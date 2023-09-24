@@ -1,5 +1,5 @@
 package gestorAplicacion;
 
-public class Cliente {
+public class Cliente extends Persona {
     
 }
