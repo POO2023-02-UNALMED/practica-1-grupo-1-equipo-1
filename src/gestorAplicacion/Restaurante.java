@@ -1,8 +1,97 @@
 package gestorAplicacion;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Restaurante {
-    Empleado empleadoDelMes;
-    List<Mesa> listadoMesas = new ArrayList<Mesa>();
+    private final String nombre = "Queseria de mi sin ti";
+    private Empleado empleadoDelMes;
+    private int numMesas;
+    private int numEmpleados;
+    private int numClientes;
+    private List<Empleado> listadoEmpleados;
+    private List<Cliente> listadoClientes;
+    private List<Mesa> listadoMesas;
+    private Map<String, Material> inventario;
+
+
+    public Restaurante () {
+        this(new ArrayList<>());
+    }
+    public Restaurante(List<Mesa> listadoMesas) {
+        this(listadoMesas, new ArrayList<>());
+    }
+    public Restaurante (List<Mesa> listadoMesas, List<Empleado> listadoEmpleados) {
+        this(listadoMesas, listadoEmpleados, new ArrayList<>());
+    }
+    public Restaurante (List<Mesa> listadoMesas, List<Empleado> listadoEmpleados, List<Cliente> listadoClientes) {
+        this(listadoMesas, listadoEmpleados, listadoClientes, new HashMap<>());
+    }
+    public Restaurante (List<Mesa> listadoMesas, List<Empleado> listadoEmpleados, List<Cliente> listadoClientes, Map<String, Material> inventario) {
+        this.listadoMesas = listadoMesas;
+        this.listadoEmpleados = listadoEmpleados;
+        this.listadoClientes = listadoClientes;
+        this.inventario = inventario;
+        this.numMesas += contadorListado(listadoMesas);
+        this.numEmpleados += contadorListado(listadoEmpleados);
+        this.numClientes += contadorListado(listadoEmpleados);
+    }
+
+    public <T> int contadorListado (List<T> listado) {
+        int contador = 0;
+        for (T elemento : listado) {
+            if (elemento != null) {
+                contador++;
+            }
+        }
+        return contador;
+    }
+    public Empleado getEmpleadoDelMes () {
+        return this.empleadoDelMes;
+    }
+    public void setEmpleadoDelMes (Empleado empleadoDelMes) {
+        this.empleadoDelMes = empleadoDelMes;
+    }
+    public String getNombre () {
+        return this.nombre;
+    }
+    public int getNumMesas () {
+        return this.numMesas;
+    }
+    public int getNumEmpleados () {
+        return this.numEmpleados;
+    }
+    public int getNumClientes () {
+        return this.numClientes;
+    }
+    public List<Empleado> getEmpleados () {
+        return this.listadoEmpleados;
+    }
+    public List<Cliente> getClientes () {
+        return this.listadoClientes;
+    }
+    public List<Mesa> getMesas () {
+        return this.listadoMesas;
+    }
+    public Map<String, Material> getInventario () {
+        return this.inventario;
+    }
+    public void contratarEmpleado(Empleado novato) {
+        this.listadoEmpleados.add(novato);
+    }
+    public void afiliarCliente (Cliente nuevoCliente) {
+        this.listadoClientes.add(nuevoCliente);
+    }
+    public void comprarMesa (Mesa nuevaMesa) {
+        this.listadoMesas.add(nuevaMesa);
+    }
+    public void comprarMaterial (Material materialComprado, int cantidad) {
+        if (this.inventario.containsKey(materialComprado.getTipo())) {
+            materialComprado.comprarMaterial(cantidad);
+        }
+        else {
+            inventario.put(materialComprado.getTipo(), materialComprado);
+        }
+    }
 }
