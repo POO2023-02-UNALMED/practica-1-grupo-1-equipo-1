@@ -3,6 +3,8 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import gestorAplicacion.Material.Tipo;
+import java.io.Serializable;
 
 public class Restaurante {
     private final String nombre = "Queseria de mi sin ti";
@@ -13,7 +15,7 @@ public class Restaurante {
     private List<Empleado> listadoEmpleados;
     private List<Cliente> listadoClientes;
     private List<Mesa> listadoMesas;
-    private Map<String, Material> inventario;
+    private Map<Tipo, Material> inventario;
 
 
     public Restaurante () {
@@ -28,7 +30,7 @@ public class Restaurante {
     public Restaurante (List<Mesa> listadoMesas, List<Empleado> listadoEmpleados, List<Cliente> listadoClientes) {
         this(listadoMesas, listadoEmpleados, listadoClientes, new HashMap<>());
     }
-    public Restaurante (List<Mesa> listadoMesas, List<Empleado> listadoEmpleados, List<Cliente> listadoClientes, Map<String, Material> inventario) {
+    public Restaurante (List<Mesa> listadoMesas, List<Empleado> listadoEmpleados, List<Cliente> listadoClientes, Map<Tipo, Material> inventario) {
         this.listadoMesas = listadoMesas;
         this.listadoEmpleados = listadoEmpleados;
         this.listadoClientes = listadoClientes;
@@ -74,7 +76,7 @@ public class Restaurante {
     public List<Mesa> getMesas () {
         return this.listadoMesas;
     }
-    public Map<String, Material> getInventario () {
+    public Map<Tipo, Material> getInventario () {
         return this.inventario;
     }
     public void contratarEmpleado(Empleado novato) {
