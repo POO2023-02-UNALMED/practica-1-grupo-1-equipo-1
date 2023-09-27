@@ -7,10 +7,12 @@ import gestorAplicacion.Personas.Cliente;
 public class Reserva {
     private Cliente duenoReserva;
     private Mesa mesa;
+    private int numAsistentes;
     private LocalDate diaReserva;
     //private LocalTime horaReserva;
-    public Reserva (Cliente duenoReserva, LocalDate diaReserva/*, LocalTime horaReserva*/) {
+    public Reserva (Cliente duenoReserva, int numAsistentes,LocalDate diaReserva/*, LocalTime horaReserva*/) {
         this.duenoReserva = duenoReserva;
+        this.numAsistentes = numAsistentes;
         this.diaReserva = diaReserva;
         //this.horaReserva = horaReserva;
     }
@@ -22,6 +24,9 @@ public class Reserva {
     }
     public LocalDate getDiaReserva () {
         return this.diaReserva;
+    }
+    public int getNumeroAsistentes () {
+        return this.numAsistentes;
     }
     /*public LocalTime getHoraReserva () {
         return this.horaReserva;
@@ -39,8 +44,7 @@ public class Reserva {
         this.horaReserva = horaReserva;
     }*/
     public String toString () {
-        return "Dueño de la reserva: "+this.getDuenoReserva()+"\nMesa número: "
-        +this.mesa.getNumeroMesa()+"\nCapacidad: "+this.mesa.getCapacidad()+
-        "\nDía de la reserva: "+this.getDiaReserva()/*+"\nHora de la Reserva: "+this.getHoraReserva()*/;
+        return "Dueño de la reserva: "+this.getDuenoReserva()+"\nNumero de asistentes: "+this.getNumeroAsistentes()+"\nMesa número: "
+        +this.mesa.getNumeroMesa()+"\nFecha reservada: "+this.getDiaReserva()/*+"\nHora reservada: "+this.getHoraReserva()*/;
     }
 }
