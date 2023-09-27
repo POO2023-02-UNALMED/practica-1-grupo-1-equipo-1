@@ -1,4 +1,4 @@
-package gestorAplicacion;
+package gestorAplicacion.Cosas;
 import java.time.LocalDate;
 import java.io.Serializable;
 

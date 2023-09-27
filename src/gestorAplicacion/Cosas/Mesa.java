@@ -1,15 +1,18 @@
-package gestorAplicacion;
+package gestorAplicacion.Cosas;
 import java.io.Serializable;
 
 public class Mesa {
     private int capacidad;
     private Reserva reserva;
+    private boolean ocupada;
+    private int numeroMesa;
     public Mesa (int capacidad) {
-        this(capacidad, null);
+        this(capacidad, 0);
     }
-    public Mesa (int capacidad, Reserva reserva) {
+    public Mesa (int capacidad, int numeroMesa) {
         this.capacidad = capacidad;
-        this.reserva = reserva;
+        this.numeroMesa = numeroMesa;
+        this.ocupada = false;
     }
     public int getCapacidad () {
         return this.capacidad;
@@ -22,5 +25,19 @@ public class Mesa {
     }
     public void reservarMesa (Reserva reserva) {
         this.reserva = reserva;
+        this.reserva.setMesa(this);
+        this.setOcupada(true);
+    }
+    public boolean isOcupada () {
+        return this.ocupada;
+    }
+    public void setOcupada (boolean ocupacion) {
+        this.ocupada = ocupacion;
+    }
+    public int getNumeroMesa () {
+        return this.numeroMesa;
+    }
+    public void setNumeroMesa (int numeroMesa) {
+        this.numeroMesa = numeroMesa;
     }
 }
