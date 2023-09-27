@@ -7,7 +7,7 @@ import java.util.Random;
 public class Mesa {
     private static List<Integer> numeroMesas = new ArrayList<>();
     private int capacidad;
-    private Reserva reserva;
+    private List<Reserva> reservas = new ArrayList<>();
     private boolean ocupada;
     private int numeroMesa;
     public Mesa (int capacidad, int numeroMesa) {
@@ -27,8 +27,8 @@ public class Mesa {
     public void setCapacidad (int nuevaCapacidad) {
         this.capacidad = nuevaCapacidad;
     }
-    public Reserva getReserva () {
-        return this.reserva;
+    public List<Reserva> getReserva () {
+        return this.reservas;
     }
     public boolean suficienteCapacidad1(Reserva reserva) {
         if (this.capacidad >= reserva.getNumeroAsistentes()) {
@@ -47,12 +47,11 @@ public class Mesa {
         }
     }
     public void reservarMesa (Reserva reserva) {
-        if (this.suficienteCapacidad1(reserva)) {
-            this.reserva = reserva;
-            this.reserva.setMesa(this);
-            this.setOcupada(true);
+        if (this.suficienteCapacidad1(reserva) && this.mesaCompatible(reserva)) {
+            this.reservas.add(reserva);
+            reserva.setMesa(this);
+            reserva.getDuenoReserva().setReserva(reserva);;
         }
-        
     }
     public boolean isOcupada () {
         return this.ocupada;
@@ -83,5 +82,13 @@ public class Mesa {
         else {
             return false;
         }
+    }
+    public boolean mesaCompatible(Reserva reserva) {
+        for (Reserva reserva1 : reservas) {
+            if (reserva1.getDiaReserva().isEqual(reserva.getDiaReserva())) {
+                return false;
+            }
+        }
+        return true;
     }
 }

@@ -97,4 +97,13 @@ public class Restaurante {
             inventario.put(materialComprado.getTipo(), materialComprado);
         }
     }
+    public List<Mesa> listadoMesasValidasParaReserva(Reserva reserva) {
+        List<Mesa> mesasFiltradas = new ArrayList<>();
+        for (Mesa mesa : listadoMesas) {
+            if (mesa.suficienteCapacidad1(reserva) && mesa.mesaCompatible(reserva)) {
+                mesasFiltradas.add(mesa);
+            }
+        }
+        return mesasFiltradas;
+    }
 }
