@@ -1,4 +1,4 @@
-package gestorAplicacion;
+package gestorAplicacion.Cosas;
 import java.io.Serializable;
 
 public class Plato {

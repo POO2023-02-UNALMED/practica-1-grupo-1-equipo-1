@@ -5,7 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
-import gestorAplicacion.Restaurante;
+import gestorAplicacion.Cosas.Restaurante;
 public class Serializador {
 	private static File rutaTemp=new File("src\\basedatos\\temp");
 	public static void serializar(Restaurante restaurante) {

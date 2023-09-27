@@ -1,5 +1,6 @@
-package gestorAplicacion;
+package gestorAplicacion.Personas;
 import java.io.Serializable;
+import gestorAplicacion.Cosas.*;
 
 public class Cliente extends Persona {
     public Cliente(String nombre, String genero, int edad) {

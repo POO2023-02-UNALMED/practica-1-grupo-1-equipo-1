@@ -1,10 +1,11 @@
-package gestorAplicacion;
+package gestorAplicacion.Cosas;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import gestorAplicacion.Material.Tipo;
+import gestorAplicacion.Cosas.Material.Tipo;
 import java.io.Serializable;
+import gestorAplicacion.Personas.*;
 
 public class Restaurante {
     private final String nombre = "Queseria de mi sin ti";

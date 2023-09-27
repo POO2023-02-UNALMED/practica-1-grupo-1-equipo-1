@@ -1,7 +1,8 @@
-package gestorAplicacion;
+package gestorAplicacion.Cosas;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.io.Serializable;
+import gestorAplicacion.Personas.Cliente;
 
 public class Reserva {
     private Cliente duenoReserva;

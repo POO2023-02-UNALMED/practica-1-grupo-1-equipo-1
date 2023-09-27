@@ -1,7 +1,8 @@
-package gestorAplicacion;
+package gestorAplicacion.Personas;
 import java.util.Date;
 import java.util.ArrayList;
 import java.io.Serializable;
+import gestorAplicacion.Cosas.*;
 
 public class Empleado extends Persona{
     private ArrayList<Turno> turnos;
