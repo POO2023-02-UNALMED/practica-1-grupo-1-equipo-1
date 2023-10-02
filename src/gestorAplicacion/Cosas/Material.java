@@ -26,6 +26,9 @@ public class Material {
     public int getCantidad () {
         return this.cantidad;
     }
+    public void restarCantidad(){
+    	this.cantidad-=1;
+    }
     public double getPrecioUnitario () {
         return this.precioUnitario;
     }
