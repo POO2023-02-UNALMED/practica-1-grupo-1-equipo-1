@@ -6,20 +6,39 @@ import gestorAplicacion.Cosas.*;
 
 public class Empleado extends Persona{
     private ArrayList<Turno> turnos;
+    private Turno turno;
     private String puesto;
     private double salario;
     private Date fechaContratacion;
     private Restaurante restaurante;
 
-    public Empleado(String nombre, String genero,int edad,String puesto,Restaurante restaurante) {
+    public Empleado(String nombre, String genero,int edad,String puesto,Restaurante restaurante, Turno turno){
         super(nombre, genero, edad);
-        this.setPuesto(puesto);
-        this.setSalario(0);
+        this.puesto = puesto;
+        this.restaurante = restaurante;
+        this.turno = turno;
         this.setFechaContratacion(new Date()); // Guarda la fecha actual
-        this.setRestaurante(restaurante);
     }
+    
+    
     // Metodos de funcionalidades
-	public void agregarTurno(Turno turno){
+    // Verificar Tiempo
+    public boolean verificarTiempo(int TiempoPlato){
+    	int tiempo_disponible = this.turno.getHoras()* 60;
+    	if(TiempoPlato>tiempo_disponible){
+    		return true;
+    		}
+    	return false;
+    	}
+    public boolean verificarTiempo(){
+    	int tiempo_disponible = this.turno.getHoras()* 60; 
+    	if(Plato.TIEMPO_DOMICILIO_MINUTOS >tiempo_disponible){
+    		return true;
+    	}
+		return false;
+    }
+	
+    public void agregarTurno(Turno turno){
 		this.turnos.add(turno);
 	}
 
@@ -32,7 +51,6 @@ public class Empleado extends Persona{
 				}
 			}
 		}
-	
     // Metodos getter
 	public ArrayList<Turno> getTurno() {
 		return turnos;

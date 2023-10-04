@@ -1,60 +1,53 @@
 package gestorAplicacion.Cosas;
 import java.io.Serializable;
 
-import java.util.Date;
-
 public class Turno {
-    private Date inicio;
-    private Date fin;
+	public enum Tipo {SEMANA, SABADO, DOMINGO}
     private double salario;
     private boolean completado;
     private boolean cobrado;
+    private int horas;
 
-    public Turno(Date inicio, Date fin, double salario) {
-        this.setInicio(inicio);
-        this.setFin(fin);
-        this.setSalario(salario);
+    // Constructor
+    public Turno(Tipo tipo, int horas, double salario, boolean completado){
+        this.setHoras(horas);
+        this.salario = salario;
+        this.completado = false;
+        this.cobrado = false;
+    }
+    
+    // Métodos getter
+	public int getHoras() {
+		return horas;
+	}
+	
+    public double getSalario() {
+        return salario;
     }
 
-    // Métodos getter
-    public double getSalario() {
-		return salario;
-	}
+    public boolean isCompletado() {
+        return completado;
+    }
 
-	public Date getInicio() {
-		return inicio;
-	}
+    public boolean isCobrado() {
+        return cobrado;
+    }
 
-	public Date getFin() {
-		return fin;
-	}
-	
-	public boolean isCompletado() {
-		return completado;
-	}
-	
-	public boolean isCobrado() {
-		return cobrado;
-	}
-	
-	// Métodos setter
-	public void setSalario(double salario) {
-		this.salario = salario;
-	}
-	
-	public void setInicio(Date inicio) {
-		this.inicio = inicio;
-	}
+    // Métodos setter
+    public void setSalario(double salario) {
+        this.salario = salario;
+    }
 
-	public void setFin(Date fin) {
-		this.fin = fin;
-	}
+    public void setCompletado(boolean completado) {
+        this.completado = completado;
+    }
 
-	public void setCompletado(boolean completado) {
-		this.completado = completado;
-	}
+    public void setCobrado(boolean cobrado) {
+        this.cobrado = cobrado;
+    }
 
-	public void setCobrado(boolean cobrado) {
-		this.cobrado = cobrado;
+	public void setHoras(int horas) {
+		this.horas = horas;
 	}
 }
+
