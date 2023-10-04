@@ -9,14 +9,15 @@ public class Empleado extends Persona{
     private String puesto;
     private double salario;
     private Date fechaContratacion;
+    private Restaurante restaurante;
 
-    public Empleado(String nombre, String genero,int edad,String puesto) {
+    public Empleado(String nombre, String genero,int edad,String puesto,Restaurante restaurante) {
         super(nombre, genero, edad);
         this.setPuesto(puesto);
         this.setSalario(0);
         this.setFechaContratacion(new Date()); // Guarda la fecha actual
+        this.setRestaurante(restaurante);
     }
-    
     // Metodos de funcionalidades
 	public void agregarTurno(Turno turno){
 		this.turnos.add(turno);
@@ -69,9 +70,20 @@ public class Empleado extends Persona{
 	public void setSalario(double salario) {
 		this.salario = salario;
 	}
+	public Restaurante getRestaurante() {
+		return this.restaurante;
+	}
+	public void setRestaurante(Restaurante restaurante) {
+		this.restaurante=restaurante;
+	}
 
 
 	public void setFechaContratacion(Date fechaContratacion) {
 		this.fechaContratacion = fechaContratacion;
+	}
+	
+	//metodo que permite reportar daños a un material no organico
+	public void reportarDano(Material material,int cantidad) {
+		this.restaurante.botarMaterial(material, cantidad);
 	}
 }

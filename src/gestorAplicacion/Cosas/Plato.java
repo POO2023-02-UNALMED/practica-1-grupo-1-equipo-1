@@ -41,5 +41,6 @@ public class Plato {
     public int getNumeroDeIngredientes() {
         return ingredientes.size();
     }
+    
 
 }

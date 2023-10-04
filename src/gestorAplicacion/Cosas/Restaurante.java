@@ -97,6 +97,16 @@ public class Restaurante {
             inventario.put(materialComprado.getTipo(), materialComprado);
         }
     }
+    //metodo para eliminar un material
+    public void botarMaterial(Material materialEliminado,int cantidad) {
+    	if (this.inventario.containsKey(materialEliminado.getTipo()) && materialEliminado.getCantidad()>=1) {
+    		materialEliminado.botarMaterial(cantidad);
+    	}
+    	else {
+    		operacionInvalida();
+    	}
+    }
+ 
     public List<Mesa> listadoMesasValidasParaReserva(Reserva reserva) {
         List<Mesa> mesasFiltradas = new ArrayList<>();
         for (Mesa mesa : listadoMesas) {
@@ -106,4 +116,8 @@ public class Restaurante {
         }
         return mesasFiltradas;
     }
+    //metodo para decir si una accion no puede ser ejecutada
+    public String operacionInvalida() {
+    	return "Operacion Inválida";
+    	}
 }

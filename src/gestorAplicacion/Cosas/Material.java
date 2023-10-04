@@ -35,8 +35,11 @@ public class Material {
     public LocalDate getFechaVencimiento() {
         return this.fechaVencimiento;
     }
-        public void comprarMaterial(int cantidad) {
+    public void comprarMaterial(int cantidad) {
         this.cantidad += cantidad;
+    }
+    public void botarMaterial(int cantidad) {
+    	this.cantidad -= cantidad;
     }
     public void cambiarPrecioUnitario(double precioUnitario) {
         this.precioUnitario = precioUnitario;
