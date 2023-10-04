@@ -116,8 +116,12 @@ public class Restaurante {
     	return inventarioStr;
     }
     public void ordenaPorVencimiento() {
-    	
-    }*/
+   	}
+    public String mostrarIngredientes(){
+    }
+    public String mostrarMateriales(){
+    }
+    */
  
     public List<Mesa> listadoMesasValidasParaReserva(Reserva reserva) {
         List<Mesa> mesasFiltradas = new ArrayList<>();
