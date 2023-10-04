@@ -3,7 +3,8 @@ import java.time.LocalDate;
 import java.io.Serializable;
 
 public class Material {
-    public enum Tipo {TOMATE, CEBOLLA, CUCHARA, TENEDOR};
+    public enum Tipo {TOMATE,CEBOLLA,MANTEQUILLA,ACEITE,VINO,QUESO,HARINA,CHAMPINON,RES,
+    PESCADO,CERDO,PAN,AJO,ESPECIA,HUEVO,TRUFA,CUCHARA,TENEDOR,PLATO,VASO};
     private Tipo tipo;
     private int cantidad;
     private double precioUnitario;

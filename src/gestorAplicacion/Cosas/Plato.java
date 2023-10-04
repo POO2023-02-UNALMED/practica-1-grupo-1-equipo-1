@@ -6,14 +6,18 @@ import java.util.Map;
 public class Plato {
     private String nombre;
     private int precio;
+    private String descripcion;
     private Map<Material, Integer> ingredientes;
 
-    public Plato(String nombre, int precio, Map<Material, Integer> ingredientes) {
+    public Plato(String nombre, int precio,String desc, Map<Material, Integer> ingredientes) {
         this.nombre = nombre;
         this.precio = precio;
         this.ingredientes = ingredientes;
+        this.descripcion=desc;
     }
-    
+    public Plato(String nombre, int precio, Map<Material, Integer> ingredientes) {
+        this(nombre,precio,"Platillo simple",ingredientes);
+    }
     // Métodos getter
     public String getNombre() {
         return nombre;
@@ -23,6 +27,9 @@ public class Plato {
     }
     public Map<Material, Integer> getIngredientes() {
         return ingredientes;
+    }
+    public String getDescripcion() {
+    	return descripcion;
     }
     
     // Métodos setter
@@ -35,7 +42,9 @@ public class Plato {
     public void setIngredientes(Map<Material, Integer> ingredientes) {
         this.ingredientes = ingredientes;
     }
-    
+    public void setDescripcion(String desc) {
+    	this.descripcion=desc;
+    }
     
     // Método para obtener el número total de ingredientes
     public int getNumeroDeIngredientes() {

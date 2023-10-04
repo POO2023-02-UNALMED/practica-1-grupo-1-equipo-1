@@ -17,6 +17,8 @@ public class Restaurante {
     private List<Cliente> listadoClientes;
     private List<Mesa> listadoMesas;
     private Map<Tipo, Material> inventario;
+    private List<String> inventarioStr;
+    
 
 
     public Restaurante () {
@@ -106,6 +108,16 @@ public class Restaurante {
     		operacionInvalida();
     	}
     }
+    /*public List<String> consultarInventario() {
+    	
+    	for(Material material:inventario.values()) {
+    		
+    	}
+    	return inventarioStr;
+    }
+    public void ordenaPorVencimiento() {
+    	
+    }*/
  
     public List<Mesa> listadoMesasValidasParaReserva(Reserva reserva) {
         List<Mesa> mesasFiltradas = new ArrayList<>();
