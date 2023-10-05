@@ -9,7 +9,7 @@ public class Turno {
     private int horas;
 
     // Constructor
-    public Turno(Tipo tipo, int horas, double salario, boolean completado){
+    public Turno(Tipo tipo, int horas, double salario){
         this.setHoras(horas);
         this.salario = salario;
         this.completado = false;

@@ -8,23 +8,31 @@ public class Pedido {
     private Empleado cocinero;
     private Empleado mesero;
     private Empleado domiciliario;
+    private static ArrayList<Pedido> pedidosVerificados = new ArrayList<>();
+    private static ArrayList<Pedido> pedidosNoVerificados = new ArrayList<>();
+    private static ArrayList<Pedido> pedidos = new ArrayList<>();
     private ArrayList<Plato> platos;
-    private ArrayList<Plato> verificados;
+    // Segun este atributo se van a mostrar y se van a dividir
+    // En pedidos verificados y no verificados
     private boolean verificado = false;
 	private String tipoPedido;
 
-    public Pedido(Mesa mesa, String tipoPedido, Empleado cocinero, Empleado mesero) {
-        this(mesa, tipoPedido, cocinero, mesero, null);
+	public static Pedido crearPedido(Mesa mesa, String tipoPedido, Empleado cocinero, Empleado mesero) {
+        if (tipoPedido.equals("domicilio")) {
+            return new Pedido(null, tipoPedido, cocinero, mesero, null);
+        } else {
+            return new Pedido(mesa, tipoPedido, cocinero, mesero, null);
+        }
     }
-
+    	
     public Pedido(Mesa mesa, String tipoPedido, Empleado cocinero, Empleado mesero, Empleado domiciliario) {
-        this.mesa = mesa;
+    	Pedido.pedidos.add(this);
+    	this.mesa = mesa;
         this.tipoPedido = tipoPedido;
         this.cocinero = cocinero;
         this.mesero = mesero;
         this.domiciliario = domiciliario;
         this.platos = new ArrayList<>();
-        this.setVerificados(new ArrayList<>());
         this.verificado = false;
     }
 
@@ -32,7 +40,7 @@ public class Pedido {
      public boolean verificarPedido(){
      	boolean verificado_insumos = false;
      	// se inicializa como true el domiciliario ya que ste se utiliza para pedidos de tipo domiciliario
-     	boolean verificado_domiciliario = true;
+     	boolean verificado_domiciliario = false;
      	boolean verificado_cocinero = false;
      	for(Plato plato : platos){
      		if (plato.verificarInsumos(plato)){
@@ -40,58 +48,61 @@ public class Pedido {
      			}else if(true){
      				break;
      		}
-     		if (this.cocinero.verificarTiempo(plato.getTiempo())){
+     		if (this.cocinero.verificarTiempo(plato.getTiempoPreparacion())){
      			verificado_cocinero = true;
      			}else if(true){
+     				System.out.println("false por cocinero");
      				break;
      				}
-     		if(this.domiciliario.verificarTiempo()){
-     			verificado_cocinero = true;
-     		}
      		if (this.tipoPedido.equals("domicilio")) {
      			if(this.domiciliario.verificarTiempo()){
-     				// si hay disponibilidad no se cambia nada ya que su operador booleano esta inicializado en true es true no se cambia nada
+     				verificado_domiciliario=true;
+     				return (verificado_insumos && verificado_cocinero && verificado_domiciliario);
      				}else if(true){
-     					verificado_domiciliario = false;
+     					return (verificado_insumos && verificado_cocinero && verificado_domiciliario);
      					}
      			}
      		}
-     	return (verificado_insumos && verificado_cocinero && verificado_domiciliario);
+     	return (verificado_insumos && verificado_cocinero );
      	}
-    
-     // Metodos de plato
+     
+  // Metodos de plato
      public void agregarPlato(Plato plato) {
-    	    this.platos.add(plato);
-    	}
-     
+         this.platos.add(plato);
+     }
+
      public void removerPlato(Plato plato) {
-    	    this.platos.remove(plato);
-    	}
-     
+         this.platos.remove(plato);
+     }
+
      // Metodos de verificacion
      public boolean isVerificado() {
-    	    return verificado;
-    	}
+         return verificado;
+     }
 
-   	public void setVerificado(boolean verificado) {
-   		this.verificado = verificado;
-   		}
-   	// Metodos de mesa
-   	public Mesa getMesa() {
-   	    return mesa;
-   	}
-
-   	public void setMesa(Mesa mesa) {
-   	    this.mesa = mesa;
-   	}
-   	
-   	// Metodos de listas verificados
-	public ArrayList<Plato> getVerificados() {
-		return verificados;
-	}
-
-	public void setVerificados(ArrayList<Plato> verificados) {
-		this.verificados = verificados;
-	}   	
-
+     public void setVerificado(boolean verificado) {
+         this.verificado = verificado;
+     }
+     
+     // Metodos de mostrar Pedidos
+     public static ArrayList<Pedido> getPedidosSinFiltrar(){
+    	 return pedidos;
+     }
+     public static ArrayList<Pedido> getPedidosVerificados(){
+    	 for (Pedido pedido : pedidos){
+    		 if(pedido.isVerificado()){
+    			 pedidosVerificados.add(pedido);
+    		 }
+    	 }
+    	 return pedidosVerificados;
+     }
+     public static ArrayList<Pedido> getPedidosNoVerificados(){
+    	 for (Pedido pedido : pedidos){
+    		 if(pedido.isVerificado()){
+    			 pedidosVerificados.add(pedido);
+    		 }
+    	 }
+    	 return pedidosNoVerificados;
+     }
+     
 }

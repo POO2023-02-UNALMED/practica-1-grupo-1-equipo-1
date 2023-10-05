@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
-
 import baseDatos.Serializador;
 import gestorAplicacion.Cosas.*;
 
@@ -34,7 +33,28 @@ public class Administrador {
     		
     		switch(opcion) {
     		case 1: ; break;
-    		case 2:;break;
+    		case 2: do{
+    			System.out.println("¿Que deseas hacer?");
+    			System.out.println("1. Lista de pedidos");
+    			System.out.println("2. Añadir pedidos");
+    			System.out.println("3. Cancelar pedidos");
+    			System.out.println("4. Verificar pedidos");
+    			System.out.println("5. Volver al menú de funcionalidades");
+    			System.out.print("Escribe el número de la opción que necesitas: ");
+    			opcion=(int) readLong();
+    			switch(opcion) {
+    			case 1: {
+    			    for(Pedido pedido : Pedido.getPedidosSinFiltrar()){
+    			        System.out.println(pedido);
+    			    }
+    			    break;
+    			}
+    			case 2: // Código para añadir pedidos
+    			case 3: // Código para cancelar pedidos
+    			case 4: // Código para verificar pedidos
+    			case 5: break; // Volver al menú principal
+    			}
+    		}while(opcion!=5);
     		case 3:;break;
     		case 4: do {
     			System.out.println("¿Que deseas hacer?");

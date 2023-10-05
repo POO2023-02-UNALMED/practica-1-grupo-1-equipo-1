@@ -11,7 +11,6 @@ public class Empleado extends Persona{
     private double salario;
     private Date fechaContratacion;
     private Restaurante restaurante;
-
     public Empleado(String nombre, String genero,int edad,String puesto,Restaurante restaurante, Turno turno){
         super(nombre, genero, edad);
         this.puesto = puesto;
@@ -23,16 +22,16 @@ public class Empleado extends Persona{
     
     // Metodos de funcionalidades
     // Verificar Tiempo
-    public boolean verificarTiempo(int TiempoPlato){
-    	int tiempo_disponible = this.turno.getHoras()* 60;
-    	if(TiempoPlato>tiempo_disponible){
+    public boolean verificarTiempo(int tiempoPlato){
+    	int tiempoDisponible = this.turno.getHoras()* 60;
+    	if(tiempoDisponible>tiempoPlato){
     		return true;
     		}
     	return false;
     	}
     public boolean verificarTiempo(){
-    	int tiempo_disponible = this.turno.getHoras()* 60; 
-    	if(Plato.TIEMPO_DOMICILIO_MINUTOS >tiempo_disponible){
+    	int tiempoDisponible = this.turno.getHoras()* 60; 
+    	if( tiempoDisponible > Plato.TIEMPO_DOMICILIO_MINUTOS ){
     		return true;
     	}
 		return false;

@@ -7,18 +7,19 @@ public class Plato {
     private String nombre;
     private int precio;
     private String descripcion;
-    private int tiempo;
+    private int tiempoPreparacion;
     public static final int TIEMPO_DOMICILIO_MINUTOS = 30;
     private Map<Material, Integer> ingredientes;
 
-    public Plato(String nombre, int precio, String desc, Map<Material, Integer> ingredientes) {
+    public Plato(String nombre, int precio, String desc, int tiempoPreparacion, Map<Material, Integer> ingredientes) {
         this.nombre = nombre;
         this.precio = precio;
+        this.tiempoPreparacion = tiempoPreparacion;
         this.ingredientes = ingredientes;
         this.descripcion = desc;    
        }
-    public Plato(String nombre, int precio, Map<Material, Integer> ingredientes) {
-    	this(nombre,precio,"Platillo simple",ingredientes);
+    public Plato(String nombre, int precio, int tiempoPreparacion, Map<Material, Integer> ingredientes) {
+    	this(nombre, precio, "Platillo simple", tiempoPreparacion,ingredientes);
     }
     public boolean verificarInsumos(Plato plato){
     	boolean verificado = false;
@@ -70,12 +71,12 @@ public class Plato {
         return ingredientes.size();
     }
 
-	public int getTiempo() {
-		return tiempo;
+	public int getTiempoPreparacion() {
+		return tiempoPreparacion;
 	}
 
-	public void setTiempo(int tiempo) {
-		this.tiempo = tiempo;
+	public void setTiempoPreparacion(int tiempoPreparacion) {
+		this.tiempoPreparacion = tiempoPreparacion;
 	}
 
 }
