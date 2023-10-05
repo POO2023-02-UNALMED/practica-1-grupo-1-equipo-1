@@ -1,10 +1,13 @@
 package gestorAplicacion.Cosas;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
-import gestorAplicacion.Cosas.Material.Tipo;
+import gestorAplicacion.Cosas.Material.*;
 import java.io.Serializable;
+import java.time.LocalDate;
+
 import gestorAplicacion.Personas.*;
 
 public class Restaurante {
@@ -17,7 +20,7 @@ public class Restaurante {
     private List<Cliente> listadoClientes;
     private List<Mesa> listadoMesas;
     private Map<Tipo, Material> inventario;
-    private List<String> inventarioStr;
+    
     
 
 
@@ -108,20 +111,20 @@ public class Restaurante {
     		operacionInvalida();
     	}
     }
-    /*public List<String> consultarInventario() {
-    	
-    	for(Material material:inventario.values()) {
-    		
+    public double calcularValorInventario() {
+    	double valorTotal=0;
+    	for (Material material: inventario.values()) {
+    		valorTotal+=material.getCantidad()*material.getPrecioUnitario();
     	}
-    	return inventarioStr;
+    	return valorTotal;
     }
-    public void ordenaPorVencimiento() {
-   	}
-    public String mostrarIngredientes(){
+ 
+		
+    public void mostrarIngredientes(){
     }
-    public String mostrarMateriales(){
+    public void mostrarMateriales(){
     }
-    */
+    
  
     public List<Mesa> listadoMesasValidasParaReserva(Reserva reserva) {
         List<Mesa> mesasFiltradas = new ArrayList<>();

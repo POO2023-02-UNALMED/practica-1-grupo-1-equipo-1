@@ -1,4 +1,8 @@
 package uiMain;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Scanner;
 
 import baseDatos.Serializador;
@@ -41,7 +45,7 @@ public class Administrador {
     			System.out.print("Escribe el número de la opción que necesitas: ");
     			opcion=(int) readLong();
     			switch(opcion) {
-    			case 1: //System.out.println(restaurante.consultarInventario());
+    			case 1: consultarInventario(restaurante);
     			case 2: 
     				do {
     					System.out.println("Escoge la funcion que deseas usar");
@@ -69,6 +73,21 @@ public class Administrador {
     		}
     		}while(opcion!=6);
     		
+    }
+    public static void consultarInventario(Restaurante restaurante) {
+    	List<Material> inventarioOrdenado=new ArrayList<>(restaurante.getInventario().values());
+    	inventarioOrdenado.sort(Comparator.comparing(Material::getFechaVencimiento));
+    	for(Material material:inventarioOrdenado) {
+    		LocalDate hoy=LocalDate.now();
+    		LocalDate fechaVencimiento=material.getFechaVencimiento();
+    		System.out.println("Tipo: " + material.getTipo() + "\nCantidad: " + material.getCantidad() +  "\nPrecio unitario: " + material.getPrecioUnitario() 
+			+ "\nFecha de Vencimiento: " + material.getFechaVencimiento());
+    		if (fechaVencimiento!=null && fechaVencimiento.isBefore(hoy.plusDays(7L))) {
+    			System.out.println("Este Material está próximo a vencer");
+    		}else if(material.getCantidad()<=10) {
+    			System.out.println("Este Material está próximo a acabar");
+    		}
+    	}
     }
     private static void salirDelSistema(Restaurante restaurante) {
     	System.out.println("Vuelva pronto");
