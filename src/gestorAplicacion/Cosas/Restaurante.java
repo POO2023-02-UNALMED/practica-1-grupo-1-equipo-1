@@ -94,6 +94,7 @@ public class Restaurante {
     public void comprarMesa (Mesa nuevaMesa) {
         this.listadoMesas.add(nuevaMesa);
     }
+
     public void comprarMaterial (Material materialComprado, int cantidad) {
         if (this.inventario.containsKey(materialComprado.getTipo())) {
             materialComprado.comprarMaterial(cantidad);
@@ -117,12 +118,6 @@ public class Restaurante {
     		valorTotal+=material.getCantidad()*material.getPrecioUnitario();
     	}
     	return valorTotal;
-    }
- 
-		
-    public void mostrarIngredientes(){
-    }
-    public void mostrarMateriales(){
     }
     
  
