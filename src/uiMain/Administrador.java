@@ -20,7 +20,7 @@ public class Administrador {
     	Restaurante restaurante=new Restaurante();
     	int opcion;
     	do {
-    		
+    		//aaaaaa
     		System.out.println("Bienvenido al Gestor del Restaurante" + restaurante.getNombre()); // agregar el método getNombre
     		System.out.println("¿Que función deseas usar?");
     		System.out.println("1. Gestión de Reserva");
