@@ -181,7 +181,14 @@ public class Restaurante {
     public void comprarMesa (Mesa nuevaMesa) {
         this.listadoMesas.add(nuevaMesa);
     }
-
+    public void eliminarMesa(int numeroMesa) {
+    	for(Mesa mesa:listadoMesas) {
+    		if(mesa.getNumeroMesa()==numeroMesa) {
+    			listadoMesas.remove(mesa);
+    			return;
+    		}
+    	}
+    }
     public void comprarMaterial (Material materialComprado, int cantidad) {
         if (this.inventario.containsKey(materialComprado.getTipo())) {
             materialComprado.comprarMaterial(cantidad);

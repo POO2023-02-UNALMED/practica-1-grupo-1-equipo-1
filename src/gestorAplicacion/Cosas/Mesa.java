@@ -21,6 +21,8 @@ public class Mesa {
         this.ocupada = false;
         Mesa.numeroMesas.add(numeroMesa);
     }
+    
+   
     public int getCapacidad () {
         return this.capacidad;
     }

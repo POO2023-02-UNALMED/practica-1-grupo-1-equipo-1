@@ -20,7 +20,7 @@ public class Administrador {
     	Restaurante restaurante=new Restaurante();
     	int opcion;
     	do {
-    		//adasdsadad
+    		
     		System.out.println("Bienvenido al Gestor del Restaurante" + restaurante.getNombre()); // agregar el método getNombre
     		System.out.println("¿Que función deseas usar?");
     		System.out.println("1. Gestión de Reserva");
@@ -71,16 +71,19 @@ public class Administrador {
     					System.out.println("Escoge la funcion que deseas usar");
     					System.out.println("1. ¿Que ingrediente desea comprar?");
     					System.out.println("2. ¿Que material desea comprar?");
-    					System.out.println("3. Volver al menú de gestión de inventario");
+    					System.out.println("3. ¿Que mesa deseas comprar?");
+    					System.out.println("4. Volver al menú de gestión de inventario");
     					opcion=(int)readLong();
     					switch(opcion) {
-    					case 1: mostrarIngredientes(restaurante);
-    						System.out.println("Ingrese el ingrediente y la cantidad a comprar");
+    					case 1: 
+    						//mostrarIngredientes(restaurante);
+    						//System.out.println("Ingrese el ingrediente y la cantidad a comprar");
     						/*Material ingrediente=scan.next();
     						int cantidad=(int) readLong();
     						restaurante.comprarMaterial(ingrediente,cantidad);*/
-    					case 2: mostrarMateriales(restaurante);
-    						System.out.println("Ingrese el material y la cantidad a comprar");
+    					case 2: 
+    						//mostrarMateriales(restaurante);
+    						//System.out.println("Ingrese el material y la cantidad a comprar");
     						/*Material material=scan.next();
     						int cantidad2=(int) readLong();
     						if (material==Mesa) {
@@ -88,7 +91,13 @@ public class Administrador {
     						}else{
     							comprarMaterial(material,cantidad2);
     						}*/
-    					case 3:break;
+    					case 3:mostrarMesas(restaurante);
+    					System.out.println("Escriba el numero de la nueva mesa y su capacidad");
+    					int numMesa=(int) readLong();
+    					int capacidad=(int) readLong();
+    					Mesa nuevaMesa = new Mesa(numMesa,capacidad);
+    					restaurante.comprarMesa(nuevaMesa);
+    					case 4:break;
     					}
     				}while(opcion!=3);
     			case 3:
@@ -96,24 +105,26 @@ public class Administrador {
     					System.out.println("Escoge la funcion que deseas usar");
     					System.out.println("1. ¿Que ingrediente vas a desechar?");
     					System.out.println("2. ¿Que material vas a desechar?");
-    					System.out.println("3. Volver al menú de gestión de inventario");
+    					System.out.println("3. ¿Que mesa vas a desechar?");
+    					System.out.println("4. Volver al menú de gestión de inventario");
     					opcion=(int)readLong();
     					switch(opcion) {
-    					case 1: mostrarIngredientes(restaurante);
+    					case 1:  mostrarIngredientes(restaurante);
     						System.out.println("Ingrese el ingrediente y la cantidad a desechar");
-    						/*Material ingrediente=scan.next();
+    						int ingrediente=(int) readLong();
     						int cantidad=(int) readLong();
-    						restaurante.comprarMaterial(ingrediente,cantidad);*/
+    						//restaurante.comprarMaterial(ingrediente,cantidad);
     					case 2: mostrarMateriales(restaurante);
     						System.out.println("Ingrese el material y la cantidad a desechar");
-    						/*Material material=scan.next();
+    						int material=(int) readLong();
     						int cantidad2=(int) readLong();
-    						if (material==Mesa) {
-    							restaurante.comprarMesa(material);
-    						}else{
-    							comprarMaterial(material,cantidad2);
-    						}*/
-    					case 3:break;
+    						//restaurante.comprarMaterial(material,cantidad2);
+
+    					case 3:mostrarMesas(restaurante);
+    					System.out.println("Escriba el numero de mesa a desechar");
+    					int numMesa=(int) readLong();
+    					restaurante.eliminarMesa(numMesa);
+    					case 4:break;
     					}
     				}while(opcion!=3);
     			case 4:break;
@@ -127,6 +138,13 @@ public class Administrador {
     		}
     		}while(opcion!=6);
     		
+    }
+    public static void mostrarMesas(Restaurante restaurante) {
+    	System.out.println("Mesas del restaurante: ");
+    	for (Mesa mesa:restaurante.getMesas()) {
+    		System.out.println("Mesa: " + mesa.getNumeroMesa()+" con Capacidad de: "+mesa.getCapacidad()+" personas");
+    		System.out.println("-----------------------------");
+    	}
     }
     public static void consultarInventario(Restaurante restaurante) {
     	List<Material> inventarioOrdenado=new ArrayList<>(restaurante.getInventario().values());
@@ -144,13 +162,17 @@ public class Administrador {
     	}
     }
     public static void mostrarIngredientes(Restaurante restaurante) {
+    	int cont=0;
     	for (Material material: restaurante.getInventario().values()) {
-    		System.out.println("Tipo: "+material.getTipo() + "\nCantidad: "+material.getCantidad()+"\nFecha: "+material.getFechaVencimiento()+"\nPrecio por unidad: "+material.getPrecioUnitario());
+    		System.out.println(cont + "Tipo: "+material.getTipo() + "\nCantidad: "+material.getCantidad()+"\nFecha: "+material.getFechaVencimiento()+"\nPrecio por unidad: "+material.getPrecioUnitario());
+    		cont++;
     	}
     }
     public static void mostrarMateriales(Restaurante restaurante) {
+    	int cont=0;
     	for (Material material: restaurante.getInventario().values()) {
-    		System.out.println("Tipo: "+material.getTipo() + "\nCantidad: "+material.getCantidad()+"\nPrecio por unidad: "+material.getPrecioUnitario());
+    		System.out.println(cont + "Tipo: "+material.getTipo() + "\nCantidad: "+material.getCantidad()+"\nPrecio por unidad: "+material.getPrecioUnitario());
+    		cont++;
     	}
     }
     private static void salirDelSistema(Restaurante restaurante) {
