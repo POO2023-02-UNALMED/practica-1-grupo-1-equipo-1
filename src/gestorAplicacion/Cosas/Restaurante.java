@@ -7,7 +7,7 @@ import java.util.Map;
 import gestorAplicacion.Cosas.Material.*;
 import java.io.Serializable;
 import java.time.LocalDate;
-
+import gestorAplicacion.Cosas.*;
 import gestorAplicacion.Personas.*;
 
 public class Restaurante {
@@ -61,6 +61,66 @@ public class Restaurante {
     public void setEmpleadoDelMes (Empleado empleadoDelMes) {
         this.empleadoDelMes = empleadoDelMes;
     }
+    public void setEmpleadoDelMes() {
+        Empleado empleadoDelMes = null;
+        int puntuacionMaxima = 0;
+
+        // Encontrar al empleado con mayor puntuación
+        for (Empleado empleado : listadoEmpleados) {
+            if (empleado.getPuntuacion() > puntuacionMaxima) {
+                puntuacionMaxima = empleado.getPuntuacion();
+                empleadoDelMes = empleado;
+            }
+        }
+
+        //Establecer al empleado del mes
+        setEmpleadoDelMes(empleadoDelMes);
+    }
+    /*public double despedirEmpleado(Empleado empleado) {
+        // Verificar si el empleado está en la lista de empleados
+    	double liquidacion = empleado.getSalario();
+    	if (listadoEmpleados.contains(empleado)) {
+            // Calcular la liquidación     
+            // Eliminar al empleado de la lista
+            listadoEmpleados.remove(empleado);
+        }
+    	return liquidacion;
+        
+    }*/
+    /*public void contratarEmpleado(String puesto, Turno.Tipo tipoTurno) {
+        Empleado empleadoDisponible = null;
+
+        // Buscar un empleado disponible en la lista de empleados
+        for (Empleado empleado : listadoEmpleados) {
+            if (empleado.getRestaurante() == null) {
+                empleadoDisponible = empleado;
+                break;
+            }
+        }
+
+        if (empleadoDisponible != null) {
+            // Configurar el empleado contratado con el puesto y turno
+            empleadoDisponible.setPuesto(puesto);
+            Turno turno = null;
+            switch (tipoTurno) {
+              case SEMANA:
+                turno = new Turno(Turno.Tipo.SEMANA, int horas, double salario);  
+                break;
+              case SABADO:
+                turno = new Turno(Turno.Tipo.SABADO, int horas, double salario);  
+                break;
+              case DOMINGO:
+                turno = new Turno(Turno.Tipo.int horas, double salario);
+                break;
+            }
+
+            // Asignar el turno al empleado
+            empleadoDisponible.setTurno(turno);
+
+            // Asignar el restaurante al empleado
+            empleadoDisponible.setRestaurante(this);
+        }
+    }*/
     public String getNombre () {
         return this.nombre;
     }
@@ -88,6 +148,33 @@ public class Restaurante {
     public void contratarEmpleado(Empleado novato) {
         this.listadoEmpleados.add(novato);
     }
+    /*public void contratarEmpleado(String nombre, String genero, int edad, String puesto, Turno.Tipo tipoTurno) {
+        // Crear un nuevo objeto Turno en función del tipo de turno seleccionado
+       //Agregar valores que vayamos a determinar en los turnos y salarios
+        Turno turno = null;
+        switch (tipoTurno) {
+            case SEMANA:
+                turno = new Turno(Turno.Tipo.SEMANA, int horas, double Turno.getSalario());  
+                break;
+            case SABADO:
+                turno = new Turno(Turno.Tipo.SABADO, int horas, double salario);  
+                break;
+            case DOMINGO:
+                turno = new Turno(Turno.Tipo.DOMINGO, int horas, double salario);
+                break;
+            default:
+                break;
+        }
+
+        // Crear un nuevo empleado y agregarlo a la lista de empleados del restaurante
+        Empleado nuevoEmpleado = new Empleado(nombre, genero, edad, puesto, this, turno);
+        this.contratarEmpleado(nuevoEmpleado);
+    }
+    
+    public void contratarEmpleado1(String puesto, Turno.Tipo tipoTurno) {
+        Empleado empleadoDisponible = null;
+    }*/
+    
     public void afiliarCliente (Cliente nuevoCliente) {
         this.listadoClientes.add(nuevoCliente);
     }

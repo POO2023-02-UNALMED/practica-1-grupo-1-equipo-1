@@ -11,6 +11,7 @@ public class Empleado extends Persona{
     private double salario;
     private Date fechaContratacion;
     private Restaurante restaurante;
+    private int puntuacion;
     public Empleado(String nombre, String genero,int edad,String puesto,Restaurante restaurante, Turno turno){
         super(nombre, genero, edad);
         this.puesto = puesto;
@@ -93,7 +94,12 @@ public class Empleado extends Persona{
 	public void setRestaurante(Restaurante restaurante) {
 		this.restaurante=restaurante;
 	}
-
+	public int getPuntuacion() {
+	    return puntuacion;
+	}
+	public void setPuntuacion(int puntuacion) {
+	    this.puntuacion = puntuacion;
+	}
 
 	public void setFechaContratacion(Date fechaContratacion) {
 		this.fechaContratacion = fechaContratacion;
