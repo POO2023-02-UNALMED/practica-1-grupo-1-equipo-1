@@ -189,18 +189,25 @@ public class Restaurante {
     		}
     	}
     }
-    public void comprarMaterial (Material materialComprado, int cantidad) {
-        if (this.inventario.containsKey(materialComprado.getTipo())) {
+    public void comprarMaterial (Material.Tipo tipo, int cantidad) {
+        if (this.inventario.containsKey(tipo)) {
+        	Material materialComprado = this.inventario.get(tipo);
             materialComprado.comprarMaterial(cantidad);
         }
         else {
-            inventario.put(materialComprado.getTipo(), materialComprado);
+        	Material nuevoMaterial=new Material(tipo,cantidad,0);
+            inventario.put(tipo, nuevoMaterial);
         }
     }
-    //metodo para eliminar un material
-    public void botarMaterial(Material materialEliminado,int cantidad) {
-    	if (this.inventario.containsKey(materialEliminado.getTipo()) && materialEliminado.getCantidad()>=1) {
-    		materialEliminado.botarMaterial(cantidad);
+
+    public void botarMaterial(Material.Tipo tipo,int cantidad) {
+    	if (this.inventario.containsKey(tipo)) {
+    		Material materialEliminado=this.inventario.get(tipo);
+    		if (materialEliminado.getCantidad()>=cantidad) {
+    			materialEliminado.botarMaterial(cantidad);
+    		}else {
+    			operacionInvalida();
+    		}
     	}
     	else {
     		operacionInvalida();
