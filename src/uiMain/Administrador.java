@@ -21,7 +21,7 @@ public class Administrador {
     	int opcion;
     	do {
     		
-    		System.out.println("Bienvenido al Gestor del Restaurante" + restaurante.getNombre()); // agregar el método getNombre
+    		System.out.println("Bienvenido al Gestor del Restaurante " + restaurante.getNombre()); // agregar el método getNombre
     		System.out.println("¿Que función deseas usar?");
     		System.out.println("1. Gestión de Reserva");
     		System.out.println("2. Gestión de Pedidos");
@@ -68,7 +68,7 @@ public class Administrador {
     			case 1: consultarInventario(restaurante);
     			case 2: 
     				do {
-    					System.out.println("Escoge la funcion que deseas usar");
+    					
     					System.out.println("1. ¿Que ingrediente desea comprar?");
     					System.out.println("2. ¿Que material desea comprar?");
     					System.out.println("3. ¿Que mesa deseas comprar?");
@@ -82,6 +82,8 @@ public class Administrador {
     						Material.Tipo ingredienteEnum=Material.Tipo.valueOf(ingrediente);
     						int cantidad=(int) readLong();
     						restaurante.comprarMaterial(ingredienteEnum,cantidad);
+    						System.out.println("Se han comprado "+cantidad+" "+ingredienteEnum);
+    						break;
     					case 2: 
     						mostrarMateriales(restaurante);
     						System.out.println("Ingrese el material y la cantidad a comprar");
@@ -89,16 +91,20 @@ public class Administrador {
     						int cantidad2=(int) readLong();
     						Material.Tipo materialEnum=Material.Tipo.valueOf(material);
     						restaurante.comprarMaterial(materialEnum,cantidad2);
-    						
-    					case 3:mostrarMesas(restaurante);
-    					System.out.println("Escriba el numero de la nueva mesa y su capacidad");
-    					int numMesa=(int) readLong();
-    					int capacidad=(int) readLong();
-    					Mesa nuevaMesa = new Mesa(numMesa,capacidad);
-    					restaurante.comprarMesa(nuevaMesa);
+    						System.out.println("Se han comprado "+cantidad2+" "+materialEnum);
+    						break;
+    					case 3:
+    						mostrarMesas(restaurante);
+    						System.out.println("Escriba el numero de la nueva mesa y su capacidad");
+    						int numMesa=(int) readLong();
+    						int capacidad=(int) readLong();
+    						Mesa nuevaMesa = new Mesa(numMesa,capacidad);
+    						restaurante.comprarMesa(nuevaMesa);
+    						System.out.println("La mesa numero "+numMesa+" con capadidad de "+capacidad+" personas ha sido registrada con éxito");
+    						break;
     					case 4:break;
     					}
-    				}while(opcion!=3);
+    				}while(opcion!=4);
     			case 3:
     				do {
     					System.out.println("Escoge la funcion que deseas usar");
@@ -113,18 +119,23 @@ public class Administrador {
     						String ingrediente =scan.next();
     						int cantidad=(int) readLong();
     						Material.Tipo ingredienteEnum=Material.Tipo.valueOf(ingrediente);
-    						restaurante.comprarMaterial(ingredienteEnum,cantidad);
+    						restaurante.botarMaterial(ingredienteEnum,cantidad);
+    						System.out.println("Se han eliminado "+cantidad+" "+ingredienteEnum);
+    						break;
     					case 2: mostrarMateriales(restaurante);
     						System.out.println("Ingrese el material y la cantidad a desechar");
     						String material= scan.next();
     						Material.Tipo materialEnum=Material.Tipo.valueOf(material);
     						int cantidad2=(int) readLong();
-    						restaurante.comprarMaterial(materialEnum,cantidad2);
-
+    						restaurante.botarMaterial(materialEnum,cantidad2);
+    						System.out.println("Se han eliminado "+cantidad2+" "+materialEnum);
+    						break;
     					case 3:mostrarMesas(restaurante);
     					System.out.println("Escriba el numero de mesa a desechar");
     					int numMesa=(int) readLong();
     					restaurante.eliminarMesa(numMesa);
+    					System.out.println("La mesa numero "+numMesa+" ha sido eliminada con éxito");
+    					break;
     					case 4:break;
     					}
     				}while(opcion!=4);

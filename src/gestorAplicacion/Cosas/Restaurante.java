@@ -11,7 +11,7 @@ import gestorAplicacion.Cosas.*;
 import gestorAplicacion.Personas.*;
 
 public class Restaurante {
-    private final String nombre = "Queseria de mi sin ti";
+    private final String nombre = "Le Quasó";
     private Empleado empleadoDelMes;
     private int numMesas;
     private int numEmpleados;
