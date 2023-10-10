@@ -242,7 +242,9 @@ public class Restaurante {
             listado.add(cliente1.getReserva());
         }
         for (Reserva reserva1 : listado) {
-            r += "\n"+reserva1.resumenReserva()+"\n\n+++++++++++++++++++++++++\n";
+            if (reserva1 != null) {
+                r += "\n"+reserva1.resumenReserva()+"\n\n+++++++++++++++++++++++++\n";
+            }
         }
         if (r.equals("")) {
             r = "\nNo se han echo reservas\n";

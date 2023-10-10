@@ -68,6 +68,16 @@ public class Administrador {
 							restaurante.f1(cedulaDuenoReserva, nombre, numAsistentes, diaReserva);
 							System.out.println("Reserva creada");
 							break;
+					case 3: System.out.print("Ingrese la cedula del dueño de la reserva a cancelar: ");
+							Long cedulaDuenoReserva2 = readLong();
+							if (restaurante.verificarCliente(cedulaDuenoReserva2)) {
+								System.out.println("El cliente no se encuentra afiliado al restaurante");
+							}
+							else {
+								restaurante.getCliente(cedulaDuenoReserva2).setReserva(null);
+								System.out.println("\nReserva cancelada\n");
+							}
+							break;
 				}
 			break;
     		case 2: do{
