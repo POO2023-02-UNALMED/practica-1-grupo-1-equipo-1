@@ -234,5 +234,44 @@ public class Restaurante {
     //metodo para decir si una accion no puede ser ejecutada
     public String operacionInvalida() {
     	return "Operacion Inválida";
-    	}
+    }
+    public String imprimirReservas() {
+        String r = "";
+        List<Reserva> listado = new ArrayList<>();
+        for (Cliente cliente1 : getClientes()) {
+            listado.add(cliente1.getReserva());
+        }
+        for (Reserva reserva1 : listado) {
+            r += reserva1.resumenReserva()+"\n++++++++++++++++++++\n";
+        }
+        if (r.equals("")) {
+            r = "No se han echo reservas";
+        }
+        return r;
+    }
+    public boolean verificarCliente(Long cedula) {
+        for (Cliente cliente1 : getClientes()) {
+            if (cedula == cliente1.getCedula()) {
+                return false;
+            }
+        }
+        return true;
+    }
+    public Cliente getCliente(Long cedula) {
+        for (Cliente cliente1 : getClientes()) {
+            if (cedula == cliente1.getCedula()) {
+                return cliente1;
+            }
+        }
+        return null;
+    }
+    public void f1(Long cedula, String nombre, int numAsistentes, String diaReserva) {
+        if (verificarCliente(cedula)) {
+            Cliente c1 = new Cliente(nombre, cedula);
+            afiliarCliente(c1);
+        }
+        Cliente c1 = getCliente(cedula);
+        LocalDate diaReserva2 = Reserva.deStringaFecha(diaReserva);
+        c1.setReserva(new Reserva(c1, numAsistentes, diaReserva2));
+    }
 }

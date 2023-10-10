@@ -3,6 +3,7 @@ import java.time.LocalDate;
 //import java.time.LocalTime;
 import java.io.Serializable;
 import gestorAplicacion.Personas.Cliente;
+import java.time.format.DateTimeFormatter;
 
 public class Reserva {
     private Cliente duenoReserva;
@@ -43,8 +44,19 @@ public class Reserva {
     /*public void setHoraReserva (LocalTime horaReserva) {
         this.horaReserva = horaReserva;
     }*/
-    public String toString () {
-        return "Dueño de la reserva: "+this.getDuenoReserva()+"\nNumero de asistentes: "+this.getNumeroAsistentes()+"\nMesa número: "
+    public String resumenReserva () {
+        if (this.mesa == null) {
+            return "Dueño de la reserva: "+this.getDuenoReserva().getNombre()+"\nNumero de asistentes: "+this.getNumeroAsistentes()+"\nMesa número: "
+        +"Sin mesa asignada"+"\nFecha reservada: "+this.getDiaReserva()/*+"\nHora reservada: "+this.getHoraReserva()*/;
+        }
+        else {
+            return "Dueño de la reserva: "+this.getDuenoReserva().getNombre()+"\nNumero de asistentes: "+this.getNumeroAsistentes()+"\nMesa número: "
         +this.mesa.getNumeroMesa()+"\nFecha reservada: "+this.getDiaReserva()/*+"\nHora reservada: "+this.getHoraReserva()*/;
+        }
+    }
+    public static LocalDate deStringaFecha(String fechaString) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate fecha = LocalDate.parse(fechaString, formatter);
+        return fecha;
     }
 }

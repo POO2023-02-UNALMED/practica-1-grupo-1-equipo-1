@@ -12,8 +12,8 @@ public class Empleado extends Persona{
     private Date fechaContratacion;
     private Restaurante restaurante;
     private int puntuacion;
-    public Empleado(String nombre, String genero,int edad,String puesto,Restaurante restaurante, Turno turno){
-        super(nombre, genero, edad);
+    public Empleado(String nombre, String puesto,Restaurante restaurante, Turno turno){
+        super(nombre);
         this.puesto = puesto;
         this.restaurante = restaurante;
         this.turno = turno;

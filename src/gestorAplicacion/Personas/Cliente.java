@@ -5,8 +5,10 @@ import gestorAplicacion.Cosas.*;
 public class Cliente extends Persona {
 	private Reserva reserva;
     private Pedido pedido;
-    public Cliente(String nombre, String genero, int edad) {
-		super(nombre, genero, edad);
+	private Long cedula;
+    public Cliente(String nombre, Long cedula) {
+		super(nombre);
+		this.cedula = cedula;
 	}
 	public Reserva getReserva() {
 		return this.reserva;
@@ -19,5 +21,11 @@ public class Cliente extends Persona {
 	}
 	public void PedirComida(Pedido pedido) {
 		this.pedido = pedido;
+	}
+	public Long getCedula() {
+		return cedula;
+	}
+	public void setCedula(Long cedula) {
+		this.cedula = cedula;
 	}
 }

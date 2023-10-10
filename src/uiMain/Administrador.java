@@ -4,8 +4,12 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
+
+import javax.sql.rowset.spi.SyncResolver;
+
 import baseDatos.Serializador;
 import gestorAplicacion.Cosas.*;
+import gestorAplicacion.Personas.Cliente;
 
 public class Administrador {
 	static Scanner scan=new Scanner(System.in);
@@ -28,11 +32,44 @@ public class Administrador {
     		System.out.println("3. Gestión de Empleados");
     		System.out.println("4. Gestión de Inventario");
     		System.out.println("5. Gestión Financiera");
+			System.out.println("6. Terminar");
     		System.out.print("Escribe el número de la opción que necesitas: ");
     		opcion = (int) readLong();
     		
     		switch(opcion) {
-    		case 1: ; break;
+    		case 1:
+				System.out.println("¿Que deseas hacer?");
+    			System.out.println("1. Ver la lista de reservas");
+    			System.out.println("2. Crear reserva");
+    			System.out.println("3. Cancelar reserva");
+    			System.out.println("4. Asignar mesas a");
+    			System.out.println("5. Volver al menú de funcionalidades");
+    			System.out.print("Escribe el número de la opción que necesitas: ");
+				opcion=(int) readLong();
+				switch(opcion) {
+					case 1:	System.out.println(restaurante.imprimirReservas());
+							break;
+					case 2: System.out.print("Ingrese la cedula del dueño de la reserva: ");
+							Long cedulaDuenoReserva = readLong();
+							String nombre = "";
+							if (restaurante.verificarCliente(cedulaDuenoReserva)) {
+								System.out.println(restaurante.getClientes().size());
+								System.out.println("El cliente no se encuentra afiliado al restaurante");
+								System.out.print("Ingrese el nombre del cliente: ");
+								nombre = readln();
+							}
+							else {
+								nombre = restaurante.getCliente(cedulaDuenoReserva).getNombre();
+							}
+							System.out.println("Ingrese el numero de Asistentes: ");
+							int numAsistentes = (int) readLong();
+							System.out.println("Ingrese el dia de la reserva en formato dia-mes-año: ");
+							String diaReserva = readln();
+							restaurante.f1(cedulaDuenoReserva, nombre, numAsistentes, diaReserva);
+							System.out.println("Reserva creada");
+							break;
+				}
+			break;
     		case 2: do{
     			System.out.println("¿Que deseas hacer?");
     			System.out.println("1. Lista de pedidos");
@@ -146,9 +183,10 @@ public class Administrador {
     			
   
     		case 5:;break;
-    		case 6: salirDelSistema(restaurante);break;
+    		case 6: salirDelSistema(restaurante);
+			break;
     		}
-    		}while(opcion!=6);
+    	} while(opcion!=6);
     		
     }
     public static void mostrarMesas(Restaurante restaurante) {
