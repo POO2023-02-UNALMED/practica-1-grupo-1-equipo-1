@@ -242,16 +242,16 @@ public class Restaurante {
             listado.add(cliente1.getReserva());
         }
         for (Reserva reserva1 : listado) {
-            r += reserva1.resumenReserva()+"\n++++++++++++++++++++\n";
+            r += "\n"+reserva1.resumenReserva()+"\n\n+++++++++++++++++++++++++\n";
         }
         if (r.equals("")) {
-            r = "No se han echo reservas";
+            r = "\nNo se han echo reservas\n";
         }
         return r;
     }
     public boolean verificarCliente(Long cedula) {
         for (Cliente cliente1 : getClientes()) {
-            if (cedula == cliente1.getCedula()) {
+            if (cedula.equals(cliente1.getCedula())) {
                 return false;
             }
         }
@@ -259,7 +259,7 @@ public class Restaurante {
     }
     public Cliente getCliente(Long cedula) {
         for (Cliente cliente1 : getClientes()) {
-            if (cedula == cliente1.getCedula()) {
+            if (cedula.equals(cliente1.getCedula())) {
                 return cliente1;
             }
         }

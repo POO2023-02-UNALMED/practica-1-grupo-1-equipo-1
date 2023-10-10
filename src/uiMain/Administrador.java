@@ -47,13 +47,13 @@ public class Administrador {
     			System.out.print("Escribe el número de la opción que necesitas: ");
 				opcion=(int) readLong();
 				switch(opcion) {
-					case 1:	System.out.println(restaurante.imprimirReservas());
+					case 1:	System.out.println("\nListado de reservas");
+							System.out.println(restaurante.imprimirReservas());
 							break;
 					case 2: System.out.print("Ingrese la cedula del dueño de la reserva: ");
 							Long cedulaDuenoReserva = readLong();
 							String nombre = "";
 							if (restaurante.verificarCliente(cedulaDuenoReserva)) {
-								System.out.println(restaurante.getClientes().size());
 								System.out.println("El cliente no se encuentra afiliado al restaurante");
 								System.out.print("Ingrese el nombre del cliente: ");
 								nombre = readln();
@@ -61,9 +61,9 @@ public class Administrador {
 							else {
 								nombre = restaurante.getCliente(cedulaDuenoReserva).getNombre();
 							}
-							System.out.println("Ingrese el numero de Asistentes: ");
+							System.out.print("Ingrese el numero de Asistentes: ");
 							int numAsistentes = (int) readLong();
-							System.out.println("Ingrese el dia de la reserva en formato dia-mes-año: ");
+							System.out.print("Ingrese el dia de la reserva en formato dia-mes-año: ");
 							String diaReserva = readln();
 							restaurante.f1(cedulaDuenoReserva, nombre, numAsistentes, diaReserva);
 							System.out.println("Reserva creada");
