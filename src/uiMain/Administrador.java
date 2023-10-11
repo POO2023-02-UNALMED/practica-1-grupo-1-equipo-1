@@ -12,6 +12,7 @@ import javax.sql.rowset.spi.SyncResolver;
 import baseDatos.Serializador;
 import gestorAplicacion.Cosas.*;
 import gestorAplicacion.Personas.Cliente;
+import gestorAplicacion.Personas.Empleado;
 
 public class Administrador {
 	static Scanner scan=new Scanner(System.in);
@@ -92,13 +93,56 @@ public class Administrador {
     			System.out.print("Escribe el número de la opción que necesitas: ");
     			opcion=(int) readLong();
     			switch(opcion) {
-    			case 1: {
-    			    for(Pedido pedido : Pedido.getPedidosSinFiltrar()){
-    			        System.out.println(pedido);
+    			case 1: //{
+    			    //for(Pedido pedido : Pedido.imprimirPlatos())
+    			//}
+    			case 2: System.out.println("Ingrese el tipo de pedido");
+    			String tipoPedido = readln();
+    			if(tipoPedido.equals("domicilio")){
+    			    System.out.println("Ingrese el Cocinero");
+    			    String nombreCocinero = readln();
+    			    Empleado cocinero = restaurante.buscarEmpleado(nombreCocinero);
+    			    if (cocinero == null) {
+    			        System.out.println("Cocinero no encontrado");
+    			        break;
     			    }
-    			    break;
+    			    System.out.println("Ingrese el Domiciliario");
+    			    String nombreDomiciliario = readln();
+    			    Empleado domiciliario = restaurante.buscarEmpleado(nombreDomiciliario);
+    			    if (domiciliario == null) {
+    			        System.out.println("Domiciliario no encontrado");
+    			        break;
+    			    }
+    			    new Pedido(tipoPedido, cocinero, domiciliario);
     			}
-    			case 2: // Código para añadir pedidos
+    			else {
+    			    System.out.println("Ingrese la Mesa");
+    			    int numMesa = (int)readLong();
+    			    Mesa mesa = restaurante.buscarMesa(numMesa);
+    			    if (mesa == null) {
+    			        System.out.println("Mesa no encontrada");
+    			        break;
+    			    }
+    			    System.out.println("Ingrese el Cocinero");
+    			    String nombreCocinero = readln();
+    			    Empleado cocinero = restaurante.buscarEmpleado(nombreCocinero);
+    			    if (cocinero == null) {
+    			        System.out.println("Cocinero no encontrado");
+    			        break;
+    			    }
+    			    System.out.println("Ingrese el Mesero");
+    			    String nombreMesero = readln();
+    			    Empleado mesero = restaurante.buscarEmpleado(nombreMesero);
+    			    if (mesero == null) {
+    			        System.out.println("Mesero no encontrado");
+    			        break;
+    			    }
+    			    new Pedido(mesa, tipoPedido, cocinero, mesero);
+    			}
+
+    			
+    			
+				break;
     			case 3: // Código para cancelar pedidos
     			case 4: // Código para verificar pedidos
     			case 5: break; // Volver al menú principal

@@ -37,6 +37,17 @@ public class Plato {
     	return verificado;
     	
     }
+    
+    public String detallesPlato() {
+        return "Plato{" +
+            "nombre='" + nombre + '\'' +
+            ", precio=" + precio +
+            ", descripcion='" + descripcion + '\'' +
+            ", tiempoPreparacion=" + tiempoPreparacion +
+            ", ingredientes=" + ingredientes +
+            '}';
+    }
+    
  // Métodos getter 
     public String getNombre() {
         return nombre;

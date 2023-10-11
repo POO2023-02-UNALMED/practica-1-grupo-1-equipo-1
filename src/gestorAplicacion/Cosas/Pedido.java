@@ -8,30 +8,25 @@ public class Pedido {
     private Empleado cocinero;
     private Empleado mesero;
     private Empleado domiciliario;
-    private static ArrayList<Pedido> pedidosVerificados = new ArrayList<>();
-    private static ArrayList<Pedido> pedidosNoVerificados = new ArrayList<>();
-    private static ArrayList<Pedido> pedidos = new ArrayList<>();
+    private ArrayList<Pedido> pedidosVerificados = new ArrayList<>();
+    private ArrayList<Pedido> pedidos = new ArrayList<>();
     private ArrayList<Plato> platos;
     // Segun este atributo se van a mostrar y se van a dividir
     // En pedidos verificados y no verificados
     private boolean verificado = false;
 	private String tipoPedido;
 
-	public static Pedido crearPedido(Mesa mesa, String tipoPedido, Empleado cocinero, Empleado mesero) {
-        if (tipoPedido.equals("domicilio")) {
-            return new Pedido(null, tipoPedido, cocinero, mesero, null);
-        } else {
-            return new Pedido(mesa, tipoPedido, cocinero, mesero, null);
-        }
-    }
+	public Pedido (String tipoPedido, Empleado cocinero, Empleado domiciliario) {
+		this(null, tipoPedido, cocinero, null);
+		this.domiciliario=domiciliario;
+	}
     	
-    public Pedido(Mesa mesa, String tipoPedido, Empleado cocinero, Empleado mesero, Empleado domiciliario) {
-    	Pedido.pedidos.add(this);
+    public Pedido(Mesa mesa, String tipoPedido, Empleado cocinero, Empleado mesero) {
+    	this.pedidos.add(this);
     	this.mesa = mesa;
         this.tipoPedido = tipoPedido;
         this.cocinero = cocinero;
         this.mesero = mesero;
-        this.domiciliario = domiciliario;
         this.platos = new ArrayList<>();
         this.verificado = false;
     }
@@ -65,6 +60,27 @@ public class Pedido {
      		}
      	return (verificado_insumos && verificado_cocinero );
      	}
+    
+   // Metdos para Administrador
+   // Gestion de Pedidos
+     
+     public String imprimirPlatos(){
+    	 for (Pedido pedido: getPedidos()) {
+    		 for(Plato plato : pedido.getPlatos()){
+    			 return plato.detallesPlato();
+         	}
+     	}
+		return null;
+     }
+     
+     public String imprimirPedidosVerificados(){
+    	 for(Pedido pedido : getPedidosVerificados()){
+     		for(Plato plato : pedido.getPlatos()){
+     			return plato.detallesPlato();
+         	}
+     	}
+		return null;
+     }
      
   // Metodos de plato
      public void agregarPlato(Plato plato) {
@@ -85,10 +101,10 @@ public class Pedido {
      }
      
      // Metodos de mostrar Pedidos
-     public static ArrayList<Pedido> getPedidosSinFiltrar(){
+     public  ArrayList<Pedido> getPedidos(){
     	 return pedidos;
      }
-     public static ArrayList<Pedido> getPedidosVerificados(){
+     public  ArrayList<Pedido> getPedidosVerificados(){
     	 for (Pedido pedido : pedidos){
     		 if(pedido.isVerificado()){
     			 pedidosVerificados.add(pedido);
@@ -96,13 +112,9 @@ public class Pedido {
     	 }
     	 return pedidosVerificados;
      }
-     public static ArrayList<Pedido> getPedidosNoVerificados(){
-    	 for (Pedido pedido : pedidos){
-    		 if(pedido.isVerificado()){
-    			 pedidosVerificados.add(pedido);
-    		 }
-    	 }
-    	 return pedidosNoVerificados;
+     
+     public  ArrayList<Plato> getPlatos(){
+    	 return this.platos;
      }
      
 }

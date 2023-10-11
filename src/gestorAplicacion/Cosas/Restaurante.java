@@ -174,7 +174,22 @@ public class Restaurante {
     public void contratarEmpleado1(String puesto, Turno.Tipo tipoTurno) {
         Empleado empleadoDisponible = null;
     }*/
-    
+    public Empleado buscarEmpleado(String nombre){
+    	for(Empleado empleado : listadoEmpleados){
+    		if((empleado.getNombre()).equals(nombre)){
+    			return empleado;
+    		}
+    	}
+		return  null;
+    }
+    public Mesa buscarMesa(int numero){
+    	for(Mesa mesa : listadoMesas){
+    		if((mesa.getNumeroMesa())==(numero)){
+    			return mesa;
+    		}
+    		}
+    	return null;
+    }
     public void afiliarCliente (Cliente nuevoCliente) {
         this.listadoClientes.add(nuevoCliente);
     }
@@ -251,6 +266,8 @@ public class Restaurante {
     public String operacionInvalida() {
     	return "Operacion Inválida";
     }
+
+    // Gestion de Reservas
     public String imprimirReservas() {
         String r = "";
         List<Reserva> listado = new ArrayList<>();
