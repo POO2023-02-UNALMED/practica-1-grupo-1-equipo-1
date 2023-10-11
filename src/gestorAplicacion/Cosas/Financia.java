@@ -39,7 +39,8 @@ public class Financia {
 	    	return totalGastosMateriales;
 	}
 	public double presupuesto() {
-		double total=0;
+			double total=0;
+			return total;
 		
 }
 }

@@ -48,4 +48,7 @@ public class Material {
     public void cambiarFechaVencimiento(LocalDate fechaVencimiento) {
         this.fechaVencimiento = fechaVencimiento;
     }
+    public String fechaMaterial() {
+    	return "Este material no tiene fecha de vencimiento";
+    }
 }

@@ -189,14 +189,30 @@ public class Restaurante {
     		}
     	}
     }
-    public void comprarMaterial (Material.Tipo tipo, int cantidad) {
+    public void comprarMaterial (Material.Tipo tipo, int cantidad, int precio, LocalDate fecha) {
         if (this.inventario.containsKey(tipo)) {
         	Material materialComprado = this.inventario.get(tipo);
             materialComprado.comprarMaterial(cantidad);
+            materialComprado.cambiarPrecioUnitario(precio);
+            materialComprado.cambiarFechaVencimiento(fecha);
         }
         else {
-        	Material nuevoMaterial=new Material(tipo,cantidad,0);
+        	Material nuevoMaterial=new Material(tipo,cantidad,precio,fecha);
             inventario.put(tipo, nuevoMaterial);
+            nuevoMaterial.cambiarPrecioUnitario(precio);
+            nuevoMaterial.cambiarFechaVencimiento(fecha);
+        }
+    }
+    public void comprarMaterial (Material.Tipo tipo, int cantidad, int precio) {
+        if (this.inventario.containsKey(tipo)) {
+        	Material materialComprado = this.inventario.get(tipo);
+            materialComprado.comprarMaterial(cantidad);
+            materialComprado.cambiarPrecioUnitario(precio);
+        }
+        else {
+        	Material nuevoMaterial=new Material(tipo,cantidad,precio);
+            inventario.put(tipo, nuevoMaterial);
+            nuevoMaterial.cambiarPrecioUnitario(precio);
         }
     }
 
