@@ -1,5 +1,6 @@
 package uiMain;
 import java.time.LocalDate;
+
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ public class Administrador {
 		return scan.nextLine();
 	}
     public static void main(String[] args) {
+    	
     	Restaurante restaurante=new Restaurante();
 		restaurante.comprarMesa(new Mesa(6, 1));
     	int opcion;
@@ -167,8 +169,14 @@ public class Administrador {
     			case 5: break; // Volver al menú principal
     			}
     		}while(opcion!=5);
-    		case 3:;break;
-    		case 4: do {
+    		case 3:
+    			
+    			break;
+    		case 4: 
+    			int opcionInv;
+    			int opcionInv1;
+    			int opcionInv2;
+    			do {
     			System.out.println("-------------------------------------------------------");
     			System.out.println("¿Que deseas hacer?");
     			System.out.println("1. Consultar Inventario");
@@ -176,37 +184,38 @@ public class Administrador {
     			System.out.println("3. Desechar Materiales");
     			System.out.println("4. Volver al menú de funcionalidades");
     			System.out.print("Escribe el número de la opción que necesitas: ");
-    			opcion=(int) readLong();
-    			switch(opcion) {
+    			opcionInv=(int) readLong();
+    			switch(opcionInv) {
     			case 1:System.out.println("-------------------------------------------------------"); 
     				mostrarIngredientes(restaurante);
     				break;
-    			case 2: 
+    			case 2:
+    				
     				do {
     					System.out.println("-------------------------------------------------------");
     					System.out.println("1. ¿Que ingrediente desea comprar?");
     					System.out.println("2. ¿Que material desea comprar?");
     					System.out.println("3. ¿Que mesa deseas comprar?");
     					System.out.println("4. Volver al menú de gestión de inventario");
-    					opcion=(int)readLong();
-    					switch(opcion) {
+    					opcionInv1=(int)readLong();
+    					switch(opcionInv1) {
     					case 1: 
     						System.out.println("-------------------------------------------------------");
     						mostrarIngredientes(restaurante);
-    						System.out.println("Ingrese el ingrediente a comprar");
-    						System.out.println("-------------------------------------------------------");
+    						System.out.print("Ingrese el ingrediente a comprar: ");
+    						System.out.println("\n-------------------------------------------------------");
     						String ingrediente=scan.next();
     						Material.Tipo ingredienteEnum=Material.Tipo.valueOf(ingrediente);
-    						System.out.println("Ingrese la cantidad a comprar");
-    						System.out.println("-------------------------------------------------------");	
+    						System.out.print("Ingrese la cantidad a comprar: ");
+    						System.out.println("\n-------------------------------------------------------");	
     						int cantidad=(int) readLong();
-    						System.out.println("Ingrese el precio unitario de dicho ingrediente");
-    						System.out.println("-------------------------------------------------------");
+    						System.out.print("Ingrese el precio unitario de dicho ingrediente: ");
+    						System.out.println("\n------------------------------------------------------");
     						int precio=(int) readLong();
-    						System.out.println("Ingrese la fecha de vencimiento del ingrediente en formato dd/mm/aaaa");
-    						System.out.println("-------------------------------------------------------");
+    						System.out.print("Ingrese la fecha de vencimiento del ingrediente en formato dia-mes-año: ");
+    						System.out.println("\n-------------------------------------------------------");
     						String fechaInput=scan.nextLine();
-    						DateTimeFormatter formato=DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    						DateTimeFormatter formato=DateTimeFormatter.ofPattern("dd-MM-yyyy");
     						LocalDate fecha=LocalDate.parse(fechaInput,formato);
     						restaurante.comprarMaterial(ingredienteEnum,cantidad,precio,fecha);
     						System.out.println("Se han comprado "+cantidad+" "+ingredienteEnum+" al precio de "+precio+" que vencen el "+fecha);
@@ -215,70 +224,78 @@ public class Administrador {
     						System.out.println("-------------------------------------------------------");
     						mostrarIngredientes(restaurante);
     						System.out.println("-------------------------------------------------------");
-    						System.out.println("Ingrese el material a comprar");
-    						System.out.println("-------------------------------------------------------");
+    						System.out.print("Ingrese el material a comprar: ");
+    						System.out.println("\n-------------------------------------------------------");
     						String material=scan.next();
     						Material.Tipo materialEnum=Material.Tipo.valueOf(material);
-    						System.out.println("Ingrese la cantidad a comprar");
-    						System.out.println("-------------------------------------------------------");
+    						System.out.print("Ingrese la cantidad a comprar: ");
+    						System.out.println("\n-------------------------------------------------------");
     						int cantidad2=(int) readLong();
-    						System.out.println("Ingrese el precio de dicho material ");
-    						System.out.println("-------------------------------------------------------");
+    						System.out.print("Ingrese el precio de dicho material: ");
+    						System.out.println("\n-------------------------------------------------------");
     						int precio2=(int) readLong();
     						restaurante.comprarMaterial(materialEnum,cantidad2,precio2);
     						System.out.println("Se han comprado "+cantidad2+" "+materialEnum+" al precio de "+precio2);
     						break;
     					case 3:
     						mostrarMesas(restaurante);
-    						System.out.println("Escriba el numero de la nueva mesa y su capacidad");
+    						System.out.print("Escriba el numero de la nueva mesa: ");
+    						System.out.println("\n-------------------------------------------------------");
     						int numMesa=(int) readLong();
+    						System.out.print("Escriba la capacidad de la nueva mesa: ");
+    						System.out.println("\n-------------------------------------------------------");
     						int capacidad=(int) readLong();
-    						Mesa nuevaMesa = new Mesa(numMesa,capacidad);
-    						restaurante.comprarMesa(nuevaMesa);
+    						restaurante.comprarMesa(new Mesa(capacidad,numMesa));
     						System.out.println("La mesa numero "+numMesa+" con capadidad de "+capacidad+" personas ha sido registrada con éxito");
     						break;
     					case 4:
-    						break;
+    						;break;
     					}
-    				}while(opcion!=4);
+    				}while(opcionInv1!=4);
     			case 3:
-    				do {
+    				
+					do {
     					System.out.println("-------------------------------------------------------");
     					System.out.println("1. ¿Que ingrediente vas a desechar?");
     					System.out.println("2. ¿Que material vas a desechar?");
     					System.out.println("3. ¿Que mesa vas a desechar?");
     					System.out.println("4. Volver al menú de gestión de inventario");
-    					opcion=(int)readLong();
-    					switch(opcion) {
+    					opcionInv2=(int)readLong();
+    					switch(opcionInv2) {
     					case 1:  mostrarIngredientes(restaurante);
-    						System.out.println("Ingrese el ingrediente y la cantidad a desechar");
+    						System.out.print("Ingrese el ingrediente a desechar: ");
     						String ingrediente =scan.next();
+    						System.out.print("Ingrese la cantidad a desechar: ");
     						int cantidad=(int) readLong();
     						Material.Tipo ingredienteEnum=Material.Tipo.valueOf(ingrediente);
     						restaurante.botarMaterial(ingredienteEnum,cantidad);
     						System.out.println("Se han eliminado "+cantidad+" "+ingredienteEnum);
     						break;
     					case 2: mostrarIngredientes(restaurante);
-    						System.out.println("Ingrese el material y la cantidad a desechar");
+    						System.out.print("Ingrese el material a desechar: ");
     						String material= scan.next();
+    						System.out.print("Ingrese la cantidad a desechar: ");
     						Material.Tipo materialEnum=Material.Tipo.valueOf(material);
     						int cantidad2=(int) readLong();
     						restaurante.botarMaterial(materialEnum,cantidad2);
     						System.out.println("Se han eliminado "+cantidad2+" "+materialEnum);
     						break;
-    					case 3:mostrarMesas(restaurante);
-    					System.out.println("Escriba el numero de mesa a desechar");
-    					System.out.println("-------------------------------------------------------");
-    					int numMesa=(int) readLong();
-    					restaurante.eliminarMesa(numMesa);
-    					System.out.println("La mesa numero "+numMesa+" ha sido eliminada con éxito");
-    					break;
-    					case 4:break;
+    					case 3:
+    						mostrarMesas(restaurante);
+    						System.out.print("Escriba el numero de mesa a desechar: ");
+    						System.out.println("\n-------------------------------------------------------");
+    						int numMesa=(int) readLong();
+    						restaurante.eliminarMesa(numMesa);
+    						System.out.println("La mesa numero "+numMesa+" ha sido eliminada con éxito");
+    						break;
+    					case 4:
+    						;break;
     					}
-    				}while(opcion!=4);
-    			case 4:break;
+    				}while(opcionInv2!=4);
+    			case 4:
+    				break;
     			}
-    		}while(opcion!=4);
+    		}while(opcionInv!=4);
     			
     			
   
@@ -312,6 +329,9 @@ public class Administrador {
     	}
     }*/
     public static void mostrarIngredientes(Restaurante restaurante) {   	
+    	if (restaurante.getInventario().size()==0) {
+    		System.out.println("No hay materiales en el inventario");
+    	}
     	for (Material material: restaurante.getInventario().values()) {
     		if(material.getFechaVencimiento()!=null) {
     			System.out.println("Tipo: "+material.getTipo() + "\nCantidad: "+material.getCantidad()+"\nFecha de Vencimiento: "+material.getFechaVencimiento()+"\nPrecio por unidad: "+material.getPrecioUnitario());
@@ -330,7 +350,7 @@ public class Administrador {
     }*/
     private static void salirDelSistema(Restaurante restaurante) {
     	System.out.println("Vuelva pronto");
-    	Serializador.serializar(restaurante);
+    	//Serializador.serializar(restaurante);
     	System.exit(0);
     }
 }

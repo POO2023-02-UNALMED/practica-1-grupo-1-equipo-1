@@ -10,33 +10,63 @@ import gestorAplicacion.Cosas.*;
 import gestorAplicacion.Personas.*;
 
 public class Serializador {
-		
-	private static File rutaTemp=new File("src\\basedatos\\temp");
-	public static void serializar(Restaurante restaurante) {
-		FileOutputStream archivo;
-		ObjectOutputStream codificador;
-		File[] documentos = rutaTemp.listFiles();
-		PrintWriter lector;
-		for(File file:documentos) {
+	public static void serializar(GestionDatos gest) {
+		serializarClientes(gest, new File("src\\baseDatos\\temp\\Clientes.txt"));
+		serializarEmpleados(gest, new File("src\\baseDatos\\temp\\Empleados.txt"));
+		serializarMesas(gest, new File("src\\baseDatos\\temp\\Mesas.txt"));
+		serializarReservas(gest, new File("src\\baseDatos\\temp\\Reservas.txt"));
+	}
+		public static void serializarMesas(GestionDatos gest,File ruta) {
 			try {
-				lector = new PrintWriter(file);
-			} catch (FileNotFoundException excepcion) {
-				excepcion.printStackTrace();
+				PrintWriter pw= new PrintWriter(ruta);
+				FileOutputStream file=new FileOutputStream(ruta);
+				ObjectOutputStream output=new ObjectOutputStream(file);
+				output.writeObject(gest.getMesas());
+				output.close();
+				file.close();
+			}catch (IOException excepcion) {
+				System.out.println("Error en la serializacion" + excepcion);
 			}
 		}
-		for(File file:documentos) {
-			if(file.getAbsolutePath().contains("clientes")) {
+		public static void serializarClientes(GestionDatos gest,File ruta) {
+			try {
+				PrintWriter pw= new PrintWriter(ruta);
+				FileOutputStream file=new FileOutputStream(ruta);
+				ObjectOutputStream output=new ObjectOutputStream(file);
+				output.writeObject(gest.getClientes());
+				output.close();
+				file.close();
+			}catch (IOException excepcion) {
+				System.out.println("Error en la serializacion" + excepcion);
+			}
+		}
+		public static void serializarEmpleados(GestionDatos gest,File ruta) {
+			try {
+				PrintWriter pw= new PrintWriter(ruta);
+				FileOutputStream file=new FileOutputStream(ruta);
+				ObjectOutputStream output=new ObjectOutputStream(file);
+				output.writeObject(gest.getEmpleados());
+				output.close();
+				file.close();
+			}catch (IOException excepcion) {
+				System.out.println("Error en la serializacion" + excepcion);
+			}
+		}
+		public static void serializarReservas(GestionDatos gest,File ruta) {
+			for (Mesa mesas:gest.getRestaurante().getMesas()) {
 				try {
-					archivo = new FileOutputStream(file);
-					codificador = new ObjectOutputStream(archivo);
-					codificador.writeObject(restaurante.getClientes());
-				} catch (FileNotFoundException excepcion) {
-					excepcion.printStackTrace();
-				} catch (IOException excepcion) {
-					excepcion.printStackTrace();
+					PrintWriter pw= new PrintWriter(ruta);
+					FileOutputStream file=new FileOutputStream(ruta);
+					ObjectOutputStream output=new ObjectOutputStream(file);
+					output.writeObject(mesas.getReserva());
+					output.close();
+					file.close();
+				}catch (IOException excepcion) {
+					System.out.println("Error en la serializacion" + excepcion);
 				}
 			}
+			
 		}
-	}
+		
 	
 }

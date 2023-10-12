@@ -280,7 +280,7 @@ public class Restaurante {
             }
         }
         if (r.equals("")) {
-            r = "\nNo se han echo reservas\n";
+            r = "\nNo se han hecho reservas\n";
         }
         return r;
     }
