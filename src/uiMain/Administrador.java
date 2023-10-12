@@ -25,6 +25,7 @@ public class Administrador {
 	}
     public static void main(String[] args) {
     	Restaurante restaurante=new Restaurante();
+		restaurante.comprarMesa(new Mesa(6, 1));
     	int opcion;
     	do {
     		
@@ -42,18 +43,22 @@ public class Administrador {
     		switch(opcion) {
     		case 1:
 				System.out.println("¿Que deseas hacer?");
-    			System.out.println("1. Ver la lista de reservas");
-    			System.out.println("2. Crear reserva");
-    			System.out.println("3. Cancelar reserva");
-    			System.out.println("4. Asignar mesas a");
-    			System.out.println("5. Volver al menú de funcionalidades");
+    			System.out.println("1. Ver la lista de reservas por confirmar");
+				System.out.println("2. Ver la lista de reservas ya confirmadas");
+    			System.out.println("3. Crear reserva");
+    			System.out.println("4. Cancelar reserva");
+    			System.out.println("5. Asignar mesas a las reservas");
+    			System.out.println("6. Volver al menú de funcionalidades");
     			System.out.print("Escribe el número de la opción que necesitas: ");
 				opcion=(int) readLong();
 				switch(opcion) {
 					case 1:	System.out.println("\nListado de reservas");
 							System.out.println(restaurante.imprimirReservas());
 							break;
-					case 2: System.out.print("Ingrese la cedula del dueño de la reserva: ");
+					case 2: System.out.println("\nListado de reservas");
+							System.out.println(restaurante.imprimirReservas2());
+							break;
+					case 3: System.out.print("Ingrese la cedula del dueño de la reserva: ");
 							Long cedulaDuenoReserva = readLong();
 							String nombre = "";
 							if (restaurante.verificarCliente(cedulaDuenoReserva)) {
@@ -71,7 +76,7 @@ public class Administrador {
 							restaurante.f1(cedulaDuenoReserva, nombre, numAsistentes, diaReserva);
 							System.out.println("Reserva creada");
 							break;
-					case 3: System.out.print("Ingrese la cedula del dueño de la reserva a cancelar: ");
+					case 4: System.out.print("Ingrese la cedula del dueño de la reserva a cancelar: ");
 							Long cedulaDuenoReserva2 = readLong();
 							if (restaurante.verificarCliente(cedulaDuenoReserva2)) {
 								System.out.println("El cliente no se encuentra afiliado al restaurante");
@@ -81,6 +86,20 @@ public class Administrador {
 								System.out.println("\nReserva cancelada\n");
 							}
 							break;
+					case 5:	System.out.print("Ingrese la cédula del dueño de la reserva: ");
+							Long cedulaDuenoReserva3 = readLong();
+							if (restaurante.verificarCliente(cedulaDuenoReserva3)) {
+								System.out.println("El cliente no se encuentra afiliado al restaurante, por lo que no tiene una reserva");
+								break;
+							}
+							else {
+								System.out.println("\nMesas válidas para la reserva de "+restaurante.getCliente(cedulaDuenoReserva3).getNombre());
+								System.out.println(restaurante.mesasQueCumplen(cedulaDuenoReserva3));
+								System.out.print("Ingrese el numero de la mesa a la cual desea asignar la reserva: ");
+								int numeroMesa = (int) readLong();
+								System.out.println(restaurante.confirmarReserva(numeroMesa, cedulaDuenoReserva3));
+							}
+					case 6: break;
 				}
 			break;
     		case 2: do{

@@ -32,7 +32,7 @@ public class Mesa {
     public List<Reserva> getReserva () {
         return this.reservas;
     }
-    public boolean suficienteCapacidad1(Reserva reserva) {
+    public boolean suficienteCapacidad(Reserva reserva) {
         if (this.capacidad >= reserva.getNumeroAsistentes()) {
             return true;
         }
@@ -40,20 +40,9 @@ public class Mesa {
             return false;
         }
     }
-    public String suficienteCapacidad2(Reserva reserva) {
-        if (this.capacidad >= reserva.getNumeroAsistentes()) {
-            return "Mesa con capacidad suficiente";
-        }
-        else {
-            return "Mesa sin suficiente capacidad para los asistentes";
-        }
-    }
     public void reservarMesa (Reserva reserva) {
-        if (this.suficienteCapacidad1(reserva) && this.mesaCompatible(reserva)) {
             this.reservas.add(reserva);
             reserva.setMesa(this);
-            reserva.getDuenoReserva().setReserva(reserva);;
-        }
     }
     public boolean isOcupada () {
         return this.ocupada;
@@ -92,5 +81,8 @@ public class Mesa {
             }
         }
         return true;
+    }
+    public String resumenMesa () {
+        return "Capacidad de la mesa: "+this.getCapacidad()+"\nNúmero de la mesa: "+this.getNumeroMesa();
     }
 }

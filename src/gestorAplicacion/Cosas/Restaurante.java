@@ -256,7 +256,7 @@ public class Restaurante {
     public List<Mesa> listadoMesasValidasParaReserva(Reserva reserva) {
         List<Mesa> mesasFiltradas = new ArrayList<>();
         for (Mesa mesa : listadoMesas) {
-            if (mesa.suficienteCapacidad1(reserva) && mesa.mesaCompatible(reserva)) {
+            if (mesa.suficienteCapacidad(reserva) && mesa.mesaCompatible(reserva)) {
                 mesasFiltradas.add(mesa);
             }
         }
@@ -284,6 +284,22 @@ public class Restaurante {
         }
         return r;
     }
+    public String imprimirReservas2() {
+        String r = "";
+        List<Reserva> listado = new ArrayList<>();
+        for (Mesa mesa1 : getMesas()) {
+            listado.addAll(mesa1.getReserva());
+        }
+        for (Reserva reserva1 : listado) {
+            if (reserva1 != null) {
+                r += "\n"+reserva1.resumenReserva()+"\n\n+++++++++++++++++++++++++\n";
+            }
+        }
+        if (r.equals("")) {
+            r = "\nNo se han confirmado reservas\n";
+        }
+        return r;
+    }
     public boolean verificarCliente(Long cedula) {
         for (Cliente cliente1 : getClientes()) {
             if (cedula.equals(cliente1.getCedula())) {
@@ -308,5 +324,46 @@ public class Restaurante {
         Cliente c1 = getCliente(cedula);
         LocalDate diaReserva2 = Reserva.deStringaFecha(diaReserva);
         c1.setReserva(new Reserva(c1, numAsistentes, diaReserva2));
+    }
+    public String mesasQueCumplen(Long cedulaDuenoReserva) {
+        String t = "";
+        Cliente c1 = getCliente(cedulaDuenoReserva);
+        Reserva r1 = c1.getReserva();
+        List<Mesa> listado = this.listadoMesasValidasParaReserva(r1);
+        for (Mesa mesa1 : listado) {
+                t += "\n"+mesa1.resumenMesa()+"\n\n+++++++++++++++++++++++++\n";
+        }
+        if (t.equals("")) {
+            t = "\nNo hay mesas válidas para esa reserva\n";
+        }
+        return t;
+    }
+    public Mesa getMesa(int numMesa) {
+        Long b = (long) numMesa;
+        for (Mesa mesa1 : getMesas()) {
+            Long a = (long) mesa1.getNumeroMesa();
+            if (b.equals(a)) {
+                return mesa1;
+            }
+        }
+        return null;
+    }
+    public String confirmarReserva(int numMesa, Long cedula) {
+        Cliente c1 = getCliente(cedula);
+        Reserva r1 = c1.getReserva();
+        if (Mesa.verificarNumero(numMesa)) {
+            Mesa mesa1 = getMesa(numMesa);
+            if (mesa1.suficienteCapacidad(r1)) {
+                mesa1.reservarMesa(r1);
+                c1.setReserva(null);
+                return "Reserva asignada a la mesa #"+numMesa;
+            }
+            else {
+                return "La mesa seleccionada no tiene la capacidad suficiente, vuelva a intentarlo";
+            }
+        }
+        else {
+            return "No existe una mesa con ese número, por favor vuelva a intentarlo";
+        }
     }
 }

@@ -46,11 +46,11 @@ public class Reserva {
     }*/
     public String resumenReserva () {
         if (this.mesa == null) {
-            return "Dueño de la reserva: "+this.getDuenoReserva().getNombre()+"\nNumero de asistentes: "+this.getNumeroAsistentes()+"\nMesa número: "
+            return "Dueño de la reserva: "+this.getDuenoReserva().getNombre()+"\nCédula del reservista: "+this.getDuenoReserva().getCedula()+"\nNumero de asistentes: "+this.getNumeroAsistentes()+"\nMesa número: "
         +"Sin mesa asignada"+"\nFecha reservada: "+this.getDiaReserva()/*+"\nHora reservada: "+this.getHoraReserva()*/;
         }
         else {
-            return "Dueño de la reserva: "+this.getDuenoReserva().getNombre()+"\nNumero de asistentes: "+this.getNumeroAsistentes()+"\nMesa número: "
+            return "Dueño de la reserva: "+this.getDuenoReserva().getNombre()+"\nCédula del reservista: "+this.getDuenoReserva().getCedula()+"\nNumero de asistentes: "+this.getNumeroAsistentes()+"\nMesa número: "
         +this.mesa.getNumeroMesa()+"\nFecha reservada: "+this.getDiaReserva()/*+"\nHora reservada: "+this.getHoraReserva()*/;
         }
     }
