@@ -9,23 +9,26 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import gestorAplicacion.Cosas.*;
 import gestorAplicacion.Personas.*;
-
-public class Restaurante {
-    private final String nombre = "Le Quasó";
+import baseDatos.Deserializador;
+public class Restaurante implements Serializable{
+    private static final long serialVersionUID=1L;
+	private final String nombre = "Le Quasó";
     private Empleado empleadoDelMes;
     private int numMesas;
     private int numEmpleados;
     private int numClientes;
-    private List<Empleado> listadoEmpleados;
-    private List<Cliente> listadoClientes;
-    private List<Mesa> listadoMesas;
-    private Map<Tipo, Material> inventario;
+    private List<Empleado> listadoEmpleados=new ArrayList<>();
+    private List<Cliente> listadoClientes=new ArrayList<>();
+    private List<Mesa> listadoMesas=new ArrayList<>();
+    private Map<Tipo, Material> inventario=new HashMap<>();
     
     
 
 
     public Restaurante () {
-        this(new ArrayList<>());
+    	this(new ArrayList<>());
+    	//Deserializador.deserializar(this);
+        
     }
     public Restaurante(List<Mesa> listadoMesas) {
         this(listadoMesas, new ArrayList<>());
@@ -136,14 +139,26 @@ public class Restaurante {
     public List<Empleado> getEmpleados () {
         return this.listadoEmpleados;
     }
+    public void setEmpleados(List<Empleado> empleados) {
+    	this.listadoEmpleados=empleados;
+    }
     public List<Cliente> getClientes () {
         return this.listadoClientes;
+    }
+    public void setClientes(List<Cliente> clientes) {
+    	this.listadoClientes=clientes;
     }
     public List<Mesa> getMesas () {
         return this.listadoMesas;
     }
+    public void setMesas(List<Mesa> mesas) {
+    	this.listadoMesas=mesas;
+    }
     public Map<Tipo, Material> getInventario () {
         return this.inventario;
+    }
+    public void setInventario(Map<Tipo,Material> inv) {
+    	this.inventario=inv;
     }
     public void contratarEmpleado(Empleado novato) {
         this.listadoEmpleados.add(novato);
