@@ -21,6 +21,15 @@ public class Turno {
 		return horas;
 	}
 	
+	public int HorasExtras() {
+        int horasRegulares = 8;  //suponer que es 8
+        if (this.horas > horasRegulares) {
+            return this.horas - horasRegulares;
+        } else {
+            return 0;
+        }
+	}
+ 
     public double getSalario() {
         return salario;
     }

@@ -5,21 +5,21 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
-import gestorAplicacion.Cosas.Material.*;
+import gestorAplicacion.Cosas.Material;
 import java.io.Serializable;
 import gestorAplicacion.Cosas.*;
-import gestorAplicacion.Personas.*;
+import gestorAplicacion.Personas.Empleado;
 
 public class Financia {
 	private double presupuesto;
 	private double gastosMateriales;
-	private float pagosEmpleados;
-	private float compraMateriales;
-	private float ganancias;
-	private float liquidacion;
-	private float perdidas;
+	private double pagosEmpleados;
+	private double compraMateriales;
+	private double ganancias;
+	private double liquidacion;
+	private double perdidas;
 	
-	public Financia(double presupuesto, double gastosMateriales, float pagosEmpleados, float compraMateriales, float ganancias, float liquidacion, float perdidas) {
+	public Financia(double presupuesto, double gastosMateriales, double pagosEmpleados, double compraMateriales, double ganancias, double liquidacion, double perdidas) {
 	this.presupuesto = presupuesto;
 	this.gastosMateriales = gastosMateriales;
 	this.pagosEmpleados = pagosEmpleados;
@@ -38,9 +38,20 @@ public class Financia {
 	    	}
 	    	return totalGastosMateriales;
 	}
-	public double presupuesto() {
-			double total=0;
-			return total;
-		
 }
+	public double liquidacion(Empleado empleado) {
+        double totalSalario = 0;
+        double pagoHoraExtra = 1.5; // Supongamos que las horas extras se pagan a 1.5 veces el salario regular por hora
+        for(Turno turno : empleado.getTurnos()){
+            if (turno.isCompletado() && !turno.isCobrado()){
+                totalSalario += turno.getSalario();
+                int horasExtras = turno.HorasExtras();
+                if (horasExtras > 0) {
+                    totalSalario += horasExtras * (turno.getSalario() / turno.getHoras()) * pagoHoraExtra;
+                }
+                turno.setCobrado(true);
+            }
+        }
+        return totalSalario;
+    }
 }
