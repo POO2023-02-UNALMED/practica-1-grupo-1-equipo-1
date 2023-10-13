@@ -28,7 +28,16 @@ public class Administrador {
     	
     	Restaurante restaurante=new Restaurante();
 		restaurante.comprarMesa(new Mesa(6, 1));
-    	int opcion;
+		restaurante.comprarMesa(new Mesa(2, 1));
+		restaurante.comprarMesa(new Mesa(4, 1));
+		restaurante.comprarMesa(new Mesa(8, 1));
+		restaurante.comprarMesa(new Mesa(10, 1));
+		restaurante.comprarMesa(new Mesa(2, 1));
+		restaurante.comprarMesa(new Mesa(4, 1));
+		restaurante.comprarMesa(new Mesa(4, 1));
+		restaurante.comprarMesa(new Mesa(6, 1));
+		restaurante.comprarMesa(new Mesa(8, 1));
+    	int opcion, opcion2;
     	do {
     		
     		System.out.println("Bienvenido al Gestor del Restaurante " + restaurante.getNombre()); // agregar el método getNombre
@@ -43,7 +52,7 @@ public class Administrador {
     		opcion = (int) readLong();
     		
     		switch(opcion) {
-    		case 1:
+				case 1: do {
 				System.out.println("¿Que deseas hacer?");
     			System.out.println("1. Ver la lista de reservas por confirmar");
 				System.out.println("2. Ver la lista de reservas ya confirmadas");
@@ -52,8 +61,8 @@ public class Administrador {
     			System.out.println("5. Asignar mesas a las reservas");
     			System.out.println("6. Volver al menú de funcionalidades");
     			System.out.print("Escribe el número de la opción que necesitas: ");
-				opcion=(int) readLong();
-				switch(opcion) {
+				opcion2=(int) readLong();
+				switch(opcion2) {
 					case 1:	System.out.println("\nListado de reservas");
 							System.out.println(restaurante.imprimirReservas());
 							break;
@@ -92,17 +101,19 @@ public class Administrador {
 							Long cedulaDuenoReserva3 = readLong();
 							if (restaurante.verificarCliente(cedulaDuenoReserva3)) {
 								System.out.println("El cliente no se encuentra afiliado al restaurante, por lo que no tiene una reserva");
-								break;
 							}
 							else {
 								System.out.println("\nMesas válidas para la reserva de "+restaurante.getCliente(cedulaDuenoReserva3).getNombre());
 								System.out.println(restaurante.mesasQueCumplen(cedulaDuenoReserva3));
+								if (!restaurante.mesasQueCumplen(cedulaDuenoReserva3).equals("\nNo hay mesas válidas para esa reserva\n")) {
 								System.out.print("Ingrese el numero de la mesa a la cual desea asignar la reserva: ");
 								int numeroMesa = (int) readLong();
 								System.out.println(restaurante.confirmarReserva(numeroMesa, cedulaDuenoReserva3));
+								}
 							}
+							break;
 					case 6: break;
-				}
+				} } while(opcion2 != 6);
 			break;
     		case 2: do{
     			System.out.println("¿Que deseas hacer?");
@@ -168,10 +179,11 @@ public class Administrador {
     			case 4: // Código para verificar pedidos
     			case 5: break; // Volver al menú principal
     			}
-    		}while(opcion!=5);
+    		}while(opcion!=5); break;
     		case 3:
     			
     			break;
+			//funcionalidad Sebas
     		case 4: 
     			int opcionInv;
     			int opcionInv1;
@@ -249,9 +261,9 @@ public class Administrador {
     						System.out.println("La mesa numero "+numMesa+" con capadidad de "+capacidad+" personas ha sido registrada con éxito");
     						break;
     					case 4:
-    						;break;
+    						break;
     					}
-    				}while(opcionInv1!=4);
+    				}while(opcionInv1!=4); break;
     			case 3:
     				
 					do {
@@ -289,9 +301,9 @@ public class Administrador {
     						System.out.println("La mesa numero "+numMesa+" ha sido eliminada con éxito");
     						break;
     					case 4:
-    						;break;
+    						break;
     					}
-    				}while(opcionInv2!=4);
+    				} while(opcionInv2!=4); break;
     			case 4:
     				break;
     			}
@@ -299,9 +311,9 @@ public class Administrador {
     			
     			
   
-    		case 5:;break;
-    		case 6: salirDelSistema(restaurante);
-			break;
+    		case 5://break;
+    		//case 6: salirDelSistema(restaurante);
+			//break;
     		}
     	} while(opcion!=6);
     		
