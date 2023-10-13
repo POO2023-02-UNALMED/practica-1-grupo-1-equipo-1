@@ -32,6 +32,9 @@ public class Mesa {
     public List<Reserva> getReserva () {
         return this.reservas;
     }
+    public void setReservas(List<Reserva> reservas) {
+    	this.reservas=reservas;
+    }
     public boolean suficienteCapacidad(Reserva reserva) {
         if (this.capacidad >= reserva.getNumeroAsistentes()) {
             return true;

@@ -106,7 +106,7 @@ public class Empleado extends Persona{
 	}
 	
 	//metodo que permite reportar daños a un material no organico
-	public void reportarDano(Material material,int cantidad) {
+	public void reportarDano(Material.Tipo material,int cantidad) {
 		this.restaurante.botarMaterial(material, cantidad);
 	}
 }

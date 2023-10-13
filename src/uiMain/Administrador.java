@@ -27,7 +27,6 @@ public class Administrador {
     public static void main(String[] args) {
     	
     	Restaurante restaurante=new Restaurante();
-		restaurante.comprarMesa(new Mesa(6, 1));
     	int opcion;
     	do {
     		
