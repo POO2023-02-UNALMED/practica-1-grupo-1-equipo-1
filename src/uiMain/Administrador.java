@@ -250,7 +250,7 @@ public class Administrador {
     					case 4:
     						;break;
     					}
-    				}while(opcionInv1!=4);
+    				}while(opcionInv1!=4);break;
     			case 3:
     				
 					do {
@@ -294,7 +294,7 @@ public class Administrador {
     			case 4:
     				break;
     			}
-    		}while(opcionInv!=4);
+    		}while(opcionInv!=4);break;
     			
     			
   
@@ -349,7 +349,7 @@ public class Administrador {
     }*/
     private static void salirDelSistema(Restaurante restaurante) {
     	System.out.println("Vuelva pronto");
-    	//Serializador.serializar(restaurante);
+    	Serializador.serializar(restaurante);
     	System.exit(0);
     }
 }

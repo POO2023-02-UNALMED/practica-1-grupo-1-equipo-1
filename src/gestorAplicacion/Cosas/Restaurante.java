@@ -26,8 +26,9 @@ public class Restaurante implements Serializable{
 
 
     public Restaurante () {
+    	this(new ArrayList<>());
     	//Deserializador.deserializar(this);
-        this(new ArrayList<>());
+        
     }
     public Restaurante(List<Mesa> listadoMesas) {
         this(listadoMesas, new ArrayList<>());
