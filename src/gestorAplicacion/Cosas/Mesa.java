@@ -19,7 +19,7 @@ public class Mesa {
             this.numeroMesa = numeroMesa;
         }
         this.ocupada = false;
-        Mesa.numeroMesas.add(numeroMesa);
+        Mesa.numeroMesas.add(this.numeroMesa);
     }
     
    
