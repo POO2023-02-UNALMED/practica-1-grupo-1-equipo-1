@@ -15,38 +15,51 @@ public class Pedido {
     // En pedidos verificados y no verificados
     private boolean verificado = false;
 	private String tipoPedido;
-
-	public Pedido (String tipoPedido, Empleado cocinero, Empleado domiciliario) {
-		this(null, tipoPedido, cocinero, null);
-		this.domiciliario=domiciliario;
+	
+	public Pedido () {
 	}
-    	
-    public Pedido(Mesa mesa, String tipoPedido, Empleado cocinero, Empleado mesero) {
-    	this.pedidos.add(this);
-    	this.mesa = mesa;
-        this.tipoPedido = tipoPedido;
-        this.cocinero = cocinero;
-        this.mesero = mesero;
-        this.platos = new ArrayList<>();
-        this.verificado = false;
-    }
+	
+	// Estos constructores estan para que donde no se le asigne un array para platos se cree un por default vacio
+	public Pedido (String tipoPedido, Empleado cocinero, Empleado domiciliario) {
+	    this(null, tipoPedido, cocinero, null, new ArrayList<Plato>());
+	    this.domiciliario=domiciliario;
+	}
+	
+	public Pedido (Mesa mesa,String tipoPedido, Empleado cocinero, Empleado mesero) {
+	    this(mesa, tipoPedido, cocinero, mesero, new ArrayList<Plato>());
+	}
+	
+	// Estos constructores estan para si se les da unos platos para inicializarlo
+	public Pedido (String tipoPedido, Empleado cocinero, Empleado domiciliario, ArrayList<Plato> platos) {
+	    this(null, tipoPedido, cocinero, null, platos);
+	    this.domiciliario=domiciliario;
+	}
 
+	public Pedido(Mesa mesa, String tipoPedido, Empleado cocinero, Empleado mesero, ArrayList<Plato> platos) {
+	    this.pedidos.add(this);
+	    this.mesa = mesa;
+	    this.tipoPedido = tipoPedido;
+	    this.cocinero = cocinero;
+	    this.mesero = mesero;
+	    this.platos = platos;
+	    this.verificado = false;
+	}
     // Verificar pedido
-     public boolean verificarPedido(){
+     public boolean verificarPedido(Pedido pedido){
      	boolean verificado_insumos = false;
      	// se inicializa como true el domiciliario ya que ste se utiliza para pedidos de tipo domiciliario
      	boolean verificado_domiciliario = false;
      	boolean verificado_cocinero = false;
-     	for(Plato plato : platos){
+     	for(Plato plato : pedido.getPlatos()){
      		if (plato.verificarInsumos(plato)){
      			verificado_insumos = true;
      			}else if(true){
      				break;
      		}
      		if (this.cocinero.verificarTiempo(plato.getTiempoPreparacion())){
+     			System.out.println("mmm");
      			verificado_cocinero = true;
      			}else if(true){
-     				System.out.println("false por cocinero");
      				break;
      				}
      		if (this.tipoPedido.equals("domicilio")) {
@@ -72,7 +85,6 @@ public class Pedido {
      	}
 		return null;
      }
-     
      public String imprimirPedidosVerificados(){
     	 for(Pedido pedido : getPedidosVerificados()){
      		for(Plato plato : pedido.getPlatos()){
@@ -117,4 +129,23 @@ public class Pedido {
     	 return this.platos;
      }
      
+     
+
+     @Override
+     public String toString() {
+         String meseroStr = (mesero != null) ? mesero.toString() : "N/A";
+         String domiciliarioStr = (domiciliario != null) ? domiciliario.toString() : "N/A";
+
+         return "Pedido{" +
+                 "mesa=" + mesa +
+                 ", cocinero=" + cocinero +
+                 ", mesero=" + meseroStr +
+                 ", domiciliario=" + domiciliarioStr +
+                 ", platos=" + platos +
+                 ", verificado=" + verificado +
+                 ", tipoPedido='" + tipoPedido + '\'' +
+                 '}';
+     }
+
+
 }

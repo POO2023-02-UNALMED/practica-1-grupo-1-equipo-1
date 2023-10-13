@@ -1,4 +1,6 @@
 package uiMain;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import gestorAplicacion.Cosas.*;
@@ -19,16 +21,17 @@ public class tests {
         ingredientes.put(tomate, 10);
         ingredientes.put(cebolla, 5);
         ingredientes.put(huevo, 3);
-        Plato plato = new Plato("Huevos pericos", 10, 30, ingredientes);
+        Plato plato1 = new Plato("Huevos pericos", 10, 30, ingredientes);
         // Crear un objeto Pedido
+        ArrayList<Plato> menu = new ArrayList<Plato>(Arrays.asList(plato1));
         Pedido pedidoDomicilio = new Pedido("domicilio", cocinero, domiciliario);
         Pedido pedidoRestaurante = new Pedido(mesa, "restaurante", cocinero, mesero);
         // Agregar un plato al pedido
-        pedidoDomicilio.agregarPlato(plato);
-        pedidoRestaurante.agregarPlato(plato);
+        pedidoDomicilio.agregarPlato(plato1);
+        pedidoRestaurante.agregarPlato(plato1);
         // Verificar el pedido
-        boolean resultado1 = pedidoDomicilio.verificarPedido();
-        boolean resultado2 = pedidoRestaurante.verificarPedido();
+        boolean resultado1 = pedidoDomicilio.verificarPedido(pedidoDomicilio);
+        boolean resultado2 = pedidoRestaurante.verificarPedido(pedidoRestaurante);
         System.out.println("Resultado de la verificación domicilio: " + resultado1 + " Resultado de la verificación restaurante: " + resultado2);
     }
 }
