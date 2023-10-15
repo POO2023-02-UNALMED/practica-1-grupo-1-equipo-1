@@ -29,16 +29,28 @@ public class Financia {
 	this.perdidas = perdidas;
 	
 	}
-	
+	 public double getLiquidacion() {
+	        return this.liquidacion;
+	    }
+
+	 
+	 public double getGastosMateriales() {
+	        return this.gastosMateriales;
+	    }
+
+	 public double getPerdidas() {
+		 return this.perdidas;
+	    }
 	//Calcular Gasto de los Materiales
-	public double gastosMateriales() {
-	    double totalGastosMateriales = 0;
-	    for (Material material: Tipo.values()) {
-	    	totalGastosMateriales += material.getCantidad()*material.getPrecioUnitario();
-	    	}
-	    	return totalGastosMateriales;
-	}
-}
+	public void gastosMateriales(Restaurante restaurante) {
+        for (Material.Tipo tipo : restaurante.getInventario().keySet()) {
+            Material material = restaurante.getInventario().get(tipo);
+            this.gastosMateriales += material.getPrecioUnitario() * material.getCantidad();
+        }
+    }
+
+	// Calcula el pago de la liquidacion de un empleado del restaurante
+	
 	public double liquidacion(Empleado empleado) {
         double totalSalario = 0;
         double pagoHoraExtra = 1.5; // Supongamos que las horas extras se pagan a 1.5 veces el salario regular por hora
@@ -54,4 +66,13 @@ public class Financia {
         }
         return totalSalario;
     }
+	
+	// Calcula las perdidas del inventario  del restaurante
+	public void perdidas(Restaurante restaurante) {
+        for (Material.Tipo tipo : restaurante.getInventario().keySet()) {
+            Material material = restaurante.getInventario().get(tipo);
+            this.perdidas += material.getPrecioUnitario() * material.getCantidad();
+        }
+    }
+	
 }
