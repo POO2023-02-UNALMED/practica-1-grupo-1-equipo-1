@@ -10,12 +10,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-
 import javax.sql.rowset.spi.SyncResolver;
 
 import baseDatos.Serializador;
 import gestorAplicacion.Cosas.*;
-import gestorAplicacion.Personas.Cliente;
 import gestorAplicacion.Personas.Empleado;
 
 public class Administrador {
@@ -206,7 +204,7 @@ public class Administrador {
 	    			for(int i = 0; i < pedido.getPedidosVerificados().size(); i++){
 	    				System.out.println((i + 1) + ". " +pedido.getPedidosVerificados().get(i));
 	    			}
-	    			System.out.println("/n");
+	    			System.out.println("\n");
 	    			break;
 	    			
 	    			case 2:

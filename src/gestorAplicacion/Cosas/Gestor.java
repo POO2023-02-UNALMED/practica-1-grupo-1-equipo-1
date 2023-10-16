@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Arrays;
 
 import baseDatos.Deserializador;
-import gestorAplicacion.Cosas.*;
 import gestorAplicacion.Personas.Empleado;
 import gestorAplicacion.Personas.Cliente;
 

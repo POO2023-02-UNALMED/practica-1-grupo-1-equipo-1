@@ -3,7 +3,6 @@ import java.util.ArrayList;
 
 import java.io.Serializable;
 import gestorAplicacion.Personas.Empleado;
-import gestorAplicacion.Cosas.Restaurante;
 
 public class Pedido implements Serializable{
 	private static final long serialVersionUID=1L;
