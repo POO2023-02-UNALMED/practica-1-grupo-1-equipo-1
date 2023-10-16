@@ -23,9 +23,11 @@ public class Mesa implements Serializable{
         Mesa.numeroMesas.add(this.numeroMesa);
     }
     
-   
     public int getCapacidad () {
         return this.capacidad;
+    }
+    public static List<Integer> getNumeroMesas() {
+        return numeroMesas;
     }
     public void setCapacidad (int nuevaCapacidad) {
         this.capacidad = nuevaCapacidad;
