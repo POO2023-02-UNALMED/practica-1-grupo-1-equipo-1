@@ -77,4 +77,17 @@ public class Financia implements Serializable{
         }
     }
 	
+	//Calcular Pagos de los Empleados
+	public void calcularTotalPagosEmpleados() {
+        this.pagosEmpleados = 0;
+        for (Empleado empleado : this.empleados) {
+            for(Turno turno : empleado.getTurnos()){
+                if (turno.isCompletado() && !turno.isCobrado()){
+                    this.pagosEmpleados += turno.getSalario();
+                    turno.setCobrado(true);
+                }
+            }
+        }
+    }S
+	
 }
