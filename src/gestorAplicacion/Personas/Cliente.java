@@ -2,7 +2,8 @@ package gestorAplicacion.Personas;
 import java.io.Serializable;
 import gestorAplicacion.Cosas.*;
 
-public class Cliente extends Persona {
+public class Cliente extends Persona implements Serializable{
+	private static final long serialVersionUID=1L;
 	private Reserva reserva;
     private Pedido pedido;
 	private Long cedula;

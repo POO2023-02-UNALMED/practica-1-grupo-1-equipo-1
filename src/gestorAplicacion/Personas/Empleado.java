@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.io.Serializable;
 import gestorAplicacion.Cosas.*;
 
-public class Empleado extends Persona{
+public class Empleado extends Persona implements Serializable{
+	private static final long serialVersionUID=1L;
     private ArrayList<Turno> turnos;
     private Turno turno;
     private String puesto;

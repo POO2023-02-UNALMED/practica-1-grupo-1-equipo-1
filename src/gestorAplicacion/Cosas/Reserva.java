@@ -1,11 +1,13 @@
 package gestorAplicacion.Cosas;
 import java.time.LocalDate;
+
 //import java.time.LocalTime;
 import java.io.Serializable;
 import gestorAplicacion.Personas.Cliente;
 import java.time.format.DateTimeFormatter;
 
-public class Reserva {
+public class Reserva implements Serializable{
+	private static final long serialVersionUID=1L;
     private Cliente duenoReserva;
     private Mesa mesa;
     private int numAsistentes;

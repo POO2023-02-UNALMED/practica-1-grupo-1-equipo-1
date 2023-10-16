@@ -19,6 +19,7 @@ import gestorAplicacion.Personas.Cliente;
 import gestorAplicacion.Personas.Empleado;
 
 public class Administrador {
+	
 	static Scanner scan=new Scanner(System.in);
 	static long readLong() {
 		return scan.nextLong();
@@ -29,18 +30,14 @@ public class Administrador {
 	}
     public static void main(String[] args) {
     	
+    	Gestor gestor=new Gestor();
     	Restaurante restaurante=new Restaurante();
+    	restaurante.setClientes(gestor.getClientes());
+    	restaurante.setEmpleados(gestor.getEmpleados());
+    	restaurante.setMesas(gestor.getMesas());
+    	restaurante.setEmpleadoDelMes(gestor.getEmpleadoDelMes());
     	Pedido pedido = new Pedido();
-		restaurante.comprarMesa(new Mesa(6, 1));
-		restaurante.comprarMesa(new Mesa(2, 1));
-		restaurante.comprarMesa(new Mesa(4, 1));
-		restaurante.comprarMesa(new Mesa(8, 1));
-		restaurante.comprarMesa(new Mesa(10, 1));
-		restaurante.comprarMesa(new Mesa(2, 1));
-		restaurante.comprarMesa(new Mesa(4, 1));
-		restaurante.comprarMesa(new Mesa(4, 1));
-		restaurante.comprarMesa(new Mesa(6, 1));
-		restaurante.comprarMesa(new Mesa(8, 1));
+		
     	int opcion, opcion2;
         Material tomate = new Material(Material.Tipo.TOMATES, 10, 200);
         Material cebolla = new Material(Material.Tipo.CEBOLLAS, 5, 300);
@@ -384,8 +381,8 @@ public class Administrador {
     			
   
     		case 5://break;
-    		//case 6: salirDelSistema(restaurante);
-			//break;
+    		case 6: salirDelSistema(gestor);
+			break;
     		}
     	} while(opcion!=6);
     		
@@ -432,9 +429,9 @@ public class Administrador {
     		System.out.println("-------------------------------------------------------");
     	}
     }*/
-    private static void salirDelSistema(Restaurante restaurante) {
+    private static void salirDelSistema(Gestor gestor) {
     	System.out.println("Vuelva pronto");
-    	Serializador.serializar(restaurante);
+    	Serializador.serializar(gestor);
     	System.exit(0);
     }
 }

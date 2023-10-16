@@ -1,9 +1,11 @@
 package gestorAplicacion.Cosas;
 import java.util.ArrayList;
 
+import java.io.Serializable;
 import gestorAplicacion.Personas.Empleado;
 
-public class Pedido {
+public class Pedido implements Serializable{
+	private static final long serialVersionUID=1L;
     private Mesa mesa;
     private Empleado cocinero;
     private Empleado mesero;

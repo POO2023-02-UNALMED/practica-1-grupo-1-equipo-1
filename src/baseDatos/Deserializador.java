@@ -1,6 +1,7 @@
 package baseDatos;
 
 import java.io.File;
+
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -28,80 +29,49 @@ import gestorAplicacion.Cosas.Turno;
 import gestorAplicacion.Personas.Persona;
 import gestorAplicacion.Personas.Cliente;
 import gestorAplicacion.Personas.Empleado;
+import gestorAplicacion.Cosas.Gestor;
 
 public class Deserializador {
-	private static File rutaTemp=new File("src\\baseDatos\\temp");
-	
-	public static void deserializar(Restaurante restaurante) {
-		File[] docs = rutaTemp.listFiles();
-		FileInputStream fis;
-		ObjectInputStream ois;
-		
-		for (File file: docs) {
-			if (file.getAbsolutePath().contains("Empleados")) {
-				try {
-					fis=new FileInputStream(file);
-					ois=new ObjectInputStream(fis);
-					restaurante.setEmpleados((List<Empleado>) ois.readObject());
-				}catch(FileNotFoundException e) {
-					e.printStackTrace();
-				}catch(IOException e) {
-					e.printStackTrace();
-				}catch(ClassNotFoundException e) {
-					e.printStackTrace();
-				}
-			}else if(file.getAbsolutePath().contains("Clientes")) {
-				try {
-					fis=new FileInputStream(file);
-					ois=new ObjectInputStream(fis);
-					restaurante.setClientes((List<Cliente>) ois.readObject());
-				}catch(FileNotFoundException e) {
-					e.printStackTrace();
-				}catch(IOException e) {
-					e.printStackTrace();
-				}catch(ClassNotFoundException e) {
-					e.printStackTrace();
-				}
-			}else if(file.getAbsolutePath().contains("Mesas")) {
-				try {
-					fis=new FileInputStream(file);
-					ois=new ObjectInputStream(fis);
-					restaurante.setMesas((List<Mesa>) ois.readObject());
-				}catch(FileNotFoundException e) {
-					e.printStackTrace();
-				}catch(IOException e) {
-					e.printStackTrace();
-				}catch(ClassNotFoundException e) {
-					e.printStackTrace();
-				}
-			}else if(file.getAbsolutePath().contains("Inventario")) {
-				try {
-					fis=new FileInputStream(file);
-					ois=new ObjectInputStream(fis);
-					restaurante.setInventario((Map<Material.Tipo,Material>) ois.readObject());
-				}catch(FileNotFoundException e) {
-					e.printStackTrace();
-				}catch(IOException e) {
-					e.printStackTrace();
-				}catch(ClassNotFoundException e) {
-					e.printStackTrace();
-				}
-			}else if(file.getAbsolutePath().contains("Reservas")) {
-				List<Mesa> mesas = restaurante.getMesas();
-				for (Mesa mesa:mesas) {
-					try {
-						fis=new FileInputStream(file);
-						ois=new ObjectInputStream(fis);
-						mesa.setReservas((List<Reserva>) ois.readObject());
-					}catch(FileNotFoundException e) {
-						e.printStackTrace();
-					}catch(IOException e) {
-						e.printStackTrace();
-					}catch(ClassNotFoundException e) {
-						e.printStackTrace();
-					}
-				}
-			}
+	public static void deserializar(Gestor gestor) {
+		deserializarClientes(gestor,new File("src\\baseDatos\\temp\\Clientes.txt"));
+		deserializarEmpleados(gestor, new File("src\\baseDatos\\temp\\Empleados.txt"));
+		deserializarMesas(gestor, new File("src\\baseDatos\\temp\\Mesas.txt"));
+		deserializarEmpleadoDelMes(gestor, new File("src\\baseDatos\\temp\\EmpleadoDelMes.txt"));
+	}
+	public static void deserializarClientes(Gestor gestor, File ruta) {
+		try {
+			FileInputStream fis=new FileInputStream(ruta);
+			ObjectInputStream ois=new ObjectInputStream(fis);
+			gestor.setClientes((ArrayList<Cliente>) ois.readObject());
+		}catch(IOException | ClassNotFoundException e){
+			System.out.println("Error en la deserialización "+e);
+		}
+	}
+	public static void deserializarEmpleados(Gestor gestor, File ruta) {
+		try {
+			FileInputStream fis=new FileInputStream(ruta);
+			ObjectInputStream ois=new ObjectInputStream(fis);
+			gestor.setEmpleados((ArrayList<Empleado>) ois.readObject());
+		}catch(IOException | ClassNotFoundException e){
+			System.out.println("Error en la deserialización "+e);
+		}
+	}
+	public static void deserializarMesas(Gestor gestor, File ruta) {
+		try {
+			FileInputStream fis=new FileInputStream(ruta);
+			ObjectInputStream ois=new ObjectInputStream(fis);
+			gestor.setMesas((ArrayList<Mesa>) ois.readObject());
+		}catch(IOException | ClassNotFoundException e){
+			System.out.println("Error en la deserialización "+e);
+		}
+	}
+	public static void deserializarEmpleadoDelMes(Gestor gestor, File ruta) {
+		try {
+			FileInputStream fis=new FileInputStream(ruta);
+			ObjectInputStream ois=new ObjectInputStream(fis);
+			gestor.setEmmpleadoDelMes((Empleado) ois.readObject());
+		}catch(IOException | ClassNotFoundException e){
+			System.out.println("Error en la deserialización "+e);
 		}
 	}
 }

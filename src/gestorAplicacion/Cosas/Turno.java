@@ -1,7 +1,8 @@
 package gestorAplicacion.Cosas;
 import java.io.Serializable;
 
-public class Turno {
+public class Turno implements Serializable{
+	private static final long serialVersionUID=1L;
 	public enum Tipo {SEMANA, SABADO, DOMINGO}
     private double salario;
     private boolean completado;

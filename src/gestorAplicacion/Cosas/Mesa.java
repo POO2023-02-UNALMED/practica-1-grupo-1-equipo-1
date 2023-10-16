@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Mesa {
+public class Mesa implements Serializable{
+	private static final long serialVersionUID=1L;
     private static List<Integer> numeroMesas = new ArrayList<>();
     private int capacidad;
     private List<Reserva> reservas = new ArrayList<>();

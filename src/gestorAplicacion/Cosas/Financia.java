@@ -1,6 +1,7 @@
 package gestorAplicacion.Cosas;
 
 import java.util.List;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -10,7 +11,8 @@ import java.io.Serializable;
 import gestorAplicacion.Cosas.*;
 import gestorAplicacion.Personas.Empleado;
 
-public class Financia {
+public class Financia implements Serializable{
+	private static final long serialVersionUID=1L;
 	private double presupuesto;
 	private double gastosMateriales;
 	private double pagosEmpleados;
