@@ -3,7 +3,8 @@ import java.io.Serializable;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public class Plato {
+public class Plato implements Serializable{
+	private static final long serialVersionUID=1L;
     private String nombre;
     private int precio;
     private String descripcion;
@@ -39,13 +40,8 @@ public class Plato {
     }
     
     public String detallesPlato() {
-        return "Plato{" +
-            "nombre='" + nombre + '\'' +
-            ", precio=" + precio +
-            ", descripcion='" + descripcion + '\'' +
-            ", tiempoPreparacion=" + tiempoPreparacion +
-            ", ingredientes=" + ingredientes +
-            '}';
+    	return "Plato: "+nombre+"\nPrecio: "+precio+"\n"+descripcion+"\nTiempo de preparacion: "+tiempoPreparacion+" minutos"+"\n"+"\n+-------------------------------------------------------------------------------+";
+        
     }
     
  // Métodos getter 

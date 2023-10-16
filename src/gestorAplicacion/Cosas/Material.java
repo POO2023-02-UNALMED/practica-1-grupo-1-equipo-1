@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 public class Material implements Serializable{
 	private static final long serialVersionUID=1L;
-    public enum Tipo {TOMATES,CEBOLLAS,MANTEQUILLAS,ACEITES,VINOS,QUESOS,HARINAS,CHAMPINONES,RES,
-    PESCADOS,CERDOS,PANES,AJOS,ESPECIAS,HUEVOS,TRUFAS,CUCHARAS,TENEDORES,PLATOS,VASOS};
+    public enum Tipo {TOMATES,CEBOLLAS,PAPAS,ACEITES,VINOS,QUESOS,CHAMPINONES,RES,
+    PESCADOS,CERDOS,POLLOS,PANES,AJOS,ESPECIAS,HUEVOS,ATUN,CUCHARAS,TENEDORES,PLATOS,VASOS};
     private Tipo tipo;
     private int cantidad;
     private double precioUnitario;

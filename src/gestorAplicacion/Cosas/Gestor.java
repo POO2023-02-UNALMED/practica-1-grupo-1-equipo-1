@@ -30,10 +30,10 @@ public class Gestor implements Serializable{
 	}*/
 	
 	public Empleado getEmpleadoDelMes() {
-		return empMes;
+		return this.empMes;
 	}
 
-	public void setEmmpleadoDelMes(Empleado empMes) {
+	public void setEmpleadoDelMes(Empleado empMes) {
 		this.empMes = empMes;
 	}
 
@@ -42,7 +42,7 @@ public class Gestor implements Serializable{
 	}
 
 	public ArrayList<Cliente> getClientes() {
-		return clientes;
+		return this.clientes;
 	}
 
 	public void setClientes(ArrayList<Cliente> clientes) {
@@ -50,7 +50,7 @@ public class Gestor implements Serializable{
 	}
 
 	public ArrayList<Empleado> getEmpleados() {
-		return empleados;
+		return this.empleados;
 	}
 
 	public void setEmpleados(ArrayList<Empleado> empleados) {
@@ -58,7 +58,7 @@ public class Gestor implements Serializable{
 	}
 
 	public ArrayList<Mesa> getMesas() {
-		return mesas;
+		return this.mesas;
 	}
 
 	public void setMesas(ArrayList<Mesa> mesas) {

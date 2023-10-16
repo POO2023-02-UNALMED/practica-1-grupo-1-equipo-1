@@ -36,18 +36,58 @@ public class Administrador {
     	restaurante.setEmpleados(gestor.getEmpleados());
     	restaurante.setMesas(gestor.getMesas());
     	restaurante.setEmpleadoDelMes(gestor.getEmpleadoDelMes());
+    	
+    	Map<Material, Integer> Muton = new HashMap<>();
+    	Muton.put(new Material(Material.Tipo.RES), 1);Muton.put(new Material(Material.Tipo.ESPECIAS), 10);Muton.put(new Material(Material.Tipo.ACEITES), 1);
+    	Map<Material, Integer> coq = new HashMap<>();
+    	coq.put(new Material(Material.Tipo.POLLOS), 1);coq.put(new Material(Material.Tipo.VINOS), 1);coq.put(new Material(Material.Tipo.CEBOLLAS), 1);
+    	coq.put(new Material(Material.Tipo.CHAMPINONES), 5);coq.put(new Material(Material.Tipo.AJOS), 1);
+    	Map<Material, Integer> ratatouille = new HashMap<>();
+    	ratatouille.put(new Material(Material.Tipo.CHAMPINONES), 5);ratatouille.put(new Material(Material.Tipo.TOMATES), 4);ratatouille.put(new Material(Material.Tipo.ACEITES), 1);
+    	ratatouille.put(new Material(Material.Tipo.AJOS), 2);
+    	Map<Material, Integer> boeuf = new HashMap<>();
+    	boeuf.put(new Material(Material.Tipo.RES), 1);boeuf.put(new Material(Material.Tipo.VINOS), 1);boeuf.put(new Material(Material.Tipo.CEBOLLAS), 1);
+    	boeuf.put(new Material(Material.Tipo.CHAMPINONES), 5);boeuf.put(new Material(Material.Tipo.AJOS), 1);
+    	Map<Material, Integer> quiche = new HashMap<>();
+    	quiche.put(new Material(Material.Tipo.HUEVOS), 3);quiche.put(new Material(Material.Tipo.QUESOS), 3);quiche.put(new Material(Material.Tipo.CERDOS), 1);
+    	Map<Material, Integer> salade = new HashMap<>();
+    	salade.put(new Material(Material.Tipo.HUEVOS), 3);salade.put(new Material(Material.Tipo.TOMATES), 3);salade.put(new Material(Material.Tipo.ATUN), 1);
+    	salade.put(new Material(Material.Tipo.CEBOLLAS), 2);salade.put(new Material(Material.Tipo.ACEITES), 1);
+    	Map<Material, Integer> soupe = new HashMap<>();
+    	soupe.put(new Material(Material.Tipo.CEBOLLAS), 5);soupe.put(new Material(Material.Tipo.PANES), 2);soupe.put(new Material(Material.Tipo.QUESOS), 3);
+    	Map<Material, Integer> croque = new HashMap<>();
+    	croque.put(new Material(Material.Tipo.PANES), 2);croque.put(new Material(Material.Tipo.CERDOS), 1);croque.put(new Material(Material.Tipo.QUESOS), 1);
+    	Map<Material, Integer> bouilla = new HashMap<>();
+    	bouilla.put(new Material(Material.Tipo.PESCADOS), 2);croque.put(new Material(Material.Tipo.TOMATES), 2);
+    	croque.put(new Material(Material.Tipo.AJOS), 2);croque.put(new Material(Material.Tipo.ACEITES), 1);
+    	Map<Material, Integer> tartiflette = new HashMap<>();
+    	tartiflette.put(new Material(Material.Tipo.PAPAS), 2);tartiflette.put(new Material(Material.Tipo.CEBOLLAS), 2);
+    	tartiflette.put(new Material(Material.Tipo.CERDOS), 1);tartiflette.put(new Material(Material.Tipo.QUESOS), 1);
+    	
+    	ArrayList<Plato> menu=new ArrayList<>();
+    	
+    	menu.add(new Plato("Muton Shot",30000,"Costillas de Res con Salsa especial",30,Muton));
+    	menu.add(new Plato("Coq au Vin",45000,"Guiso de Pollo cocido en Vino y Verduras",25,coq));
+    	menu.add(new Plato("Rat a Toulile",15000,"Verduras asadas en aceite de oliva",20,ratatouille));
+    	menu.add(new Plato("Boeuf Bourguignon",60000,"Guiso de Res cocido en Vino y Verduras",30,boeuf));
+    	menu.add(new Plato("Quiche Lorraine",30000,"Pastel salado con cerdo",35,quiche));
+    	menu.add(new Plato("Salade Nicoise",15000,"Ensalada con Huevo y Atun",10,salade));
+    	menu.add(new Plato("Soupe a l'oignon",20000,"Sopa espesa de Cebolla",25,soupe));
+    	menu.add(new Plato("Croque Monsieur",15000,"Sandwich con Cerdo y Queso",10,croque));
+    	menu.add(new Plato("Bouillabaisse",20000,"Sopa de Pescado tradicional",25,bouilla));
+    	menu.add(new Plato("Tartiflette",40000,"Gratinado de Papa y Cerdo",20,tartiflette));
+
     	Pedido pedido = new Pedido();
-		
+    	//mostrarMenu(menu);
     	int opcion, opcion2;
-        Material tomate = new Material(Material.Tipo.TOMATES, 10, 200);
+        /*Material tomate = new Material(Material.Tipo.TOMATES, 10, 200);
         Material cebolla = new Material(Material.Tipo.CEBOLLAS, 5, 300);
         Material huevo = new Material(Material.Tipo.HUEVOS, 5, 400);
         Map<Material, Integer> ingredientes = new HashMap<>();
         ingredientes.put(tomate, 10);
         ingredientes.put(cebolla, 5);
         ingredientes.put(huevo, 3);
-		Plato plato1 = new Plato("Huevos pericos", 10, 30, ingredientes);
-		ArrayList<Plato> menu = new ArrayList<Plato>(Arrays.asList(plato1));
+		Plato plato1 = new Plato("Huevos pericos", 10, 30, ingredientes);*/
     	do {
     		
     		System.out.println("Bienvenido al Gestor del Restaurante " + restaurante.getNombre()); // agregar el método getNombre
@@ -269,6 +309,8 @@ public class Administrador {
     			switch(opcionInv) {
     			case 1:System.out.println("-------------------------------------------------------"); 
     				mostrarIngredientes(restaurante);
+    				System.out.println("-------------------------------------------------------");
+					mostrarMesas(restaurante);
     				break;
     			case 2:
     				
@@ -380,7 +422,7 @@ public class Administrador {
     			
     			
   
-    		case 5://break;
+    		case 5:break;
     		case 6: salirDelSistema(gestor);
 			break;
     		}
@@ -394,21 +436,7 @@ public class Administrador {
     		System.out.println("-------------------------------------------------------");
     	}
     }
-    /*public static void consultarInventario(Restaurante restaurante) {
-    	List<Material> inventarioOrdenado=new ArrayList<>(restaurante.getInventario().values());
-    	inventarioOrdenado.sort(Comparator.comparing(Material::getFechaVencimiento));
-    	for(Material material:inventarioOrdenado) {
-    		LocalDate hoy=LocalDate.now();
-    		LocalDate fechaVencimiento=material.getFechaVencimiento();
-    		System.out.println("Tipo: " + material.getTipo() + "\nCantidad: " + material.getCantidad() +  "\nPrecio unitario: " + material.getPrecioUnitario() 
-			+ "\nFecha de Vencimiento: " + material.getFechaVencimiento());
-    		if (fechaVencimiento!=null && fechaVencimiento.isBefore(hoy.plusDays(7L))) {
-    			System.out.println("Este Material está próximo a vencer");
-    		}else if(material.getCantidad()<=10) {
-    			System.out.println("Este Material está próximo a acabar");
-    		}
-    	}
-    }*/
+    
     public static void mostrarIngredientes(Restaurante restaurante) {   	
     	if (restaurante.getInventario().size()==0) {
     		System.out.println("No hay materiales en el inventario");
@@ -423,12 +451,15 @@ public class Administrador {
     		}
     	}
     }
-    /*public static void mostrarMateriales(Restaurante restaurante) {
-    	for (Material material: restaurante.getInventario().values()) {
-    		System.out.println("Tipo: "+material.getTipo() + "\nCantidad: "+material.getCantidad()+"\nPrecio por unidad: "+material.getPrecioUnitario());
-    		System.out.println("-------------------------------------------------------");
+    
+    public static void mostrarMenu(ArrayList<Plato> menu) {
+    	short cont=1;
+    	for (Plato plato:menu) {
+    		System.out.println(cont+". "+plato.detallesPlato());
+    		cont++;
     	}
-    }*/
+    }
+    
     private static void salirDelSistema(Gestor gestor) {
     	System.out.println("Vuelva pronto");
     	Serializador.serializar(gestor);

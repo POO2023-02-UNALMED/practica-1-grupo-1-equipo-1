@@ -69,7 +69,7 @@ public class Deserializador {
 		try {
 			FileInputStream fis=new FileInputStream(ruta);
 			ObjectInputStream ois=new ObjectInputStream(fis);
-			gestor.setEmmpleadoDelMes((Empleado) ois.readObject());
+			gestor.setEmpleadoDelMes((Empleado) ois.readObject());
 		}catch(IOException | ClassNotFoundException e){
 			System.out.println("Error en la deserialización "+e);
 		}
