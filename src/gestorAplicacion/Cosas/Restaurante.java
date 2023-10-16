@@ -13,7 +13,7 @@ import gestorAplicacion.Personas.*;
 import baseDatos.Deserializador;
 public class Restaurante implements Serializable{
     private static final long serialVersionUID=1L;
-	private final String nombre = "Le Quasó";
+	private final String NOMBRE = "Le Quasó";
     private Empleado empleadoDelMes;
     private int numMesas;
     private int numEmpleados;
@@ -81,7 +81,7 @@ public class Restaurante implements Serializable{
     }
 
     public String getNombre () {
-        return this.nombre;
+        return this.NOMBRE;
     }
     public int getNumMesas () {
         return this.numMesas;
