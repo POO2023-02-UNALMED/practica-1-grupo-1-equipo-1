@@ -242,7 +242,7 @@ public class Administrador {
 		    			} else if(tipoPedido.equals("restaurante")){
 		    			    System.out.print("Ingrese la Mesa: ");
 		    			    int numMesa = (int)readLong();
-		    			    Mesa mesa = restaurante.buscarMesa(numMesa);
+		    			    Mesa mesa = restaurante.getMesa(numMesa);
 		    			    if (mesa == null) {
 		    			        System.out.println("Mesa no encontrada");
 		    			        break;

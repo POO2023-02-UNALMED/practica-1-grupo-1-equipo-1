@@ -126,14 +126,6 @@ public class Restaurante implements Serializable{
     	}
 		return  null;
     }
-    public Mesa buscarMesa(int numero){
-    	for(Mesa mesa : listadoMesas){
-    		if((mesa.getNumeroMesa())==(numero)){
-    			return mesa;
-    		}
-    		}
-    	return null;
-    }
     public void afiliarCliente (Cliente nuevoCliente) {
         this.listadoClientes.add(nuevoCliente);
     }
