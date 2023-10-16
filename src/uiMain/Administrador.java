@@ -60,6 +60,9 @@ public class Administrador implements Menu {
         Pedido pedido = new Pedido();
     	//mostrarMenu(menu);
     	int opcion, opcion2;
+		for (Mesa mesa1 : restaurante.getMesas()) {
+			mesa1.anadirNumero(mesa1.getNumeroMesa());
+		}
     	do {
     		System.out.println("");
     		System.out.println("Bienvenido al Gestor del Restaurante " + restaurante.getNombre()); // agregar el método getNombre
@@ -104,14 +107,14 @@ public class Administrador implements Menu {
 								nombre = readln();
 							}
 							else {
-								nombre = restaurante.getCliente(cedulaDuenoReserva).getNombre();
+								nombre = restaurante.obtenerCliente(cedulaDuenoReserva).getNombre();
 							}
 							System.out.print("Ingrese el numero de Asistentes: ");
 							int numAsistentes = (int) readLong();
 							System.out.print("Ingrese el dia de la reserva en formato dia-mes-año: ");
 							String diaReserva = readln();
 							if (Reserva.revisarFecha(diaReserva)) {
-								restaurante.f1(cedulaDuenoReserva, nombre, numAsistentes, diaReserva);
+								restaurante.asignarReservaCliente(cedulaDuenoReserva, nombre, numAsistentes, diaReserva);
 								System.out.println("Reserva creada");
 							}
 							else {
@@ -124,7 +127,7 @@ public class Administrador implements Menu {
 								System.out.println("El cliente no se encuentra afiliado al restaurante");
 							}
 							else {
-								restaurante.getCliente(cedulaDuenoReserva2).setReserva(null);
+								restaurante.obtenerCliente(cedulaDuenoReserva2).setReserva(null);
 								System.out.println("\nReserva cancelada\n");
 							}
 							break;
@@ -134,7 +137,7 @@ public class Administrador implements Menu {
 								System.out.println("El cliente no se encuentra afiliado al restaurante, por lo que no tiene una reserva");
 							}
 							else {
-								System.out.println("\nMesas válidas para la reserva de "+restaurante.getCliente(cedulaDuenoReserva3).getNombre());
+								System.out.println("\nMesas válidas para la reserva de "+restaurante.obtenerCliente(cedulaDuenoReserva3).getNombre());
 								System.out.println(restaurante.mesasQueCumplen(cedulaDuenoReserva3));
 								if (!restaurante.mesasQueCumplen(cedulaDuenoReserva3).equals("\nNo hay mesas válidas para esa reserva\n")) {
 								System.out.print("Ingrese el numero de la mesa a la cual desea asignar la reserva: ");

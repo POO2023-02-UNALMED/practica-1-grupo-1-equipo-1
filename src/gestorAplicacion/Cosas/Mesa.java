@@ -11,6 +11,8 @@ public class Mesa implements Serializable{
     private List<Reserva> reservas = new ArrayList<>();
     private boolean ocupada;
     private int numeroMesa;
+
+    //Constructor
     public Mesa (int capacidad, int numeroMesa) {
         this.capacidad = capacidad;
         if (Mesa.verificarNumero(numeroMesa)) {
@@ -23,21 +25,45 @@ public class Mesa implements Serializable{
         Mesa.numeroMesas.add(this.numeroMesa);
     }
     
-    public int getCapacidad () {
-        return this.capacidad;
-    }
+    //Metodos getter
     public static List<Integer> getNumeroMesas() {
         return numeroMesas;
     }
+    public int getCapacidad () {
+        return this.capacidad;
+    }
+    public List<Reserva> getReservas () {
+        return this.reservas;
+    }
+    public boolean isOcupada () {
+        return this.ocupada;
+    }
+    public int getNumeroMesa () {
+        return this.numeroMesa;
+    }
+
+    //Metodos setter
     public void setCapacidad (int nuevaCapacidad) {
         this.capacidad = nuevaCapacidad;
-    }
-    public List<Reserva> getReserva () {
-        return this.reservas;
     }
     public void setReservas(List<Reserva> reservas) {
     	this.reservas=reservas;
     }
+    public void setOcupada (boolean ocupacion) {
+        this.ocupada = ocupacion;
+    }
+    public void setNumeroMesa (int numeroMesa) {
+        if (!Mesa.verificarNumero(numeroMesa)) {
+            this.numeroMesa = numeroMesa;
+        }
+    }
+    public void anadirNumero(int a) {
+        Mesa.getNumeroMesas().add(a);
+    }
+
+    //Metodos funcionalidades
+
+    //Indica si la mesa tiene sillas suficientes para la reserva
     public boolean suficienteCapacidad(Reserva reserva) {
         if (this.capacidad >= reserva.getNumeroAsistentes()) {
             return true;
@@ -46,40 +72,14 @@ public class Mesa implements Serializable{
             return false;
         }
     }
+
+    //a la mesa se le asigna una reserva
     public void reservarMesa (Reserva reserva) {
             this.reservas.add(reserva);
             reserva.setMesa(this);
     }
-    public boolean isOcupada () {
-        return this.ocupada;
-    }
-    public void setOcupada (boolean ocupacion) {
-        this.ocupada = ocupacion;
-    }
-    public int getNumeroMesa () {
-        return this.numeroMesa;
-    }
-    public void setNumeroMesa (int numeroMesa) {
-        if (!Mesa.verificarNumero(numeroMesa)) {
-            this.numeroMesa = numeroMesa;
-        }
-    }
-    public static int generarNumeroMesa() {
-        int numeroAleatorio;
-        do {
-            Random rand = new Random();
-            numeroAleatorio = rand.nextInt(1000) + 1;
-        } while (Mesa.verificarNumero(numeroAleatorio));
-        return numeroAleatorio;
-    }
-    public static boolean verificarNumero(int numero) {
-        if (Mesa.numeroMesas.contains(numero)) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
+
+    //revisa si la mesa ya tiene una reserva para el día de la reserva pasado por parámetro
     public boolean mesaCompatible(Reserva reserva) {
         for (Reserva reserva1 : reservas) {
             if (reserva1.getDiaReserva().isEqual(reserva.getDiaReserva())) {
@@ -88,11 +88,34 @@ public class Mesa implements Serializable{
         }
         return true;
     }
+
+    //Da la informacion de la mesa, para escoger cual mesa reservar
     public String resumenMesa () {
         return "Capacidad de la mesa: "+this.getCapacidad()+"\nNúmero de la mesa: "+this.getNumeroMesa();
     }
     
     public String toString(){
     	return "Capacidad: " + capacidad + "numeroMesa" + numeroMesa; 
+    }
+
+    //Metodos de clase
+    //de ser necesario, asigna numeros aleatorios a las mesas para que no hayan numeros repetidos de mesas
+    public static int generarNumeroMesa() {
+        int numeroAleatorio;
+        do {
+            Random rand = new Random();
+            numeroAleatorio = rand.nextInt(1000) + 1;
+        } while (Mesa.verificarNumero(numeroAleatorio));
+        return numeroAleatorio;
+    }
+
+    //revisa si existe una mesa con el numero pasado por parametro
+    public static boolean verificarNumero(int numero) {
+        if (Mesa.numeroMesas.contains(numero)) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }

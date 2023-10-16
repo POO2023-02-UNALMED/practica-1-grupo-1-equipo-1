@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import gestorAplicacion.Personas.*;
 import baseDatos.Deserializador;
-public class Restaurante implements Serializable{
+public class Restaurante implements Serializable {
     private static final long serialVersionUID=1L;
 	private final String NOMBRE = "Le Quasó";
     private Empleado empleadoDelMes;
@@ -22,12 +22,9 @@ public class Restaurante implements Serializable{
     private List<Mesa> listadoMesas=new ArrayList<>();
     private Map<Tipo, Material> inventario=new HashMap<>();
     
-    
-
-
+    //Constructores, que se invocan uno a otro, dependiendo si los restaurantes se inicializan con listas o no
     public Restaurante () {
     	this(new ArrayList<>());
-        
     }
     public Restaurante(List<Mesa> listadoMesas) {
         this(listadoMesas, new ArrayList<>());
@@ -48,6 +45,7 @@ public class Restaurante implements Serializable{
         this.numClientes += contadorListado(listadoEmpleados);
     }
 
+    //Cuenta el tamaño de una lista
     public <T> int contadorListado (List<T> listado) {
         int contador = 0;
         for (T elemento : listado) {
@@ -57,9 +55,37 @@ public class Restaurante implements Serializable{
         }
         return contador;
     }
+
+    //Metodos getter
+    public String getNombre () {
+        return this.NOMBRE;
+    }
     public Empleado getEmpleadoDelMes () {
         return this.empleadoDelMes;
     }
+    public int getNumMesas () {
+        return this.numMesas;
+    }
+    public int getNumEmpleados () {
+        return this.numEmpleados;
+    }
+    public int getNumClientes () {
+        return this.numClientes;
+    }
+    public List<Empleado> getEmpleados () {
+        return this.listadoEmpleados;
+    }
+    public List<Cliente> getClientes () {
+        return this.listadoClientes;
+    }
+    public List<Mesa> getMesas () {
+        return this.listadoMesas;
+    }
+        public Map<Tipo, Material> getInventario () {
+        return this.inventario;
+    }
+
+    //Metodos setter
     public void setEmpleadoDelMes (Empleado empleadoDelMes) {
         this.empleadoDelMes = empleadoDelMes;
     }
@@ -78,47 +104,30 @@ public class Restaurante implements Serializable{
         //Establecer al empleado del mes
         setEmpleadoDelMes(empleadoDelMes);
     }
-
-    public String getNombre () {
-        return this.NOMBRE;
-    }
-    public int getNumMesas () {
-        return this.numMesas;
-    }
-    public int getNumEmpleados () {
-        return this.numEmpleados;
-    }
-    public int getNumClientes () {
-        return this.numClientes;
-    }
-    public List<Empleado> getEmpleados () {
-        return this.listadoEmpleados;
-    }
     public void setEmpleados(List<Empleado> empleados) {
     	this.listadoEmpleados=empleados;
-    }
-    public List<Cliente> getClientes () {
-        return this.listadoClientes;
     }
     public void setClientes(List<Cliente> clientes) {
     	this.listadoClientes=clientes;
     }
-    public List<Mesa> getMesas () {
-        return this.listadoMesas;
-    }
     public void setMesas(List<Mesa> mesas) {
     	this.listadoMesas=mesas;
-    }
-    public Map<Tipo, Material> getInventario () {
-        return this.inventario;
     }
     public void setInventario(Map<Tipo,Material> inv) {
     	this.inventario=inv;
     }
-    public void contratarEmpleado(Empleado novato) {
-        this.listadoEmpleados.add(novato);
+    public void setNumMesas(int numMesas) {
+        this.numMesas = numMesas;
+    }
+    public void setNumClientes(int numClientes) {
+        this.numClientes = numClientes;
+    }
+    public void setNumEmpleados(int numEmpleados) {
+        this.numEmpleados = numEmpleados;
     }
 
+    //Metodos funcionalidades
+    //busca el objeto empleado por el nombre
     public Empleado buscarEmpleado(String nombre){
     	for(Empleado empleado : listadoEmpleados){
     		if((empleado.getNombre()).equals(nombre)){
@@ -127,17 +136,25 @@ public class Restaurante implements Serializable{
     	}
 		return  null;
     }
+    //añade un empleado a la lista de empleados
+    public void contratarEmpleado(Empleado novato) {
+        this.listadoEmpleados.add(novato);
+        int a = this.getNumEmpleados();
+        this.setNumEmpleados(a+1);
+    }
+    //Añade el cliente a la lista de clientes
     public void afiliarCliente (Cliente nuevoCliente) {
         this.listadoClientes.add(nuevoCliente);
+        int a = this.getNumClientes();
+        this.setNumClientes(a+1);
     }
+    //añade la mesa a la lista de mesas
     public void comprarMesa (Mesa nuevaMesa) {
         this.listadoMesas.add(nuevaMesa);
         int a = this.getNumMesas();
         this.setNumMesas(a+1);
     }
-    public void setNumMesas(int numMesas) {
-        this.numMesas = numMesas;
-    }
+    //elimina la mesa del listado de mesas en base al número
     public void eliminarMesa(int numeroMesa) {
     	for(Mesa mesa:listadoMesas) {
     		if(mesa.getNumeroMesa()==numeroMesa) {
@@ -146,6 +163,7 @@ public class Restaurante implements Serializable{
     		}
     	}
     }
+    //Metodos gestion de inventario
     public void comprarMaterial (Material.Tipo tipo, int cantidad, int precio, LocalDate fecha) {
         if (this.inventario.containsKey(tipo)) {
         	Material materialComprado = this.inventario.get(tipo);
@@ -194,7 +212,13 @@ public class Restaurante implements Serializable{
     	return valorTotal;
     }
     
- 
+    //metodo para decir si una accion no puede ser ejecutada
+    public String operacionInvalida() {
+    	return "Operacion Inválida";
+    }
+
+    // Gestion de Reservas
+    //retorna las mesas que son válidas (capacidad y fecha disponible) para la reserva
     public List<Mesa> listadoMesasValidasParaReserva(Reserva reserva) {
         List<Mesa> mesasFiltradas = new ArrayList<>();
         for (Mesa mesa : listadoMesas) {
@@ -204,12 +228,18 @@ public class Restaurante implements Serializable{
         }
         return mesasFiltradas;
     }
-    //metodo para decir si una accion no puede ser ejecutada
-    public String operacionInvalida() {
-    	return "Operacion Inválida";
+    //encuentra una mesa por su numero
+    public Mesa encontrarMesa(int numMesa) {
+        Long b = (long) numMesa;
+        for (Mesa mesa1 : getMesas()) {
+            Long a = (long) mesa1.getNumeroMesa();
+            if (b.equals(a)) {
+                return mesa1;
+            }
+        }
+        return null;
     }
-
-    // Gestion de Reservas
+    //Imprime las reservas por confirmar (sin mesa asignada)
     public String imprimirReservas() {
         String r = "";
         List<Reserva> listado = new ArrayList<>();
@@ -226,11 +256,12 @@ public class Restaurante implements Serializable{
         }
         return r;
     }
+    //Imprime las reservas confirmadas (con mesa asignada)
     public String imprimirReservas2() {
         String r = "";
         List<Reserva> listado = new ArrayList<>();
         for (Mesa mesa1 : getMesas()) {
-            listado.addAll(mesa1.getReserva());
+            listado.addAll(mesa1.getReservas());
         }
         for (Reserva reserva1 : listado) {
             if (reserva1 != null) {
@@ -242,6 +273,7 @@ public class Restaurante implements Serializable{
         }
         return r;
     }
+    //dice si el cliente si está guardado en la lista de clientes
     public boolean verificarCliente(Long cedula) {
         for (Cliente cliente1 : getClientes()) {
             if (cedula.equals(cliente1.getCedula())) {
@@ -250,7 +282,8 @@ public class Restaurante implements Serializable{
         }
         return true;
     }
-    public Cliente getCliente(Long cedula) {
+    //devuelve el objeto cliente en base a su cédula
+    public Cliente obtenerCliente(Long cedula) {
         for (Cliente cliente1 : getClientes()) {
             if (cedula.equals(cliente1.getCedula())) {
                 return cliente1;
@@ -258,18 +291,20 @@ public class Restaurante implements Serializable{
         }
         return null;
     }
-    public void f1(Long cedula, String nombre, int numAsistentes, String diaReserva) {
+    //obtiene el cliente en base a la cédula llamando al método obtenerCliente, y le asigna la reserva
+    public void asignarReservaCliente(Long cedula, String nombre, int numAsistentes, String diaReserva) {
         if (verificarCliente(cedula)) {
             Cliente c1 = new Cliente(nombre, cedula);
             afiliarCliente(c1);
         }
-        Cliente c1 = getCliente(cedula);
+        Cliente c1 = obtenerCliente(cedula);
         LocalDate diaReserva2 = Reserva.deStringaFecha(diaReserva);
         c1.setReserva(new Reserva(c1, numAsistentes, diaReserva2));
     }
+    //retorna el listado de mesas que cumplen para la reserva que tenga asignada ek cliente
     public String mesasQueCumplen(Long cedulaDuenoReserva) {
         String t = "";
-        Cliente c1 = getCliente(cedulaDuenoReserva);
+        Cliente c1 = obtenerCliente(cedulaDuenoReserva);
         Reserva r1 = c1.getReserva();
         List<Mesa> listado = this.listadoMesasValidasParaReserva(r1);
         for (Mesa mesa1 : listado) {
@@ -280,21 +315,13 @@ public class Restaurante implements Serializable{
         }
         return t;
     }
-    public Mesa encontrarMesa(int numMesa) {
-        Long b = (long) numMesa;
-        for (Mesa mesa1 : getMesas()) {
-            Long a = (long) mesa1.getNumeroMesa();
-            if (b.equals(a)) {
-                return mesa1;
-            }
-        }
-        return null;
-    }
-    /*public String confirmarReserva(int numMesa, Long cedula) {
-        Cliente c1 = getCliente(cedula);
+
+    //Si la mesa seleccionada cumple, le asigna la reserva a la mesa
+    public String confirmarReserva(int numMesa, Long cedula) {
+        Cliente c1 = obtenerCliente(cedula);
         Reserva r1 = c1.getReserva();
         if (Mesa.verificarNumero(numMesa)) {
-            Mesa mesa1 = getMesa(numMesa);
+            Mesa mesa1 = encontrarMesa(numMesa);
             if (mesa1.suficienteCapacidad(r1)) {
                 mesa1.reservarMesa(r1);
                 c1.setReserva(null);
@@ -307,9 +334,9 @@ public class Restaurante implements Serializable{
         else {
             return "No existe una mesa con ese número, por favor vuelva a intentarlo";
         }
-    }*/
-    public String confirmarReserva(int numMesa, Long cedula) {
-        Cliente c1 = getCliente(cedula);
+    }
+    /*public String confirmarReserva(int numMesa, Long cedula) {
+        Cliente c1 = obtenerCliente(cedula);
         Reserva r1 = c1.getReserva();
         List<Mesa> mesas=listadoMesas;
         for(Mesa mesa:mesas) {
@@ -323,10 +350,10 @@ public class Restaurante implements Serializable{
                 else {
                     return "La mesa seleccionada no tiene la capacidad suficiente, vuelva a intentarlo";
                 }
-            
             }
-        }return "No existe una mesa con ese número, por favor vuelva a intentarlo";
-    }
-    
-  
+            else {
+                return "No existe una mesa con ese número, por favor vuelva a intentarlo";
+            }
+        }
+    }*/
 }

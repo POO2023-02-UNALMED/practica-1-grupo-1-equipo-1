@@ -12,13 +12,15 @@ public class Reserva implements Serializable{
     private Mesa mesa;
     private int numAsistentes;
     private LocalDate diaReserva;
-    //private LocalTime horaReserva;
-    public Reserva (Cliente duenoReserva, int numAsistentes,LocalDate diaReserva/*, LocalTime horaReserva*/) {
+
+    //Constructor
+    public Reserva (Cliente duenoReserva, int numAsistentes,LocalDate diaReserva) {
         this.duenoReserva = duenoReserva;
         this.numAsistentes = numAsistentes;
         this.diaReserva = diaReserva;
-        //this.horaReserva = horaReserva;
     }
+
+    //Metodos getter
     public Cliente getDuenoReserva () {
         return this.duenoReserva;
     }
@@ -31,9 +33,8 @@ public class Reserva implements Serializable{
     public int getNumeroAsistentes () {
         return this.numAsistentes;
     }
-    /*public LocalTime getHoraReserva () {
-        return this.horaReserva;
-    } */
+
+    //Metodos setter
     public void setDuenoReserva (Cliente duenoReserva) {
         this.duenoReserva = duenoReserva;
     }
@@ -43,24 +44,31 @@ public class Reserva implements Serializable{
     public void setDiaReserva (LocalDate diaReserva) {
         this.diaReserva = diaReserva;
     }
-    /*public void setHoraReserva (LocalTime horaReserva) {
-        this.horaReserva = horaReserva;
-    }*/
+
+    //Metodos funcionalidad 1 (reservas)
+    //Metodo para imprimir la info de las reservas, dependiendo si son o no confirmadas
     public String resumenReserva () {
         if (this.mesa == null) {
-            return "Dueño de la reserva: "+this.getDuenoReserva().getNombre()+"\nCédula del reservista: "+this.getDuenoReserva().getCedula()+"\nNumero de asistentes: "+this.getNumeroAsistentes()+"\nMesa número: "
-        +"Sin mesa asignada"+"\nFecha reservada: "+this.getDiaReserva()/*+"\nHora reservada: "+this.getHoraReserva()*/;
+            return "Dueño de la reserva: "+this.getDuenoReserva().getNombre()+"\nCédula del reservista: "
+            +this.getDuenoReserva().getCedula()+"\nNumero de asistentes: "+this.getNumeroAsistentes()+"\nMesa número: "
+            +"Sin mesa asignada"+"\nFecha reservada: "+this.getDiaReserva();
         }
         else {
-            return "Dueño de la reserva: "+this.getDuenoReserva().getNombre()+"\nCédula del reservista: "+this.getDuenoReserva().getCedula()+"\nNumero de asistentes: "+this.getNumeroAsistentes()+"\nMesa número: "
-        +this.mesa.getNumeroMesa()+"\nFecha reservada: "+this.getDiaReserva()/*+"\nHora reservada: "+this.getHoraReserva()*/;
+            return "Dueño de la reserva: "+this.getDuenoReserva().getNombre()+"\nCédula del reservista: "
+            +this.getDuenoReserva().getCedula()+"\nNumero de asistentes: "+this.getNumeroAsistentes()+"\nMesa número: "
+            +this.mesa.getNumeroMesa()+"\nFecha reservada: "+this.getDiaReserva();
         }
     }
+
+    //Metodos de clase
+    //Convierte un String a una fecha
     public static LocalDate deStringaFecha(String fechaString) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDate fecha = LocalDate.parse(fechaString, formatter);
         return fecha;
     }
+
+    //revisa si la fecha es posterior a hoy para que las reservas tengan sentido
     public static boolean revisarFecha(String fecha) {
         LocalDate f1 = deStringaFecha(fecha);
         LocalDate fechaActual = LocalDate.now();
