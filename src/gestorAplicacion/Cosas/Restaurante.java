@@ -1,5 +1,6 @@
 package gestorAplicacion.Cosas;
 import java.util.List;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -288,7 +289,7 @@ public class Restaurante implements Serializable{
         }
         return t;
     }
-    public Mesa getMesa(int numMesa) {
+    public Mesa encontrarMesa(int numMesa) {
         Long b = (long) numMesa;
         for (Mesa mesa1 : getMesas()) {
             Long a = (long) mesa1.getNumeroMesa();
@@ -322,7 +323,7 @@ public class Restaurante implements Serializable{
         List<Mesa> mesas=listadoMesas;
         for(Mesa mesa:mesas) {
         	if (numMesa==mesa.getNumeroMesa()) {
-                Mesa mesa1 = getMesa(numMesa);
+                Mesa mesa1 = encontrarMesa(numMesa);
                 if (mesa1.suficienteCapacidad(r1)) {
                     mesa1.reservarMesa(r1);
                     c1.setReserva(null);
@@ -335,11 +336,6 @@ public class Restaurante implements Serializable{
             }
         }return "No existe una mesa con ese número, por favor vuelva a intentarlo";
     }
-    public void asignarNumeroMesa(List<Mesa> mesas) {
-		for (Mesa mesa:mesas) {
-			int num=mesa.getNumeroMesa();
-			mesa.setNumeroMesa(num);
-		}
-	}
+    
   
 }

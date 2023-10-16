@@ -12,6 +12,7 @@ import gestorAplicacion.Personas.Empleado;
 
 public class Financia implements Serializable{
 	private static final long serialVersionUID=1L;
+	private Restaurante restaurante;
 	private double presupuesto;
 	private double gastosMateriales;
 	private double pagosEmpleados;
@@ -20,7 +21,8 @@ public class Financia implements Serializable{
 	private double liquidacion;
 	private double perdidas;
 	
-	public Financia(double presupuesto, double gastosMateriales, double pagosEmpleados, double compraMateriales, double ganancias, double liquidacion, double perdidas) {
+	public Financia(Restaurante restaurante,double presupuesto, double gastosMateriales, double pagosEmpleados, double compraMateriales, double ganancias, double liquidacion, double perdidas) {
+	this.restaurante=restaurante;
 	this.presupuesto = presupuesto;
 	this.gastosMateriales = gastosMateriales;
 	this.pagosEmpleados = pagosEmpleados;
@@ -79,7 +81,7 @@ public class Financia implements Serializable{
 	//Calcular Pagos de los Empleados
 	public void calcularTotalPagosEmpleados() {
         this.pagosEmpleados = 0;
-        for (Empleado empleado : this.empleados) {
+        for (Empleado empleado : restaurante.getEmpleados()) {
             for(Turno turno : empleado.getTurnos()){
                 if (turno.isCompletado() && !turno.isCobrado()){
                     this.pagosEmpleados += turno.getSalario();

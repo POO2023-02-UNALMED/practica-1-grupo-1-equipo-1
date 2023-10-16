@@ -78,6 +78,18 @@ public class Serializador {
 			System.out.println("Error en la serialización "+ e);
 		}
 	}
+	public static void serializarInventario(Gestor gestor,File ruta) {
+		try {
+			PrintWriter pw=new PrintWriter(ruta);
+			FileOutputStream fos=new FileOutputStream(ruta);
+			ObjectOutputStream oos=new ObjectOutputStream(fos);
+			oos.writeObject(gestor.getEmpleadoDelMes());
+			oos.close();
+			fos.close();
+		}catch(IOException e) {
+			System.out.println("Error en la serialización "+ e);
+		}
+	}
 	
 }
 

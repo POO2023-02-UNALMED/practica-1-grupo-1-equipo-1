@@ -1,13 +1,28 @@
 package gestorAplicacion.Cosas;
 import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import baseDatos.Deserializador;
-import gestorAplicacion.Cosas.*;
-import gestorAplicacion.Personas.Empleado;
+import uiMain.Administrador;
+import gestorAplicacion.Cosas.Financia;
+import gestorAplicacion.Cosas.Material;
+import gestorAplicacion.Cosas.Material.Tipo;
+import gestorAplicacion.Cosas.Mesa;
+import gestorAplicacion.Cosas.Pedido;
+import gestorAplicacion.Cosas.Plato;
+import gestorAplicacion.Cosas.Reserva;
+import gestorAplicacion.Cosas.Restaurante;
+import gestorAplicacion.Cosas.Turno;
+import gestorAplicacion.Personas.Persona;
 import gestorAplicacion.Personas.Cliente;
+import gestorAplicacion.Personas.Empleado;
+
 
 
 public class Gestor implements Serializable{
@@ -18,6 +33,7 @@ public class Gestor implements Serializable{
 	private List<Mesa> mesas=restaurante.getMesas();
 	private Empleado empMes=restaurante.getEmpleadoDelMes();
 	private List<Reserva> reservas = new ArrayList<>();
+	private Map<Tipo,Material> inventario=restaurante.getInventario();
 	
 	public List<Reserva> getReservas(){
 		return reservas;
