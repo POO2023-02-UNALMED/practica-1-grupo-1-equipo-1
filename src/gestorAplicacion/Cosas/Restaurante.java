@@ -140,6 +140,11 @@ public class Restaurante implements Serializable{
     }
     public void comprarMesa (Mesa nuevaMesa) {
         this.listadoMesas.add(nuevaMesa);
+        int a = this.getNumMesas();
+        this.setNumMesas(a+1);
+    }
+    public void setNumMesas(int numMesas) {
+        this.numMesas = numMesas;
     }
     public void eliminarMesa(int numeroMesa) {
     	for(Mesa mesa:listadoMesas) {

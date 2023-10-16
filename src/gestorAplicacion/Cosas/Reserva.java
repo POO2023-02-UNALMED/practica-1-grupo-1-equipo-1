@@ -61,4 +61,13 @@ public class Reserva implements Serializable{
         LocalDate fecha = LocalDate.parse(fechaString, formatter);
         return fecha;
     }
+    public static boolean revisarFecha(String fecha) {
+        LocalDate f1 = deStringaFecha(fecha);
+        LocalDate fechaActual = LocalDate.now();
+        if (f1.isAfter(fechaActual)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
