@@ -39,9 +39,6 @@ public class Administrador {
     	restaurante.setEmpleadoDelMes(gestor.getEmpleadoDelMes());
     	
     	
-    	for (Mesa mesa:restaurante.getMesas()) {
-    		System.out.println(Mesa.getNumeroMesas());
-    	}
     	
     	Map<Material, Integer> Muton = new HashMap<>();
     	Muton.put(new Material(Material.Tipo.RES), 1);Muton.put(new Material(Material.Tipo.ESPECIAS), 10);Muton.put(new Material(Material.Tipo.ACEITES), 1);
