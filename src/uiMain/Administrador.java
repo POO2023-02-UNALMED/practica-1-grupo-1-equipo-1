@@ -41,34 +41,42 @@ public class Administrador {
     	restaurante.setEmpleadoDelMes(gestor.getEmpleadoDelMes());
     	
     	
-    	
+    	Material res = new Material(Material.Tipo.RES, 100, 100);
+    	Material especias = new Material(Material.Tipo.ESPECIAS, 100, 50);
+    	Material aceites = new Material(Material.Tipo.ACEITES, 100, 100);
+    	Material pollos = new Material(Material.Tipo.POLLOS, 100, 200);
+    	Material vinos = new Material(Material.Tipo.VINOS, 100, 300);
+    	Material cebollas = new Material(Material.Tipo.CEBOLLAS, 100, 50);
+    	Material champinones = new Material(Material.Tipo.CHAMPINONES, 500, 100);
+    	Material ajos = new Material(Material.Tipo.AJOS, 100, 30);
+    	Material tomates = new Material(Material.Tipo.TOMATES, 400, 200);
+    	Material quesos = new Material(Material.Tipo.QUESOS, 300, 150);
+    	Material cerdos = new Material(Material.Tipo.CERDOS, 100, 200);
+    	Material atun = new Material(Material.Tipo.ATUN, 100, 250);
+    	Material panes = new Material(Material.Tipo.PANES, 200, 50);
+    	Material pescados = new Material(Material.Tipo.PESCADOS ,200 ,300 );
+    	Material papas = new Material(Material.Tipo.PAPAS ,200 ,100 );
+    	Material huevos = new Material(Material.Tipo.PAPAS ,200 ,100 );
     	Map<Material, Integer> Muton = new HashMap<>();
-    	Muton.put(new Material(Material.Tipo.RES), 1);Muton.put(new Material(Material.Tipo.ESPECIAS), 10);Muton.put(new Material(Material.Tipo.ACEITES), 1);
+    	Muton.put(res, 1);Muton.put(especias, 10);Muton.put(aceites, 1);
     	Map<Material, Integer> coq = new HashMap<>();
-    	coq.put(new Material(Material.Tipo.POLLOS), 1);coq.put(new Material(Material.Tipo.VINOS), 1);coq.put(new Material(Material.Tipo.CEBOLLAS), 1);
-    	coq.put(new Material(Material.Tipo.CHAMPINONES), 5);coq.put(new Material(Material.Tipo.AJOS), 1);
+    	coq.put(pollos, 1);coq.put(vinos, 1);coq.put(cebollas, 1);coq.put(champinones, 5);coq.put(ajos, 1);
     	Map<Material, Integer> ratatouille = new HashMap<>();
-    	ratatouille.put(new Material(Material.Tipo.CHAMPINONES), 5);ratatouille.put(new Material(Material.Tipo.TOMATES), 4);ratatouille.put(new Material(Material.Tipo.ACEITES), 1);
-    	ratatouille.put(new Material(Material.Tipo.AJOS), 2);
+    	ratatouille.put(champinones, 5);ratatouille.put(tomates, 4);ratatouille.put(aceites, 1);ratatouille.put(ajos, 2);
     	Map<Material, Integer> boeuf = new HashMap<>();
-    	boeuf.put(new Material(Material.Tipo.RES), 1);boeuf.put(new Material(Material.Tipo.VINOS), 1);boeuf.put(new Material(Material.Tipo.CEBOLLAS), 1);
-    	boeuf.put(new Material(Material.Tipo.CHAMPINONES), 5);boeuf.put(new Material(Material.Tipo.AJOS), 1);
+    	boeuf.put(res, 1);boeuf.put(vinos, 1);boeuf.put(cebollas, 1);boeuf.put(champinones, 5);boeuf.put(ajos, 1);    	
     	Map<Material, Integer> quiche = new HashMap<>();
-    	quiche.put(new Material(Material.Tipo.HUEVOS), 3);quiche.put(new Material(Material.Tipo.QUESOS), 3);quiche.put(new Material(Material.Tipo.CERDOS), 1);
+    	quiche.put(huevos, 3);quiche.put(quesos, 3);quiche.put(cerdos, 1);
     	Map<Material, Integer> salade = new HashMap<>();
-    	salade.put(new Material(Material.Tipo.HUEVOS), 3);salade.put(new Material(Material.Tipo.TOMATES), 3);salade.put(new Material(Material.Tipo.ATUN), 1);
-    	salade.put(new Material(Material.Tipo.CEBOLLAS), 2);salade.put(new Material(Material.Tipo.ACEITES), 1);
+    	salade.put(huevos, 3);salade.put(tomates, 3);salade.put(atun, 1);salade.put(cebollas, 2);salade.put(aceites, 1);
     	Map<Material, Integer> soupe = new HashMap<>();
-    	soupe.put(new Material(Material.Tipo.CEBOLLAS), 5);soupe.put(new Material(Material.Tipo.PANES), 2);soupe.put(new Material(Material.Tipo.QUESOS), 3);
+    	soupe.put(cebollas, 5);soupe.put(panes, 2);soupe.put(quesos, 3);    	
     	Map<Material, Integer> croque = new HashMap<>();
-    	croque.put(new Material(Material.Tipo.PANES), 2);croque.put(new Material(Material.Tipo.CERDOS), 1);croque.put(new Material(Material.Tipo.QUESOS), 1);
+    	croque.put(panes ,2 );croque.put(cerdos ,1 );croque.put(quesos ,1 );
     	Map<Material, Integer> bouilla = new HashMap<>();
-    	bouilla.put(new Material(Material.Tipo.PESCADOS), 2);croque.put(new Material(Material.Tipo.TOMATES), 2);
-    	croque.put(new Material(Material.Tipo.AJOS), 2);croque.put(new Material(Material.Tipo.ACEITES), 1);
+    	bouilla.put(pescados ,2 );bouilla.put(tomates ,2 );bouilla.put(ajos ,2 );bouilla.put(aceites ,1 );    	
     	Map<Material, Integer> tartiflette = new HashMap<>();
-    	tartiflette.put(new Material(Material.Tipo.PAPAS), 2);tartiflette.put(new Material(Material.Tipo.CEBOLLAS), 2);
-    	tartiflette.put(new Material(Material.Tipo.CERDOS), 1);tartiflette.put(new Material(Material.Tipo.QUESOS), 1);
-    	
+    	tartiflette.put(papas ,2 );tartiflette.put(cebollas ,2 );tartiflette.put(cerdos ,1 );tartiflette.put(quesos ,1 );    	
     	ArrayList<Plato> menu=new ArrayList<>();
     	
     	menu.add(new Plato("Muton Shot",30000,"Costillas de Res con Salsa especial",30,Muton));
@@ -81,8 +89,9 @@ public class Administrador {
     	menu.add(new Plato("Croque Monsieur",15000,"Sandwich con Cerdo y Queso",10,croque));
     	menu.add(new Plato("Bouillabaisse",20000,"Sopa de Pescado tradicional",25,bouilla));
     	menu.add(new Plato("Tartiflette",40000,"Gratinado de Papa y Cerdo",20,tartiflette));
-
-    	Pedido pedido = new Pedido();
+    	
+        // Pedido
+        Pedido pedido = new Pedido();
     	//mostrarMenu(menu);
     	int opcion, opcion2;
     	do {
@@ -180,85 +189,88 @@ public class Administrador {
     			
     			switch(opcion) {
     			
-    			case 1: System.out.println("\nListado de Pedidos sin Verificar");
-    			if (pedido.getPedidos().size()==0)
-    			{
-    				System.out.println("\n-No hay pedidos sin verificar");
-    			}
-    			for(int i = 0; i < pedido.getPedidos().size(); i++){
-    				System.out.println((i + 1) + ". " +pedido.getPedidos().get(i));
-    			}
-    			
-    			System.out.println("\nListado de Pedidos Verificados");
-    			if(pedido.getPedidosVerificados().size()==0){
-    				System.out.println("\n-No hay pedidos verificados\n");
-    			}
-    			break;
-    			
-    			case 2:
-    				ArrayList<Plato> platosTemp = new ArrayList<Plato>();
-    				// Imprimir el menú
-    				for (int i = 0; i < menu.size(); i++) {
-    				    System.out.println((i + 1) + ". " + menu.get(i).detallesPlato());
-    				}
-    				System.out.print("Por favor, introduce los índices de los platos que deseas (separados por comas): ");
-    				String platos = readln();
-    				String[] indices = platos.split(",");
-    				for (String indice : indices) {
-    				    int i = Integer.parseInt(indice.trim()); // convertir el índice a int
-    				    platosTemp.add(menu.get(i-1));
-    				}
-    				
-    				System.out.print("Ingrese el tipo de pedido indicando consumo(domicilio o restaurante): ");
-    				String tipoPedido = scanner.nextLine();
-	    			if(tipoPedido.equals("domicilio")){
-	    			    System.out.print("Ingrese el Cocinero: ");
-	    				String nombreCocinero = scanner.nextLine();
-	    			    Empleado cocinero = restaurante.buscarEmpleado(nombreCocinero);
-	    			    if (cocinero == null) {
-	    			        System.out.println("Cocinero no encontrado");
-	    			        break;
-	    			    }
-	    			    System.out.print("Ingrese el Domiciliario: ");
-	    			    String nombreDomiciliario = scanner.nextLine();
-	    			    Empleado domiciliario = restaurante.buscarEmpleado(nombreDomiciliario);
-	    			    if (domiciliario == null) {
-	    			        System.out.println("Domiciliario no encontrado");
-	    			        break;
-	    			    }
-	    			    // Se guarda en pedidos ya que en el constructor de pedidos hay im
-	    			    new Pedido(tipoPedido, cocinero, domiciliario, platosTemp, restaurante);
-	    			    System.out.println("Pedido creado exitosamente");
-	    			} else if(tipoPedido.equals("restaurante")){
-	    			    System.out.print("Ingrese la Mesa: ");
-	    			    int numMesa = (int)readLong();
-	    			    Mesa mesa = restaurante.buscarMesa(numMesa);
-	    			    if (mesa == null) {
-	    			        System.out.println("Mesa no encontrada");
-	    			        break;
-	    			    }
-	    			    System.out.print("Ingrese el Cocinero: ");
-	    			    String nombreCocinero = readln();
-	    			    Empleado cocinero = restaurante.buscarEmpleado(nombreCocinero);
-	    			    if (cocinero == null) {
-	    			        System.out.println("Cocinero no encontrado");
-	    			        break;
-	    			    }
-	    			    System.out.println("Ingrese el Mesero: ");
-	    			    String nombreMesero = readln();
-	    			    Empleado mesero = restaurante.buscarEmpleado(nombreMesero);
-	    			    if (mesero == null) {
-	    			        System.out.println("Mesero no encontrado");
-	    			        break;
-	    			    }
-	    			    new Pedido(mesa, tipoPedido, cocinero, mesero, platosTemp, restaurante);
+    			case 1:
+	    			System.out.println("\nListado de Pedidos sin Verificar");
+	    			if (pedido.getPedidos().size()==0)
+	    			{
+	    				System.out.println("\n-No hay pedidos sin verificar");
 	    			}
-	    			else{
-	    				System.out.println("Tipo de pedido no encontrado");
+	    			for(int i = 0; i < pedido.getPedidos().size(); i++){
+	    				System.out.println((i + 1) + ". " +pedido.getPedidos().get(i));
 	    			}
-	    			//Para reinicializar la lista para mandar
-	    			platosTemp = new ArrayList<Plato>();
-				break;
+	    			
+	    			System.out.println("\nListado de Pedidos Verificados");
+	    			if(pedido.getPedidosVerificados().size()==0){
+	    				System.out.println("\n-No hay pedidos verificados\n");
+	    			}
+	    			for(int i = 0; i < pedido.getPedidosVerificados().size(); i++){
+	    				System.out.println((i + 1) + ". " +pedido.getPedidosVerificados().get(i));
+	    			}
+	    			System.out.println("/n");
+	    			break;
+	    			
+	    			case 2:
+	    				ArrayList<Plato> platosTemp = new ArrayList<Plato>();
+	    				// Imprimir el menú
+	    				for (int i = 0; i < menu.size(); i++) {System.out.println((i + 1) + ". " + menu.get(i).detallesPlato());}
+	    				System.out.print("Por favor, introduce los índices de los platos que deseas (separados por comas): ");
+	    				String platos = readln();
+	    				String[] indices = platos.split(",");
+	    				for (String indice : indices) {
+	    				    int i = Integer.parseInt(indice.trim()); // convertir el índice a int
+	    				    platosTemp.add(menu.get(i-1));
+	    				}
+	    				System.out.print("Ingrese el tipo de pedido indicando consumo(domicilio o restaurante): ");
+	    				String tipoPedido = scanner.nextLine();
+		    			if(tipoPedido.equals("domicilio")){
+		    				
+		    			    System.out.print("Ingrese el Cocinero: ");
+		    				String nombreCocinero = scanner.nextLine();
+		    			    Empleado cocinero = restaurante.buscarEmpleado(nombreCocinero);
+		    			    if (cocinero == null) {
+		    			        System.out.println("Cocinero no encontrado");
+		    			        break;
+		    			    }
+		    			    System.out.print("Ingrese el Domiciliario: ");
+		    			    String nombreDomiciliario = scanner.nextLine();
+		    			    Empleado domiciliario = restaurante.buscarEmpleado(nombreDomiciliario);
+		    			    if (domiciliario == null) {
+		    			        System.out.println("Domiciliario no encontrado");
+		    			        break;
+		    			    }
+		    			    // Se guarda en pedidos ya que en el constructor de pedidos hay im
+		    			    new Pedido(tipoPedido, cocinero, domiciliario, platosTemp, restaurante);
+		    			    System.out.println("Pedido creado exitosamente");
+		    			} else if(tipoPedido.equals("restaurante")){
+		    			    System.out.print("Ingrese la Mesa: ");
+		    			    int numMesa = (int)readLong();
+		    			    Mesa mesa = restaurante.buscarMesa(numMesa);
+		    			    if (mesa == null) {
+		    			        System.out.println("Mesa no encontrada");
+		    			        break;
+		    			    }
+		    			    System.out.print("Ingrese el Cocinero: ");
+		    			    String nombreCocinero = readln();
+		    			    Empleado cocinero = restaurante.buscarEmpleado(nombreCocinero);
+		    			    if (cocinero == null) {
+		    			        System.out.println("Cocinero no encontrado");
+		    			        break;
+		    			    }
+		    			    System.out.println("Ingrese el Mesero: ");
+		    			    String nombreMesero = readln();
+		    			    Empleado mesero = restaurante.buscarEmpleado(nombreMesero);
+		    			    if (mesero == null) {
+		    			        System.out.println("Mesero no encontrado");
+		    			        break;
+		    			    }
+		    			    new Pedido(mesa, tipoPedido, cocinero, mesero, platosTemp, restaurante);
+		    			}
+		    			else{
+		    				System.out.println("Tipo de pedido no encontrado");
+		    			}
+		    			//Para reinicializar la lista para mandar
+		    			platosTemp = new ArrayList<Plato>();
+					break;
     			case 3:
     				System.out.println("Estos son los pedidos que puedes cancelar");
         			for(int i = 0; i < pedido.getPedidos().size(); i++){
@@ -286,22 +298,22 @@ public class Administrador {
             		{
             			System.out.println("\n-No hay pedidos verificados");
             		}
-            		else{	
-        			for(int i = 0; i < pedido.getPedidosVerificados().size(); i++){
-        				System.out.println((i + 1) + ". " + pedido.getPedidosVerificados().get(i));
-        			}
-            		}
+            		else{
+            			System.out.println("vamos bien");
+            			for(int i = 0; i < pedido.getPedidosVerificados().size(); i++){
+            				System.out.println((i + 1) + ". " + pedido.getPedidosVerificados().get(i));
+            				}
+            			}
         			System.out.print("\nIngrese los pedidos que desee verificar separado por comas: ");
     			    String numsPedido = scanner.nextLine();
     			    String[] nums = numsPedido.split(",");
     			    for(String numStr : nums){
     			    	int num = Integer.parseInt(numStr);
     			    	if(pedido.verificarPedido(pedido.getPedidos().get(num-1))) {
-    			    	System.out.println("\nPedido: " + num +  "verificado exitosamente");
+    			    		pedido.actualizarPedidos();
+    			    	System.out.println("\nPedido: " + num +  " verificado exitosamente");
     			    	}
-    			    	else{
-    			    		System.out.println("\nHay un problema en el pedido numero: " + num);
-    			    	}
+    			    	else{System.out.println("\nHay un problema en el pedido numero: " + num);}
     			    }
             		}
     			case 5: break; // Volver al menú principal

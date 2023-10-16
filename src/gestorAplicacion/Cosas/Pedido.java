@@ -61,14 +61,14 @@ public class Pedido implements Serializable{
      			}else if(true){
      				break;
      		}
-     		if (this.cocinero.verificarTiempo(plato.getTiempoPreparacion())){
+     		if (pedido.cocinero.verificarTiempo(plato.getTiempoPreparacion())){
      			verificado_cocinero = true;
      			pedido.setVerificado(true);
      			}else if(true){
      				break;
      				}
-     		if (this.tipoPedido.equals("domicilio")) {
-     			if(this.domiciliario.verificarTiempo()){
+     		if (pedido.tipoPedido.equals("domicilio")) {
+     			if(pedido.domiciliario.verificarTiempo()){
      				verificado_domiciliario=true;
      				pedido.setVerificado(true);
      				return (verificado_insumos && verificado_cocinero && verificado_domiciliario);
@@ -133,14 +133,18 @@ public class Pedido implements Serializable{
     	 return pedidos;
      }
      public  ArrayList<Pedido> getPedidosVerificados(){
-    	 for (Pedido pedido : pedidos){
-    		 if(pedido.isVerificado()){
-    			 pedidosVerificados.add(pedido);
-    		 }
-    	 }
     	 return pedidosVerificados;
      }
      
+     public void actualizarPedidos() {
+    	    for (int i = pedidos.size() - 1; i >= 0; i--) {
+    	        Pedido pedido = pedidos.get(i);
+    	        if (pedido.isVerificado()) {
+    	            pedidosVerificados.add(pedido);
+    	            pedidos.remove(i);
+    	        }
+    	    }
+    	}
      public  ArrayList<Plato> getPlatos(){
     	 return this.platos;
      }

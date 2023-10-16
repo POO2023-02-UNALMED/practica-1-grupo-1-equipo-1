@@ -52,7 +52,7 @@ public class Plato implements Serializable{
     }
     
     public String detallesPlato() {
-        return " Plato"+
+        return "Plato"+
         	"\n   Nombre: " + nombre  +
             "\n   Precio: " + precio +
             "\n   Descripcion: " + descripcion  +

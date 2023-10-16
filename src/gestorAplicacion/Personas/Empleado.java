@@ -119,6 +119,13 @@ public class Empleado extends Persona implements Serializable{
 		this.restaurante.botarMaterial(material, cantidad);
 	}
 	
+	public String mostrarPorTipo(String tipo){
+		for(Empleado empleado : restaurante.getEmpleados()){
+			return empleado.toString();
+		}
+		return null;
+	}
+	
 	public String toString(){
 		return "Nombre: " + getNombre() + " " + turno;
 	}
