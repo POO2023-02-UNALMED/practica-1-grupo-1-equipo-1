@@ -94,8 +94,13 @@ public class Administrador {
 							int numAsistentes = (int) readLong();
 							System.out.print("Ingrese el dia de la reserva en formato dia-mes-año: ");
 							String diaReserva = readln();
-							restaurante.f1(cedulaDuenoReserva, nombre, numAsistentes, diaReserva);
-							System.out.println("Reserva creada");
+							if (Reserva.revisarFecha(diaReserva)) {
+								restaurante.f1(cedulaDuenoReserva, nombre, numAsistentes, diaReserva);
+								System.out.println("Reserva creada");
+							}
+							else {
+								System.out.println("La fecha ingresada no es válida, por favor intente con una fecha posterior a hoy");
+							}
 							break;
 					case 4: System.out.print("Ingrese la cedula del dueño de la reserva a cancelar: ");
 							Long cedulaDuenoReserva2 = readLong();
