@@ -42,7 +42,7 @@ public class Deserializador {
 		try {
 			FileInputStream fis=new FileInputStream(ruta);
 			ObjectInputStream ois=new ObjectInputStream(fis);
-			gestor.setClientes((ArrayList<Cliente>) ois.readObject());
+			gestor.setClientes((List<Cliente>) ois.readObject());
 		}catch(IOException | ClassNotFoundException e){
 			System.out.println("Error en la deserialización "+e);
 		}
@@ -51,7 +51,7 @@ public class Deserializador {
 		try {
 			FileInputStream fis=new FileInputStream(ruta);
 			ObjectInputStream ois=new ObjectInputStream(fis);
-			gestor.setEmpleados((ArrayList<Empleado>) ois.readObject());
+			gestor.setEmpleados((List<Empleado>) ois.readObject());
 		}catch(IOException | ClassNotFoundException e){
 			System.out.println("Error en la deserialización "+e);
 		}
@@ -60,7 +60,7 @@ public class Deserializador {
 		try {
 			FileInputStream fis=new FileInputStream(ruta);
 			ObjectInputStream ois=new ObjectInputStream(fis);
-			gestor.setMesas((ArrayList<Mesa>) ois.readObject());
+			gestor.setMesas((List<Mesa>) ois.readObject());
 		}catch(IOException | ClassNotFoundException e){
 			System.out.println("Error en la deserialización "+e);
 		}

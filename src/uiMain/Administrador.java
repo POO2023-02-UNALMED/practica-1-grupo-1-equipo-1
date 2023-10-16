@@ -31,11 +31,17 @@ public class Administrador {
     public static void main(String[] args) {
     	
     	Gestor gestor=new Gestor();
-    	Restaurante restaurante=new Restaurante();
+    	Restaurante restaurante=gestor.getRestaurante();
     	restaurante.setClientes(gestor.getClientes());
     	restaurante.setEmpleados(gestor.getEmpleados());
     	restaurante.setMesas(gestor.getMesas());
+    	restaurante.asignarNumeroMesa(gestor.getMesas());
     	restaurante.setEmpleadoDelMes(gestor.getEmpleadoDelMes());
+    	
+    	
+    	for (Mesa mesa:restaurante.getMesas()) {
+    		System.out.println(Mesa.getNumeroMesas());
+    	}
     	
     	Map<Material, Integer> Muton = new HashMap<>();
     	Muton.put(new Material(Material.Tipo.RES), 1);Muton.put(new Material(Material.Tipo.ESPECIAS), 10);Muton.put(new Material(Material.Tipo.ACEITES), 1);

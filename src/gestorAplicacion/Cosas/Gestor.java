@@ -13,13 +13,13 @@ import gestorAplicacion.Personas.Cliente;
 public class Gestor implements Serializable{
 	private static final long serialVersionUID=1L;
 	private Restaurante restaurante=new Restaurante();
-	private ArrayList<Cliente> clientes=(ArrayList<Cliente>) restaurante.getClientes();
-	private ArrayList<Empleado> empleados= (ArrayList<Empleado>) restaurante.getEmpleados();
-	private ArrayList<Mesa> mesas= (ArrayList<Mesa>) restaurante.getMesas();
+	private List<Cliente> clientes=restaurante.getClientes();
+	private List<Empleado> empleados=restaurante.getEmpleados();
+	private List<Mesa> mesas=restaurante.getMesas();
 	private Empleado empMes=restaurante.getEmpleadoDelMes();
-	private ArrayList<Reserva> reservas = new ArrayList<>();
+	private List<Reserva> reservas = new ArrayList<>();
 	
-	public ArrayList<Reserva> getReservas(){
+	public List<Reserva> getReservas(){
 		return reservas;
 	}
 	/*public void setReservas(ArrayList<Reserva> reservas) {
@@ -41,27 +41,27 @@ public class Gestor implements Serializable{
 		Deserializador.deserializar(this);
 	}
 
-	public ArrayList<Cliente> getClientes() {
+	public List<Cliente> getClientes() {
 		return this.clientes;
 	}
 
-	public void setClientes(ArrayList<Cliente> clientes) {
+	public void setClientes(List<Cliente> clientes) {
 		this.clientes = clientes;
 	}
 
-	public ArrayList<Empleado> getEmpleados() {
+	public List<Empleado> getEmpleados() {
 		return this.empleados;
 	}
 
-	public void setEmpleados(ArrayList<Empleado> empleados) {
+	public void setEmpleados(List<Empleado> empleados) {
 		this.empleados = empleados;
 	}
 
-	public ArrayList<Mesa> getMesas() {
+	public List<Mesa> getMesas() {
 		return this.mesas;
 	}
 
-	public void setMesas(ArrayList<Mesa> mesas) {
+	public void setMesas(List<Mesa> mesas) {
 		this.mesas = mesas;
 	}
 	public  Restaurante getRestaurante() {

@@ -298,7 +298,7 @@ public class Restaurante implements Serializable{
         }
         return null;
     }
-    public String confirmarReserva(int numMesa, Long cedula) {
+    /*public String confirmarReserva(int numMesa, Long cedula) {
         Cliente c1 = getCliente(cedula);
         Reserva r1 = c1.getReserva();
         if (Mesa.verificarNumero(numMesa)) {
@@ -315,5 +315,31 @@ public class Restaurante implements Serializable{
         else {
             return "No existe una mesa con ese número, por favor vuelva a intentarlo";
         }
+    }*/
+    public String confirmarReserva(int numMesa, Long cedula) {
+        Cliente c1 = getCliente(cedula);
+        Reserva r1 = c1.getReserva();
+        List<Mesa> mesas=listadoMesas;
+        for(Mesa mesa:mesas) {
+        	if (numMesa==mesa.getNumeroMesa()) {
+                Mesa mesa1 = getMesa(numMesa);
+                if (mesa1.suficienteCapacidad(r1)) {
+                    mesa1.reservarMesa(r1);
+                    c1.setReserva(null);
+                    return "Reserva asignada a la mesa #"+numMesa;
+                }
+                else {
+                    return "La mesa seleccionada no tiene la capacidad suficiente, vuelva a intentarlo";
+                }
+            
+            }
+        }return "No existe una mesa con ese número, por favor vuelva a intentarlo";
     }
+    public void asignarNumeroMesa(List<Mesa> mesas) {
+		for (Mesa mesa:mesas) {
+			int num=mesa.getNumeroMesa();
+			mesa.setNumeroMesa(num);
+		}
+	}
+  
 }
