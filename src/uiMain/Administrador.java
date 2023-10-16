@@ -1,6 +1,7 @@
 package uiMain;
 import java.time.LocalDate;
 
+
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -213,7 +214,7 @@ public class Administrador implements Menu {
 		    			} else if(tipoPedido.equals("restaurante")){
 		    			    System.out.print("Ingrese la Mesa: ");
 		    			    int numMesa = (int)readLong();
-		    			    Mesa mesa = restaurante.getMesa(numMesa);
+		    			    Mesa mesa = restaurante.encontrarMesa(numMesa);
 		    			    if (mesa == null) {
 		    			        System.out.println("Mesa no encontrada");
 		    			        break;
