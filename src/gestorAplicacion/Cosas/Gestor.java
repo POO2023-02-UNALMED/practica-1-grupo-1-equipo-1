@@ -1,6 +1,7 @@
 package gestorAplicacion.Cosas;
 import java.io.Serializable;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -9,17 +10,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import baseDatos.Deserializador;
-import uiMain.Administrador;
-import gestorAplicacion.Cosas.Financia;
-import gestorAplicacion.Cosas.Material;
+
+
 import gestorAplicacion.Cosas.Material.Tipo;
-import gestorAplicacion.Cosas.Mesa;
-import gestorAplicacion.Cosas.Pedido;
-import gestorAplicacion.Cosas.Plato;
-import gestorAplicacion.Cosas.Reserva;
-import gestorAplicacion.Cosas.Restaurante;
-import gestorAplicacion.Cosas.Turno;
-import gestorAplicacion.Personas.Persona;
 import gestorAplicacion.Personas.Cliente;
 import gestorAplicacion.Personas.Empleado;
 

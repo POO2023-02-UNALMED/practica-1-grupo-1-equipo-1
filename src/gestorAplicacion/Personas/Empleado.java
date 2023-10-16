@@ -61,8 +61,8 @@ public class Empleado extends Persona implements Serializable{
 			}
 		}
     // Metodos getter
-	public ArrayList<Turno> getTurno() {
-		return turnos;
+	public Turno getTurno() {
+		return turno;
 	}
 
 	public ArrayList<Turno> getTurnos() {

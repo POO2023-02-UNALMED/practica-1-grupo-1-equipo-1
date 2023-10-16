@@ -10,12 +10,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-
 import javax.sql.rowset.spi.SyncResolver;
 
 import baseDatos.Serializador;
 import gestorAplicacion.Cosas.*;
-import gestorAplicacion.Personas.Cliente;
 import gestorAplicacion.Personas.Empleado;
 
 public class Administrador implements Menu {
@@ -177,7 +175,7 @@ public class Administrador implements Menu {
 	    			for(int i = 0; i < pedido.getPedidosVerificados().size(); i++){
 	    				System.out.println((i + 1) + ". " +pedido.getPedidosVerificados().get(i));
 	    			}
-	    			System.out.println("/n");
+	    			System.out.println("\n");
 	    			break;
 	    			
 	    			case 2:
@@ -215,7 +213,7 @@ public class Administrador implements Menu {
 		    			} else if(tipoPedido.equals("restaurante")){
 		    			    System.out.print("Ingrese la Mesa: ");
 		    			    int numMesa = (int)readLong();
-		    			    Mesa mesa = restaurante.buscarMesa(numMesa);
+		    			    Mesa mesa = restaurante.getMesa(numMesa);
 		    			    if (mesa == null) {
 		    			        System.out.println("Mesa no encontrada");
 		    			        break;

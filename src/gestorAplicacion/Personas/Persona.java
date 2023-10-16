@@ -1,5 +1,4 @@
 package gestorAplicacion.Personas;
-import java.io.Serializable;
 
 public abstract class Persona {
 	private String nombre;
