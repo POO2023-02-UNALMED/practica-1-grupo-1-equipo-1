@@ -91,4 +91,8 @@ public class Mesa implements Serializable{
     public String resumenMesa () {
         return "Capacidad de la mesa: "+this.getCapacidad()+"\nNúmero de la mesa: "+this.getNumeroMesa();
     }
+    
+    public String toString(){
+    	return "Capacidad: " + capacidad + "numeroMesa" + numeroMesa; 
+    }
 }

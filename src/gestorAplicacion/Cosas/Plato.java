@@ -1,7 +1,11 @@
 package gestorAplicacion.Cosas;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import gestorAplicacion.Cosas.Material.Tipo;
+
 
 public class Plato implements Serializable{
 	private static final long serialVersionUID=1L;
@@ -39,9 +43,21 @@ public class Plato implements Serializable{
     	
     }
     
+    public List<Tipo> mostrarIngredientes(){
+    	List<Tipo> tipos= new ArrayList<>();
+    	for(Map.Entry<Material, Integer> entry : ingredientes.entrySet()){
+    		tipos.add(entry.getKey().getTipo());
+    	}
+		return tipos;
+    }
+    
     public String detallesPlato() {
-    	return "Plato: "+nombre+"\nPrecio: "+precio+"\n"+descripcion+"\nTiempo de preparacion: "+tiempoPreparacion+" minutos"+"\n"+"\n+-------------------------------------------------------------------------------+";
-        
+        return " Plato"+
+        	"\n   Nombre: " + nombre  +
+            "\n   Precio: " + precio +
+            "\n   Descripcion: " + descripcion  +
+            "\n   Tiempo de preparacion: " + tiempoPreparacion +
+            "\n   Ingredientes: " + mostrarIngredientes().toString();
     }
     
  // Métodos getter 
@@ -87,3 +103,4 @@ public class Plato implements Serializable{
 	}
 
 }
+

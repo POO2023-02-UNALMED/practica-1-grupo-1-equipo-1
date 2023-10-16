@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
-import gestorAplicacion.Cosas.Material;
 import java.io.Serializable;
 import gestorAplicacion.Cosas.*;
 import gestorAplicacion.Personas.Empleado;
@@ -88,6 +87,6 @@ public class Financia implements Serializable{
                 }
             }
         }
-    }S
+    }
 	
 }

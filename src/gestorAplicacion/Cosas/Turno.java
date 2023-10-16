@@ -1,5 +1,7 @@
 package gestorAplicacion.Cosas;
 import java.io.Serializable;
+import gestorAplicacion.Cosas.Material.Tipo;
+
 
 public class Turno implements Serializable{
 	private static final long serialVersionUID=1L;
@@ -8,9 +10,11 @@ public class Turno implements Serializable{
     private boolean completado;
     private boolean cobrado;
     private int horas;
+	private Tipo tipo;
 
     // Constructor
     public Turno(Tipo tipo, int horas, double salario){
+    	this.tipo = tipo;
         this.setHoras(horas);
         this.salario = salario;
         this.completado = false;
@@ -18,6 +22,9 @@ public class Turno implements Serializable{
     }
     
     // Métodos getter
+    public Tipo getTipo () {
+        return this.tipo;
+    }
 	public int getHoras() {
 		return horas;
 	}
@@ -58,6 +65,10 @@ public class Turno implements Serializable{
 
 	public void setHoras(int horas) {
 		this.horas = horas;
+	}
+	
+	public String toString(){
+		return "Tipo: " + this.getTipo() +" Salario: " +salario +" Estado completado: " +completado +" Estado cobrado";
 	}
 }
 

@@ -10,6 +10,7 @@ public class tests {
     public static void main(String[] args) {
         // Crear objetos de las clases necesarias
         Mesa mesa = new Mesa(4, 1);
+        Restaurante restaurante = new Restaurante();
         Turno turnoSemana= new Turno(Turno.Tipo.SEMANA, 8, 50000);
         Empleado domiciliario = new Empleado("Manolo","domiciliario", null, turnoSemana);;
         Empleado cocinero = new Empleado("Juan", "Cocinero", null, turnoSemana);
@@ -24,14 +25,16 @@ public class tests {
         Plato plato1 = new Plato("Huevos pericos", 10, 30, ingredientes);
         // Crear un objeto Pedido
         ArrayList<Plato> menu = new ArrayList<Plato>(Arrays.asList(plato1));
-        Pedido pedidoDomicilio = new Pedido("domicilio", cocinero, domiciliario);
-        Pedido pedidoRestaurante = new Pedido(mesa, "restaurante", cocinero, mesero);
+        Pedido pedidoDomicilio = new Pedido("domicilio", cocinero, domiciliario, restaurante);
+        Pedido pedidoRestaurante = new Pedido(mesa, "restaurante", cocinero, mesero, restaurante);
         // Agregar un plato al pedido
         pedidoDomicilio.agregarPlato(plato1);
         pedidoRestaurante.agregarPlato(plato1);
         // Verificar el pedido
         boolean resultado1 = pedidoDomicilio.verificarPedido(pedidoDomicilio);
         boolean resultado2 = pedidoRestaurante.verificarPedido(pedidoRestaurante);
+        System.out.println("pillelos");
+        System.out.println(pedidoDomicilio.imprimirPedidosVerificadosPlato());
         System.out.println("Resultado de la verificación domicilio: " + resultado1 + " Resultado de la verificación restaurante: " + resultado2);
     }
 }

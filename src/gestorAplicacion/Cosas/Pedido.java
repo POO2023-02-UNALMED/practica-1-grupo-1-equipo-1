@@ -3,6 +3,7 @@ import java.util.ArrayList;
 
 import java.io.Serializable;
 import gestorAplicacion.Personas.Empleado;
+import gestorAplicacion.Cosas.Restaurante;
 
 public class Pedido implements Serializable{
 	private static final long serialVersionUID=1L;
@@ -11,8 +12,9 @@ public class Pedido implements Serializable{
     private Empleado mesero;
     private Empleado domiciliario;
     private ArrayList<Pedido> pedidosVerificados = new ArrayList<>();
-    private ArrayList<Pedido> pedidos = new ArrayList<>();
+    private static ArrayList<Pedido> pedidos = new ArrayList<>();
     private ArrayList<Plato> platos;
+    private Restaurante restaurante;
     // Segun este atributo se van a mostrar y se van a dividir
     // En pedidos verificados y no verificados
     private boolean verificado = false;
@@ -22,29 +24,30 @@ public class Pedido implements Serializable{
 	}
 	
 	// Estos constructores estan para que donde no se le asigne un array para platos se cree un por default vacio
-	public Pedido (String tipoPedido, Empleado cocinero, Empleado domiciliario) {
-	    this(null, tipoPedido, cocinero, null, new ArrayList<Plato>());
+	public Pedido (String tipoPedido, Empleado cocinero, Empleado domiciliario, Restaurante restaurante) {
+	    this(null, tipoPedido, cocinero, null, new ArrayList<Plato>(), restaurante);
 	    this.domiciliario=domiciliario;
 	}
 	
-	public Pedido (Mesa mesa,String tipoPedido, Empleado cocinero, Empleado mesero) {
-	    this(mesa, tipoPedido, cocinero, mesero, new ArrayList<Plato>());
+	public Pedido (Mesa mesa,String tipoPedido, Empleado cocinero, Empleado mesero, Restaurante restaurante) {
+	    this(mesa, tipoPedido, cocinero, mesero, new ArrayList<Plato>(), restaurante);
 	}
 	
 	// Estos constructores estan para si se les da unos platos para inicializarlo
-	public Pedido (String tipoPedido, Empleado cocinero, Empleado domiciliario, ArrayList<Plato> platos) {
-	    this(null, tipoPedido, cocinero, null, platos);
+	public Pedido (String tipoPedido, Empleado cocinero, Empleado domiciliario, ArrayList<Plato> platos, Restaurante restaurante) {
+	    this(null, tipoPedido, cocinero, null, platos, restaurante);
 	    this.domiciliario=domiciliario;
 	}
 
-	public Pedido(Mesa mesa, String tipoPedido, Empleado cocinero, Empleado mesero, ArrayList<Plato> platos) {
-	    this.pedidos.add(this);
+	public Pedido(Mesa mesa, String tipoPedido, Empleado cocinero, Empleado mesero, ArrayList<Plato> platos, Restaurante restaurante) {
+	    Pedido.pedidos.add(this);
 	    this.mesa = mesa;
 	    this.tipoPedido = tipoPedido;
 	    this.cocinero = cocinero;
 	    this.mesero = mesero;
 	    this.platos = platos;
 	    this.verificado = false;
+	    this.restaurante = restaurante;
 	}
     // Verificar pedido
      public boolean verificarPedido(Pedido pedido){
@@ -59,19 +62,20 @@ public class Pedido implements Serializable{
      				break;
      		}
      		if (this.cocinero.verificarTiempo(plato.getTiempoPreparacion())){
-     			System.out.println("mmm");
      			verificado_cocinero = true;
+     			pedido.setVerificado(true);
      			}else if(true){
      				break;
      				}
      		if (this.tipoPedido.equals("domicilio")) {
      			if(this.domiciliario.verificarTiempo()){
      				verificado_domiciliario=true;
+     				pedido.setVerificado(true);
      				return (verificado_insumos && verificado_cocinero && verificado_domiciliario);
      				}else if(true){
      					return (verificado_insumos && verificado_cocinero && verificado_domiciliario);
      					}
-     			}
+     		}
      		}
      	return (verificado_insumos && verificado_cocinero );
      	}
@@ -80,14 +84,24 @@ public class Pedido implements Serializable{
    // Gestion de Pedidos
      
      public String imprimirPlatos(){
+    	 int i = 0;
     	 for (Pedido pedido: getPedidos()) {
     		 for(Plato plato : pedido.getPlatos()){
-    			 return plato.detallesPlato();
+    			 i+=1;
+    			 return "\n   "+i+":"+plato.detallesPlato();
          	}
      	}
 		return null;
      }
-     public String imprimirPedidosVerificados(){
+     public String imprimirPedidosVerificadosPlato(){
+    	 for(Pedido pedido : getPedidosVerificados()){
+     		for(Plato plato : pedido.getPlatos()){
+     			return plato.detallesPlato();
+         	}
+     	}
+		return null;
+     }
+     public String imprimirPedidosPlato(){
     	 for(Pedido pedido : getPedidosVerificados()){
      		for(Plato plato : pedido.getPlatos()){
      			return plato.detallesPlato();
@@ -131,22 +145,20 @@ public class Pedido implements Serializable{
     	 return this.platos;
      }
      
-     
-
      @Override
      public String toString() {
+    	 String mesaStr = (mesa != null) ? mesa.toString() : "N/A";
          String meseroStr = (mesero != null) ? mesero.toString() : "N/A";
          String domiciliarioStr = (domiciliario != null) ? domiciliario.toString() : "N/A";
 
-         return "Pedido{" +
-                 "mesa=" + mesa +
-                 ", cocinero=" + cocinero +
-                 ", mesero=" + meseroStr +
-                 ", domiciliario=" + domiciliarioStr +
-                 ", platos=" + platos +
-                 ", verificado=" + verificado +
-                 ", tipoPedido='" + tipoPedido + '\'' +
-                 '}';
+         return "mesa: " + mesa +
+                 "\n   cocinero: " + cocinero.toString() +
+                 "\n   mesero: " + meseroStr +
+                 "\n   domiciliario: " + domiciliarioStr +
+                 "\n   numero de platos: " + this.getPlatos().size()+ 
+                 "\n   platos: " + imprimirPlatos() +
+                 "\n   verificado: " + verificado +
+                 "\n   tipoPedido: " + tipoPedido ;
      }
 
 

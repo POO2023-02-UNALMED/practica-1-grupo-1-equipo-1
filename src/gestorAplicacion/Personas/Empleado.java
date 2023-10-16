@@ -1,8 +1,13 @@
 package gestorAplicacion.Personas;
 import java.util.Date;
+
+import gestorAplicacion.Cosas.Material;
+import gestorAplicacion.Cosas.Plato;
+import gestorAplicacion.Cosas.Restaurante;
+import gestorAplicacion.Cosas.Turno;
+
 import java.util.ArrayList;
 import java.io.Serializable;
-import gestorAplicacion.Cosas.*;
 
 public class Empleado extends Persona implements Serializable{
 	private static final long serialVersionUID=1L;
@@ -19,6 +24,7 @@ public class Empleado extends Persona implements Serializable{
         this.restaurante = restaurante;
         this.turno = turno;
         this.setFechaContratacion(new Date()); // Guarda la fecha actual
+        restaurante.contratarEmpleado(this);
     }
     
     
@@ -111,5 +117,9 @@ public class Empleado extends Persona implements Serializable{
 	//metodo que permite reportar daños a un material no organico
 	public void reportarDano(Material.Tipo material,int cantidad) {
 		this.restaurante.botarMaterial(material, cantidad);
+	}
+	
+	public String toString(){
+		return "Nombre: " + getNombre() + " " + turno;
 	}
 }
