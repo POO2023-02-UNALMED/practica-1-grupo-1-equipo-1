@@ -21,6 +21,7 @@ import java.util.HashMap;
 import uiMain.Administrador;
 import gestorAplicacion.Cosas.Financia;
 import gestorAplicacion.Cosas.Material;
+import gestorAplicacion.Cosas.Material.Tipo;
 import gestorAplicacion.Cosas.Mesa;
 import gestorAplicacion.Cosas.Pedido;
 import gestorAplicacion.Cosas.Plato;
@@ -38,6 +39,7 @@ public class Deserializador {
 		deserializarEmpleados(gestor, new File("src\\baseDatos\\temp\\Empleados.txt"));
 		deserializarMesas(gestor, new File("src\\baseDatos\\temp\\Mesas.txt"));
 		deserializarEmpleadoDelMes(gestor, new File("src\\baseDatos\\temp\\EmpleadoDelMes.txt"));
+		deserializarInventario(gestor,  new File("src\\baseDatos\\temp\\Inventario.txt"));
 	}
 	public static void deserializarClientes(Gestor gestor, File ruta) {
 		try {
@@ -71,6 +73,15 @@ public class Deserializador {
 			FileInputStream fis=new FileInputStream(ruta);
 			ObjectInputStream ois=new ObjectInputStream(fis);
 			gestor.setEmpleadoDelMes((Empleado) ois.readObject());
+		}catch(IOException | ClassNotFoundException e){
+			System.out.println("Error en la deserialización "+e);
+		}
+	}
+	public static void deserializarInventario(Gestor gestor, File ruta) {
+		try {
+			FileInputStream fis=new FileInputStream(ruta);
+			ObjectInputStream ois=new ObjectInputStream(fis);
+			gestor.setInventario((Map<Tipo,Material>) ois.readObject());
 		}catch(IOException | ClassNotFoundException e){
 			System.out.println("Error en la deserialización "+e);
 		}

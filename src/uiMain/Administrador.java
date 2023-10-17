@@ -37,6 +37,9 @@ public class Administrador implements Menu {
     	restaurante.setEmpleados(gestor.getEmpleados());
     	restaurante.setMesas(gestor.getMesas());
     	restaurante.setEmpleadoDelMes(gestor.getEmpleadoDelMes());
+    	restaurante.setInventario(gestor.getInventario());
+    	
+    	
     	
     	ArrayList<Plato> menu=Menu.crearMenu();
     	Material res = new Material(Material.Tipo.RES, 100, 100);
@@ -55,6 +58,8 @@ public class Administrador implements Menu {
     	Material pescados = new Material(Material.Tipo.PESCADOS ,200 ,300 );
     	Material papas = new Material(Material.Tipo.PAPAS ,200 ,100 );
     	Material huevos = new Material(Material.Tipo.PAPAS ,200 ,100 );
+    	
+    	
     	
         // Pedido
         Pedido pedido = new Pedido();
@@ -340,12 +345,17 @@ public class Administrador implements Menu {
     						int precio=(int) readLong();
     						System.out.print("Ingrese la fecha de vencimiento del ingrediente en formato dia-mes-año: ");
     						System.out.println("\n-------------------------------------------------------");
-    						String fechaInput=scan.nextLine();
-    						DateTimeFormatter formato=DateTimeFormatter.ofPattern("dd-MM-yyyy");
-    						LocalDate fecha=LocalDate.parse(fechaInput,formato);
-    						restaurante.comprarMaterial(ingredienteEnum,cantidad,precio,fecha);
-    						System.out.println("Se han comprado "+cantidad+" "+ingredienteEnum+" al precio de "+precio+" que vencen el "+fecha);
-    						break;
+    						String vence = readln();
+							if (Reserva.revisarFecha(vence)) {
+								restaurante.comprarMaterial(ingredienteEnum,cantidad,precio,vence);
+								System.out.println("Se han comprado "+cantidad+" "+ingredienteEnum+" al precio de "+precio+" que vencen el "+vence);
+							}
+							else {
+								System.out.println("La fecha ingresada no es válida, por favor intente con una fecha posterior a hoy");
+							}
+							break;
+    				
+    				
     					case 2: 
     						System.out.println("-------------------------------------------------------");
     						mostrarIngredientes(restaurante);

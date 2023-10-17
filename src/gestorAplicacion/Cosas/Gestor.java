@@ -21,22 +21,12 @@ import gestorAplicacion.Personas.Empleado;
 public class Gestor implements Serializable{
 	private static final long serialVersionUID=1L;
 	private Restaurante restaurante=new Restaurante();
-	private List<Cliente> clientes=restaurante.getClientes();
-	private List<Empleado> empleados=restaurante.getEmpleados();
-	private List<Mesa> mesas=restaurante.getMesas();
-	private Empleado empMes=restaurante.getEmpleadoDelMes();
-	private List<Reserva> reservas = new ArrayList<>();
-	private Map<Tipo,Material> inventario=restaurante.getInventario();
+	private List<Cliente> clientes=new ArrayList<>();
+	private List<Empleado> empleados=new ArrayList<>();
+	private List<Mesa> mesas=new ArrayList<>();
+	private Empleado empMes;
+	private Map<Tipo,Material> inventario=new HashMap<>();
 	
-	public List<Reserva> getReservas(){
-		return reservas;
-	}
-	/*public void setReservas(ArrayList<Reserva> reservas) {
-		ArrayList<Mesa> mesas1 = mesas;
-		for (Mesa mesa:mesas1) {
-			reservas.add(Reserva mesa.getReserva());
-		}
-	}*/
 	
 	public Empleado getEmpleadoDelMes() {
 		return this.empMes;
@@ -75,6 +65,29 @@ public class Gestor implements Serializable{
 	}
 	public  Restaurante getRestaurante() {
 		return this.restaurante;
+	}
+
+	public Map<Tipo,Material> getInventario() {
+		return this.inventario;
+	}
+	public void setInventario(Map<Tipo,Material> inv) {
+		this.inventario=inv;
+	}
+	public Cliente nuevoCliente(String nombre,long cedula) {
+		Cliente nuevoCliente=new Cliente(nombre,cedula);
+		clientes.add(nuevoCliente);
+		return nuevoCliente;
+	}
+	public Empleado nuevoEmpleado(String nombre,String puesto,Restaurante restaurante,Turno turno) {
+		Empleado nuevoEmpleado = new Empleado(nombre,puesto,restaurante,turno);
+		empleados.add(nuevoEmpleado);
+		return nuevoEmpleado;
+	}
+	
+	public Mesa nuevaMesa(int capacidad,int numeromesa) {
+		Mesa nuevaMesa= new Mesa(capacidad,numeromesa);
+		mesas.add(nuevaMesa);
+		return nuevaMesa;
 	}
 	
 }

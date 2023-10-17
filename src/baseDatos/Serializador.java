@@ -28,6 +28,7 @@ public class Serializador {
 		serializarEmpleados(gestor, new File("src\\baseDatos\\temp\\Empleados.txt"));
 		serializarMesas(gestor, new File("src\\baseDatos\\temp\\Mesas.txt"));
 		serializarEmpleadoDelMes(gestor, new File("src\\baseDatos\\temp\\EmpleadoDelMes.txt"));
+		serializarInventario(gestor,  new File("src\\baseDatos\\temp\\Inventario.txt"));
 	}
 	
 	public static void serializarClientes(Gestor gestor,File ruta) {
@@ -83,7 +84,7 @@ public class Serializador {
 			PrintWriter pw=new PrintWriter(ruta);
 			FileOutputStream fos=new FileOutputStream(ruta);
 			ObjectOutputStream oos=new ObjectOutputStream(fos);
-			oos.writeObject(gestor.getEmpleadoDelMes());
+			oos.writeObject(gestor.getInventario());
 			oos.close();
 			fos.close();
 		}catch(IOException e) {

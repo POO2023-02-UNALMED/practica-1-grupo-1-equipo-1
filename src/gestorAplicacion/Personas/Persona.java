@@ -1,8 +1,11 @@
 package gestorAplicacion.Personas;
 
 public abstract class Persona {
-	private String nombre;
+	protected String nombre;
 	
+	public Persona() {
+		
+	}
     public Persona(String nombre) {
         this.nombre = nombre;
     }
