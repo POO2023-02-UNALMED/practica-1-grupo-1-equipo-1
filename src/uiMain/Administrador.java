@@ -37,6 +37,7 @@ public class Administrador implements Menu {
     	restaurante.setEmpleados(gestor.getEmpleados());
     	restaurante.setMesas(gestor.getMesas());
     	restaurante.setEmpleadoDelMes(gestor.getEmpleadoDelMes());
+    	restaurante.setInventario(gestor.getInventario());
     	
     	ArrayList<Plato> menu=Menu.crearMenu();
     	Material res = new Material(Material.Tipo.RES, 100, 100);

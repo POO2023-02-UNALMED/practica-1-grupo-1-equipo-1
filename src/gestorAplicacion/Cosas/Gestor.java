@@ -76,5 +76,12 @@ public class Gestor implements Serializable{
 	public  Restaurante getRestaurante() {
 		return this.restaurante;
 	}
+
+	public Map<Tipo,Material> getInventario() {
+		return this.inventario;
+	}
+	public void setInventario(Map<Tipo,Material> inv) {
+		this.inventario=inv;
+	}
 	
 }

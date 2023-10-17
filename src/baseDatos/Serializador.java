@@ -83,7 +83,7 @@ public class Serializador {
 			PrintWriter pw=new PrintWriter(ruta);
 			FileOutputStream fos=new FileOutputStream(ruta);
 			ObjectOutputStream oos=new ObjectOutputStream(fos);
-			oos.writeObject(gestor.getEmpleadoDelMes());
+			oos.writeObject(gestor.getInventario());
 			oos.close();
 			fos.close();
 		}catch(IOException e) {
