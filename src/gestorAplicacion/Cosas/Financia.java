@@ -19,21 +19,21 @@ public class Financia implements Serializable{
 	private double ganancias;
 	private double liquidacion;
 	private double perdidas;
+	 private Restaurante restaurante;
 	
-	public Financia(double presupuesto, double gastosMateriales, double pagosEmpleados, double ganancias, double liquidacion, double perdidas) {
+	public Financia(Restaurante restaurante, double presupuesto, double gastosMateriales, double pagosEmpleados, double ganancias, double liquidacion, double perdidas) {
 	this.presupuesto = presupuesto;
 	this.gastosMateriales = gastosMateriales;
 	this.pagosEmpleados = pagosEmpleados;
 	this.ganancias = ganancias;
 	this.liquidacion = liquidacion;
 	this.perdidas = perdidas;
+	this.restaurante = restaurante;
 	
 	}
 	 public double getLiquidacion() {
 	        return this.liquidacion;
 	    }
-
-	 
 	 public double getGastosMateriales() {
 	        return this.gastosMateriales;
 	    }
@@ -47,9 +47,9 @@ public class Financia implements Serializable{
 		 
 	    }
 	//Calcular Gasto de los Materiales
-	 public double gastosMateriales(Restaurante restaurante) {
+	 public double gastosMateriales() {
 		    double totalGastosMateriales = 0;
-		    for (Pedido pedido : restaurante.getPedidos()) {
+		    for (Pedido pedido : Pedido.getPedidos()) {
 		        for (Plato plato : pedido.getPlatos()) {
 		            for (Map.Entry<Material, Integer> entrada : plato.getIngredientes().entrySet()) {
 		                Material material = entrada.getKey();
