@@ -21,6 +21,7 @@ public class Restaurante implements Serializable {
     private List<Cliente> listadoClientes=new ArrayList<>();
     private List<Mesa> listadoMesas=new ArrayList<>();
     private Map<Tipo, Material> inventario=new HashMap<>();
+    private List<Pedido> pedidos=new ArrayList<>();;
     
     //Constructores, que se invocan uno a otro, dependiendo si los restaurantes se inicializan con listas o no
     public Restaurante () {
@@ -164,7 +165,10 @@ public class Restaurante implements Serializable {
     	}
     }
     //Metodos gestion de inventario
+
+
     public void comprarMaterial (Material.Tipo tipo, int cantidad, int precio, String fecha) {
+
         if (this.inventario.containsKey(tipo)) {
         	Material materialComprado = this.inventario.get(tipo);
         	LocalDate vence = Reserva.deStringaFecha(fecha);
@@ -215,7 +219,9 @@ public class Restaurante implements Serializable {
     	}
     	return valorTotal;
     }
-    
+    public List<Pedido> getPedidos() {
+        return this.pedidos;
+    }
     //metodo para decir si una accion no puede ser ejecutada
     public String operacionInvalida() {
     	return "Operacion Inválida";
