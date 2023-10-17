@@ -12,21 +12,18 @@ import gestorAplicacion.Personas.Empleado;
 
 public class Financia implements Serializable{
 	private static final long serialVersionUID=1L;
-	private Restaurante restaurante;
+	
 	private double presupuesto;
 	private double gastosMateriales;
 	private double pagosEmpleados;
-	private double compraMateriales;
 	private double ganancias;
 	private double liquidacion;
 	private double perdidas;
 	
-	public Financia(Restaurante restaurante,double presupuesto, double gastosMateriales, double pagosEmpleados, double compraMateriales, double ganancias, double liquidacion, double perdidas) {
-	this.restaurante=restaurante;
+	public Financia(double presupuesto, double gastosMateriales, double pagosEmpleados, double ganancias, double liquidacion, double perdidas) {
 	this.presupuesto = presupuesto;
 	this.gastosMateriales = gastosMateriales;
 	this.pagosEmpleados = pagosEmpleados;
-	this.compraMateriales = compraMateriales;
 	this.ganancias = ganancias;
 	this.liquidacion = liquidacion;
 	this.perdidas = perdidas;
@@ -40,36 +37,47 @@ public class Financia implements Serializable{
 	 public double getGastosMateriales() {
 	        return this.gastosMateriales;
 	    }
+	 
+	 public double getPagosEmpleados() {
+	        return this.pagosEmpleados;
+	 }
 
 	 public double getPerdidas() {
 		 return this.perdidas;
+		 
 	    }
 	//Calcular Gasto de los Materiales
-	public void gastosMateriales(Restaurante restaurante) {
-        for (Material.Tipo tipo : restaurante.getInventario().keySet()) {
-            Material material = restaurante.getInventario().get(tipo);
-            this.gastosMateriales += material.getPrecioUnitario() * material.getCantidad();
-        }
-    }
+	 public double gastosMateriales(Restaurante restaurante) {
+		    double totalGastosMateriales = 0;
+		    for (Pedido pedido : restaurante.getPedidos()) {
+		        for (Plato plato : pedido.getPlatos()) {
+		            for (Map.Entry<Material, Integer> entrada : plato.getIngredientes().entrySet()) {
+		                Material material = entrada.getKey();
+		                int cantidadUtilizada = entrada.getValue();
+		                totalGastosMateriales += material.getPrecioUnitario() * cantidadUtilizada;
+		            }
+		        }
+		    }
+		    this.gastosMateriales = totalGastosMateriales;
+		    return totalGastosMateriales;
+		}
 
 	// Calcula el pago de la liquidacion de un empleado del restaurante
-	
-	public double liquidacion(Empleado empleado) {
-        double totalSalario = 0;
-        double pagoHoraExtra = 1.5; // Supongamos que las horas extras se pagan a 1.5 veces el salario regular por hora
-        for(Turno turno : empleado.getTurnos()){
-            if (turno.isCompletado() && !turno.isCobrado()){
-                totalSalario += turno.getSalario();
-                int horasExtras = turno.HorasExtras();
-                if (horasExtras > 0) {
-                    totalSalario += horasExtras * (turno.getSalario() / turno.getHoras()) * pagoHoraExtra;
-                }
-                turno.setCobrado(true);
-            }
-        }
-        return totalSalario;
-    }
-	
+	public double LiquidacionEmpleado(Empleado empleado) {
+	    double totalPago = 0;
+	    for (Turno turno : empleado.getTurnos()) {
+	        if (turno.isCompletado() && !turno.isCobrado()) {
+	            totalPago += turno.getSalario();
+	            int horasExtras = turno.HorasExtras();
+	            if (horasExtras > 0) {
+	                double pagoHoraExtra = 1.5; // Supongamos que las horas extras se pagan a 1.5 veces el salario regular por hora
+	                totalPago += horasExtras * (empleado.getSalario() / turno.getHoras()) * pagoHoraExtra;
+	            }
+	            turno.setCobrado(true);
+	        }
+	    }
+	    return totalPago;
+	}
 	// Calcula las perdidas del inventario  del restaurante
 	public void perdidas(Restaurante restaurante) {
         for (Material.Tipo tipo : restaurante.getInventario().keySet()) {
@@ -79,16 +87,22 @@ public class Financia implements Serializable{
     }
 	
 	//Calcular Pagos de los Empleados
-	public void calcularTotalPagosEmpleados() {
-        this.pagosEmpleados = 0;
-        for (Empleado empleado : restaurante.getEmpleados()) {
-            for(Turno turno : empleado.getTurnos()){
-                if (turno.isCompletado() && !turno.isCobrado()){
-                    this.pagosEmpleados += turno.getSalario();
-                    turno.setCobrado(true);
-                }
-            }
-        }
-    }
+	public double pagosEmpleados(Restaurante restaurante) {
+	    double totalPago = 0;
+	    for (Empleado empleado : restaurante.getEmpleados()) {
+	        totalPago += empleado.getSalario();
+	        for (Turno turno : empleado.getTurnos()) {
+	            if (turno.isCompletado() && !turno.isCobrado()) {
+	                int horasExtras = turno.HorasExtras();
+	                if (horasExtras > 0) {
+	                    double pagoHoraExtra = 1.5; // Supongamos que las horas extras se pagan a 1.5 veces el salario regular por hora
+	                    totalPago += horasExtras * (empleado.getSalario() / turno.getHoras()) * pagoHoraExtra;
+	                }
+	            }
+	        }
+	    }
+	    this.pagosEmpleados = totalPago;
+	    return totalPago;
+	}
 	
 }
