@@ -28,6 +28,7 @@ public class Serializador {
 		serializarEmpleados(gestor, new File("src\\baseDatos\\temp\\Empleados.txt"));
 		serializarMesas(gestor, new File("src\\baseDatos\\temp\\Mesas.txt"));
 		serializarEmpleadoDelMes(gestor, new File("src\\baseDatos\\temp\\EmpleadoDelMes.txt"));
+		serializarInventario(gestor,  new File("src\\baseDatos\\temp\\Inventario.txt"));
 	}
 	
 	public static void serializarClientes(Gestor gestor,File ruta) {

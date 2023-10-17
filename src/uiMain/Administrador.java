@@ -39,6 +39,8 @@ public class Administrador implements Menu {
     	restaurante.setEmpleadoDelMes(gestor.getEmpleadoDelMes());
     	restaurante.setInventario(gestor.getInventario());
     	
+    	
+    	
     	ArrayList<Plato> menu=Menu.crearMenu();
     	Material res = new Material(Material.Tipo.RES, 100, 100);
     	Material especias = new Material(Material.Tipo.ESPECIAS, 100, 50);
@@ -56,6 +58,8 @@ public class Administrador implements Menu {
     	Material pescados = new Material(Material.Tipo.PESCADOS ,200 ,300 );
     	Material papas = new Material(Material.Tipo.PAPAS ,200 ,100 );
     	Material huevos = new Material(Material.Tipo.PAPAS ,200 ,100 );
+    	
+    	
     	
         // Pedido
         Pedido pedido = new Pedido();

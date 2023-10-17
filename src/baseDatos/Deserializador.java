@@ -39,6 +39,7 @@ public class Deserializador {
 		deserializarEmpleados(gestor, new File("src\\baseDatos\\temp\\Empleados.txt"));
 		deserializarMesas(gestor, new File("src\\baseDatos\\temp\\Mesas.txt"));
 		deserializarEmpleadoDelMes(gestor, new File("src\\baseDatos\\temp\\EmpleadoDelMes.txt"));
+		deserializarInventario(gestor,  new File("src\\baseDatos\\temp\\Inventario.txt"));
 	}
 	public static void deserializarClientes(Gestor gestor, File ruta) {
 		try {
