@@ -15,32 +15,33 @@ public class Plato implements Serializable{
     private int tiempoPreparacion;
     public static final int TIEMPO_DOMICILIO_MINUTOS = 30;
     private Map<Material, Integer> ingredientes;
+    private boolean verificadoInsumos;
 
     public Plato(String nombre, int precio, String desc, int tiempoPreparacion, Map<Material, Integer> ingredientes) {
         this.nombre = nombre;
         this.precio = precio;
         this.tiempoPreparacion = tiempoPreparacion;
         this.ingredientes = ingredientes;
-        this.descripcion = desc;    
+        this.descripcion = desc;
+        this.verificadoInsumos=false;
        }
     public Plato(String nombre, int precio, int tiempoPreparacion, Map<Material, Integer> ingredientes) {
     	this(nombre, precio, "Platillo simple", tiempoPreparacion,ingredientes);
     }
-    public boolean verificarInsumos(Plato plato){
-    	boolean verificado = false;
+    public Plato() {
+	}
+	public boolean verificarInsumos(Plato plato){
 		for(Entry<Material, Integer> entrada : plato.getIngredientes().entrySet()){
 			Material ingrediente = entrada.getKey();
 			Integer cantidadPlato = entrada.getValue();
 			if(ingrediente.getCantidad() < cantidadPlato){
-				verificado = false;
+				//se lo deja en false
 			}
 			if(ingrediente.getCantidad() >= cantidadPlato){
-				verificado = true;
-				
+				setVerificadoInsumos(true);
 			}
 		}
-    	return verificado;
-    	
+		return verificadoInsumos;
     }
     
     public List<Tipo> mostrarIngredientes(){
@@ -100,6 +101,12 @@ public class Plato implements Serializable{
 
 	public void setTiempoPreparacion(int tiempoPreparacion) {
 		this.tiempoPreparacion = tiempoPreparacion;
+	}
+	public boolean isVerificadoInsumos() {
+		return verificadoInsumos;
+	}
+	public void setVerificadoInsumos(boolean verificadoInsumos) {
+		this.verificadoInsumos = verificadoInsumos;
 	}
 
 }

@@ -370,4 +370,28 @@ public class Restaurante implements Serializable {
 	public ArrayList<Pedido> getPedidos() {
 		return pedidos;
 	}
+	public  ArrayList<Plato>  veirificarMenu(ArrayList<Plato> menu) {
+		ArrayList<Plato> menuVerificado= new ArrayList<>();
+		for(Plato plato: menu){
+			if(plato.verificarInsumos(plato)){
+				menuVerificado.add(plato);
+			}
+		}
+		return menuVerificado;
+	}
+	public Reserva encontrarReserva(int numMesa) {
+	    for(Cliente cliente : listadoClientes){
+	        Reserva reserva = cliente.getReserva();
+	        if (reserva != null) {
+	            Mesa mesa = reserva.getMesa();
+	            if (mesa != null) {
+	                int numMesaReserva = mesa.getNumeroMesa();
+	                if(numMesaReserva == numMesa){
+	                    return reserva;
+	                }
+	            }
+	        }
+	    }
+	    return null;
+	}
 }

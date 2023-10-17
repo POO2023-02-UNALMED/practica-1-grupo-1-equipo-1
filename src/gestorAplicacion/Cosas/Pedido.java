@@ -3,13 +3,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.io.Serializable;
 import gestorAplicacion.Personas.Empleado;
+import uiMain.Menu;
 
-public class Pedido implements Serializable{
+public class Pedido implements Serializable,Menu{
 	private static final long serialVersionUID=1L;
     private Mesa mesa;
     private Empleado cocinero;
     private Empleado mesero;
     private Empleado domiciliario;
+    private Reserva reserva;
     private ArrayList<Plato> platos;
     private Restaurante restaurante;
     // Segun este atributo se van a mostrar y se van a dividir
@@ -30,6 +32,11 @@ public class Pedido implements Serializable{
 	    this(mesa, tipoPedido, cocinero, mesero, new ArrayList<Plato>(), restaurante);
 	}
 	
+	public Pedido (Mesa mesa,String tipoPedido, Empleado cocinero, Empleado mesero, ArrayList<Plato> platos, Restaurante restaurante, Reserva reserva) {
+	    this(null, tipoPedido, cocinero, null, platos, restaurante);
+	    this.reserva=reserva;
+	}
+	
 	// Estos constructores estan para si se les da unos platos para inicializarlo
 	public Pedido (String tipoPedido, Empleado cocinero, Empleado domiciliario, ArrayList<Plato> platos, Restaurante restaurante) {
 	    this(null, tipoPedido, cocinero, null, platos, restaurante);
@@ -46,18 +53,13 @@ public class Pedido implements Serializable{
 	    this.restaurante = restaurante;
 	    restaurante.agregarPedido(this);
 	}
-    // Verificar pedido
+
+	// Verificar pedido
      public boolean verificarPedido(Pedido pedido){
-     	boolean verificado_insumos = false;
      	// se inicializa como true el domiciliario ya que ste se utiliza para pedidos de tipo domiciliario
      	boolean verificado_domiciliario = false;
      	boolean verificado_cocinero = false;
      	for(Plato plato : pedido.getPlatos()){
-     		if (plato.verificarInsumos(plato)){
-     			verificado_insumos = true;
-     			}else if(true){
-     				break;
-     		}
      		if (pedido.cocinero.verificarTiempo(plato.getTiempoPreparacion())){
      			verificado_cocinero = true;
      			pedido.setVerificado(true);
@@ -68,13 +70,13 @@ public class Pedido implements Serializable{
      			if(pedido.domiciliario.verificarTiempo()){
      				verificado_domiciliario=true;
      				pedido.setVerificado(true);
-     				return (verificado_insumos && verificado_cocinero && verificado_domiciliario);
+     				return (verificado_cocinero && verificado_domiciliario);
      				}else if(true){
-     					return (verificado_insumos && verificado_cocinero && verificado_domiciliario);
+     					return (verificado_cocinero && verificado_domiciliario);
      					}
      		}
      		}
-     	return (verificado_insumos && verificado_cocinero );
+     	return (verificado_cocinero );
      	}
     
    // Metdos para Administrador
@@ -158,6 +160,8 @@ public class Pedido implements Serializable{
     	 String mesaStr = (mesa != null) ? mesa.toString() : "N/A";
          String meseroStr = (mesero != null) ? mesero.toString() : "N/A";
          String domiciliarioStr = (domiciliario != null) ? domiciliario.toString() : "N/A";
+         String resumen = (reserva != null) ? reserva.resumenReserva() : "N/A";
+         
 
          return "mesa: " + mesa +
                  "\n   cocinero: " + cocinero.toString() +
@@ -165,6 +169,7 @@ public class Pedido implements Serializable{
                  "\n   domiciliario: " + domiciliarioStr +
                  "\n   numero de platos: " + this.getPlatos().size()+ 
                  "\n   platos: " + imprimirPlatos() +
+                 "\n   Este pedido tiene esta reserva: " + reserva.resumenReserva() +
                  "\n   verificado: " + verificado +
                  "\n   tipoPedido: " + tipoPedido ;
      }
