@@ -46,6 +46,13 @@ public class Financia implements Serializable{
 		 return this.perdidas;
 		 
 	    }
+	 
+	 //Calcular el presupuesto
+	 public double Presupuesto() {
+		    double totalGastos = gastosMateriales() + pagosEmpleados(restaurante);
+		    this.presupuesto = this.presupuesto - totalGastos;
+		    return this.presupuesto;
+		}
 	//Calcular Gasto de los Materiales
 	 public double gastosMateriales() {
 		    double totalGastosMateriales = 0;
@@ -63,23 +70,28 @@ public class Financia implements Serializable{
 		}
 
 	// Calcula el pago de la liquidacion de un empleado del restaurante
-	public double LiquidacionEmpleado(Empleado empleado) {
-	    double totalPago = 0;
-	    for (Turno turno : empleado.getTurnos()) {
-	        if (turno.isCompletado() && !turno.isCobrado()) {
-	            totalPago += turno.getSalario();
-	            int horasExtras = turno.HorasExtras();
-	            if (horasExtras > 0) {
-	                double pagoHoraExtra = 1.5; // Supongamos que las horas extras se pagan a 1.5 veces el salario regular por hora
-	                totalPago += horasExtras * (empleado.getSalario() / turno.getHoras()) * pagoHoraExtra;
-	            }
-	            turno.setCobrado(true);
-	        }
-	    }
-	    return totalPago;
-	}
+	 public double Liquidacion(String nombreEmpleado) {
+		    double totalPago = 0;
+		    for (Empleado empleado : restaurante.getEmpleados()) {
+		        if (empleado.getNombre().equals(nombreEmpleado)) {
+		            for (Turno turno : empleado.getTurnos()) {
+		                if (turno.isCompletado() && !turno.isCobrado()) {
+		                    totalPago += turno.getSalario();
+		                    int horasExtras = turno.HorasExtras();
+		                    if (horasExtras > 0) {
+		                        double pagoHoraExtra = 1.5; // Supongamos que las horas extras se pagan a 1.5 veces el salario regular por hora
+		                        totalPago += horasExtras * (empleado.getSalario() / turno.getHoras()) * pagoHoraExtra;
+		                    }
+		                    turno.setCobrado(true);
+		                }
+		            }
+		            break;
+		        }
+		    }
+		    return totalPago;
+		}
 	// Calcula las perdidas del inventario  del restaurante
-	public void perdidas(Restaurante restaurante) {
+	 public void perdidas(Restaurante restaurante) {
         for (Material.Tipo tipo : restaurante.getInventario().keySet()) {
             Material material = restaurante.getInventario().get(tipo);
             this.perdidas += material.getPrecioUnitario() * material.getCantidad();

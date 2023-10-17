@@ -434,8 +434,29 @@ public class Administrador implements Menu {
     		}while(opcionInv!=4);break;
     			
     			
-  
-    		case 5:break;
+  //funcionalidad financiera
+    		
+    		case 5:
+    			do{
+        			System.out.println("¿Que deseas hacer?");
+        			System.out.println("1. Consultar el Presupuesto Total de Restaurante");
+        			System.out.println("2. Consultar los Gastos del Restaurante");
+        			System.out.println("3. Consultar los Perdidas del Restaurante");
+        			System.out.println("4. Consultar las Ganancias del Restaurante");
+        			System.out.println("5. Calcular la liquidacion de un Empleado");
+        			System.out.print("Escribe el número de la opción que necesitas: ");
+        			
+        			opcion=(int) readLong();
+        			
+        			switch(opcion) {
+        			
+        			case 1:
+        				//double presupuesto = Financia.getPresupuesto();
+    	    			//System.out.println("\nEl presupuesto Total del Restaurante es: " + presupuesto);
+    			
+    			
+    			
+    			break;
     		case 6: salirDelSistema(gestor);
 			break;
     		}
