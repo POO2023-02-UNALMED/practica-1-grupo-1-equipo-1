@@ -56,7 +56,7 @@ public class Financia implements Serializable{
 	//Calcular Gasto de los Materiales
 	 public double gastosMateriales() {
 		    double totalGastosMateriales = 0;
-		    for (Pedido pedido : Pedido.getPedidos()) {
+		    for (Pedido pedido : restaurante.getPedidos()) {
 		        for (Plato plato : pedido.getPlatos()) {
 		            for (Map.Entry<Material, Integer> entrada : plato.getIngredientes().entrySet()) {
 		                Material material = entrada.getKey();

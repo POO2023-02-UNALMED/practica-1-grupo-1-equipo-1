@@ -34,7 +34,6 @@ public class tests {
         // Verificar el pedido
         boolean resultado1 = pedidoDomicilio.verificarPedido(pedidoDomicilio);
         boolean resultado2 = pedidoRestaurante.verificarPedido(pedidoRestaurante);
-        System.out.println("pillelos");
         System.out.println(pedidoDomicilio.imprimirPedidosVerificadosPlato());
         System.out.println("Resultado de la verificación domicilio: " + resultado1 + " Resultado de la verificación restaurante: " + resultado2);
     }

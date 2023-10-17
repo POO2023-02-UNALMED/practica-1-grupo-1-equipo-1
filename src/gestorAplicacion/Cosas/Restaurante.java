@@ -20,6 +20,7 @@ public class Restaurante implements Serializable {
     private List<Empleado> listadoEmpleados=new ArrayList<>();
     private List<Cliente> listadoClientes=new ArrayList<>();
     private List<Mesa> listadoMesas=new ArrayList<>();
+    private ArrayList<Pedido> pedidos= new ArrayList<>();
     private Map<Tipo, Material> inventario=new HashMap<>();
     
     //Constructores, que se invocan uno a otro, dependiendo si los restaurantes se inicializan con listas o no
@@ -128,9 +129,9 @@ public class Restaurante implements Serializable {
 
     //Metodos funcionalidades
     //busca el objeto empleado por el nombre
-    public Empleado buscarEmpleado(String nombre){
+    public Empleado buscarEmpleado(String nombre, String puesto){
     	for(Empleado empleado : listadoEmpleados){
-    		if((empleado.getNombre()).equals(nombre)){
+    		if((empleado.getNombre()).equals(nombre) && (empleado.getPuesto()).equals(puesto)){
     			return empleado;
     		}
     	}
@@ -363,4 +364,10 @@ public class Restaurante implements Serializable {
             }
         }
     }*/
+	public void agregarPedido(Pedido pedido) {
+		pedidos.add(pedido);
+	}
+	public ArrayList<Pedido> getPedidos() {
+		return pedidos;
+	}
 }

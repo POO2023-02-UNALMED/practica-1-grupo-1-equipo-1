@@ -1,6 +1,6 @@
 package gestorAplicacion.Cosas;
 import java.util.ArrayList;
-
+import java.util.List;
 import java.io.Serializable;
 import gestorAplicacion.Personas.Empleado;
 
@@ -10,8 +10,6 @@ public class Pedido implements Serializable{
     private Empleado cocinero;
     private Empleado mesero;
     private Empleado domiciliario;
-    private ArrayList<Pedido> pedidosVerificados = new ArrayList<>();
-    private static ArrayList<Pedido> pedidos = new ArrayList<>();
     private ArrayList<Plato> platos;
     private Restaurante restaurante;
     // Segun este atributo se van a mostrar y se van a dividir
@@ -39,7 +37,6 @@ public class Pedido implements Serializable{
 	}
 
 	public Pedido(Mesa mesa, String tipoPedido, Empleado cocinero, Empleado mesero, ArrayList<Plato> platos, Restaurante restaurante) {
-	    Pedido.pedidos.add(this);
 	    this.mesa = mesa;
 	    this.tipoPedido = tipoPedido;
 	    this.cocinero = cocinero;
@@ -47,6 +44,7 @@ public class Pedido implements Serializable{
 	    this.platos = platos;
 	    this.verificado = false;
 	    this.restaurante = restaurante;
+	    restaurante.agregarPedido(this);
 	}
     // Verificar pedido
      public boolean verificarPedido(Pedido pedido){
@@ -84,7 +82,7 @@ public class Pedido implements Serializable{
      
      public String imprimirPlatos(){
     	 int i = 0;
-    	 for (Pedido pedido: getPedidos()) {
+    	 for (Pedido pedido: this.restaurante.getPedidos()) {
     		 for(Plato plato : pedido.getPlatos()){
     			 i+=1;
     			 return "\n   "+i+":"+plato.detallesPlato();
@@ -93,15 +91,18 @@ public class Pedido implements Serializable{
 		return null;
      }
      public String imprimirPedidosVerificadosPlato(){
-    	 for(Pedido pedido : getPedidosVerificados()){
+    	 for(Pedido pedido : this.restaurante.getPedidos()){
+    		 if(pedido.isVerificado()){
      		for(Plato plato : pedido.getPlatos()){
      			return plato.detallesPlato();
          	}
      	}
+    	 }
 		return null;
      }
+     
      public String imprimirPedidosPlato(){
-    	 for(Pedido pedido : getPedidosVerificados()){
+    	 for(Pedido pedido : this.restaurante.getPedidos()){
      		for(Plato plato : pedido.getPlatos()){
      			return plato.detallesPlato();
          	}
@@ -128,22 +129,26 @@ public class Pedido implements Serializable{
      }
      
      // Metodos de mostrar Pedidos
-     public  ArrayList<Pedido> getPedidos(){
-    	 return pedidos;
-     }
-     public  ArrayList<Pedido> getPedidosVerificados(){
-    	 return pedidosVerificados;
+     public  ArrayList<Pedido> getPedidos(Restaurante restaurante){
+    	 ArrayList<Pedido> PedidosSinVerificar=new ArrayList<>();
+    	 for(Pedido pedido: restaurante.getPedidos()) {
+    		 if(!pedido.isVerificado()){
+    			 PedidosSinVerificar.add(pedido);
+    		 }
+    	 }
+    	 return PedidosSinVerificar;
      }
      
-     public void actualizarPedidos() {
-    	    for (int i = pedidos.size() - 1; i >= 0; i--) {
-    	        Pedido pedido = pedidos.get(i);
-    	        if (pedido.isVerificado()) {
-    	            pedidosVerificados.add(pedido);
-    	            pedidos.remove(i);
-    	        }
-    	    }
-    	}
+     
+     public  ArrayList<Pedido> getPedidosVerificados(Restaurante restaurante){
+    	 ArrayList<Pedido> PedidosVerificados=new ArrayList<>();
+    	 for(Pedido pedido: restaurante.getPedidos()) {
+    		 if(pedido.isVerificado()){
+    			 PedidosVerificados.add(pedido);
+    		 }
+    	 }
+    	 return PedidosVerificados;
+     }
      public  ArrayList<Plato> getPlatos(){
     	 return this.platos;
      }

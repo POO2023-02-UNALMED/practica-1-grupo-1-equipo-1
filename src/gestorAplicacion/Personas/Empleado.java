@@ -131,6 +131,6 @@ public class Empleado extends Persona implements Serializable{
 	}
 	
 	public String toString(){
-		return "Nombre: " + this.getNombre() + "\n " + this.turno+"\n";
+		return "Nombre: " + this.getNombre()+ " Puesto: "+ this.getPuesto() + "\n   " + this.turno+"\n";
 	}
 }
