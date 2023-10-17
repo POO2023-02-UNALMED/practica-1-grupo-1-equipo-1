@@ -164,18 +164,22 @@ public class Restaurante implements Serializable {
     	}
     }
     //Metodos gestion de inventario
-    public void comprarMaterial (Material.Tipo tipo, int cantidad, int precio, LocalDate fecha) {
+    public void comprarMaterial (Material.Tipo tipo, int cantidad, int precio, String fecha) {
         if (this.inventario.containsKey(tipo)) {
         	Material materialComprado = this.inventario.get(tipo);
+        	LocalDate vence = Reserva.deStringaFecha(fecha);
             materialComprado.comprarMaterial(cantidad);
             materialComprado.cambiarPrecioUnitario(precio);
-            materialComprado.cambiarFechaVencimiento(fecha);
+            materialComprado.cambiarFechaVencimiento(vence);
+            
+            
         }
         else {
-        	Material nuevoMaterial=new Material(tipo,cantidad,precio,fecha);
+        	LocalDate vence = Reserva.deStringaFecha(fecha);
+        	Material nuevoMaterial=new Material(tipo,cantidad,precio,vence);
             inventario.put(tipo, nuevoMaterial);
             nuevoMaterial.cambiarPrecioUnitario(precio);
-            nuevoMaterial.cambiarFechaVencimiento(fecha);
+            nuevoMaterial.cambiarFechaVencimiento(vence);
         }
     }
     public void comprarMaterial (Material.Tipo tipo, int cantidad, int precio) {

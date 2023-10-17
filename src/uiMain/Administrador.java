@@ -340,12 +340,17 @@ public class Administrador implements Menu {
     						int precio=(int) readLong();
     						System.out.print("Ingrese la fecha de vencimiento del ingrediente en formato dia-mes-año: ");
     						System.out.println("\n-------------------------------------------------------");
-    						String fechaInput=scan.nextLine();
-    						DateTimeFormatter formato=DateTimeFormatter.ofPattern("dd-MM-yyyy");
-    						LocalDate fecha=LocalDate.parse(fechaInput,formato);
-    						restaurante.comprarMaterial(ingredienteEnum,cantidad,precio,fecha);
-    						System.out.println("Se han comprado "+cantidad+" "+ingredienteEnum+" al precio de "+precio+" que vencen el "+fecha);
-    						break;
+    						String vence = readln();
+							if (Reserva.revisarFecha(vence)) {
+								restaurante.comprarMaterial(ingredienteEnum,cantidad,precio,vence);
+								System.out.println("Se han comprado "+cantidad+" "+ingredienteEnum+" al precio de "+precio+" que vencen el "+vence);
+							}
+							else {
+								System.out.println("La fecha ingresada no es válida, por favor intente con una fecha posterior a hoy");
+							}
+							break;
+    				
+    				
     					case 2: 
     						System.out.println("-------------------------------------------------------");
     						mostrarIngredientes(restaurante);
