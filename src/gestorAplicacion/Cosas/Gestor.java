@@ -78,8 +78,8 @@ public class Gestor implements Serializable{
 		clientes.add(nuevoCliente);
 		return nuevoCliente;
 	}
-	public Empleado nuevoEmpleado(String nombre,String puesto,Restaurante restaurante,Turno turno) {
-		Empleado nuevoEmpleado = new Empleado(nombre,puesto,restaurante,turno);
+	public Empleado nuevoEmpleado(String nombre,Long cedula,String puesto,Restaurante restaurante,Turno turno) {
+		Empleado nuevoEmpleado = new Empleado(nombre,cedula,puesto,restaurante,turno);
 		empleados.add(nuevoEmpleado);
 		return nuevoEmpleado;
 	}

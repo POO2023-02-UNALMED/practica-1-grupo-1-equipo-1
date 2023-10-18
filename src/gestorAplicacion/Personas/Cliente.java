@@ -6,13 +6,13 @@ public class Cliente extends Persona implements Serializable{
 	private static final long serialVersionUID=1L;
 	private Reserva reserva;
     private Pedido pedido;
-	private Long cedula;
+
 	
 	public Cliente() {
 		
 	}
     public Cliente(String nombre, Long cedula) {
-		super(nombre);
+		super(nombre,cedula);
 		this.cedula = cedula;
 	}
 	public Reserva getReserva() {
@@ -27,10 +27,8 @@ public class Cliente extends Persona implements Serializable{
 	public void PedirComida(Pedido pedido) {
 		this.pedido = pedido;
 	}
-	public Long getCedula() {
-		return cedula;
+	public void puntuacion(Empleado e) {
+		
 	}
-	public void setCedula(Long cedula) {
-		this.cedula = cedula;
-	}
+	
 }

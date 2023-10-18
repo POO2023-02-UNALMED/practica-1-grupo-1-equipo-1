@@ -22,8 +22,8 @@ public class Empleado extends Persona implements Serializable{
     public Empleado() {
     	
     }
-    public Empleado(String nombre, String puesto,Restaurante restaurante, Turno turno){
-        super(nombre);
+    public Empleado(String nombre,Long cedula, String puesto,Restaurante restaurante, Turno turno){
+        super(nombre,cedula);
         this.puesto = puesto;
         this.restaurante = restaurante;
         this.turno = turno;
@@ -132,5 +132,8 @@ public class Empleado extends Persona implements Serializable{
 	
 	public String toString(){
 		return "Nombre: " + this.getNombre()+ " Puesto: "+ this.getPuesto() + "\n   " + this.turno+"\n";
+	}
+	public void puntuacion(Empleado e) {
+		
 	}
 }
