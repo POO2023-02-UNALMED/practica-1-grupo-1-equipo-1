@@ -36,8 +36,6 @@ public class Empleado extends Persona implements Serializable{
     // Verificar Tiempo
     public boolean verificarTiempo(int tiempoPlato){
     	int tiempoDisponible = this.turno.getHoras()* 60;
-    	System.out.println(tiempoDisponible);
-    	System.out.println(tiempoPlato);
     	if(tiempoDisponible>tiempoPlato){
     		return true;
     		}

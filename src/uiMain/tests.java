@@ -13,9 +13,9 @@ public class tests {
         Restaurante restaurante1 = new Restaurante();
         System.out.println(restaurante1);
         Turno turnoSemana= new Turno(Turno.Tipo.SEMANA, 8, 50000);
-        Empleado domiciliario = new Empleado("Manolo","domiciliario", restaurante1, turnoSemana);;
-        Empleado cocinero = new Empleado("Juan", "Cocinero", restaurante1, turnoSemana);
-        Empleado mesero = new Empleado("Ana", "Mesero", restaurante1, turnoSemana);
+        Empleado domiciliario = new Empleado("Manolo",1081975140L, "domiciliario", restaurante1, turnoSemana);
+        Empleado cocinero = new Empleado("Juan", 1081975137L, "Cocinero", restaurante1, turnoSemana);
+        Empleado mesero = new Empleado("Ana", 1081052976L, "Mesero", restaurante1, turnoSemana);
         Material tomate = new Material(Material.Tipo.TOMATES, 10, 200);
         Material cebolla = new Material(Material.Tipo.CEBOLLAS, 5, 300);
         Material huevo = new Material(Material.Tipo.HUEVOS, 5, 400);

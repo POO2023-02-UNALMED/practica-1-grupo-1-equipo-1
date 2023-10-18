@@ -247,6 +247,7 @@ public class Restaurante implements Serializable {
         }
         return null;
     }
+    
     //Imprime las reservas por confirmar (sin mesa asignada)
     public String imprimirReservas() {
         String r = "";
@@ -379,19 +380,13 @@ public class Restaurante implements Serializable {
 		}
 		return menuVerificado;
 	}
-	public Reserva encontrarReserva(int numMesa) {
-	    for(Cliente cliente : listadoClientes){
-	        Reserva reserva = cliente.getReserva();
-	        if (reserva != null) {
-	            Mesa mesa = reserva.getMesa();
-	            if (mesa != null) {
-	                int numMesaReserva = mesa.getNumeroMesa();
-	                if(numMesaReserva == numMesa){
-	                    return reserva;
-	                }
-	            }
-	        }
-	    }
-	    return null;
-	}
+	public Reserva encontrarReserva(int numMesa, String nombre) {
+		Mesa mesa = encontrarMesa(numMesa);
+		for(Reserva reserva : mesa.getReservas()){
+			if((reserva.getDuenoReserva().getNombre()).equals(nombre)){
+				return reserva;
+			}
+		}
+		return null;
+}
 }

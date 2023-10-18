@@ -159,7 +159,7 @@ public class Pedido implements Serializable,Menu{
      public String toString() {
     	 String mesaStr = (mesa != null) ? mesa.toString() : "N/A";
          String meseroStr = (mesero != null) ? mesero.toString() : "N/A";
-         String domiciliarioStr = (domiciliario != null) ? domiciliario.toString() : "N/A";
+         String domiciliarioStr = (domiciliario != null) ? domiciliario.toString() : "no tiene reserva asociada";
          String resumen = (reserva != null) ? reserva.resumenReserva() : "N/A";
          
 
@@ -169,7 +169,7 @@ public class Pedido implements Serializable,Menu{
                  "\n   domiciliario: " + domiciliarioStr +
                  "\n   numero de platos: " + this.getPlatos().size()+ 
                  "\n   platos: " + imprimirPlatos() +
-                 "\n   Este pedido tiene esta reserva: " + reserva.resumenReserva() +
+                 "\n   Este pedido tiene esta reserva: " + resumen+
                  "\n   verificado: " + verificado +
                  "\n   tipoPedido: " + tipoPedido ;
      }
