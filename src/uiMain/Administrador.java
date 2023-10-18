@@ -498,9 +498,9 @@ public class Administrador implements Menu {
     			
   //funcionalidad financiera
     		
-  //funcionalidad financiera
     		
     		case 5:
+    			
     			do{
         			System.out.println("¿Que deseas hacer?");
         			System.out.println("1. Consultar el Presupuesto Total de Restaurante");
@@ -517,16 +517,29 @@ public class Administrador implements Menu {
         			case 1:
         				//double presupuesto = Financia.getPresupuesto();
     	    			//System.out.println("\nEl presupuesto Total del Restaurante es: " + presupuesto);
-    			
-    			
-    			
-    			break;
+        				
+        			case 5: 
+        				// Pedir al usuario que introduzca el nombre del empleado
+        		        System.out.println("Por favor, introduce el nombre del empleado para la liquidación:");
+        		        String nombreEmpleado = scanner.nextLine();
+
+        		        // Realizar la liquidación para ese empleado
+        		        double liquidacion = financia.calcularLiquidacionEmpleado(nombreEmpleado);
+
+        		        // Comprobar si se encontró al empleado y, de ser así, imprimir el resultado
+        		        if (liquidacion != -1) {
+        		            System.out.println("La liquidación para el empleado " + nombreEmpleado + " es: " + liquidacion);
+        		        } else {
+        		            System.out.println("El empleado " + nombreEmpleado + " no hace parte del restaurante.");
+        		        }
+        			break;
+        			
     		case 6: salirDelSistema(gestor);
 			break;
     		}
     	} while(opcion!=6);
-    		
-    }
+    
+    		}
     public static void mostrarMesas(Restaurante restaurante) {
     	System.out.println("Mesas del restaurante: ");
     	for (Mesa mesa:restaurante.getMesas()) {
