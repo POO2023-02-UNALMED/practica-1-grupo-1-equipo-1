@@ -7,13 +7,10 @@ public class Cliente extends Persona implements Serializable{
 	private Reserva reserva;
     private Pedido pedido;
 
-	
 	public Cliente() {
-		
 	}
     public Cliente(String nombre, Long cedula) {
-		super(nombre,cedula);
-		this.cedula = cedula;
+		super(nombre, cedula);
 	}
 	public Reserva getReserva() {
 		return this.reserva;
