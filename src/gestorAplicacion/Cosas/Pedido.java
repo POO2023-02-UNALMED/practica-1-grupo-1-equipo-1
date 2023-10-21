@@ -173,6 +173,12 @@ public class Pedido implements Serializable,Menu{
                  "\n   verificado: " + verificado +
                  "\n   tipoPedido: " + tipoPedido ;
      }
-
+     public double getPrecioTotal() {
+         double precioTotal = 0;
+         for (Plato plato : this.getPlatos()) {
+             precioTotal += plato.getPrecio();
+         }
+         return precioTotal;
+     }
 
 }

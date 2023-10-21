@@ -17,40 +17,44 @@ public class Financia implements Serializable{
 	private double gastosMateriales;
 	private double gastoMaterialEspecifico;
 	private double pagosEmpleados;
-	private double ganancias;
-	private double liquidacion;
+	private double gananciasBrutas;
+	private double gananciasNetas;
 	private double perdidas;
-	 private Restaurante restaurante;
+	private Restaurante restaurante;
 	
-	public Financia(Restaurante restaurante, double presupuesto, double gastosMateriales,double gastoMaterialEspecifico, double pagosEmpleados, double ganancias, double liquidacion, double perdidas) {
-	this.presupuesto = presupuesto;
-	this.gastosMateriales = gastosMateriales;
-	this.gastoMaterialEspecifico = gastoMaterialEspecifico ;
-	this.pagosEmpleados = pagosEmpleados;
-	this.ganancias = ganancias;
-	this.liquidacion = liquidacion;
-	this.perdidas = perdidas;
-	this.restaurante = restaurante;
+	public Financia(double presupuesto, double gastosMateriales,double gastoMaterialEspecifico, double pagosEmpleados, double gananciasBrutas, double gananciasNetas, double liquidacion, double perdidas) {
+	this.presupuesto = 1000000;
+	this.gastosMateriales = 0;
+	this.gastoMaterialEspecifico = 0;
+	this.pagosEmpleados = 0;
+	this.gananciasBrutas = 0;
+	this.gananciasNetas = 0 ;
+	this.perdidas = 0;
 	
 	}
-	 public double getLiquidacion() {
-	        return this.liquidacion;
-	    }
-	 public double getGastosMateriales() {
-	        return this.gastosMateriales;
-	    }
-	 public double getGastoMaterialEspecifico() {
-	        return this.gastoMaterialEspecifico;
-	    }
-	 
-	 public double getPagosEmpleados() {
-	        return this.pagosEmpleados;
-	 }
-
-	 public double getPerdidas() {
-		 return this.perdidas;
-		 
-	    }
+	
+	public double getPresupuesto() {
+		return presupuesto;
+	}
+	public double getGastosMateriales() {
+		return gastosMateriales;
+	}
+	public double getGastoMaterialEspecifico() {
+		return gastoMaterialEspecifico;
+	}
+	public double getPagosEmpleados() {
+		return pagosEmpleados;
+	}
+	public double getGananciasBrutas() {
+		return gananciasBrutas;
+	}
+	public double getGananciasNetas() {
+		return gananciasNetas;
+	}
+	public double getPerdidas() {
+		return perdidas;
+	}
+	
 	 
 	//Calcular Gasto de los Materiales
 	 public double gastosMateriales() {
@@ -65,7 +69,7 @@ public class Financia implements Serializable{
 		        }
 		    }
 		    this.gastosMateriales = totalGastosMateriales;
-		    return totalGastosMateriales;
+		    return this.gastosMateriales;
 		}
 	 // Calcula el valor de un tipo de material 
 	 
@@ -83,13 +87,13 @@ public class Financia implements Serializable{
 	            }
 	        }
 	        this.gastoMaterialEspecifico = totalGastoMaterial;  // Almacenar el resultado en la variable de instancia
-	        return totalGastoMaterial;
+	        return this.gastoMaterialEspecifico;
 	    }
 
 
 	// Calcula el pago de la liquidacion de un empleado del restaurante
 	 
-	 public double calcularLiquidacionEmpleado(String nombreEmpleado) {
+	 public double liquidacionEmpleado(String nombreEmpleado) {
 		 
 	        // Iterar sobre la lista de empleados del restaurante
 		 
@@ -114,6 +118,7 @@ public class Financia implements Serializable{
 	    }
 
 	    // Método separado para calcular el pago por un turno, incluyendo horas extras
+	 
 	    private double calcularPago(Turno turno, Empleado empleado) {
 	        double pago = turno.getSalario();
 	        int horasExtras = turno.HorasExtras();
@@ -125,12 +130,22 @@ public class Financia implements Serializable{
 	    }
 	    
 	// Calcula las perdidas del inventario  del restaurante
-	 public void perdidas(Restaurante restaurante) {
-        for (Material.Tipo tipo : restaurante.getInventario().keySet()) {
-            Material material = restaurante.getInventario().get(tipo);
-            this.perdidas += material.getPrecioUnitario() * material.getCantidad();
-        }
-    }
+	    public double calcularPerdidas() {
+	        
+	        this.perdidas = 0;
+	        
+	        Map<Material.Tipo, Material> inventario = this.restaurante.getInventario();
+
+	        for (Material.Tipo tipo : inventario.keySet()) {
+	            Material material = inventario.get(tipo);
+
+	            if (material.getCantidad() < 0) {
+	                // Calculamos el costo de los materiales botados y lo sumamos a las pérdidas
+	                this.perdidas += material.getPrecioUnitario() * Math.abs(material.getCantidad());
+	            }
+	        }
+	        return this.perdidas;
+	    }
 	
 	//Calcular Pagos de los Empleados
 	public double pagosEmpleados(Restaurante restaurante) {
@@ -148,31 +163,32 @@ public class Financia implements Serializable{
 	        }
 	    }
 	    this.pagosEmpleados = totalPago;
-	    return totalPago;
+	    return this.pagosEmpleados;
 	}
-	public double calcularGananciasBrutas() {
+	
+	public double gananciasBrutas() {
         double totalGananciasBrutas = 0;
         for (Pedido pedido : restaurante.getPedidos()) {
         	totalGananciasBrutas += pedido.getPrecioTotal();
         }
-        this.ganancias = totalGananciasBrutas;
-        return totalGananciasBrutas;
+        this.gananciasBrutas = totalGananciasBrutas;
+        return this.gananciasBrutas;
     }
 
     // Método para calcular las ganancias netas del restaurante
-    public double calcularGananciasNetas() {
+    public double gananciasNetas() {
         double totalGastos = gastosMateriales() + pagosEmpleados(restaurante);
-        double totalIngresos = calcularGananciasBrutas();
-        double gananciasNetas = totalIngresos - totalGastos;
-        return gananciasNetas;
+        double totalIngresos = gananciasBrutas();
+        this.gananciasNetas = totalIngresos - totalGastos;
+        return this.gananciasNetas;
     }
 
     // Método para calcular el presupuesto considerando las ganancias
-    public double Presupuesto() {
+    public double presupuesto() {
         double totalGastos = gastosMateriales() + pagosEmpleados(restaurante);
-        double gananciasNetas = calcularGananciasNetas();
+        double gananciasNetas = gananciasNetas();
         this.presupuesto = this.presupuesto - totalGastos + gananciasNetas;
-        return this.presupuesto;
+        return presupuesto;
     }
 
 	
