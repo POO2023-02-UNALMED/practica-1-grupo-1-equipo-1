@@ -40,6 +40,16 @@ public class Deserializador {
 		deserializarMesas(gestor, new File("src\\baseDatos\\temp\\Mesas.txt"));
 		deserializarEmpleadoDelMes(gestor, new File("src\\baseDatos\\temp\\EmpleadoDelMes.txt"));
 		deserializarInventario(gestor,  new File("src\\baseDatos\\temp\\Inventario.txt"));
+		deserializarPedidos(gestor,  new File("src\\baseDatos\\temp\\Pedidos.txt"));
+	}
+	public static void deserializarPedidos(Gestor gestor, File ruta) {
+		try {
+			FileInputStream fis=new FileInputStream(ruta);
+			ObjectInputStream ois=new ObjectInputStream(fis);
+			gestor.setPedidos((ArrayList<Pedido>) ois.readObject());
+		}catch(IOException | ClassNotFoundException e){
+			System.out.println("Error en la deserialización "+e);
+		}
 	}
 	public static void deserializarClientes(Gestor gestor, File ruta) {
 		try {

@@ -26,6 +26,7 @@ public class Gestor implements Serializable{
 	private List<Mesa> mesas=new ArrayList<>();
 	private Empleado empMes;
 	private Map<Tipo,Material> inventario=new HashMap<>();
+	private ArrayList<Pedido> pedidos=new ArrayList<>();
 	
 	
 	public Empleado getEmpleadoDelMes() {
@@ -73,6 +74,12 @@ public class Gestor implements Serializable{
 	public void setInventario(Map<Tipo,Material> inv) {
 		this.inventario=inv;
 	}
+	public ArrayList<Pedido> getPedidos(){
+		return this.pedidos;
+	}
+	public void setPedidos(ArrayList<Pedido> pedidos) {
+		this.pedidos=pedidos;
+	}
 	public Cliente nuevoCliente(String nombre,long cedula) {
 		Cliente nuevoCliente=new Cliente(nombre,cedula);
 		clientes.add(nuevoCliente);
@@ -89,5 +96,6 @@ public class Gestor implements Serializable{
 		mesas.add(nuevaMesa);
 		return nuevaMesa;
 	}
+	
 	
 }

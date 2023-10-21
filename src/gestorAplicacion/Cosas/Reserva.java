@@ -1,7 +1,6 @@
 package gestorAplicacion.Cosas;
-import java.time.LocalDate;
 
-//import java.time.LocalTime;
+import java.time.LocalDate;
 import java.io.Serializable;
 import gestorAplicacion.Personas.Cliente;
 import java.time.format.DateTimeFormatter;
@@ -48,15 +47,16 @@ public class Reserva implements Serializable{
     //Metodos funcionalidad 1 (reservas)
     //Metodo para imprimir la info de las reservas, dependiendo si son o no confirmadas
     public String resumenReserva () {
+        DateTimeFormatter formatoPersonalizado = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         if (this.mesa == null) {
             return "Dueño de la reserva: "+this.getDuenoReserva().getNombre()+"\nCédula del reservista: "
             +this.getDuenoReserva().getCedula()+"\nNumero de asistentes: "+this.getNumeroAsistentes()+"\nMesa número: "
-            +"Sin mesa asignada"+"\nFecha reservada: "+this.getDiaReserva();
+            +"Sin mesa asignada"+"\nFecha reservada: "+this.getDiaReserva().format(formatoPersonalizado);
         }
         else {
             return "Dueño de la reserva: "+this.getDuenoReserva().getNombre()+"\nCédula del reservista: "
             +this.getDuenoReserva().getCedula()+"\nNumero de asistentes: "+this.getNumeroAsistentes()+"\nMesa número: "
-            +this.mesa.getNumeroMesa()+"\nFecha reservada: "+this.getDiaReserva();
+            +this.mesa.getNumeroMesa()+"\nFecha reservada: "+this.getDiaReserva().format(formatoPersonalizado);
         }
     }
 
