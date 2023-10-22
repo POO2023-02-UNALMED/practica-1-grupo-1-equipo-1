@@ -2,6 +2,7 @@ package gestorAplicacion.Cosas;
 
 import java.util.List;
 
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -21,15 +22,23 @@ public class Financia implements Serializable{
 	private double gananciasNetas;
 	private double perdidas;
 	private Restaurante restaurante;
-	
+	public Financia() {
+		this.presupuesto = 1000000;
+		this.gastosMateriales = 0;
+		this.gastoMaterialEspecifico = 0;
+		this.pagosEmpleados = 0;
+		this.gananciasBrutas = 0;
+		this.gananciasNetas = 0 ;
+		this.perdidas = 0;
+	}
 	public Financia(double presupuesto, double gastosMateriales,double gastoMaterialEspecifico, double pagosEmpleados, double gananciasBrutas, double gananciasNetas, double liquidacion, double perdidas) {
-	this.presupuesto = 1000000;
-	this.gastosMateriales = 0;
-	this.gastoMaterialEspecifico = 0;
-	this.pagosEmpleados = 0;
-	this.gananciasBrutas = 0;
-	this.gananciasNetas = 0 ;
-	this.perdidas = 0;
+	this.presupuesto = presupuesto;
+	this.gastosMateriales = gastosMateriales;
+	this.gastoMaterialEspecifico = gastoMaterialEspecifico;
+	this.pagosEmpleados = pagosEmpleados;
+	this.gananciasBrutas = gananciasBrutas;
+	this.gananciasNetas = gananciasNetas;
+	this.perdidas = perdidas;
 	
 	}
 	
@@ -119,7 +128,7 @@ public class Financia implements Serializable{
 
 	    // Método separado para calcular el pago por un turno, incluyendo horas extras
 	 
-	    private double calcularPago(Turno turno, Empleado empleado) {
+	    public double calcularPago(Turno turno, Empleado empleado) {
 	        double pago = turno.getSalario();
 	        int horasExtras = turno.HorasExtras();
 	        if (horasExtras > 0) {
