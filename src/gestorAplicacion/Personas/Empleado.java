@@ -26,11 +26,12 @@ public class Empleado extends Persona implements Serializable{
     public Empleado() {
     	
     }
-    public Empleado(String nombre,Long cedula, String puesto,Restaurante restaurante, Turno turno){
-        super(nombre,cedula);
+    public Empleado(String nombre, Long cedula, String puesto, Restaurante restaurante, Turno turno){
+        super(nombre, cedula);
         this.puesto = puesto;
         this.restaurante = restaurante;
-        this.turno = turno;
+        this.turnos = new ArrayList<>(); // Inicializa la lista de turnos
+        this.turnos.add(turno); // Añade el turno a la lista
         this.setFechaContratacion(new Date()); // Guarda la fecha actual
         restaurante.contratarEmpleado(this);
     }
@@ -39,16 +40,24 @@ public class Empleado extends Persona implements Serializable{
     // Metodos de funcionalidades
     // Verificar Tiempo
     public boolean verificarTiempo(Empleado empleado,int tiempoPlato){
-    	int tiempoDisponible = empleado.getTurno().getHoras()* 60;
-    	if(tiempoDisponible>tiempoPlato){
-    		return true;
-    		}
-    	return false;
-    	}
+    	for (Turno turno : empleado.getTurnos()) {
+    		if(!turno.isCobrado()){
+    			int tiempoDisponible = turno.getHoras()* 60;
+    	    	if(tiempoDisponible>tiempoPlato){
+    	    		return true;
+    	    		}
+    	    	}
+    			}
+		return false;
+    }
     public boolean verificarTiempo(Empleado empleado){
-    	int tiempoDisponible = this.turno.getHoras()* 60; 
-    	if( tiempoDisponible > PEDIDO_DOMICILIO ){
-    		return true;
+    	for (Turno turno : empleado.getTurnos()) {
+    		if(!turno.isCobrado()){
+    			int tiempoDisponible = turno.getHoras()* 60; 
+    			if( tiempoDisponible > PEDIDO_DOMICILIO ){
+    				return true;
+    	}
+    	}
     	}
 		return false;
     }
@@ -131,10 +140,19 @@ public class Empleado extends Persona implements Serializable{
 		}
 		return null;
 	}
-	
+	private Turno turnoActual() {
+		for(Turno turno : this.turnos)
+		{
+			if(!turno.isCobrado()){
+				return turno;
+			}
+		}
+		return null;
+		}
 	public String toString(){
-		return "Nombre: " + this.getNombre()+ " Puesto: "+ this.getPuesto() + "\n   " + this.turno+"\n";
+		return "Nombre: " + this.getNombre()+ " Puesto: "+ this.getPuesto() + "\n   " + turnoActual()+"\n";
 	}
+	
 	public void puntuacion(Empleado e) {
 		
 	}

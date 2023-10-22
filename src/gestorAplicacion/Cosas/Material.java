@@ -31,8 +31,8 @@ public class Material implements Serializable{
     public int getCantidad () {
         return this.cantidad;
     }
-    public void restarCantidad(){
-    	this.cantidad-=1;
+    public void restarCantidad(int cantidad){
+    	this.cantidad-=cantidad;
     }
     public double getPrecioUnitario () {
         return this.precioUnitario;

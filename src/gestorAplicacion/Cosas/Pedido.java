@@ -135,8 +135,15 @@ public class Pedido implements Serializable,Menu{
      public  ArrayList<Plato> getPlatos(){
     	 return this.platos;
      }
-     
-
+     public Empleado getCocinero() {
+    	 return this.cocinero;
+     }
+     public Empleado getMesero() {
+    	 return this.mesero;
+     }
+     public Empleado getDomiciliario() {
+    	 return this.domiciliario;
+     }
      @Override
      public String toString() {
     	 String mesaStr = (mesa != null) ? mesa.toString() : "N/A";
@@ -162,12 +169,39 @@ public class Pedido implements Serializable,Menu{
          }
          return precioTotal;
      }
-
+     
+     public int getTiempoTotal() {
+         int tiempoTotal = 0;
+         for (Plato plato : this.getPlatos()) {
+        	 tiempoTotal += plato.getTiempoPreparacion();
+         }
+         return tiempoTotal;
+     }
+     
+     
+     
+     public void actualizarTiempoEmpleados(Pedido pedido){
+    	 for(Turno turno : pedido.getCocinero().getTurnos()){
+    		 if(turno.isCobrado()) {
+    			 turno.restarTiempo(pedido.getTiempoTotal());
+    		 }
+    	 }
+    	 for(Turno turno : pedido.getDomiciliario().getTurnos()){
+    		 if(turno.isCobrado()) {
+    			 turno.restarTiempo(TIEMPO_DOMICILIO);
+    		 }
+    	 }
+     }
+     
+     public void actualizarInventario(Restaurante restaurante,Pedido pedido) {
+		actualizarTiempoEmpleados(pedido);
+		restaurante.actualizarInsumos(pedido);
+}
 	public Mesa verificarPedido(Restaurante restaurante,Pedido pedido) {
 		Mesa mesa = restaurante.buscarMesaDisponible();
 		pedido.setMesa(mesa);
 		pedido.setVerificado(true);
-		restaurante.actualizarInsumos(pedido);
+		actualizarInventario(restaurante,pedido);
 		return mesa;
 	}
 

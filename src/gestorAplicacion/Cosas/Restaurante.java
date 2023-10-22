@@ -462,7 +462,7 @@ public class Restaurante implements Serializable {
 		String pedidosVerificados ="";
 		for(int i = 0; i < getPedidosVerificados().size(); i++){
 			pedidosVerificados+=(i + 1) + ". " + getPedidosVerificados().get(i);
-			pedidosVerificados+="\n   ++++++++++++++++++++++++++\n";
+			pedidosVerificados+="\n-------------------------------------------------------\n";
 			}
 		return pedidosVerificados;
 	}
@@ -470,14 +470,21 @@ public class Restaurante implements Serializable {
 	    String pedidosSinVerificar ="";
 	    for(int i = 0; i < getPedidosSinVerificar().size(); i++){
 	        pedidosSinVerificar+=(i + 1) + ". " + getPedidosSinVerificar().get(i);
-	        pedidosSinVerificar+="\n   ++++++++++++++++++++++++++\n";
+	        pedidosSinVerificar+="\n-------------------------------------------------------\n";
 	    }
 	    return pedidosSinVerificar;
 	}
 
 
 	public void actualizarInsumos(Pedido pedido) {
-		
+	    for (Plato plato : pedido.getPlatos()) {
+	        for (Map.Entry<Material, Integer> entrada : plato.getIngredientes().entrySet()) {
+	            Material material = entrada.getKey();
+	            int cantidadUtilizada = entrada.getValue();
+	            material.restarCantidad(cantidadUtilizada);
+	        }
+	    }
 	}
+
 	
 }
