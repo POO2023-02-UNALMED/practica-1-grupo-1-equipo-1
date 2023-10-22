@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.sql.rowset.spi.SyncResolver;
+
 import gestorAplicacion.Cosas.Material.*;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -135,6 +138,7 @@ public class Restaurante implements Serializable {
     }
 
     //Metodos funcionalidades
+    //Gestión de Pedidos
     //busca el objeto empleado por el nombre
     public Empleado buscarEmpleado(String nombre, String puesto){
     	for(Empleado empleado : listadoEmpleados){
@@ -171,8 +175,126 @@ public class Restaurante implements Serializable {
     		}
     	}
     }
-    //Metodos gestion de inventario
+    public void agregarPedido(Pedido pedido) {
+		pedidos.add(pedido);
+	}
+	
+	public  ArrayList<Plato>  veirificarMenu(ArrayList<Plato> menu) {
+		ArrayList<Plato> menuVerificado= new ArrayList<>();
+		for(Plato plato: menu){
+			if(plato.verificarInsumos(plato)){
+				menuVerificado.add(plato);
+			}
+		}
+		return menuVerificado;
+	}
+	public Reserva encontrarReserva(int numMesa, String nombre) {
+		Mesa mesa = encontrarMesa(numMesa);
+		for(Reserva reserva : mesa.getReservas()){
+			if((reserva.getDuenoReserva().getNombre()).equals(nombre)){
+				return reserva;
+			}
+		}
+		return null;
+    }
+	public List<Empleado> clasificarEmpleados( List<Empleado> empleados, String tipo){
+		List<Empleado> empleadosClasificados = new ArrayList<>();
+		for(Empleado empleado : empleados){
+			if(empleado.getPuesto().equals(tipo)){
+				empleadosClasificados.add(empleado);
+			}
+		}
+		return empleadosClasificados;
+	}
+	public List<Mesa> buscarMesaDisponible() {
+        LocalDate fechaActual = LocalDate.now();
+        List<Mesa> listaDeMesasNo = new ArrayList<>();
+        List<Mesa> listadoTotal = getMesas();
+        for (Mesa mesa1 : getMesas()) {
+            for (Reserva reserva1 : mesa1.getReservas()) {
+                if (reserva1.getDiaReserva().equals(fechaActual)) {
+                    listaDeMesasNo.add(mesa1);
+                    break;
+                }
+            }
+        }
+        for (Mesa mesa2 : listaDeMesasNo) {
+            listadoTotal.remove(mesa2);
+        }
+        return listadoTotal;
+    }
+	
+	public List<Empleado> verificarCocineros(List<Empleado> empleados, ArrayList<Plato> platos){
+	    List<Empleado> cocineros = clasificarEmpleados(empleados, "cocinero");
+	    List<Empleado> cocinerosVerificados = new ArrayList<>();
+	    int tiempoPreparacion = platos.get(0).getTiempoTotal(platos);
+	    for(Empleado empleado : cocineros){
+	        if(empleado.verificarTiempo(empleado, tiempoPreparacion)){
+	            cocinerosVerificados.add(empleado);
+	        }
+	    }
+	    return cocinerosVerificados;
+	}
+	
+	public List<Empleado> verificarDomiciliarios(List<Empleado> empleados) {
+	    List<Empleado> domiciliarios = clasificarEmpleados(empleados, "domiciliario");
+	    List<Empleado> domiciliariosVerificados = new ArrayList<>();
+	    for(Empleado empleado : domiciliarios){
+	        if(empleado.verificarTiempo(empleado)){
+	            domiciliariosVerificados.add(empleado);
+	        }
+	    }
+	    return domiciliariosVerificados;
+	}
 
+ 	public List<Pedido> getPedidosVerificados() {
+		List<Pedido> pedidosVerificados = new ArrayList<>();
+		for(Pedido pedido : getPedidos()){
+			if(pedido.isVerificado()){
+				pedidosVerificados.add(pedido);
+			}
+		}
+		return pedidosVerificados;
+	}
+ 	
+	public List<Pedido> getPedidosSinVerificar(){
+		List<Pedido> pedidosSinVerificar = new ArrayList<>();
+		for(Pedido pedido : getPedidos()){
+			if(pedido.isVerificado()==false){
+				pedidosSinVerificar.add(pedido);
+			}
+		}
+		return pedidosSinVerificar;
+	}
+	
+	public String imprimirPedidosVerificados(){
+		String pedidosVerificados ="";
+		for(int i = 0; i < getPedidosVerificados().size(); i++){
+			pedidosVerificados+=(i + 1) + ". " + getPedidosVerificados().get(i);
+			pedidosVerificados+="\n-------------------------------------------------------\n";
+			}
+		return pedidosVerificados;
+	}
+	public String imprimirPedidosSinVerificar(){
+	    String pedidosSinVerificar ="";
+	    for(int i = 0; i < getPedidosSinVerificar().size(); i++){
+	        pedidosSinVerificar+=(i + 1) + ". " + getPedidosSinVerificar().get(i);
+	        pedidosSinVerificar+="\n-------------------------------------------------------\n";
+	    }
+	    return pedidosSinVerificar;
+	}
+
+	public void actualizarInsumos(Pedido pedido) {
+	    for (Plato plato : pedido.getPlatos()) {
+	        for (Map.Entry<Material, Integer> entrada : plato.getIngredientes().entrySet()) {
+	            Material material = entrada.getKey();
+	            int cantidadUtilizada = entrada.getValue();
+	            material.restarCantidad(cantidadUtilizada);
+	        }
+	    }
+	}
+
+    //Metodos gestion de inventario
 
     public void comprarMaterial (Material.Tipo tipo, int cantidad, int precio, String fecha) {
 
@@ -226,28 +348,9 @@ public class Restaurante implements Serializable {
     	}
     	return valorTotal;
     }
-    
     //metodo para decir si una accion no puede ser ejecutada
     public String operacionInvalida() {
     	return "Operacion Inválida";
-    }
-
-    public List<Mesa> mesasDisponibles() {
-        LocalDate fechaActual = LocalDate.now();
-        List<Mesa> listaDeMesasNo = new ArrayList<>();
-        List<Mesa> listadoTotal = getMesas();
-        for (Mesa mesa1 : getMesas()) {
-            for (Reserva reserva1 : mesa1.getReservas()) {
-                if (reserva1.getDiaReserva().equals(fechaActual)) {
-                    listaDeMesasNo.add(mesa1);
-                    break;
-                }
-            }
-        }
-        for (Mesa mesa2 : listaDeMesasNo) {
-            listadoTotal.remove(mesa2);
-        }
-        return listadoTotal;
     }
 
     // Gestion de Reservas
@@ -308,20 +411,6 @@ public class Restaurante implements Serializable {
         }
         return r;
     }
-
-    /*public void borrarReservasViejas() {
-        LocalDate fechaActual = LocalDate.now();
-        List<Reserva> nuevaLista = new ArrayList<>();
-        for (Mesa mesa1 : getMesas()) {
-            for (Reserva reserva1 : mesa1.getReservas()) {
-                if (!reserva1.getDiaReserva().isBefore(fechaActual)) {
-                    nuevaLista.add(reserva1);
-                }
-            }
-            mesa1.setReservas(nuevaLista);
-        }
-    }*/
-
     //dice si el cliente si está guardado en la lista de clientes
     public boolean verificarCliente(Long cedula) {
         for (Cliente cliente1 : getClientes()) {
@@ -350,7 +439,7 @@ public class Restaurante implements Serializable {
         LocalDate diaReserva2 = Reserva.deStringaFecha(diaReserva);
         c1.setReserva(new Reserva(c1, numAsistentes, diaReserva2));
     }
-    //retorna el listado de mesas que cumplen para la reserva que tenga asignada ek cliente
+    //retorna el listado de mesas que cumplen para la reserva que tenga asignada el cliente
     public String mesasQueCumplen(Long cedulaDuenoReserva) {
         String t = "";
         Cliente c1 = obtenerCliente(cedulaDuenoReserva);
@@ -384,145 +473,9 @@ public class Restaurante implements Serializable {
             return "No existe una mesa con ese número, por favor vuelva a intentarlo";
         }
     }
-    /*public String confirmarReserva(int numMesa, Long cedula) {
-        Cliente c1 = obtenerCliente(cedula);
-        Reserva r1 = c1.getReserva();
-        List<Mesa> mesas=listadoMesas;
-        for(Mesa mesa:mesas) {
-        	if (numMesa==mesa.getNumeroMesa()) {
-                Mesa mesa1 = encontrarMesa(numMesa);
-                if (mesa1.suficienteCapacidad(r1)) {
-                    mesa1.reservarMesa(r1);
-                    c1.setReserva(null);
-                    return "Reserva asignada a la mesa #"+numMesa;
-                }
-                else {
-                    return "La mesa seleccionada no tiene la capacidad suficiente, vuelva a intentarlo";
-                }
-            }
-            else {
-                return "No existe una mesa con ese número, por favor vuelva a intentarlo";
-            }
+    public void borrarReservasViejas() {
+        for (Mesa mesa1 : getMesas()) {
+            mesa1.borrarReservasViejas();
         }
-    }*/
-	public void agregarPedido(Pedido pedido) {
-		pedidos.add(pedido);
-	}
-	
-	public  ArrayList<Plato>  veirificarMenu(ArrayList<Plato> menu) {
-		ArrayList<Plato> menuVerificado= new ArrayList<>();
-		for(Plato plato: menu){
-			if(plato.verificarInsumos(plato)){
-				menuVerificado.add(plato);
-			}
-		}
-		return menuVerificado;
-	}
-	
-	
-	
-	public Reserva encontrarReserva(int numMesa, String nombre) {
-		Mesa mesa = encontrarMesa(numMesa);
-		for(Reserva reserva : mesa.getReservas()){
-			if((reserva.getDuenoReserva().getNombre()).equals(nombre)){
-				return reserva;
-			}
-		}
-		return null;
-}
-	public List<Empleado> clasificarEmpleados( List<Empleado> empleados, String tipo){
-		List<Empleado> empleadosClasificados = new ArrayList<>();
-		for(Empleado empleado : empleados){
-			if(empleado.getPuesto().equals(tipo)){
-				empleadosClasificados.add(empleado);
-			}
-		}
-		return empleadosClasificados;
-	}
-	public Mesa buscarMesaDisponible() {
-		LocalDate fechaActual = LocalDate.now();
-		for(Mesa mesa : listadoMesas){
-			for(Reserva reserva : mesa.getReservas()){
-				if(!reserva.getDiaReserva().equals(fechaActual)){
-					return mesa;
-				}
-			}
-		}
-		return null;
-	}
-	
-	public List<Empleado> verificarCocineros(List<Empleado> empleados, ArrayList<Plato> platos){
-	    List<Empleado> cocineros = clasificarEmpleados(empleados, "cocinero");
-	    List<Empleado> cocinerosVerificados = new ArrayList<>();
-	    int tiempoPreparacion = platos.get(0).getTiempoTotal(platos);
-	    for(Empleado empleado : cocineros){
-	        if(empleado.verificarTiempo(empleado, tiempoPreparacion)){
-	            cocinerosVerificados.add(empleado);
-	        }
-	    }
-	    return cocinerosVerificados;
-	}
-	
-	public List<Empleado> verificarDomiciliarios(List<Empleado> empleados) {
-	    List<Empleado> domiciliarios = clasificarEmpleados(empleados, "domiciliario");
-	    List<Empleado> domiciliariosVerificados = new ArrayList<>();
-	    for(Empleado empleado : domiciliarios){
-	        if(empleado.verificarTiempo(empleado)){
-	            domiciliariosVerificados.add(empleado);
-	        }
-	    }
-	    return domiciliariosVerificados;
-	}
-
-
-	
- 	public List<Pedido> getPedidosVerificados() {
-		List<Pedido> pedidosVerificados = new ArrayList<>();
-		for(Pedido pedido : getPedidos()){
-			if(pedido.isVerificado()){
-				pedidosVerificados.add(pedido);
-			}
-		}
-		return pedidosVerificados;
-	}
- 	
-	public List<Pedido> getPedidosSinVerificar(){
-		List<Pedido> pedidosSinVerificar = new ArrayList<>();
-		for(Pedido pedido : getPedidos()){
-			if(pedido.isVerificado()==false){
-				pedidosSinVerificar.add(pedido);
-			}
-		}
-		return pedidosSinVerificar;
-	}
-	
-	public String imprimirPedidosVerificados(){
-		String pedidosVerificados ="";
-		for(int i = 0; i < getPedidosVerificados().size(); i++){
-			pedidosVerificados+=(i + 1) + ". " + getPedidosVerificados().get(i);
-			pedidosVerificados+="\n-------------------------------------------------------\n";
-			}
-		return pedidosVerificados;
-	}
-	public String imprimirPedidosSinVerificar(){
-	    String pedidosSinVerificar ="";
-	    for(int i = 0; i < getPedidosSinVerificar().size(); i++){
-	        pedidosSinVerificar+=(i + 1) + ". " + getPedidosSinVerificar().get(i);
-	        pedidosSinVerificar+="\n-------------------------------------------------------\n";
-	    }
-	    return pedidosSinVerificar;
-	}
-
-
-	public void actualizarInsumos(Pedido pedido) {
-	    for (Plato plato : pedido.getPlatos()) {
-	        for (Map.Entry<Material, Integer> entrada : plato.getIngredientes().entrySet()) {
-	            Material material = entrada.getKey();
-	            int cantidadUtilizada = entrada.getValue();
-	            material.restarCantidad(cantidadUtilizada);
-	        }
-	    }
-	}
-
-	
+    }
 }

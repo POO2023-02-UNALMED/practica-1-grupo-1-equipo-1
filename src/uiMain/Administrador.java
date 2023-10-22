@@ -341,7 +341,7 @@ public class Administrador implements Menu {
     			}
     		}while(opcion!=5); break;
     		case 3:
-    			
+    			System.out.println("Esperando a ser creada por Jhogert");
     			break;
 			//funcionalidad Sebas
     		case 4: 

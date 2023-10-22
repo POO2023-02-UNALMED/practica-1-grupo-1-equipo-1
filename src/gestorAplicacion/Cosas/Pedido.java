@@ -200,7 +200,7 @@ public class Pedido implements Serializable,Menu{
 		restaurante.actualizarInsumos(pedido);
 }
 	public Mesa verificarPedido(Restaurante restaurante,Pedido pedido) {
-		Mesa mesa = restaurante.buscarMesaDisponible();
+		Mesa mesa = restaurante.buscarMesaDisponible().get(0);
 		pedido.setMesa(mesa);
 		pedido.setVerificado(true);
 		actualizarInventario(restaurante,pedido);
