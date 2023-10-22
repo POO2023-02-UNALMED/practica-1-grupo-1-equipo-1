@@ -69,7 +69,8 @@ public class Financia implements Serializable{
 	}
 	
 	 
-	//Calcular Gasto de los Materiales
+	//Calcula los Gastos de los Materiales
+	
 	public double gastosMateriales() {
 	    double totalGastosMateriales = 0;
 	    for (Pedido pedido : restaurante.getPedidos()) {
@@ -144,7 +145,8 @@ public class Financia implements Serializable{
 		    return totalPago;
 		}
 	 
-	 //Calcular el pago de un solo empleado
+	 //Calcula el pago de un solo empleado
+	 
 	 public double calcularPagoEmpleado(Empleado empleado) {
 		    double totalPago = 0;
 		    for (Turno turno : empleado.getTurnos()) {
@@ -159,7 +161,8 @@ public class Financia implements Serializable{
 		    return totalPago;
 		}
 	
-	//Calcular Pagos de todos los Empleados
+	//Calcula el Pago total de todos los Empleados
+	 
 	    public double pagosEmpleados(Restaurante restaurante) {
 	        double totalPago = 0;
 	        for (Empleado empleado : restaurante.getEmpleados()) {
@@ -180,6 +183,7 @@ public class Financia implements Serializable{
 	    }
 	
 	// Calcula las perdidas del inventario  del restaurante
+	    
 	    public double calcularPerdidas() {
 	        this.perdidas = 0;
 	        
@@ -194,7 +198,9 @@ public class Financia implements Serializable{
 	        }
 	        return this.perdidas;
 	    }
-	
+	    
+	// Calcula las ganancias Brutas del restaurante
+	    
 	public double gananciasBrutas() {
         double totalGananciasBrutas = 0;
         for (Pedido pedido : restaurante.getPedidos()) {
@@ -204,7 +210,8 @@ public class Financia implements Serializable{
         return this.gananciasBrutas;
     }
 
-    // Método para calcular las ganancias netas del restaurante
+    // Calcula las ganancias netas del restaurante
+	
     public double gananciasNetas() {
         double totalGastos = gastosMateriales() + pagosEmpleados(restaurante);
         double totalIngresos = gananciasBrutas();
@@ -212,7 +219,8 @@ public class Financia implements Serializable{
         return this.gananciasNetas;
     }
 
-    // Método para calcular el presupuesto considerando las ganancias
+    // Calcula el presupuesto considerando las ganancias del restaurante
+    
     public double presupuesto() {
         double totalGastos = gastosMateriales() + pagosEmpleados(restaurante);
         double gananciasNetas = gananciasNetas();
