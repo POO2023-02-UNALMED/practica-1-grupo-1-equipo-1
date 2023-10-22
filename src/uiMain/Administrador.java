@@ -604,8 +604,8 @@ public class Administrador implements Menu {
         					System.out.println("1. Ganancia Bruta");
         					System.out.println("2. Ganancia Neta");
         					
-        					opcionInv2=(int)readLong();
-        					switch(opcionInv2) {
+        					opcionF2=(int)readLong();
+        					switch(opcionF2) {
         					
         					case 1:  
         						System.out.println("-------------------------------------------------------");
@@ -622,7 +622,7 @@ public class Administrador implements Menu {
         						break;
         					case 3:break;
         					}
-        				} while(opcionInv2!=3); break;
+        				} while(opcionF2!=3); break;
         			case 4:
         				System.out.println("-------------------------------------------------------");
         				System.out.print("Ingrese el nombre del Empleado : ");
@@ -639,7 +639,7 @@ public class Administrador implements Menu {
         				break; 
         			case 6: break;
         				
-				} while(opcionInv!=6); break;
+				} while(opcionF!=6); break;
         			
 				
     		
@@ -648,7 +648,7 @@ public class Administrador implements Menu {
 			break;
     	} 
     
-    		}while(opcion!=6);break;}
+    		}while(opcion!=6);}
     public static void mostrarMesas(Restaurante restaurante) {
     	System.out.println("Mesas del restaurante: ");
     	for (Mesa mesa:restaurante.getMesas()) {
