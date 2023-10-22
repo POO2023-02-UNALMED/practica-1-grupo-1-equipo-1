@@ -1,3 +1,10 @@
+//Clase encargada de la interacción con el usuario, uso de switch para escoger funcionalidad, cada una con un switch interno
+//Funcionalidad 1: Gestión de reservas: Autor: Samuel Ortiz
+//Funcionalidad 2: Gestión de Pedidos: Autor: Daniel Garzón
+//Funcionalidad 3: Gestión de Empleados: Autor: Jhogert Bita
+//Funcionalidad 4: Gestión de Inventario: Autor: Sebastián Hoyos
+//Funcionalidad 5: Gestión Financiera: Autor: Nicole Guaranguay
+
 package uiMain;
 import java.time.LocalDate;
 

@@ -1,3 +1,6 @@
+//Autor: Samuel Ortiz, almacena las reservas en base a su capacidad
+//Componentes: importaciones, constructor, getters y setters, métodos funcionalidades
+
 package gestorAplicacion.Cosas;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -91,6 +94,7 @@ public class Mesa implements Serializable{
         return true;
     }
 
+    //Borra las reservas confirmadas que tengan una fecha anterior a hoy
     public void borrarReservasViejas() {
         LocalDate fechaActual = LocalDate.now();
         Iterator<Reserva> iterador = reservas.iterator();

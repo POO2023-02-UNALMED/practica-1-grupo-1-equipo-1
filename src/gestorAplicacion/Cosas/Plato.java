@@ -1,3 +1,6 @@
+//Autor: Daniel Garzón.
+//Componentes: importaciones, constructores, getters y setters, métodos funcionalidades
+
 package gestorAplicacion.Cosas;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -30,38 +33,8 @@ public class Plato implements Serializable{
     }
     public Plato() {
 	}
-	public boolean verificarInsumos(Plato plato){
-		for(Entry<Material, Integer> entrada : plato.getIngredientes().entrySet()){
-			Material ingrediente = entrada.getKey();
-			Integer cantidadPlato = entrada.getValue();
-			if(ingrediente.getCantidad() < cantidadPlato){
-				//se lo deja en false
-			}
-			if(ingrediente.getCantidad() >= cantidadPlato){
-				setVerificadoInsumos(true);
-			}
-		}
-		return verificadoInsumos;
-    }
-    
-    public List<Tipo> mostrarIngredientes(){
-    	List<Tipo> tipos= new ArrayList<>();
-    	for(Map.Entry<Material, Integer> entry : ingredientes.entrySet()){
-    		tipos.add(entry.getKey().getTipo());
-    	}
-		return tipos;
-    }
-    
-    public String detallesPlato() {
-        return 
-        	"\n   Nombre: " + nombre  +
-            "\n   Precio: " + precio +
-            "\n   Descripcion: " + descripcion  +
-            "\n   Tiempo de preparacion: " + tiempoPreparacion +
-            "\n   Ingredientes: " + mostrarIngredientes().toString();
-    }
-    
- // Métodos getter 
+
+     // Métodos getter 
     public String getNombre() {
         return nombre;
     }
@@ -93,6 +66,38 @@ public class Plato implements Serializable{
     }
     public void setIngredientes(Map<Material, Integer> ingredientes) {
         this.ingredientes = ingredientes;
+    }
+
+    //Métodos funcionalidades
+	public boolean verificarInsumos(Plato plato){
+		for(Entry<Material, Integer> entrada : plato.getIngredientes().entrySet()){
+			Material ingrediente = entrada.getKey();
+			Integer cantidadPlato = entrada.getValue();
+			if(ingrediente.getCantidad() < cantidadPlato){
+				//se lo deja en false
+			}
+			if(ingrediente.getCantidad() >= cantidadPlato){
+				setVerificadoInsumos(true);
+			}
+		}
+		return verificadoInsumos;
+    }
+    
+    public List<Tipo> mostrarIngredientes(){
+    	List<Tipo> tipos= new ArrayList<>();
+    	for(Map.Entry<Material, Integer> entry : ingredientes.entrySet()){
+    		tipos.add(entry.getKey().getTipo());
+    	}
+		return tipos;
+    }
+    
+    public String detallesPlato() {
+        return 
+        	"\n   Nombre: " + nombre  +
+            "\n   Precio: " + precio +
+            "\n   Descripcion: " + descripcion  +
+            "\n   Tiempo de preparacion: " + tiempoPreparacion +
+            "\n   Ingredientes: " + mostrarIngredientes().toString();
     }
     
     

@@ -1,3 +1,6 @@
+//Autor: Samuel Ortiz. Usada para la funcionalidad 1: gestión de reservas.
+//Componentes: Importaciones, constructores, getters y setters
+
 package gestorAplicacion.Personas;
 import java.io.Serializable;
 import gestorAplicacion.Cosas.*;

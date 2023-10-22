@@ -1,3 +1,4 @@
+//Autor: Daniel Garzón. Clase creada para ser heredada por Cliente y por Empleado.
 package gestorAplicacion.Personas;
 import java.io.Serializable;
 public abstract class Persona implements Serializable {

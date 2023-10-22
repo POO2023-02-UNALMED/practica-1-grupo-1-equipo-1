@@ -1,21 +1,18 @@
+//Autor: Sebastián Hoyos. Se encarga de la serialización.
+
 package gestorAplicacion.Cosas;
+
 import java.io.Serializable;
-
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-
 import baseDatos.Deserializador;
-
-
 import gestorAplicacion.Cosas.Material.Tipo;
 import gestorAplicacion.Personas.Cliente;
 import gestorAplicacion.Personas.Empleado;
-
 
 
 public class Gestor implements Serializable{

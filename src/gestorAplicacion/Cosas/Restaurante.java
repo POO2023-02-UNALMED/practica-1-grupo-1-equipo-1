@@ -1,6 +1,9 @@
+//Autores: Samuel Ortiz, atributos y constructores; entre todos, los métodos. Participa en todas las funcionalidades, 
+//encargada de almacenar en listas los objetos necesarios para las funcionalidades
+//Componentes: importaciones, constructores, getters y setters, y métodos de las funcionalidades
+
 package gestorAplicacion.Cosas;
 import java.util.List;
-
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -10,6 +13,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import gestorAplicacion.Personas.*;
 import baseDatos.Deserializador;
+
 public class Restaurante implements Serializable {
     private static final long serialVersionUID=1L;
 	private final String NOMBRE = "Le Quasó";
@@ -351,27 +355,7 @@ public class Restaurante implements Serializable {
             return "No existe una mesa con ese número, por favor vuelva a intentarlo";
         }
     }
-    /*public String confirmarReserva(int numMesa, Long cedula) {
-        Cliente c1 = obtenerCliente(cedula);
-        Reserva r1 = c1.getReserva();
-        List<Mesa> mesas=listadoMesas;
-        for(Mesa mesa:mesas) {
-        	if (numMesa==mesa.getNumeroMesa()) {
-                Mesa mesa1 = encontrarMesa(numMesa);
-                if (mesa1.suficienteCapacidad(r1)) {
-                    mesa1.reservarMesa(r1);
-                    c1.setReserva(null);
-                    return "Reserva asignada a la mesa #"+numMesa;
-                }
-                else {
-                    return "La mesa seleccionada no tiene la capacidad suficiente, vuelva a intentarlo";
-                }
-            }
-            else {
-                return "No existe una mesa con ese número, por favor vuelva a intentarlo";
-            }
-        }
-    }*/
+
 	public void agregarPedido(Pedido pedido) {
 		pedidos.add(pedido);
 	}
@@ -406,17 +390,23 @@ public class Restaurante implements Serializable {
 		}
 		return empleadosClasificados;
 	}
-	public Mesa buscarMesaDisponible() {
+	public List<Mesa> buscarMesaDisponible() {
 		LocalDate fechaActual = LocalDate.now();
-		for(Mesa mesa : listadoMesas){
-			for(Reserva reserva : mesa.getReservas()){
-				if(!reserva.getDiaReserva().equals(fechaActual)){
-					return mesa;
-				}
-			}
-		}
-		return null;
-	}
+		List<Mesa> listaDeMesasNo = new ArrayList<>();
+        List<Mesa> listadoTotal = getMesas();
+        for (Mesa mesa1 : getMesas()) {
+            for (Reserva reserva1 : mesa1.getReservas()) {
+                if (reserva1.getDiaReserva().equals(fechaActual)) {
+                    listaDeMesasNo.add(mesa1);
+                    break;
+                }
+            }
+        }
+        for (Mesa mesa2 : listaDeMesasNo) {
+            listadoTotal.remove(mesa2);
+        }
+        return listadoTotal;
+    }
 	
 	public List<Empleado> verificarCocineros(List<Empleado> empleados, ArrayList<Plato> platos){
 	    List<Empleado> cocineros = clasificarEmpleados(empleados, "cocinero");

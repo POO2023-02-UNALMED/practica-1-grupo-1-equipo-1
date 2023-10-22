@@ -1,3 +1,6 @@
+//Autor: Samuel Ortiz. Usada para la gestión de reservas, se encarga del manejo de fechas, y de relacionarse con Cliente y Mesa
+//Componenetes: importaciones, constructor, getters y setters, métodos de funcionalidades (de instancia y de clase)
+
 package gestorAplicacion.Cosas;
 
 import java.time.LocalDate;
