@@ -39,6 +39,7 @@ public class Administrador implements Menu {
     	restaurante.setMesas(gestor.getMesas());
     	restaurante.setEmpleadoDelMes(gestor.getEmpleadoDelMes());
     	restaurante.setInventario(gestor.getInventario());
+    	restaurante.setPedidos(gestor.getPedidos());
     	//Crear un objeto Financia 
     	
     	Financia financia = new Financia(restaurante);  	
@@ -84,7 +85,7 @@ public class Administrador implements Menu {
 		for (Mesa mesa1 : restaurante.getMesas()) {
 			mesa1.anadirNumero(mesa1.getNumeroMesa());
 		}
-		restaurante.borrarReservasViejas();
+		//restaurante.borrarReservasViejas();
 		
     	do {
     		System.out.println("");

@@ -85,6 +85,10 @@ public class Restaurante implements Serializable {
         public Map<Tipo, Material> getInventario () {
         return this.inventario;
     }
+    public List<Pedido> getPedidos(){
+    	return this.pedidos;
+    }
+    	
 
     //Metodos setter
     public void setEmpleadoDelMes (Empleado empleadoDelMes) {
@@ -117,6 +121,9 @@ public class Restaurante implements Serializable {
     public void setInventario(Map<Tipo,Material> inv) {
     	this.inventario=inv;
     }
+    public void setPedidos(ArrayList<Pedido> pedidos) {
+		this.pedidos=pedidos;
+	}
     public void setNumMesas(int numMesas) {
         this.numMesas = numMesas;
     }
@@ -266,9 +273,7 @@ public class Restaurante implements Serializable {
         return null;
     }
     
-    public List<Pedido> getPedidos(){
-    	return pedidos;
-    }
+    
     //Imprime las reservas por confirmar (sin mesa asignada)
     public String imprimirReservas() {
         String r = "";
@@ -304,7 +309,7 @@ public class Restaurante implements Serializable {
         return r;
     }
 
-    public void borrarReservasViejas() {
+    /*public void borrarReservasViejas() {
         LocalDate fechaActual = LocalDate.now();
         List<Reserva> nuevaLista = new ArrayList<>();
         for (Mesa mesa1 : getMesas()) {
@@ -315,7 +320,7 @@ public class Restaurante implements Serializable {
             }
             mesa1.setReservas(nuevaLista);
         }
-    }
+    }*/
 
     //dice si el cliente si está guardado en la lista de clientes
     public boolean verificarCliente(Long cedula) {
