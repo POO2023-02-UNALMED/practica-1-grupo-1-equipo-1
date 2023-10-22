@@ -15,6 +15,7 @@ import javax.sql.rowset.spi.SyncResolver;
 
 import baseDatos.Serializador;
 import gestorAplicacion.Cosas.*;
+import gestorAplicacion.Cosas.Financia;
 import gestorAplicacion.Personas.Empleado;
 
 public class Administrador implements Menu {
@@ -38,7 +39,8 @@ public class Administrador implements Menu {
     	restaurante.setMesas(gestor.getMesas());
     	restaurante.setEmpleadoDelMes(gestor.getEmpleadoDelMes());
     	restaurante.setInventario(gestor.getInventario());
-    	
+    	//Crear un objeto Financia 
+    	Financia financia = new Financia();
     	
     	
     	ArrayList<Plato> menu=Menu.crearMenu();
@@ -90,8 +92,7 @@ public class Administrador implements Menu {
 		for (Mesa mesa1 : restaurante.getMesas()) {
 			mesa1.anadirNumero(mesa1.getNumeroMesa());
 		
-		//Crear un objeto Financia 
-		//Financia financia = new Financia();
+		
 		}
 		
     	do {
@@ -497,6 +498,10 @@ public class Administrador implements Menu {
     	
     		
     		case 5:
+    			int opcionF;
+    			int opcionF1;
+    			int opcionF2;
+    			
     			do {
         			System.out.println("-------------------------------------------------------");
         			System.out.println("¿Que deseas hacer?");
@@ -507,16 +512,17 @@ public class Administrador implements Menu {
         			System.out.println("5. Consultar las Pérdidas del restaurante");
         			System.out.print("Escribe el número de la opción que necesitas: ");
         			
-        			opcionInv=(int) readLong();
-        			switch(opcionInv) {
+        			opcionF = (int) readLong();
+					switch(opcionF) {
+					
         			case 1:System.out.println("-------------------------------------------------------");
-        			
+        				
         			// Consultar el presupuesto total del restaurante
-        		    	//double presupuesto = financia.getPresupuesto();
-        		    	//double gastos = financia.getGastosMateriales() + financia.getPagosEmpleados();
+        		    	double presupuesto = financia.getPresupuesto();
+        		    	double gastos = financia.getGastosMateriales() + financia.getPagosEmpleados();
         		 
-        		    	//System.out.println("Presupuesto total del restaurante: " + presupuesto);
-        		    	//if (presupuesto < gastos) {
+        		    	System.out.println("Presupuesto total del restaurante: " + presupuesto);
+        		    	if (presupuesto < gastos) {
         		            System.out.println("¡El presupuesto es inferior a los gastos del restaurante!");
         		        } else {
         		            System.out.println("El presupuesto es mayor que los gastos del restaurante.");
@@ -534,11 +540,11 @@ public class Administrador implements Menu {
         					System.out.println("4. Pago de un Empleado");
         					
         		
-        					opcionInv1=(int)readLong();
-        					switch(opcionInv1) {
+        					opcionF1=(int)readLong();
+        					switch(opcionF1) {
         					case 1: 
         						System.out.println("-------------------------------------------------------");
-        						//double total = financia.getGastosMateriales();
+        						double total = financia.getGastosMateriales();
         						System.out.println("Costo total de abastecer el Inventario del Restaurante: " + total );
         						
     							break;
@@ -551,7 +557,7 @@ public class Administrador implements Menu {
         						Material.Tipo tipo = Material.Tipo.valueOf(tipoMaterial.toUpperCase());
 
         						// Llamar al método gastoMaterialEspecifico
-        						//double gasto = financia.gastoMaterialEspecifico(tipo);
+        						double gasto = financia.gastoMaterialEspecifico(tipo);
 
         						System.out.println("El valor de abastecer el tipo de material " + tipoMaterial + " es " + gasto);
         						
@@ -559,8 +565,8 @@ public class Administrador implements Menu {
         						
         					case 3:
         						System.out.println("-------------------------------------------------------");
-        						//double pago = financia.getPagosEmpleados();
-        						System.out.println("Pago total de los Empleados del Restaurante: " + pago );
+        						double pago3 = financia.getPagosEmpleados();
+        						System.out.println("Pago total de los Empleados del Restaurante: " + pago3);
         						
         						break;
         						
@@ -579,17 +585,17 @@ public class Administrador implements Menu {
         						if (empleado != null) {
         						    // Si se encontró al empleado, calcular el pago
         						    Turno turno = empleado.getTurno();  // Suponiendo que tienes un método getTurno() en tu clase Empleado
-        						    //double pago = financia.calcularPago(turno, empleado);
+        						    double pago4 = financia.calcularPago(turno, empleado);
 
         						    // Imprimir el resultado
-        						    System.out.println("El valor de pago del empleado " + nombreEmpleado + " es " + pago);
+        						    System.out.println("El valor de pago del empleado " + nombreEmpleado + " es " + pago4);
         						} else {
         						    System.out.println("No se encontró al empleado " + nombreEmpleado);
         						}
         						
         						break;
         					}
-        				} while(opcionInv1!=4); break;
+        				} while(opcionF1!=4); break;
         					
         			case 3:
         				
@@ -603,45 +609,46 @@ public class Administrador implements Menu {
         					
         					case 1:  
         						System.out.println("-------------------------------------------------------");
-        						//double pago = financia.getGananciasBrutas();
-        						System.out.println("La Ganancia Bruta del Restaurante : " + pago );
+        						double pago1 = financia.getGananciasBrutas();
+        						System.out.println("La Ganancia Bruta del Restaurante : " + pago1);
         						
         						break;
         						
         					case 2: 
         						System.out.println("-------------------------------------------------------");
-        						//double pago = financia.getGananciasNetas();
-        						System.out.println("La Ganancia Neta del Restaurante : " + pago );
+        						double pago2 = financia.getGananciasNetas();
+        						System.out.println("La Ganancia Neta del Restaurante : " + pago2 );
         						
         						break;
-        					
+        					case 3:break;
         					}
-        				} while(opcionInv2!=4); break;
+        				} while(opcionInv2!=3); break;
         			case 4:
         				System.out.println("-------------------------------------------------------");
         				System.out.print("Ingrese el nombre del Empleado : ");
 						String nombreEmpleado =scan.next();
-						//double liquidacion = financia.liquidacionEmpleado(nombreEmpleado);
+						double liquidacion = financia.liquidacionEmpleado(nombreEmpleado);
 
 						// Imprimir el resultado
 						System.out.println("El valor de pago del empleado " + nombreEmpleado + " es " + liquidacion);
         			break;
         			
         			case 5:
-        				//double perdidas = financia.calcularPerdidas();
+        				double perdidas = financia.calcularPerdidas();
         				System.out.println("Las pérdidas del restaurante son: " + perdidas);
         				break; 
-        				}
+        			case 6: break;
         				
-				} while(opcionInv!=5); break;
+				} while(opcionInv!=6); break;
         			
 				
+    		
+    		}while (opcionInv!=5);
     		case 6: salirDelSistema(gestor);
 			break;
-    		}
-    	} while(opcion!=6);
+    	} 
     
-    		}
+    		}while(opcion!=6);break;}
     public static void mostrarMesas(Restaurante restaurante) {
     	System.out.println("Mesas del restaurante: ");
     	for (Mesa mesa:restaurante.getMesas()) {
@@ -679,3 +686,5 @@ public class Administrador implements Menu {
     	System.exit(0);
     }
 }
+
+
