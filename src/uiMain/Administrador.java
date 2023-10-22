@@ -92,7 +92,7 @@ public class Administrador implements Menu {
 		for (Mesa mesa1 : restaurante.getMesas()) {
 			mesa1.anadirNumero(mesa1.getNumeroMesa());
 		}
-		//restaurante.borrarReservasViejas();
+		restaurante.borrarReservasViejas();
 		
     	do {
     		System.out.println("");
