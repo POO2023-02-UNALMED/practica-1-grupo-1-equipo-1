@@ -85,6 +85,9 @@ public class Restaurante implements Serializable {
         public Map<Tipo, Material> getInventario () {
         return this.inventario;
     }
+        public List<Pedido> getPedidos(){
+        	return pedidos;
+        }
 
     //Metodos setter
     public void setEmpleadoDelMes (Empleado empleadoDelMes) {
@@ -125,6 +128,9 @@ public class Restaurante implements Serializable {
     }
     public void setNumEmpleados(int numEmpleados) {
         this.numEmpleados = numEmpleados;
+    }
+    public void setPedidos(ArrayList<Pedido> pedidos) {
+    	this.pedidos=pedidos;
     }
 
     //Metodos funcionalidades
@@ -248,9 +254,7 @@ public class Restaurante implements Serializable {
         return null;
     }
     
-    public List<Pedido> getPedidos(){
-    	return pedidos;
-    }
+    
     //Imprime las reservas por confirmar (sin mesa asignada)
     public String imprimirReservas() {
         String r = "";
