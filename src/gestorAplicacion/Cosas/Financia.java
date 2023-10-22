@@ -31,7 +31,11 @@ public class Financia implements Serializable{
 		this.gananciasNetas = 0 ;
 		this.perdidas = 0;
 	}
-	public Financia(double presupuesto, double gastosMateriales,double gastoMaterialEspecifico, double pagosEmpleados, double gananciasBrutas, double gananciasNetas, double liquidacion, double perdidas) {
+	public Financia(Restaurante restaurante) {
+		this.restaurante = restaurante;
+	}
+	public Financia(Restaurante restaurante, double presupuesto, double gastosMateriales,double gastoMaterialEspecifico, double pagosEmpleados, double gananciasBrutas, double gananciasNetas, double liquidacion, double perdidas) {
+	this.restaurante = restaurante;
 	this.presupuesto = presupuesto;
 	this.gastosMateriales = gastosMateriales;
 	this.gastoMaterialEspecifico = gastoMaterialEspecifico;
@@ -66,25 +70,26 @@ public class Financia implements Serializable{
 	
 	 
 	//Calcular Gasto de los Materiales
-	 public double gastosMateriales() {
-		    double totalGastosMateriales = 0;
-		    for (Pedido pedido : restaurante.getPedidos()) {
-		        for (Plato plato : pedido.getPlatos()) {
-		            for (Map.Entry<Material, Integer> entrada : plato.getIngredientes().entrySet()) {
-		                Material material = entrada.getKey();
-		                int cantidadUtilizada = entrada.getValue();
-		                totalGastosMateriales += material.getPrecioUnitario() * cantidadUtilizada;
-		            }
-		        }
-		    }
-		    this.gastosMateriales = totalGastosMateriales;
-		    return this.gastosMateriales;
-		}
+	public double gastosMateriales() {
+	    double totalGastosMateriales = 0;
+	    for (Pedido pedido : restaurante.getPedidos()) {
+	        for (Plato plato : pedido.getPlatos()) {
+	            for (Map.Entry<Material, Integer> entrada : plato.getIngredientes().entrySet()) {
+	                Material material = entrada.getKey();
+	                int cantidadUtilizada = entrada.getValue();
+	                totalGastosMateriales += material.getPrecioUnitario() * cantidadUtilizada;
+	            }
+	        }
+	    }
+	    this.gastosMateriales = totalGastosMateriales;
+	    return this.gastosMateriales;
+	}
+
 	 // Calcula el valor de un tipo de material 
 	 
 	 public double gastoMaterialEspecifico(Material.Tipo tipoMaterial) {
 	        double totalGastoMaterial = 0;
-	        for (Pedido pedido : restaurante.getPedidos()) {
+	        for (Pedido pedido : this.restaurante.getPedidos()) {
 	            for (Plato plato : pedido.getPlatos()) {
 	                for (Map.Entry<Material, Integer> entrada : plato.getIngredientes().entrySet()) {
 	                    Material material = entrada.getKey();

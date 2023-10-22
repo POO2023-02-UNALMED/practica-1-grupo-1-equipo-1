@@ -40,8 +40,8 @@ public class Administrador implements Menu {
     	restaurante.setEmpleadoDelMes(gestor.getEmpleadoDelMes());
     	restaurante.setInventario(gestor.getInventario());
     	//Crear un objeto Financia 
-    	Financia financia = new Financia();
     	
+    	Financia financia = new Financia(restaurante);  	
     	
     	ArrayList<Plato> menu=Menu.crearMenu();
     	Material res = new Material(Material.Tipo.RES, 100, 100);
@@ -510,6 +510,7 @@ public class Administrador implements Menu {
         			System.out.println("3. Consultar las Ganancias del restaurante");
         			System.out.println("4. Consultar el valor de liquidación de un empleado");
         			System.out.println("5. Consultar las Pérdidas del restaurante");
+        			System.out.println("6. Volver al menú de funcionalidades");
         			System.out.print("Escribe el número de la opción que necesitas: ");
         			
         			opcionF = (int) readLong();
@@ -538,6 +539,8 @@ public class Administrador implements Menu {
         					System.out.println("2. Valor de abastecer un Material del Inventario");
         					System.out.println("3. Pago total de los Empleados");
         					System.out.println("4. Pago de un Empleado");
+        					System.out.println("5. Volver al menú de gestión de inventario");
+        					System.out.print("Escribe el número de la opción que necesitas: ");
         					
         		
         					opcionF1=(int)readLong();
@@ -553,7 +556,7 @@ public class Administrador implements Menu {
         					case 2: 
         						System.out.println("-------------------------------------------------------");
         						System.out.print("Ingrese el nombre del Material : ");
-        						String tipoMaterial =scan.next();
+        						String tipoMaterial = scanner.nextLine();
         						Material.Tipo tipo = Material.Tipo.valueOf(tipoMaterial.toUpperCase());
 
         						// Llamar al método gastoMaterialEspecifico
@@ -573,7 +576,7 @@ public class Administrador implements Menu {
         					case 4:
         						System.out.println("-------------------------------------------------------");
         						System.out.print("Ingrese el nombre del Empleado : ");
-        						String nombreEmpleado =scan.next();
+        						String nombreEmpleado =scanner.nextLine();
         						Empleado empleado = null;
         						for (Empleado e : restaurante.getEmpleados()) {
         						    if (e.getNombre().equals(nombreEmpleado)) {
@@ -594,8 +597,10 @@ public class Administrador implements Menu {
         						}
         						
         						break;
+        					case 5:
+        						break;
         					}
-        				} while(opcionF1!=4); break;
+        				} while(opcionF1!=5); break;
         					
         			case 3:
         				
@@ -603,6 +608,8 @@ public class Administrador implements Menu {
         					System.out.println("-------------------------------------------------------");
         					System.out.println("1. Ganancia Bruta");
         					System.out.println("2. Ganancia Neta");
+        					System.out.println("3. Volver al menú de gestión de inventario");
+        					System.out.print("Escribe el número de la opción que necesitas: ");
         					
         					opcionF2=(int)readLong();
         					switch(opcionF2) {
@@ -626,7 +633,7 @@ public class Administrador implements Menu {
         			case 4:
         				System.out.println("-------------------------------------------------------");
         				System.out.print("Ingrese el nombre del Empleado : ");
-						String nombreEmpleado =scan.next();
+						String nombreEmpleado = scanner.nextLine();;
 						double liquidacion = financia.liquidacionEmpleado(nombreEmpleado);
 
 						// Imprimir el resultado
