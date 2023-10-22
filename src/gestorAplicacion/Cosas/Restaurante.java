@@ -175,23 +175,6 @@ public class Restaurante implements Serializable {
     		}
     	}
     }
-	public List<Mesa> buscarMesaDisponible() {
-        LocalDate fechaActual = LocalDate.now();
-        List<Mesa> listaDeMesasNo = new ArrayList<>();
-        List<Mesa> listadoTotal = getMesas();
-        for (Mesa mesa1 : getMesas()) {
-            for (Reserva reserva1 : mesa1.getReservas()) {
-                if (reserva1.getDiaReserva().equals(fechaActual)) {
-                    listaDeMesasNo.add(mesa1);
-                    break;
-                }
-            }
-        }
-        for (Mesa mesa2 : listaDeMesasNo) {
-            listadoTotal.remove(mesa2);
-        }
-        return listadoTotal;
-    }
 
     //Metodos gestion de inventario
 
@@ -411,6 +394,17 @@ public class Restaurante implements Serializable {
 		}
 		return empleadosClasificados;
 	}
+	public Mesa buscarMesaDisponible() {
+		LocalDate fechaActual = LocalDate.now();
+		for(Mesa mesa : listadoMesas){
+			for(Reserva reserva : mesa.getReservas()){
+				if(!reserva.getDiaReserva().equals(fechaActual)){
+					return mesa;
+				}
+			}
+		}
+		return null;
+	} 
 	
 	public List<Empleado> verificarCocineros(List<Empleado> empleados, ArrayList<Plato> platos){
 	    List<Empleado> cocineros = clasificarEmpleados(empleados, "cocinero");
