@@ -219,12 +219,12 @@ public class Administrador implements Menu {
 	    				for(int i = 0; i < cocineros.size(); i++){
 	    					System.out.println((i + 1) + ". " + cocineros.get(i));
 	    				}
-	    				System.out.println("-------------------------------------------------------");
 	    				System.out.print("Ingrese el Nombre del Cocinero: ");
 		    			String nombreCocinero = scanner.nextLine();
 		    			Empleado cocinero = restaurante.buscarEmpleado(nombreCocinero, "cocinero");
 		    			if (cocinero == null) {
 		    			System.out.println("Cocinero no encontrado");
+		    			System.out.println("-------------------------------------------------------");
 	    			    break;
 	    			    }
 	    				if(tipoPedido.equals("domicilio")){
@@ -248,10 +248,11 @@ public class Administrador implements Menu {
 		    			    System.out.println("-------------------------------------------------------");
 		    			    
 		    			} else if(tipoPedido.equals("restaurante")){
-		    				System.out.println("Estos son los empleados registrados");
-		    				
-		    				for(int i = 0; i < restaurante.getEmpleados().size(); i++){
-		    					System.out.println((i + 1) + ". " + restaurante.getEmpleados().get(i));
+		    				System.out.println("-------------------------------------------------------");
+		    				System.out.println("Estos son los meseros disponibles ");
+		    				List<Empleado> meseros = restaurante.clasificarEmpleados(restaurante.getEmpleados(), "mesero");
+		    				for(int i = 0; i < meseros.size(); i++){
+		    					System.out.println((i + 1) + ". " + meseros.get(i));
 		    				}
 		    			    System.out.print("\nIngrese el Nombre del Mesero: ");
 		    			    String nombreMesero = scanner.nextLine();
@@ -272,7 +273,7 @@ public class Administrador implements Menu {
 		    			    	System.out.println("\nReserva no encontrada");
 		    			    	System.out.println("\n Se asigna la mesa numero: "+ mesaTemporal.getNumeroMesa()+" a el pedido");
 		    			    	new Pedido(mesaTemporal, tipoPedido, cocinero, mesero, platosTemp, restaurante);
-			    			    System.out.println("pedido creado exitosamente\n");
+			    			    System.out.println("pedido creado exitosamente");
 			    			    System.out.println("-------------------------------------------------------");
 		    			    	break;
 		    			    	}

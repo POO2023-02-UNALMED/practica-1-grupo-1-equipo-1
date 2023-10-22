@@ -186,10 +186,12 @@ public class Pedido implements Serializable,Menu{
     			 turno.restarTiempo(pedido.getTiempoTotal());
     		 }
     	 }
+    	 if(pedido.getDomiciliario()!=null) {
     	 for(Turno turno : pedido.getDomiciliario().getTurnos()){
     		 if(turno.isCobrado()) {
     			 turno.restarTiempo(TIEMPO_DOMICILIO);
     		 }
+    	 }
     	 }
      }
      

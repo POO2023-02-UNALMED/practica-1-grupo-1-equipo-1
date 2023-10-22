@@ -437,6 +437,7 @@ public class Restaurante implements Serializable {
 	    return domiciliariosVerificados;
 	}
 
+
 	
  	public List<Pedido> getPedidosVerificados() {
 		List<Pedido> pedidosVerificados = new ArrayList<>();
