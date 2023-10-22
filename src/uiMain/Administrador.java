@@ -83,9 +83,8 @@ public class Administrador implements Menu {
     	int opcion, opcion2;
 		for (Mesa mesa1 : restaurante.getMesas()) {
 			mesa1.anadirNumero(mesa1.getNumeroMesa());
-		
-		
 		}
+		restaurante.borrarReservasViejas();
 		
     	do {
     		System.out.println("");
@@ -488,7 +487,7 @@ public class Administrador implements Menu {
     			do {
         			System.out.println("-------------------------------------------------------");
         			System.out.println("¿Que deseas hacer?");
-        			System.out.println("1. Consultar el Presupuesto del Restuarante");
+        			System.out.println("1. Consultar el Presupuesto del Restaurante");
         			System.out.println("2. Consultar los Gastos del restaurante");
         			System.out.println("3. Consultar las Ganancias del restaurante");
         			System.out.println("4. Consultar el valor de liquidación de un empleado");
@@ -629,16 +628,13 @@ public class Administrador implements Menu {
         				break; 
         			case 6: break;
         				
-				} while(opcionF!=6); break;
-        			
-				
-    		
-    		}while (opcionInv!=5);
+				}	
+    		} while (opcionF!=6); break;
     		case 6: salirDelSistema(gestor);
 			break;
     	} 
     
-    		}while(opcion!=6);}
+    		} while(opcion!=6);}
     public static void mostrarMesas(Restaurante restaurante) {
     	System.out.println("Mesas del restaurante: ");
     	for (Mesa mesa:restaurante.getMesas()) {

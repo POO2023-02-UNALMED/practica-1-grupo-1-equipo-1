@@ -225,6 +225,24 @@ public class Restaurante implements Serializable {
     	return "Operacion Inválida";
     }
 
+    public List<Mesa> mesasDisponibles() {
+        LocalDate fechaActual = LocalDate.now();
+        List<Mesa> listaDeMesasNo = new ArrayList<>();
+        List<Mesa> listadoTotal = getMesas();
+        for (Mesa mesa1 : getMesas()) {
+            for (Reserva reserva1 : mesa1.getReservas()) {
+                if (reserva1.getDiaReserva().equals(fechaActual)) {
+                    listaDeMesasNo.add(mesa1);
+                    break;
+                }
+            }
+        }
+        for (Mesa mesa2 : listaDeMesasNo) {
+            listadoTotal.remove(mesa2);
+        }
+        return listadoTotal;
+    }
+
     // Gestion de Reservas
     //retorna las mesas que son válidas (capacidad y fecha disponible) para la reserva
     public List<Mesa> listadoMesasValidasParaReserva(Reserva reserva) {
@@ -285,6 +303,20 @@ public class Restaurante implements Serializable {
         }
         return r;
     }
+
+    public void borrarReservasViejas() {
+        LocalDate fechaActual = LocalDate.now();
+        List<Reserva> nuevaLista = new ArrayList<>();
+        for (Mesa mesa1 : getMesas()) {
+            for (Reserva reserva1 : mesa1.getReservas()) {
+                if (!reserva1.getDiaReserva().isBefore(fechaActual)) {
+                    nuevaLista.add(reserva1);
+                }
+            }
+            mesa1.setReservas(nuevaLista);
+        }
+    }
+
     //dice si el cliente si está guardado en la lista de clientes
     public boolean verificarCliente(Long cedula) {
         for (Cliente cliente1 : getClientes()) {
