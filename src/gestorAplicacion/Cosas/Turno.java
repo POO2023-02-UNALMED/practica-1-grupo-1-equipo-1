@@ -1,3 +1,6 @@
+//Autor: Daniel Garzón. Usada para la gestión de pedidos, empleados y financiera.
+//Componentes: Importaciones, constructor, getters y setters, y métodos de las funcionalidades 
+
 package gestorAplicacion.Cosas;
 import java.io.Serializable;
 
@@ -25,18 +28,6 @@ public class Turno implements Serializable{
     }
 	public int getHoras() {
 		return horas;
-	}
-	
-	public void restarTiempo(int tiempo){
-		this.horas=(this.horas*60)-tiempo;
-	}
-	public int HorasExtras() {
-        int horasRegulares = 8;  //suponer que es 8
-        if (this.horas > horasRegulares) {
-            return this.horas - horasRegulares;
-        } else {
-            return 0;
-        }
 	}
  
     public double getSalario() {
@@ -71,8 +62,20 @@ public class Turno implements Serializable{
 		this.horas = horas;
 	}
 	
+    public void restarTiempo(int tiempo){
+		this.horas=(this.horas*60)-tiempo;
+	}
+
+	public int HorasExtras() {
+        int horasRegulares = 8;  //suponer que es 8
+        if (this.horas > horasRegulares) {
+            return this.horas - horasRegulares;
+        } else {
+            return 0;
+        }
+	}
+
 	public String toString(){
 		return "Tipo: " + this.getTipo() +" Salario: " +this.getEstado() +" Estado completado: " + this.isCompletado() +" Estado cobrado";
 	}
 }
-

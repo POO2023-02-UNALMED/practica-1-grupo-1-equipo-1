@@ -1,3 +1,5 @@
+//Autor de la interface: Sebastián Hoyos
+
 package uiMain;
 
 import java.util.ArrayList;

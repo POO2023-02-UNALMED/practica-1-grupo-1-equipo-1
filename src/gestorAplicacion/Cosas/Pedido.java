@@ -1,3 +1,6 @@
+//Autor: Daniel Garzón.
+//Componentes: importaciones, constructores, métodos funcionalidades
+
 package gestorAplicacion.Cosas;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,9 +19,7 @@ public class Pedido implements Serializable,Menu{
     private Restaurante restaurante;
     public static final int TIEMPO_DOMICILIO = 30;
     public static final int TIEMPO_MESERO = 20;
-    // Segun este atributo se van a mostrar y se van a dividir
-    // En pedidos verificados y no verificados
-    private boolean verificado = false;
+    private boolean verificado = false; // Segun este atributo se van a mostrar y se van a dividir en pedidos verificados y no verificados
 	private String tipoPedido;
 	
 	public Pedido () {

@@ -1,8 +1,9 @@
+//Autor: Nicole Guaranguay
+//Componentes: importaciones, constructores, getters y métodos funcionalidades
+
 package gestorAplicacion.Cosas;
 
 import java.util.List;
-
-
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;

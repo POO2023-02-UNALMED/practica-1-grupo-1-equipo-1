@@ -1,3 +1,6 @@
+//Autor: Daniel Garzón. Usada para la funcionalidad de gestión de pedidos, empleados, y financiera. 
+//Componentes: Importaciones, constructores, getters y setters, y métodos de las funcionalidades
+
 package gestorAplicacion.Personas;
 import java.util.Date;
 import java.util.List;
@@ -35,51 +38,6 @@ public class Empleado extends Persona implements Serializable{
         restaurante.contratarEmpleado(this);
     }
     
-    
-    // Metodos de funcionalidades
-    // Verificar Tiempo
-    public boolean verificarTiempo(Empleado empleado,int tiempoPlato){
-    	for (Turno turno : empleado.getTurnos()) {
-    		if(!turno.isCobrado()){
-    			int tiempoDisponible = turno.getHoras()* 60;
-    	    	if(tiempoDisponible>tiempoPlato){
-    	    		return true;
-    	    		}
-    	    	}
-    			}
-		return false;
-    }
-    public boolean verificarTiempo(Empleado empleado){
-    	if(empleado.getPuesto().equals("domicilio")){
-    	for (Turno turno : empleado.getTurnos()) {
-    		if(!turno.isCobrado()){
-    			int tiempoDisponible = turno.getHoras()* 60; 
-    			if( tiempoDisponible > Pedido.TIEMPO_DOMICILIO ){
-    				return true;}}}
-    	if(empleado.getPuesto().equals("domicilio")){
-    		for (Turno turno : empleado.getTurnos()) {
-        		if(!turno.isCobrado()){
-        			int tiempoDisponible = turno.getHoras()* 60; 
-        			if( tiempoDisponible > Pedido.TIEMPO_MESERO ){
-        				return true;}}}
-    	}
-    	}
-		return false;
-    }
-	
-    public void agregarTurno(Turno turno){
-		this.turnos.add(turno);
-	}
-
-	// Este metodo verifica si un turno esta completado y no cobrado 
-	// Para que se le agregué al salario total
-	public void turnosCompletados(){
-		for(Turno turno : turnos){
-			if (turno.isCompletado()==true & turno.isCobrado()==false){
-					salario+=turno.getSalario();
-				}
-			}
-		}
     // Metodos getter
 	public Turno getTurno() {
 		return turno;
@@ -133,6 +91,51 @@ public class Empleado extends Persona implements Serializable{
 	public void setFechaContratacion(Date fechaContratacion) {
 		this.fechaContratacion = fechaContratacion;
 	}
+	
+    // Metodos de funcionalidades
+    // Verificar Tiempo
+    public boolean verificarTiempo(Empleado empleado,int tiempoPlato){
+    	for (Turno turno : empleado.getTurnos()) {
+    		if(!turno.isCobrado()){
+    			int tiempoDisponible = turno.getHoras()* 60;
+    	    	if(tiempoDisponible>tiempoPlato){
+    	    		return true;
+    	    		}
+    	    	}
+    			}
+		return false;
+    }
+    public boolean verificarTiempo(Empleado empleado){
+    	if(empleado.getPuesto().equals("domicilio")){
+    	for (Turno turno : empleado.getTurnos()) {
+    		if(!turno.isCobrado()){
+    			int tiempoDisponible = turno.getHoras()* 60; 
+    			if( tiempoDisponible > Pedido.TIEMPO_DOMICILIO ){
+    				return true;}}}
+    	if(empleado.getPuesto().equals("domicilio")){
+    		for (Turno turno : empleado.getTurnos()) {
+        		if(!turno.isCobrado()){
+        			int tiempoDisponible = turno.getHoras()* 60; 
+        			if( tiempoDisponible > Pedido.TIEMPO_MESERO ){
+        				return true;}}}
+    	}
+    	}
+		return false;
+    }
+	
+    public void agregarTurno(Turno turno){
+		this.turnos.add(turno);
+	}
+
+	// Este metodo verifica si un turno esta completado y no cobrado 
+	// Para que se le agregué al salario total
+	public void turnosCompletados(){
+		for(Turno turno : turnos){
+			if (turno.isCompletado()==true & turno.isCobrado()==false){
+					salario+=turno.getSalario();
+				}
+			}
+		}
 	
 	//metodo que permite reportar daños a un material no organico
 	public void reportarDano(Material.Tipo material,int cantidad) {

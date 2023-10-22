@@ -1,3 +1,6 @@
+//Autor: Daniel Garzón.
+//Componentes: importaciones, constructores, getters y metodos de funcionalidades
+
 package gestorAplicacion.Cosas;
 import java.time.LocalDate;
 import java.io.Serializable;
