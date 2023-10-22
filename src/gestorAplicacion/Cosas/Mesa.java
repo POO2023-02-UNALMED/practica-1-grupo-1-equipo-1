@@ -95,7 +95,7 @@ public class Mesa implements Serializable{
     }
     
     public String toString(){
-    	return "Capacidad: " + capacidad + "numeroMesa" + numeroMesa; 
+    	return "Capacidad: " + capacidad + " mesa numero: " + numeroMesa; 
     }
 
     //Metodos de clase

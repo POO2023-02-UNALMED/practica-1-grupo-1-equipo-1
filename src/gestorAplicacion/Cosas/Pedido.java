@@ -14,6 +14,7 @@ public class Pedido implements Serializable,Menu{
     private Reserva reserva;
     private ArrayList<Plato> platos;
     private Restaurante restaurante;
+    public static final int TIEMPO_DOMICILIO = 30;
     // Segun este atributo se van a mostrar y se van a dividir
     // En pedidos verificados y no verificados
     private boolean verificado = false;
@@ -54,44 +55,20 @@ public class Pedido implements Serializable,Menu{
 	    restaurante.agregarPedido(this);
 	}
 
-	// Verificar pedido
-     public boolean verificarPedido(Pedido pedido){
-     	// se inicializa como true el domiciliario ya que ste se utiliza para pedidos de tipo domiciliario
-     	boolean verificado_domiciliario = false;
-     	boolean verificado_cocinero = false;
-     	for(Plato plato : pedido.getPlatos()){
-     		if (pedido.cocinero.verificarTiempo(plato.getTiempoPreparacion())){
-     			verificado_cocinero = true;
-     			pedido.setVerificado(true);
-     			}else if(true){
-     				break;
-     				}
-     		if (pedido.tipoPedido.equals("domicilio")) {
-     			if(pedido.domiciliario.verificarTiempo()){
-     				verificado_domiciliario=true;
-     				pedido.setVerificado(true);
-     				return (verificado_cocinero && verificado_domiciliario);
-     				}else if(true){
-     					return (verificado_cocinero && verificado_domiciliario);
-     					}
-     		}
-     		}
-     	return (verificado_cocinero );
-     	}
     
    // Metdos para Administrador
    // Gestion de Pedidos
      
      public String imprimirPlatos(){
-    	 int i = 0;
-    	 for (Pedido pedido: this.restaurante.getPedidos()) {
-    		 for(Plato plato : pedido.getPlatos()){
+    	 String stringPlatos = "";
+    	 int i =0;
+    	 for(Plato plato : this.getPlatos()){
     			 i+=1;
-    			 return "\n   "+i+":"+plato.detallesPlato();
+    			 stringPlatos+="\n   "+"Plato numero: "+i+plato.detallesPlato()+"\n";
          	}
+		return stringPlatos;
      	}
-		return null;
-     }
+     
      public String imprimirPedidosVerificadosPlato(){
     	 for(Pedido pedido : this.restaurante.getPedidos()){
     		 if(pedido.isVerificado()){
@@ -115,6 +92,10 @@ public class Pedido implements Serializable,Menu{
   // Metodos de plato
      public void agregarPlato(Plato plato) {
          this.platos.add(plato);
+     }
+     
+     public void setMesa(Mesa mesa){
+    	 this.mesa = mesa;
      }
 
      public void removerPlato(Plato plato) {
@@ -154,7 +135,15 @@ public class Pedido implements Serializable,Menu{
      public  ArrayList<Plato> getPlatos(){
     	 return this.platos;
      }
-     
+     public Empleado getCocinero() {
+    	 return this.cocinero;
+     }
+     public Empleado getMesero() {
+    	 return this.mesero;
+     }
+     public Empleado getDomiciliario() {
+    	 return this.domiciliario;
+     }
      @Override
      public String toString() {
     	 String mesaStr = (mesa != null) ? mesa.toString() : "N/A";
@@ -180,5 +169,43 @@ public class Pedido implements Serializable,Menu{
          }
          return precioTotal;
      }
+     
+     public int getTiempoTotal() {
+         int tiempoTotal = 0;
+         for (Plato plato : this.getPlatos()) {
+        	 tiempoTotal += plato.getTiempoPreparacion();
+         }
+         return tiempoTotal;
+     }
+     
+     
+     
+     public void actualizarTiempoEmpleados(Pedido pedido){
+    	 for(Turno turno : pedido.getCocinero().getTurnos()){
+    		 if(turno.isCobrado()) {
+    			 turno.restarTiempo(pedido.getTiempoTotal());
+    		 }
+    	 }
+    	 if(pedido.getDomiciliario()!=null) {
+    	 for(Turno turno : pedido.getDomiciliario().getTurnos()){
+    		 if(turno.isCobrado()) {
+    			 turno.restarTiempo(TIEMPO_DOMICILIO);
+    		 }
+    	 }
+    	 }
+     }
+     
+     public void actualizarInventario(Restaurante restaurante,Pedido pedido) {
+		actualizarTiempoEmpleados(pedido);
+		restaurante.actualizarInsumos(pedido);
+}
+	public Mesa verificarPedido(Restaurante restaurante,Pedido pedido) {
+		Mesa mesa = restaurante.buscarMesaDisponible();
+		pedido.setMesa(mesa);
+		pedido.setVerificado(true);
+		actualizarInventario(restaurante,pedido);
+		return mesa;
+	}
+
 
 }

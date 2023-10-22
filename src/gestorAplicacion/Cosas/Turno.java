@@ -27,6 +27,9 @@ public class Turno implements Serializable{
 		return horas;
 	}
 	
+	public void restarTiempo(int tiempo){
+		this.horas=(this.horas*60)-tiempo;
+	}
 	public int HorasExtras() {
         int horasRegulares = 8;  //suponer que es 8
         if (this.horas > horasRegulares) {
@@ -60,13 +63,16 @@ public class Turno implements Serializable{
     public void setCobrado(boolean cobrado) {
         this.cobrado = cobrado;
     }
+    public boolean getEstado() {
+		return this.completado;
+	}
 
 	public void setHoras(int horas) {
 		this.horas = horas;
 	}
 	
 	public String toString(){
-		return "Tipo: " + this.getTipo() +" Salario: " +salario +" Estado completado: " +completado +" Estado cobrado";
+		return "Tipo: " + this.getTipo() +" Salario: " +this.getEstado() +" Estado completado: " + this.isCompletado() +" Estado cobrado";
 	}
 }
 

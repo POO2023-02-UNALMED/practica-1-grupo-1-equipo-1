@@ -1,7 +1,10 @@
 package gestorAplicacion.Personas;
 import java.util.Date;
+import java.util.List;
 
 import gestorAplicacion.Cosas.Material;
+import gestorAplicacion.Cosas.Mesa;
+import gestorAplicacion.Cosas.Pedido;
 import gestorAplicacion.Cosas.Plato;
 import gestorAplicacion.Cosas.Restaurante;
 import gestorAplicacion.Cosas.Turno;
@@ -18,15 +21,17 @@ public class Empleado extends Persona implements Serializable{
     private Date fechaContratacion;
     private Restaurante restaurante;
     private int puntuacion;
+    public static final int PEDIDO_DOMICILIO = 30;
     
     public Empleado() {
     	
     }
-    public Empleado(String nombre,Long cedula, String puesto,Restaurante restaurante, Turno turno){
-        super(nombre,cedula);
+    public Empleado(String nombre, Long cedula, String puesto, Restaurante restaurante, Turno turno){
+        super(nombre, cedula);
         this.puesto = puesto;
         this.restaurante = restaurante;
-        this.turno = turno;
+        this.turnos = new ArrayList<>(); // Inicializa la lista de turnos
+        this.turnos.add(turno); // Añade el turno a la lista
         this.setFechaContratacion(new Date()); // Guarda la fecha actual
         restaurante.contratarEmpleado(this);
     }
@@ -34,17 +39,25 @@ public class Empleado extends Persona implements Serializable{
     
     // Metodos de funcionalidades
     // Verificar Tiempo
-    public boolean verificarTiempo(int tiempoPlato){
-    	int tiempoDisponible = this.turno.getHoras()* 60;
-    	if(tiempoDisponible>tiempoPlato){
-    		return true;
-    		}
-    	return false;
+    public boolean verificarTiempo(Empleado empleado,int tiempoPlato){
+    	for (Turno turno : empleado.getTurnos()) {
+    		if(!turno.isCobrado()){
+    			int tiempoDisponible = turno.getHoras()* 60;
+    	    	if(tiempoDisponible>tiempoPlato){
+    	    		return true;
+    	    		}
+    	    	}
+    			}
+		return false;
+    }
+    public boolean verificarTiempo(Empleado empleado){
+    	for (Turno turno : empleado.getTurnos()) {
+    		if(!turno.isCobrado()){
+    			int tiempoDisponible = turno.getHoras()* 60; 
+    			if( tiempoDisponible > PEDIDO_DOMICILIO ){
+    				return true;
     	}
-    public boolean verificarTiempo(){
-    	int tiempoDisponible = this.turno.getHoras()* 60; 
-    	if( tiempoDisponible > Plato.TIEMPO_DOMICILIO_MINUTOS ){
-    		return true;
+    	}
     	}
 		return false;
     }
@@ -127,11 +140,21 @@ public class Empleado extends Persona implements Serializable{
 		}
 		return null;
 	}
-	
+	private Turno turnoActual() {
+		for(Turno turno : this.turnos)
+		{
+			if(!turno.isCobrado()){
+				return turno;
+			}
+		}
+		return null;
+		}
 	public String toString(){
-		return "Nombre: " + this.getNombre()+ " Puesto: "+ this.getPuesto() + "\n   " + this.turno+"\n";
+		return "Nombre: " + this.getNombre()+ " Puesto: "+ this.getPuesto() + "\n   " + turnoActual()+"\n";
 	}
+	
 	public void puntuacion(Empleado e) {
 		
 	}
+	
 }
