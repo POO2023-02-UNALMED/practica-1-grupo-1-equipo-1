@@ -72,12 +72,12 @@ public class Administrador implements Menu {
     	Turno turno8 = new Turno(Turno.Tipo.SABADO, 2, 70000);
     	Turno turno9 = new Turno(Turno.Tipo.DOMINGO, 1, 80000);
     	Turno turno10 = new Turno(Turno.Tipo.SEMANA, 5, 65000);
-    	Empleado mesero1 = new Empleado("Juan", 123456789L, "mesero", restaurante, turno1);
+    	/*Empleado mesero1 = new Empleado("Juan", 123456789L, "mesero", restaurante, turno1);
     	mesero1.agregarTurno(turno2);
     	Empleado cocinero1 = new Empleado("Ana", 987654321L, "cocinero", restaurante, turno3);
     	cocinero1.agregarTurno(turno4);
     	Empleado domiciliario1 = new Empleado("Carlos", 456789123L, "domiciliario", restaurante, turno5);
-    	domiciliario1.agregarTurno(turno6);
+    	domiciliario1.agregarTurno(turno6);*/
         Pedido pedido = new Pedido();
         Plato plato = new Plato();
     	//mostrarMenu(menu);
