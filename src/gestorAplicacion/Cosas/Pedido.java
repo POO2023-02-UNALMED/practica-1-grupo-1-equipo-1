@@ -183,18 +183,51 @@ public class Pedido implements Serializable,Menu{
      
      
      public void actualizarTiempoEmpleados(Pedido pedido){
+
     	 for(Turno turno : pedido.getCocinero().getTurnos()){
+
     		 if(turno.isCobrado()) {
+
     			 turno.restarTiempo(pedido.getTiempoTotal());
+
     		 }
+
     	 }
+
+    	 pedido.getCocinero().turnosCompletados(pedido.getCocinero());
+
+    	 if(pedido.getMesero()!=null) {
+
+        	 for(Turno turno :pedido.getMesero().getTurnos()){
+
+        		 if(turno.isCobrado()) {
+
+        			 turno.restarTiempo(TIEMPO_MESERO);
+
+        		 }
+
+        	 }
+
+        	 pedido.getMesero().turnosCompletados(pedido.getMesero()); 
+
+    	 }
+
     	 if(pedido.getDomiciliario()!=null) {
+
     	 for(Turno turno : pedido.getDomiciliario().getTurnos()){
+
     		 if(turno.isCobrado()) {
+
     			 turno.restarTiempo(TIEMPO_DOMICILIO);
+
     		 }
+
     	 }
+
+    	 pedido.getDomiciliario().turnosCompletados(pedido.getDomiciliario());
+
     	 }
+
      }
      
      public void actualizarInventario(Restaurante restaurante,Pedido pedido) {

@@ -129,12 +129,18 @@ public class Empleado extends Persona implements Serializable{
 
 	// Este metodo verifica si un turno esta completado y no cobrado 
 	// Para que se le agregué al salario total
-	public void turnosCompletados(){
-		for(Turno turno : turnos){
+    public void turnosCompletados(Empleado empleado){
+
+		for(Turno turno : empleado.getTurnos()){
+
 			if (turno.isCompletado()==true & turno.isCobrado()==false){
+
 					salario+=turno.getSalario();
+
 				}
+
 			}
+
 		}
 	
 	//metodo que permite reportar daños a un material no organico
