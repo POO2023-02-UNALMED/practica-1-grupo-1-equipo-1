@@ -175,37 +175,6 @@ public class Restaurante implements Serializable {
     		}
     	}
     }
-    public void agregarPedido(Pedido pedido) {
-		pedidos.add(pedido);
-	}
-	
-	public  ArrayList<Plato>  veirificarMenu(ArrayList<Plato> menu) {
-		ArrayList<Plato> menuVerificado= new ArrayList<>();
-		for(Plato plato: menu){
-			if(plato.verificarInsumos(plato)){
-				menuVerificado.add(plato);
-			}
-		}
-		return menuVerificado;
-	}
-	public Reserva encontrarReserva(int numMesa, String nombre) {
-		Mesa mesa = encontrarMesa(numMesa);
-		for(Reserva reserva : mesa.getReservas()){
-			if((reserva.getDuenoReserva().getNombre()).equals(nombre)){
-				return reserva;
-			}
-		}
-		return null;
-    }
-	public List<Empleado> clasificarEmpleados( List<Empleado> empleados, String tipo){
-		List<Empleado> empleadosClasificados = new ArrayList<>();
-		for(Empleado empleado : empleados){
-			if(empleado.getPuesto().equals(tipo)){
-				empleadosClasificados.add(empleado);
-			}
-		}
-		return empleadosClasificados;
-	}
 	public List<Mesa> buscarMesaDisponible() {
         LocalDate fechaActual = LocalDate.now();
         List<Mesa> listaDeMesasNo = new ArrayList<>();
@@ -223,76 +192,6 @@ public class Restaurante implements Serializable {
         }
         return listadoTotal;
     }
-	
-	public List<Empleado> verificarCocineros(List<Empleado> empleados, ArrayList<Plato> platos){
-	    List<Empleado> cocineros = clasificarEmpleados(empleados, "cocinero");
-	    List<Empleado> cocinerosVerificados = new ArrayList<>();
-	    int tiempoPreparacion = platos.get(0).getTiempoTotal(platos);
-	    for(Empleado empleado : cocineros){
-	        if(empleado.verificarTiempo(empleado, tiempoPreparacion)){
-	            cocinerosVerificados.add(empleado);
-	        }
-	    }
-	    return cocinerosVerificados;
-	}
-	
-	public List<Empleado> verificarDomiciliarios(List<Empleado> empleados) {
-	    List<Empleado> domiciliarios = clasificarEmpleados(empleados, "domiciliario");
-	    List<Empleado> domiciliariosVerificados = new ArrayList<>();
-	    for(Empleado empleado : domiciliarios){
-	        if(empleado.verificarTiempo(empleado)){
-	            domiciliariosVerificados.add(empleado);
-	        }
-	    }
-	    return domiciliariosVerificados;
-	}
-
- 	public List<Pedido> getPedidosVerificados() {
-		List<Pedido> pedidosVerificados = new ArrayList<>();
-		for(Pedido pedido : getPedidos()){
-			if(pedido.isVerificado()){
-				pedidosVerificados.add(pedido);
-			}
-		}
-		return pedidosVerificados;
-	}
- 	
-	public List<Pedido> getPedidosSinVerificar(){
-		List<Pedido> pedidosSinVerificar = new ArrayList<>();
-		for(Pedido pedido : getPedidos()){
-			if(pedido.isVerificado()==false){
-				pedidosSinVerificar.add(pedido);
-			}
-		}
-		return pedidosSinVerificar;
-	}
-	
-	public String imprimirPedidosVerificados(){
-		String pedidosVerificados ="";
-		for(int i = 0; i < getPedidosVerificados().size(); i++){
-			pedidosVerificados+=(i + 1) + ". " + getPedidosVerificados().get(i);
-			pedidosVerificados+="\n-------------------------------------------------------\n";
-			}
-		return pedidosVerificados;
-	}
-	public String imprimirPedidosSinVerificar(){
-	    String pedidosSinVerificar ="";
-	    for(int i = 0; i < getPedidosSinVerificar().size(); i++){
-	        pedidosSinVerificar+=(i + 1) + ". " + getPedidosSinVerificar().get(i);
-	        pedidosSinVerificar+="\n-------------------------------------------------------\n";
-	    }
-	    return pedidosSinVerificar;
-	}
-
-	public void actualizarInsumos(Pedido pedido) {
-	    for (Plato plato : pedido.getPlatos()) {
-	        for (Map.Entry<Material, Integer> entrada : plato.getIngredientes().entrySet()) {
-	            Material material = entrada.getKey();
-	            int cantidadUtilizada = entrada.getValue();
-	            material.restarCantidad(cantidadUtilizada);
-	        }
-	    }
-	}
 
     //Metodos gestion de inventario
 
@@ -478,4 +377,122 @@ public class Restaurante implements Serializable {
             mesa1.borrarReservasViejas();
         }
     }
+	public void agregarPedido(Pedido pedido) {
+		pedidos.add(pedido);
+	}
+	
+	public  ArrayList<Plato>  veirificarMenu(ArrayList<Plato> menu) {
+		ArrayList<Plato> menuVerificado= new ArrayList<>();
+		for(Plato plato: menu){
+			if(plato.verificarInsumos(plato)){
+				menuVerificado.add(plato);
+			}
+		}
+		return menuVerificado;
+	}
+	
+	
+	
+	public Reserva encontrarReserva(int numMesa, String nombre) {
+		Mesa mesa = encontrarMesa(numMesa);
+		for(Reserva reserva : mesa.getReservas()){
+			if((reserva.getDuenoReserva().getNombre()).equals(nombre)){
+				return reserva;
+			}
+		}
+		return null;
+}
+	public List<Empleado> clasificarEmpleados( List<Empleado> empleados, String tipo){
+		List<Empleado> empleadosClasificados = new ArrayList<>();
+		for(Empleado empleado : empleados){
+			if(empleado.getPuesto().equals(tipo)){
+				empleadosClasificados.add(empleado);
+			}
+		}
+		return empleadosClasificados;
+	}
+	
+	public List<Empleado> verificarCocineros(List<Empleado> empleados, ArrayList<Plato> platos){
+	    List<Empleado> cocineros = clasificarEmpleados(empleados, "cocinero");
+	    List<Empleado> cocinerosVerificados = new ArrayList<>();
+	    int tiempoPreparacion = platos.get(0).getTiempoTotal(platos);
+	    for(Empleado empleado : cocineros){
+	        if(empleado.verificarTiempo(empleado, tiempoPreparacion)){
+	            cocinerosVerificados.add(empleado);
+	        }
+	    }
+	    return cocinerosVerificados;
+	}
+	
+	public List<Empleado> verificarDomiciliarios(List<Empleado> empleados) {
+	    List<Empleado> domiciliarios = clasificarEmpleados(empleados, "domiciliario");
+	    List<Empleado> domiciliariosVerificados = new ArrayList<>();
+	    for(Empleado empleado : domiciliarios){
+	        if(empleado.verificarTiempo(empleado)){
+	            domiciliariosVerificados.add(empleado);
+	        }
+	    }
+	    return domiciliariosVerificados;
+	}
+	
+	public List<Empleado> verificarMeseros(List<Empleado> empleados) {
+	    List<Empleado> domiciliarios = clasificarEmpleados(empleados, "mesero");
+	    List<Empleado> meserosVerificados = new ArrayList<>();
+	    for(Empleado empleado : domiciliarios){
+	        if(empleado.verificarTiempo(empleado)){
+	        	meserosVerificados.add(empleado);
+	        }
+	    }
+	    return meserosVerificados;
+	}
+
+
+	
+	public List<Pedido> getPedidosVerificados() {
+		List<Pedido> pedidosVerificados = new ArrayList<>();
+		for(Pedido pedido : getPedidos()){
+			if(pedido.isVerificado() && pedido.getDomiciliario()==null){
+				pedidosVerificados.add(pedido);
+			}
+		}
+		return pedidosVerificados;
+	}
+ 	
+	public List<Pedido> getPedidosSinVerificar(){
+		List<Pedido> pedidosSinVerificar = new ArrayList<>();
+		for(Pedido pedido : getPedidos()){
+			if(pedido.isVerificado()==false && pedido.getDomiciliario()==null){
+				pedidosSinVerificar.add(pedido);
+			}
+		}
+		return pedidosSinVerificar;
+	}
+	
+	public String imprimirPedidosVerificados(){
+		String pedidosVerificados ="";
+		for(int i = 0; i < getPedidosVerificados().size(); i++){
+			pedidosVerificados+=(i + 1) + ". " + getPedidosVerificados().get(i);
+			pedidosVerificados+="\n-------------------------------------------------------\n";
+			}
+		return pedidosVerificados;
+	}
+	public String imprimirPedidosSinVerificar(){
+	    String pedidosSinVerificar ="";
+	    for(int i = 0; i < getPedidosSinVerificar().size(); i++){
+	        pedidosSinVerificar+=(i + 1) + ". " + getPedidosSinVerificar().get(i);
+	        pedidosSinVerificar+="\n-------------------------------------------------------\n";
+	    }
+	    return pedidosSinVerificar;
+	}
+
+
+	public void actualizarInsumos(Pedido pedido) {
+	    for (Plato plato : pedido.getPlatos()) {
+	        for (Map.Entry<Material, Integer> entrada : plato.getIngredientes().entrySet()) {
+	            Material material = entrada.getKey();
+	            int cantidadUtilizada = entrada.getValue();
+	            material.restarCantidad(cantidadUtilizada);
+	        }
+	    }
+	}
 }

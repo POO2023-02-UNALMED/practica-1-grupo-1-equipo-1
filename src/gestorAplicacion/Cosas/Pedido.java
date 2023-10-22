@@ -15,6 +15,7 @@ public class Pedido implements Serializable,Menu{
     private ArrayList<Plato> platos;
     private Restaurante restaurante;
     public static final int TIEMPO_DOMICILIO = 30;
+    public static final int TIEMPO_MESERO = 20;
     // Segun este atributo se van a mostrar y se van a dividir
     // En pedidos verificados y no verificados
     private boolean verificado = false;
@@ -147,13 +148,13 @@ public class Pedido implements Serializable,Menu{
      @Override
      public String toString() {
     	 String mesaStr = (mesa != null) ? mesa.toString() : "N/A";
-         String meseroStr = (mesero != null) ? mesero.toString() : "N/A";
-         String domiciliarioStr = (domiciliario != null) ? domiciliario.toString() : "no tiene reserva asociada";
-         String resumen = (reserva != null) ? reserva.resumenReserva() : "N/A";
+         String meseroStr = (mesero != null) ? mesero.getNombre() : "N/A";
+         String domiciliarioStr = (domiciliario != null) ? domiciliario.getNombre() : "N/A";
+         String resumen = (reserva != null) ? reserva.resumenReservaPedido() : "no tiene reserva asociada";
          
 
          return "mesa: " + mesa +
-                 "\n   cocinero: " + cocinero.toString() +
+                 "\n   cocinero: " + cocinero.getNombre() +
                  "\n   mesero: " + meseroStr +
                  "\n   domiciliario: " + domiciliarioStr +
                  "\n   numero de platos: " + this.getPlatos().size()+ 
