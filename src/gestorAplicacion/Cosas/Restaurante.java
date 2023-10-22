@@ -20,7 +20,7 @@ public class Restaurante implements Serializable {
     private List<Empleado> listadoEmpleados=new ArrayList<>();
     private List<Cliente> listadoClientes=new ArrayList<>();
     private List<Mesa> listadoMesas=new ArrayList<>();
-    private ArrayList<Pedido> pedidos= new ArrayList<>();
+    private List<Pedido> pedidos= new ArrayList<>();
     private Map<Tipo, Material> inventario=new HashMap<>();
     
     //Constructores, que se invocan uno a otro, dependiendo si los restaurantes se inicializan con listas o no
@@ -248,6 +248,9 @@ public class Restaurante implements Serializable {
         return null;
     }
     
+    public List<Pedido> getPedidos(){
+    	return pedidos;
+    }
     //Imprime las reservas por confirmar (sin mesa asignada)
     public String imprimirReservas() {
         String r = "";
@@ -368,9 +371,7 @@ public class Restaurante implements Serializable {
 	public void agregarPedido(Pedido pedido) {
 		pedidos.add(pedido);
 	}
-	public ArrayList<Pedido> getPedidos() {
-		return pedidos;
-	}
+	
 	public  ArrayList<Plato>  veirificarMenu(ArrayList<Plato> menu) {
 		ArrayList<Plato> menuVerificado= new ArrayList<>();
 		for(Plato plato: menu){
@@ -380,6 +381,9 @@ public class Restaurante implements Serializable {
 		}
 		return menuVerificado;
 	}
+	
+	
+	
 	public Reserva encontrarReserva(int numMesa, String nombre) {
 		Mesa mesa = encontrarMesa(numMesa);
 		for(Reserva reserva : mesa.getReservas()){
@@ -389,4 +393,91 @@ public class Restaurante implements Serializable {
 		}
 		return null;
 }
+	public List<Empleado> clasificarEmpleados( List<Empleado> empleados, String tipo){
+		List<Empleado> empleadosClasificados = new ArrayList<>();
+		for(Empleado empleado : empleados){
+			if(empleado.getPuesto().equals(tipo)){
+				empleadosClasificados.add(empleado);
+			}
+		}
+		return empleadosClasificados;
+	}
+	public Mesa buscarMesaDisponible() {
+		LocalDate fechaActual = LocalDate.now();
+		for(Mesa mesa : listadoMesas){
+			for(Reserva reserva : mesa.getReservas()){
+				if(!reserva.getDiaReserva().equals(fechaActual)){
+					return mesa;
+				}
+			}
+		}
+		return null;
+	}
+	
+	public List<Empleado> verificarCocineros(List<Empleado> empleados, ArrayList<Plato> platos){
+	    List<Empleado> cocineros = clasificarEmpleados(empleados, "cocinero");
+	    List<Empleado> cocinerosVerificados = new ArrayList<>();
+	    int tiempoPreparacion = platos.get(0).getTiempoTotal(platos);
+	    for(Empleado empleado : cocineros){
+	        if(empleado.verificarTiempo(empleado, tiempoPreparacion)){
+	            cocinerosVerificados.add(empleado);
+	        }
+	    }
+	    return cocinerosVerificados;
+	}
+	
+	public List<Empleado> verificarDomiciliarios(List<Empleado> empleados) {
+	    List<Empleado> domiciliarios = clasificarEmpleados(empleados, "domiciliario");
+	    List<Empleado> domiciliariosVerificados = new ArrayList<>();
+	    for(Empleado empleado : domiciliarios){
+	        if(empleado.verificarTiempo(empleado)){
+	            domiciliariosVerificados.add(empleado);
+	        }
+	    }
+	    return domiciliariosVerificados;
+	}
+
+	
+ 	public List<Pedido> getPedidosVerificados() {
+		List<Pedido> pedidosVerificados = new ArrayList<>();
+		for(Pedido pedido : getPedidos()){
+			if(pedido.isVerificado()){
+				pedidosVerificados.add(pedido);
+			}
+		}
+		return pedidosVerificados;
+	}
+ 	
+	public List<Pedido> getPedidosSinVerificar(){
+		List<Pedido> pedidosSinVerificar = new ArrayList<>();
+		for(Pedido pedido : getPedidos()){
+			if(pedido.isVerificado()==false){
+				pedidosSinVerificar.add(pedido);
+			}
+		}
+		return pedidosSinVerificar;
+	}
+	
+	public String imprimirPedidosVerificados(){
+		String pedidosVerificados ="";
+		for(int i = 0; i < getPedidosVerificados().size(); i++){
+			pedidosVerificados+=(i + 1) + ". " + getPedidosVerificados().get(i);
+			pedidosVerificados+="\n   ++++++++++++++++++++++++++\n";
+			}
+		return pedidosVerificados;
+	}
+	public String imprimirPedidosSinVerificar(){
+	    String pedidosSinVerificar ="";
+	    for(int i = 0; i < getPedidosSinVerificar().size(); i++){
+	        pedidosSinVerificar+=(i + 1) + ". " + getPedidosSinVerificar().get(i);
+	        pedidosSinVerificar+="\n   ++++++++++++++++++++++++++\n";
+	    }
+	    return pedidosSinVerificar;
+	}
+
+
+	public void actualizarInsumos(Pedido pedido) {
+		
+	}
+	
 }

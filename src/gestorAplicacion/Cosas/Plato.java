@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import gestorAplicacion.Cosas.Material.Tipo;
+import gestorAplicacion.Personas.Empleado;
 
 
 public class Plato implements Serializable{
@@ -13,7 +14,6 @@ public class Plato implements Serializable{
     private int precio;
     private String descripcion;
     private int tiempoPreparacion;
-    public static final int TIEMPO_DOMICILIO_MINUTOS = 30;
     private Map<Material, Integer> ingredientes;
     private boolean verificadoInsumos;
 
@@ -53,7 +53,7 @@ public class Plato implements Serializable{
     }
     
     public String detallesPlato() {
-        return "Plato"+
+        return 
         	"\n   Nombre: " + nombre  +
             "\n   Precio: " + precio +
             "\n   Descripcion: " + descripcion  +
@@ -74,7 +74,13 @@ public class Plato implements Serializable{
     public Map<Material, Integer> getIngredientes() {
         return ingredientes;
     }
-    
+    public int getTiempoTotal(ArrayList<Plato> platos){
+   	 int tiempoTotal=0;
+   	 for(Plato plato : platos){
+   		 tiempoTotal+=plato.getTiempoPreparacion();
+   	 }
+   	 return tiempoTotal;
+    }
     // Métodos setter
     public void setNombre(String nombre) {
         this.nombre = nombre;

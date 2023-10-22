@@ -1,7 +1,10 @@
 package gestorAplicacion.Personas;
 import java.util.Date;
+import java.util.List;
 
 import gestorAplicacion.Cosas.Material;
+import gestorAplicacion.Cosas.Mesa;
+import gestorAplicacion.Cosas.Pedido;
 import gestorAplicacion.Cosas.Plato;
 import gestorAplicacion.Cosas.Restaurante;
 import gestorAplicacion.Cosas.Turno;
@@ -18,6 +21,7 @@ public class Empleado extends Persona implements Serializable{
     private Date fechaContratacion;
     private Restaurante restaurante;
     private int puntuacion;
+    public static final int PEDIDO_DOMICILIO = 30;
     
     public Empleado() {
     	
@@ -34,16 +38,16 @@ public class Empleado extends Persona implements Serializable{
     
     // Metodos de funcionalidades
     // Verificar Tiempo
-    public boolean verificarTiempo(int tiempoPlato){
-    	int tiempoDisponible = this.turno.getHoras()* 60;
+    public boolean verificarTiempo(Empleado empleado,int tiempoPlato){
+    	int tiempoDisponible = empleado.getTurno().getHoras()* 60;
     	if(tiempoDisponible>tiempoPlato){
     		return true;
     		}
     	return false;
     	}
-    public boolean verificarTiempo(){
+    public boolean verificarTiempo(Empleado empleado){
     	int tiempoDisponible = this.turno.getHoras()* 60; 
-    	if( tiempoDisponible > Plato.TIEMPO_DOMICILIO_MINUTOS ){
+    	if( tiempoDisponible > PEDIDO_DOMICILIO ){
     		return true;
     	}
 		return false;
@@ -134,4 +138,5 @@ public class Empleado extends Persona implements Serializable{
 	public void puntuacion(Empleado e) {
 		
 	}
+	
 }
