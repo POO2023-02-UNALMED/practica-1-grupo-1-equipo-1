@@ -507,8 +507,8 @@ public class Administrador implements Menu {
         			case 1:System.out.println("-------------------------------------------------------");
         				
         			// Consultar el presupuesto total del restaurante
-        		    	double presupuesto = financia.getPresupuesto();
-        		    	double gastos = financia.getGastosMateriales() + financia.getPagosEmpleados();
+        		    	double presupuesto = financia.presupuesto();
+        		    	double gastos = financia.gastosMateriales() + financia.pagosEmpleados(restaurante);
         		 
         		    	System.out.println("Presupuesto total del restaurante: " + presupuesto);
         		    	if (presupuesto < gastos) {
@@ -535,7 +535,7 @@ public class Administrador implements Menu {
         					switch(opcionF1) {
         					case 1: 
         						System.out.println("-------------------------------------------------------");
-        						double total = financia.getGastosMateriales();
+        						double total = financia.gastosMateriales();
         						System.out.println("Costo total de abastecer el Inventario del Restaurante: " + total );
         						
     							break;
@@ -555,7 +555,7 @@ public class Administrador implements Menu {
         						
         					case 3:
         						System.out.println("-------------------------------------------------------");
-        						double pago3 = financia.getPagosEmpleados();
+        						double pago3 = financia.pagosEmpleados(restaurante);
         						System.out.println("Pago total de los Empleados del Restaurante: " + pago3);
         						
         						break;
