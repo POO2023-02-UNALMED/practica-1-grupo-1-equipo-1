@@ -39,6 +39,7 @@ public class Administrador implements Menu {
     	restaurante.setMesas(gestor.getMesas());
     	restaurante.setEmpleadoDelMes(gestor.getEmpleadoDelMes());
     	restaurante.setInventario(gestor.getInventario());
+    	restaurante.setPedidos(gestor.getPedidos());
     	//Crear un objeto Financia 
     	
     	Financia financia = new Financia(restaurante);  	
@@ -71,21 +72,20 @@ public class Administrador implements Menu {
     	Turno turno8 = new Turno(Turno.Tipo.SABADO, 2, 70000);
     	Turno turno9 = new Turno(Turno.Tipo.DOMINGO, 1, 80000);
     	Turno turno10 = new Turno(Turno.Tipo.SEMANA, 5, 65000);
-    	Empleado mesero1 = new Empleado("Juan", 123456789L, "mesero", restaurante, turno1);
+    	/*Empleado mesero1 = new Empleado("Juan", 123456789L, "mesero", restaurante, turno1);
     	mesero1.agregarTurno(turno2);
     	Empleado cocinero1 = new Empleado("Ana", 987654321L, "cocinero", restaurante, turno3);
     	cocinero1.agregarTurno(turno4);
     	Empleado domiciliario1 = new Empleado("Carlos", 456789123L, "domiciliario", restaurante, turno5);
-    	domiciliario1.agregarTurno(turno6);
+    	domiciliario1.agregarTurno(turno6);*/
         Pedido pedido = new Pedido();
         Plato plato = new Plato();
     	//mostrarMenu(menu);
     	int opcion, opcion2;
 		for (Mesa mesa1 : restaurante.getMesas()) {
 			mesa1.anadirNumero(mesa1.getNumeroMesa());
-		
-		
 		}
+		//restaurante.borrarReservasViejas();
 		
     	do {
     		System.out.println("");
@@ -172,176 +172,174 @@ public class Administrador implements Menu {
 					case 6: break;
 				} } while(opcion2 != 6);
 			break;
-    		case 2: do{
-    			System.out.println("¿Que deseas hacer?");
-    			System.out.println("1. Ver lista de pedidos");
-    			System.out.println("2. Añadir pedidos");
-    			System.out.println("3. Cancelar pedidos");
-    			System.out.println("4. Verificar pedidos");
-    			System.out.println("5. Volver al menú de funcionalidades");
-    			System.out.print("Escribe el número de la opción que necesitas: ");
-    			
-    			opcion=(int) readLong();
-    			
-    			switch(opcion) {
-    			
-    			case 1:
-    				System.out.println("-------------------------------------------------------");
-	    			System.out.println("\nListado de Pedidos sin Verificar");
-	    			if (pedido.getPedidos(restaurante).size()==0)
-	    			{System.out.println("\n-No hay pedidos sin verificar");}
-	    			System.out.println(restaurante.imprimirPedidosSinVerificar());
-	    			System.out.println("\nListado de Pedidos Verificados");
-	    			if(pedido.getPedidosVerificados(restaurante).size()==0)
-	    			{System.out.println("\n-No hay pedidos verificados");}
-	    			System.out.println(restaurante.imprimirPedidosVerificados());
-	    			System.out.println("-------------------------------------------------------");
-	    			break;
+				case 2: do{
+	    			System.out.println("¿Que deseas hacer?");
+	    			System.out.println("1. Ver lista de pedidos");
+	    			System.out.println("2. Añadir pedidos");
+	    			System.out.println("3. Cancelar pedidos");
+	    			System.out.println("4. Verificar pedidos");
+	    			System.out.println("5. Volver al menú de funcionalidades");
+	    			System.out.print("Escribe el número de la opción que necesitas: ");
 	    			
-	    			case 2:
-	    				ArrayList<Plato> platosTemp = new ArrayList<Plato>();
-	    				// Imprimir el menú
-	    				int i1 =0;
-	    				for(Plato platof : restaurante.veirificarMenu(menu))
-	    				{System.out.println((i1+= 1) + ". "+platof.detallesPlato());}
+	    			opcion=(int) readLong();
+	    			
+	    			switch(opcion) {
+	    			
+	    			case 1:
 	    				System.out.println("-------------------------------------------------------");
-	    				System.out.print("Por favor, introduce los índices de los platos que deseas (separados por comas): ");
-	    				String platos = readln();
-	    				String[] indices = platos.split(",");
-	    				for (String indice : indices) {
-	    				    int i = Integer.parseInt(indice.trim()); // convertir el índice a int		
-	    				    platosTemp.add(menu.get(i-1));
-	    				}
-	    				System.out.print("\nIngrese el tipo de pedido indicando consumo(domicilio o restaurante): ");
-	    				String tipoPedido = scanner.nextLine();
-	    				System.out.println("Estos son los cocineros disponibles para tu pedido\n");
-	    				List<Empleado> cocineros = restaurante.verificarCocineros(restaurante.getEmpleados(),platosTemp);
-	    				for(int i = 0; i < cocineros.size(); i++){
-	    					System.out.println((i + 1) + ". " + cocineros.get(i));
-	    				}
-	    				System.out.print("Ingrese el Nombre del Cocinero: ");
-		    			String nombreCocinero = scanner.nextLine();
-		    			Empleado cocinero = restaurante.buscarEmpleado(nombreCocinero, "cocinero");
-		    			if (cocinero == null) {
-		    			System.out.println("Cocinero no encontrado");
+		    			System.out.println("\nListado de Pedidos sin Verificar");
+		    			if (restaurante.getPedidosSinVerificar().size()==0)
+		    			{System.out.println("\n-No hay pedidos sin verificar");}
+		    			System.out.println(restaurante.imprimirPedidosSinVerificar());
+		    			System.out.println("\nListado de Pedidos Verificados");
+		    			if(restaurante.getPedidosVerificados().size()==0)
+		    			{System.out.println("\n-No hay pedidos verificados");}
+		    			System.out.println(restaurante.imprimirPedidosVerificados());
 		    			System.out.println("-------------------------------------------------------");
-	    			    break;
-	    			    }
-	    				if(tipoPedido.equals("domicilio")){
-	    					List<Empleado> domiciliarios = restaurante.verificarDomiciliarios(restaurante.getEmpleados());
-		    				System.out.println("Estos son los domiciliarios disponibles para tu pedido\n");
-		    				for(int i = 0; i < domiciliarios.size(); i++){
-		    					System.out.println((i + 1) + ". " + domiciliarios.get(i));
-		    				}
-		    			    System.out.print("Ingrese el Nombre del Domiciliario: ");
-		    			    String nombreDomiciliario = scanner.nextLine();
-		    			    Empleado domiciliario = restaurante.buscarEmpleado(nombreDomiciliario, "domiciliario");
-		    			    if (domiciliario == null) {
-		    			        System.out.println("Domiciliario no encontrado");
-		    			        break;
-		    			    }
-		    			    else {
-		    			    // Se guarda en pedidos ya que en el constructor de pedidos hay im
-		    			    Pedido pedidoDomicilio = new Pedido(tipoPedido, cocinero, domiciliario, platosTemp, restaurante);		    			    System.out.println("Pedido creado exitosamente");
-		    			    pedido.actualizarInventario(restaurante, pedidoDomicilio);
-		    			    }
-		    			    System.out.println("-------------------------------------------------------");
-		    			    
-		    			} else if(tipoPedido.equals("restaurante")){
+		    			break;
+		    			
+		    			case 2:
+		    				ArrayList<Plato> platosTemp = new ArrayList<Plato>();
+		    				// Imprimir el menú
+		    				int i1 =0;
+		    				for(Plato platof : restaurante.veirificarMenu(menu))
+		    				{System.out.println((i1+= 1) + ". "+platof.detallesPlato());}
 		    				System.out.println("-------------------------------------------------------");
-		    				System.out.println("Estos son los meseros disponibles ");
-		    				List<Empleado> meseros = restaurante.clasificarEmpleados(restaurante.getEmpleados(), "mesero");
-		    				for(int i = 0; i < meseros.size(); i++){
-		    					System.out.println((i + 1) + ". " + meseros.get(i));
+		    				System.out.print("Por favor, introduce los índices de los platos que deseas (separados por comas): ");
+		    				String platos = readln();
+		    				String[] indices = platos.split(",");
+		    				for (String indice : indices) {
+		    				    int i = Integer.parseInt(indice.trim()); // convertir el índice a int		
+		    				    platosTemp.add(menu.get(i-1));
 		    				}
-		    			    System.out.print("\nIngrese el Nombre del Mesero: ");
-		    			    String nombreMesero = scanner.nextLine();
-		    			    Empleado mesero = restaurante.buscarEmpleado(nombreMesero, "mesero");
-		    			    if (mesero == null) {
-		    			        System.out.println("Mesero no encontrado");
-		    			        break;
+		    				System.out.print("\nIngrese el tipo de pedido indicando consumo(domicilio o restaurante): ");
+		    				String tipoPedido = scanner.nextLine();
+		    				System.out.println("Estos son los cocineros disponibles para tu pedido\n");
+		    				List<Empleado> cocineros = restaurante.verificarCocineros(restaurante.getEmpleados(),platosTemp);
+		    				for(int i = 0; i < cocineros.size(); i++){
+		    					System.out.println((i + 1) + ". " + cocineros.get(i));
+		    				}
+		    				System.out.print("Ingrese el Nombre del Cocinero: ");
+			    			String nombreCocinero = scanner.nextLine();
+			    			Empleado cocinero = restaurante.buscarEmpleado(nombreCocinero, "cocinero");
+			    			if (cocinero == null) {
+			    			System.out.println("Cocinero no encontrado");
+			    			System.out.println("-------------------------------------------------------");
+		    			    break;
 		    			    }
+		    				if(tipoPedido.equals("domicilio")){
+		    					List<Empleado> domiciliarios = restaurante.verificarDomiciliarios(restaurante.getEmpleados());
+			    				System.out.println("Estos son los domiciliarios disponibles para tu pedido\n");
+			    				for(int i = 0; i < domiciliarios.size(); i++){
+			    					System.out.println((i + 1) + ". " + domiciliarios.get(i));
+			    				}
+			    			    System.out.print("Ingrese el Nombre del Domiciliario: ");
+			    			    String nombreDomiciliario = scanner.nextLine();
+			    			    Empleado domiciliario = restaurante.buscarEmpleado(nombreDomiciliario, "domiciliario");
+			    			    if (domiciliario == null) {
+			    			        System.out.println("Domiciliario no encontrado");
+			    			        break;		    			    }
+			    			    else {
+			    			    // Se guarda en pedidos ya que en el constructor de pedidos hay im
+			    			    Pedido pedidoDomicilio = new Pedido(tipoPedido, cocinero, domiciliario, platosTemp, restaurante);		    			    System.out.println("Pedido creado exitosamente");
+			    			    pedido.actualizarInventario(restaurante, pedidoDomicilio);
+			    			    }
+			    			    System.out.println("-------------------------------------------------------");
+			    			    
+			    			} else if(tipoPedido.equals("restaurante")){
+			    				System.out.println("-------------------------------------------------------");
+			    				System.out.println("Estos son los meseros disponibles ");
+			    				List<Empleado> meseros = restaurante.clasificarEmpleados(restaurante.getEmpleados(), "mesero");
+			    				for(int i = 0; i < meseros.size(); i++){
+			    					System.out.println((i + 1) + ". " + meseros.get(i));
+			    				}
+			    			    System.out.print("\nIngrese el Nombre del Mesero: ");
+			    			    String nombreMesero = scanner.nextLine();
+			    			    Empleado mesero = restaurante.buscarEmpleado(nombreMesero, "mesero");
+			    			    if (mesero == null) {
+			    			        System.out.println("Mesero no encontrado");
+			    			        break;
+			    			    }
+			    			    System.out.println("-------------------------------------------------------");
+			    			    System.out.print("\nIngrese numero de mesa: ");
+			    			    int numMesa = (int)readLong();
+			    			    System.out.print("\nIngrese nombre del dueño de reserva : ");
+			    			    String nombre = readln();
+			    			    Reserva reserva = restaurante.encontrarReserva(numMesa,nombre);
+			    			    Mesa mesaTemporal =restaurante.encontrarMesa(numMesa);
+			    			    
+			    			    if (reserva==null) {
+			    			    	System.out.println("\nReserva no encontrada");
+			    			    	new Pedido(mesaTemporal, tipoPedido, cocinero, mesero, platosTemp, restaurante);
+				    			    System.out.println("pedido creado exitosamente");
+				    			    System.out.println("-------------------------------------------------------");
+			    			    	break;
+			    			    	}
+			    			    
+			    			    else if(reserva!=null){
+			    			    	String nombre1 = reserva.getDuenoReserva().getNombre();
+			    			    	System.out.println("\nHola, esta reserva esta asociada a " + nombre1);
+			    			    	Pedido ped = new Pedido(reserva.getMesa(), tipoPedido, cocinero, mesero, platosTemp, restaurante, reserva);
+				    			    ped.setVerificado(true);
+				    			    pedido.actualizarInventario(restaurante,ped);
+				    			    System.out.println("pedido creado exitosamente/n");
+				    			    System.out.println("-------------------------------------------------------");
+				    			    break;
+			    			    }
+			    			    
+			    			}
+			    			else
+			    			{System.out.println("\nTipo de pedido no encontrado");}
+			    			//Para reinicializar la lista para mandar
+			    			platosTemp = new ArrayList<Plato>();
+						break;
+		    			case 3:
+		    			    System.out.println("Estos son los pedidos que puedes cancelar");
+		    			    System.out.println(restaurante.imprimirPedidosSinVerificar());
+
+		    			    System.out.print("¿Qué pedido deseas cancelar?: ");
+		    			    int numPedido = (int)readLong();
+
+		    			    if (numPedido > 0 && numPedido <= restaurante.getPedidos().size()){
+		    			        restaurante.getPedidos().remove(numPedido-1);
+		    			        System.out.println("Estos son los pedidos actualizados");
+		    			        System.out.println("El pedido número: "  + numPedido);
+		    			        System.out.println(restaurante.imprimirPedidosSinVerificar());
+		    			    } else {System.out.println("Número de pedido inválido. Por favor, introduce un número entre 1 y " + restaurante.getPedidos().size());}
 		    			    System.out.println("-------------------------------------------------------");
-		    			    System.out.print("\nIngrese numero de mesa: ");
-		    			    int numMesa = (int)readLong();
-		    			    System.out.print("\nIngrese nombre del dueño de reserva : ");
-		    			    String nombre = readln();
-		    			    Reserva reserva = restaurante.encontrarReserva(numMesa,nombre);
-		    			    Mesa mesaTemporal =restaurante.encontrarMesa(numMesa);
+		    			    break;
 		    			    
-		    			    if (reserva==null) {
-		    			    	System.out.println("\nReserva no encontrada");
-		    			    	System.out.println("\n Se asigna la mesa numero: "+ mesaTemporal.getNumeroMesa()+" a el pedido");
-		    			    	new Pedido(mesaTemporal, tipoPedido, cocinero, mesero, platosTemp, restaurante);
-			    			    System.out.println("pedido creado exitosamente");
-			    			    System.out.println("-------------------------------------------------------");
-		    			    	break;
-		    			    	}
-		    			    
-		    			    else if(reserva!=null){
-		    			    	String nombre1 = reserva.getDuenoReserva().getNombre();
-		    			    	System.out.println("\nHola, esta reserva esta asociada a " + nombre1);
-		    			    	Pedido ped = new Pedido(reserva.getMesa(), tipoPedido, cocinero, mesero, platosTemp, restaurante, reserva);
-			    			    ped.setVerificado(true);
-			    			    pedido.actualizarInventario(restaurante,ped);
-			    			    System.out.println("pedido creado exitosamente/n");
-			    			    System.out.println("-------------------------------------------------------");
-			    			    break;
-		    			    }
-		    			    
-		    			}
-		    			else
-		    			{System.out.println("\nTipo de pedido no encontrado");}
-		    			//Para reinicializar la lista para mandar
-		    			platosTemp = new ArrayList<Plato>();
-					break;
-	    			case 3:
-	    			    System.out.println("Estos son los pedidos que puedes cancelar");
-	    			    System.out.println(restaurante.imprimirPedidosSinVerificar());
-
-	    			    System.out.print("¿Qué pedido deseas cancelar?: ");
-	    			    int numPedido = (int)readLong();
-
-	    			    if (numPedido > 0 && numPedido <= restaurante.getPedidos().size()){
-	    			        restaurante.getPedidos().remove(numPedido-1);
-	    			        System.out.println("Estos son los pedidos actualizados");
-	    			        System.out.println("El pedido número: "  + numPedido);
-	    			        System.out.println(restaurante.imprimirPedidosSinVerificar());
-	    			    } else {System.out.println("Número de pedido inválido. Por favor, introduce un número entre 1 y " + restaurante.getPedidos().size());}
-	    			    System.out.println("-------------------------------------------------------");
-	    			    break;
-	    			    
-    			
-    			case 4:
-    				System.out.println("\nListado de Pedidos sin Verificar");
-        			if (restaurante.getPedidos().size()==0)
-        			{System.out.println("\n-No hay pedidos sin verificar");}
-        			else{System.out.println(restaurante.imprimirPedidosSinVerificar());}
-        			System.out.println("-------------------------------------------------------");
-        			System.out.println("\nListado de Pedidos Verificados");
-            		if (restaurante.getPedidosVerificados().size()==0)
-            		{System.out.println("\n-No hay pedidos verificados");}
-            		else{System.out.println(restaurante.imprimirPedidosVerificados());}
-        			
-            		System.out.print("\nIngrese los pedidos que desee verificar separado por comas: ");
-    			    String numsPedido = scanner.nextLine();
-    			    String[] nums = numsPedido.split(",");
-    			    for(String numStr : nums){
-    			    	int num = Integer.parseInt(numStr);
-    			    	Pedido ped = pedido.getPedidos(restaurante).get(num-1);
-    			    	if(!pedido.verificarPedido(restaurante,ped).equals(null)) {
-    			    		pedido.verificarPedido(restaurante,ped);
-    			    	System.out.println("\nPedido: " + num +  " verificado exitosamente");
-    			    	}
-    			    	else{System.out.println("\nHay un problema en el pedido numero: " + num);
-    			    	System.out.println("-------------------------------------------------------");
-    			    	}
-    			    }
-    			case 5: break; // Volver al menú principal
-    			}
-    		}while(opcion!=5); break;
+	    			
+	    			case 4:
+	    				System.out.println("\nListado de Pedidos sin Verificar");
+	        			if (restaurante.getPedidos().size()==0)
+	        			{System.out.println("\n-No hay pedidos sin verificar");}
+	        			else{System.out.println(restaurante.imprimirPedidosSinVerificar());}
+	        			System.out.println("-------------------------------------------------------");
+	        			System.out.println("\nListado de Pedidos Verificados");
+	            		if (restaurante.getPedidosVerificados().size()==0)
+	            		{System.out.println("\n-No hay pedidos verificados");}
+	            		else{System.out.println(restaurante.imprimirPedidosVerificados());}
+	        			
+	            		System.out.print("\nIngrese los pedidos que desee verificar separado por comas: ");
+	    			    String numsPedido = scanner.nextLine();
+	    			    String[] nums = numsPedido.split(",");
+	    			    for(String numStr : nums){
+	    			    	int num = Integer.parseInt(numStr);
+	    			    	Pedido ped = pedido.getPedidos(restaurante).get(num-1);
+	    			    	if(!pedido.verificarPedido(restaurante,ped).equals(null)) {
+	    			    		pedido.verificarPedido(restaurante,ped);
+	    			    	System.out.println("\nPedido: " + num +  " verificado exitosamente");
+	    			    	}
+	    			    	else{System.out.println("\nHay un problema en el pedido numero: " + num);
+	    			    	System.out.println("-------------------------------------------------------");
+	    			    	}
+	    			    }
+	    			case 5: break; // Volver al menú principal
+	    			}
+	    		}while(opcion!=5); break;
     		case 3:
-    			
+    			System.out.println("Esperando a ser creada por Jhogert");
     			break;
 			//funcionalidad Sebas
     		case 4: 
@@ -488,7 +486,7 @@ public class Administrador implements Menu {
     			do {
         			System.out.println("-------------------------------------------------------");
         			System.out.println("¿Que deseas hacer?");
-        			System.out.println("1. Consultar el Presupuesto del Restuarante");
+        			System.out.println("1. Consultar el Presupuesto del Restaurante");
         			System.out.println("2. Consultar los Gastos del restaurante");
         			System.out.println("3. Consultar las Ganancias del restaurante");
         			System.out.println("4. Consultar el valor de liquidación de un empleado");
@@ -628,16 +626,13 @@ public class Administrador implements Menu {
         				break; 
         			case 6: break;
         				
-				} while(opcionF!=6); break;
-        			
-				
-    		
-    		}while (opcionInv!=5);
+				}	
+    		} while (opcionF!=6); break;
     		case 6: salirDelSistema(gestor);
 			break;
     	} 
     
-    		}while(opcion!=6);}
+    		} while(opcion!=6);}
     public static void mostrarMesas(Restaurante restaurante) {
     	System.out.println("Mesas del restaurante: ");
     	for (Mesa mesa:restaurante.getMesas()) {

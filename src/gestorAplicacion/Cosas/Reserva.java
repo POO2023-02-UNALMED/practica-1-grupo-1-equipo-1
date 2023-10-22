@@ -59,6 +59,10 @@ public class Reserva implements Serializable{
             +this.mesa.getNumeroMesa()+"\nFecha reservada: "+this.getDiaReserva().format(formatoPersonalizado);
         }
     }
+    
+    public String resumenReservaPedido(){
+    	return " Dueño de la reserva: "+this.getDuenoReserva().getNombre()+" Mesa número: "+this.mesa.getNumeroMesa();
+    }
 
     //Metodos de clase
     //Convierte un String a una fecha

@@ -21,7 +21,6 @@ public class Empleado extends Persona implements Serializable{
     private Date fechaContratacion;
     private Restaurante restaurante;
     private int puntuacion;
-    public static final int PEDIDO_DOMICILIO = 30;
     
     public Empleado() {
     	
@@ -51,12 +50,18 @@ public class Empleado extends Persona implements Serializable{
 		return false;
     }
     public boolean verificarTiempo(Empleado empleado){
+    	if(empleado.getPuesto().equals("domicilio")){
     	for (Turno turno : empleado.getTurnos()) {
     		if(!turno.isCobrado()){
     			int tiempoDisponible = turno.getHoras()* 60; 
-    			if( tiempoDisponible > PEDIDO_DOMICILIO ){
-    				return true;
-    	}
+    			if( tiempoDisponible > Pedido.TIEMPO_DOMICILIO ){
+    				return true;}}}
+    	if(empleado.getPuesto().equals("domicilio")){
+    		for (Turno turno : empleado.getTurnos()) {
+        		if(!turno.isCobrado()){
+        			int tiempoDisponible = turno.getHoras()* 60; 
+        			if( tiempoDisponible > Pedido.TIEMPO_MESERO ){
+        				return true;}}}
     	}
     	}
 		return false;
@@ -150,7 +155,7 @@ public class Empleado extends Persona implements Serializable{
 		return null;
 		}
 	public String toString(){
-		return "Nombre: " + this.getNombre()+ " Puesto: "+ this.getPuesto() + "\n   " + turnoActual()+"\n";
+		return "Nombre: " + this.getNombre()+ " Puesto: "+ this.getPuesto() ;
 	}
 	
 	public void puntuacion(Empleado e) {

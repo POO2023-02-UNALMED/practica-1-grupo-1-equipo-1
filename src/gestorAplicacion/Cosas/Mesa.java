@@ -1,8 +1,10 @@
 package gestorAplicacion.Cosas;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Iterator;
 
 public class Mesa implements Serializable{
 	private static final long serialVersionUID=1L;
@@ -89,13 +91,24 @@ public class Mesa implements Serializable{
         return true;
     }
 
+    public void borrarReservasViejas() {
+        LocalDate fechaActual = LocalDate.now();
+        Iterator<Reserva> iterador = reservas.iterator();
+        while (iterador.hasNext()) {
+            Reserva reserva = iterador.next();
+            if (reserva.getDiaReserva().isBefore(fechaActual)) {
+                iterador.remove(); // Elimina el elemento de la lista de reservas
+            }
+        }
+    }
+
     //Da la informacion de la mesa, para escoger cual mesa reservar
     public String resumenMesa () {
         return "Capacidad de la mesa: "+this.getCapacidad()+"\nNúmero de la mesa: "+this.getNumeroMesa();
     }
     
     public String toString(){
-    	return "Capacidad: " + capacidad + " mesa numero: " + numeroMesa; 
+    	return "mesa numero: " + numeroMesa + " con capacidad: " + capacidad; 
     }
 
     //Metodos de clase
