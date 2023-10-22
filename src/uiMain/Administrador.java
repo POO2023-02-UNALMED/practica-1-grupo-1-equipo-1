@@ -542,7 +542,6 @@ public class Administrador implements Menu {
         						String tipoMaterial = scanner.nextLine();
         						Material.Tipo tipo = Material.Tipo.valueOf(tipoMaterial.toUpperCase());
 
-        						// Llamar al método gastoMaterialEspecifico
         						double gasto = financia.gastoMaterialEspecifico(tipo);
 
         						System.out.println("El valor de abastecer el tipo de material " + tipoMaterial + " es " + gasto);
@@ -557,29 +556,25 @@ public class Administrador implements Menu {
         						break;
         						
         					case 4:
-        						System.out.println("-------------------------------------------------------");
         						System.out.print("Ingrese el nombre del Empleado : ");
-        						String nombreEmpleado =scanner.nextLine();
-        						Empleado empleado = null;
-        						for (Empleado e : restaurante.getEmpleados()) {
-        						    if (e.getNombre().equals(nombreEmpleado)) {
-        						        empleado = e;
-        						        break;
-        						    }
-        						}
+        				        String nombreEmpleado = scanner.nextLine();
 
-        						if (empleado != null) {
-        						    // Si se encontró al empleado, calcular el pago
-        						    Turno turno = empleado.getTurno();  // Suponiendo que tienes un método getTurno() en tu clase Empleado
-        						    double pago4 = financia.calcularPago(turno, empleado);
+        				        Empleado empleado = null;
+        				        for (Empleado e : restaurante.getEmpleados()) {
+        				            if (e.getNombre().equals(nombreEmpleado)) {
+        				                empleado = e;
+        				                break;
+        				            }
+        				        }
+        				        if (empleado != null) {
+        				            double pago = financia.calcularPagoEmpleado(empleado);
 
-        						    // Imprimir el resultado
-        						    System.out.println("El valor de pago del empleado " + nombreEmpleado + " es " + pago4);
-        						} else {
-        						    System.out.println("No se encontró al empleado " + nombreEmpleado);
-        						}
-        						
-        						break;
+        				            System.out.println("El pago para el empleado " + nombreEmpleado + " es " + pago);
+        				        } else {
+        				            System.out.println("No se encontró al empleado " + nombreEmpleado);
+        				        }
+
+        					    break;
         					case 5:
         						break;
         					}
@@ -615,14 +610,18 @@ public class Administrador implements Menu {
         				} while(opcionF2!=3); break;
         			case 4:
         				System.out.println("-------------------------------------------------------");
-        				System.out.print("Ingrese el nombre del Empleado : ");
-						String nombreEmpleado = scanner.nextLine();;
+						System.out.print("Ingrese el nombre del Empleado : ");
+						String nombreEmpleado =scanner.nextLine();
 						double liquidacion = financia.liquidacionEmpleado(nombreEmpleado);
 
-						// Imprimir el resultado
-						System.out.println("El valor de pago del empleado " + nombreEmpleado + " es " + liquidacion);
-        			break;
-        			
+					    if (liquidacion != -1) {
+					        System.out.println("La liquidación del empleado " + nombreEmpleado + " es " + liquidacion);
+					    } else {
+					        System.out.println("No se encontró al empleado " + nombreEmpleado);
+					    }
+
+					    break;
+        				
         			case 5:
         				double perdidas = financia.calcularPerdidas();
         				System.out.println("Las pérdidas del restaurante son: " + perdidas);

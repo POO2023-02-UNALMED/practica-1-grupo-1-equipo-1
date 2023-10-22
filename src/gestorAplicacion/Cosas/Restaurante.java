@@ -476,7 +476,6 @@ public class Restaurante implements Serializable {
 	    return pedidosSinVerificar;
 	}
 
-
 	public void actualizarInsumos(Pedido pedido) {
 	    for (Plato plato : pedido.getPlatos()) {
 	        for (Map.Entry<Material, Integer> entrada : plato.getIngredientes().entrySet()) {
@@ -486,6 +485,7 @@ public class Restaurante implements Serializable {
 	        }
 	    }
 	}
+	
 
 	
 }

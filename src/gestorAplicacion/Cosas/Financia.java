@@ -102,50 +102,85 @@ public class Financia implements Serializable{
 	        }
 	        this.gastoMaterialEspecifico = totalGastoMaterial;  // Almacenar el resultado en la variable de instancia
 	        return this.gastoMaterialEspecifico;
-	    }
+	 }
 
 
 	// Calcula el pago de la liquidacion de un empleado del restaurante
 	 
 	 public double liquidacionEmpleado(String nombreEmpleado) {
-		 
-	        // Iterar sobre la lista de empleados del restaurante
-		 
+		 Empleado empleado = null;
+		    for (Empleado e : restaurante.getEmpleados()) {
+		        if (e.getNombre().equals(nombreEmpleado)) {
+		            empleado = e;
+		            break;
+		        }
+		    }
+		    if (empleado == null) {
+		        return -1;
+		    }
+		    
+		    double totalPago = 0;
+		    int horasTrabajadas = 0;
+		    
+		    for (Turno turno : empleado.getTurnos()) {
+		        
+		        if (turno.isCompletado() && !turno.isCobrado()) {
+		            totalPago += turno.getSalario();
+		            horasTrabajadas += turno.getHoras();
+		            turno.setCobrado(true);
+		        }
+		    }
+		    
+		    totalPago += empleado.getSalario();
+		    
+		    // Convertir las horas trabajadas en días trabajados
+		    int diasTrabajados = horasTrabajadas / 8;  // Suponiendo que una jornada laboral es de 8 horas
+		    
+		    double cesantias = (empleado.getSalario() * diasTrabajados) / 360;
+		    double interesesCesantias = (cesantias * diasTrabajados * 0.12) / 360;
+		    
+		    totalPago += cesantias + interesesCesantias;
+		    
+		    return totalPago;
+		}
+	 
+	 //Calcular el pago de un solo empleado
+	 public double calcularPagoEmpleado(Empleado empleado) {
+		    double totalPago = 0;
+		    for (Turno turno : empleado.getTurnos()) {
+		        double pago = turno.getSalario();
+		        int horasExtras = turno.HorasExtras();
+		        if (horasExtras > 0) {
+		            double pagoHoraExtra = 1.5; // Supongamos que las horas extras se pagan a 1.5 veces el salario regular por hora
+		            pago += horasExtras * (empleado.getSalario() / turno.getHoras()) * pagoHoraExtra;
+		        }
+		        totalPago += pago;
+		    }
+		    return totalPago;
+		}
+	
+	//Calcular Pagos de todos los Empleados
+	    public double pagosEmpleados(Restaurante restaurante) {
+	        double totalPago = 0;
 	        for (Empleado empleado : restaurante.getEmpleados()) {
-	        	
-	            // Comprobar si el nombre del empleado actual coincide con el nombre del empleado proporcionado
-	        	
-	            if (empleado.getNombre().equals(nombreEmpleado)) {
-	                double totalPago = 0;
-	                for (Turno turno : empleado.getTurnos()) {
-	                    if (turno.isCompletado() && !turno.isCobrado()) {
-	                        totalPago += calcularPago(turno, empleado);
-	                        turno.setCobrado(true);
+	            totalPago += empleado.getSalario();
+	            totalPago += liquidacionEmpleado(empleado.getNombre()); // Sumar la liquidación del empleado
+	            for (Turno turno : empleado.getTurnos()) {
+	                if (turno.isCompletado() && !turno.isCobrado()) {
+	                    int horasExtras = turno.HorasExtras();
+	                    if (horasExtras > 0) {
+	                        double pagoHoraExtra = 1.5; // Supongamos que las horas extras se pagan a 1.5 veces el salario regular por hora
+	                        totalPago += horasExtras * (empleado.getSalario() / turno.getHoras()) * pagoHoraExtra;
 	                    }
 	                }
-	                return totalPago;
 	            }
 	        }
-
-	        // Si no se encuentra al empleado, devolver -1
-	        return -1;
+	        this.pagosEmpleados = totalPago;
+	        return this.pagosEmpleados;
 	    }
-
-	    // Método separado para calcular el pago por un turno, incluyendo horas extras
-	 
-	    public double calcularPago(Turno turno, Empleado empleado) {
-	        double pago = turno.getSalario();
-	        int horasExtras = turno.HorasExtras();
-	        if (horasExtras > 0) {
-	            double pagoHoraExtra = 1.5; // Supongamos que las horas extras se pagan a 1.5 veces el salario regular por hora
-	            pago += horasExtras * (empleado.getSalario() / turno.getHoras()) * pagoHoraExtra;
-	        }
-	        return pago;
-	    }
-	    
+	
 	// Calcula las perdidas del inventario  del restaurante
 	    public double calcularPerdidas() {
-	        
 	        this.perdidas = 0;
 	        
 	        Map<Material.Tipo, Material> inventario = this.restaurante.getInventario();
@@ -154,31 +189,11 @@ public class Financia implements Serializable{
 	            Material material = inventario.get(tipo);
 
 	            if (material.getCantidad() < 0) {
-	                // Calculamos el costo de los materiales botados y lo sumamos a las pérdidas
 	                this.perdidas += material.getPrecioUnitario() * Math.abs(material.getCantidad());
 	            }
 	        }
 	        return this.perdidas;
 	    }
-	
-	//Calcular Pagos de los Empleados
-	public double pagosEmpleados(Restaurante restaurante) {
-	    double totalPago = 0;
-	    for (Empleado empleado : restaurante.getEmpleados()) {
-	        totalPago += empleado.getSalario();
-	        for (Turno turno : empleado.getTurnos()) {
-	            if (turno.isCompletado() && !turno.isCobrado()) {
-	                int horasExtras = turno.HorasExtras();
-	                if (horasExtras > 0) {
-	                    double pagoHoraExtra = 1.5; // Supongamos que las horas extras se pagan a 1.5 veces el salario regular por hora
-	                    totalPago += horasExtras * (empleado.getSalario() / turno.getHoras()) * pagoHoraExtra;
-	                }
-	            }
-	        }
-	    }
-	    this.pagosEmpleados = totalPago;
-	    return this.pagosEmpleados;
-	}
 	
 	public double gananciasBrutas() {
         double totalGananciasBrutas = 0;
