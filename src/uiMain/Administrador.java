@@ -79,8 +79,11 @@ public class Administrador implements Menu {
     	Turno turno8 = new Turno(Turno.Tipo.SABADO, 2, 70000);
     	Turno turno9 = new Turno(Turno.Tipo.DOMINGO, 1, 80000);
     	Turno turno10 = new Turno(Turno.Tipo.SEMANA, 5, 65000);
-    	
-        Pedido pedido = new Pedido();
+    	Turno turno11 = new Turno(Turno.Tipo.DOMINGO, 1, 80000);
+    	Turno turno12= new Turno(Turno.Tipo.SEMANA, 8, 50000);
+        Turno turno13= new Turno(Turno.Tipo.SEMANA, 2, 50000);
+        Turno turno14= new Turno(Turno.Tipo.SEMANA, 1, 50000);
+    	Pedido pedido = new Pedido();
         Plato plato = new Plato();
     	//mostrarMenu(menu);
     	int opcion, opcion2;
