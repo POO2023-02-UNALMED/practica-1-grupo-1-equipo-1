@@ -371,7 +371,6 @@ public class Administrador implements Menu {
 		    		} 
 			  		else {
 						Administrador.mostrarEmpleados(restaurante.getEmpleados());
-		    		}
 		      		System.out.println("Escribe el número del empleado para ver mas detalles");
 		      		int num= (int) readLong();
 		      		int indice=num-1;
@@ -381,6 +380,7 @@ public class Administrador implements Menu {
 		      		} else {
 						System.out.println("El número ingresado no es válido, por favor ingresa un número que corresponda a un empleado");
 		      		}
+					}
 		      		System.out.println("-------------------------------------------------------");
 		      		break;
 			
@@ -390,7 +390,6 @@ public class Administrador implements Menu {
 						System.out.println("No hay aspirantes a empleados");
 		      		} else {
 						mostrarEmpleados(restaurante.getAspEmpleados());
-		      		}
 		      		System.out.println("Escribe el número del aspirante para ver mas detalles");
 		      		num= (int) readLong();
 		      		indice=num-1;
@@ -400,6 +399,7 @@ public class Administrador implements Menu {
 		    		} else {
 						System.out.println("El número ingresado no es válido, por favor ingresa un número que corresponda a un empleado");
 		    		}
+				}
 		      		System.out.println("-------------------------------------------------------");
 		      		break;
 		
@@ -477,7 +477,6 @@ public class Administrador implements Menu {
 						System.out.println("No hay aspirantes a empleados");
 		      		} else {
 						mostrarEmpleados(restaurante.getAspEmpleados());
-		      		}
 		      		System.out.println("Escribe el número del aspirante que deseas contratar");
 		      		num= (int) readLong();
 		      		indice=num-1;
@@ -488,6 +487,7 @@ public class Administrador implements Menu {
 		      		} else {
 						System.out.println("El número ingresado no es válido, por favor ingresa un número que corresponda a un empleado");
 		      		}
+				}
 		      		System.out.println("-------------------------------------------------------");
 		      		break;
 		
@@ -497,7 +497,6 @@ public class Administrador implements Menu {
 			  			System.out.println("No hay empleados");
 					} else {
 			  			mostrarEmpleados(restaurante.getEmpleados());
-					}
 					System.out.println("Escribe el número del empleado que desea despedir");
 					num= (int) readLong();
 					indice=num-1;
@@ -506,6 +505,7 @@ public class Administrador implements Menu {
 			  			restaurante.getEmpleados().remove(indice);
 					} else {
 			  			System.out.println("El número ingresado no es válido, por favor ingresa un número que corresponda a un empleado");
+					}
 					}
 					System.out.println("-------------------------------------------------------");
 					break;
