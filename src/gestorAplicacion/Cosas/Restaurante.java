@@ -26,6 +26,7 @@ public class Restaurante implements Serializable {
     private List<Mesa> listadoMesas=new ArrayList<>();
     private List<Pedido> pedidos= new ArrayList<>();
     private Map<Tipo, Material> inventario=new HashMap<>();
+    private List<Empleado> listadoAspEmpleados=new ArrayList<>();
     
     //Constructores, que se invocan uno a otro, dependiendo si los restaurantes se inicializan con listas o no
     public Restaurante () {
@@ -41,6 +42,9 @@ public class Restaurante implements Serializable {
         this(listadoMesas, listadoEmpleados, listadoClientes, new HashMap<>());
     }
     public Restaurante (List<Mesa> listadoMesas, List<Empleado> listadoEmpleados, List<Cliente> listadoClientes, Map<Tipo, Material> inventario) {
+ 	this(listadoMesas, listadoEmpleados, listadoClientes, inventario, new ArrayList<>());
+    }
+    public Restaurante (List<Mesa> listadoMesas, List<Empleado> listadoEmpleados, List<Cliente> listadoClientes, Map<Tipo, Material> inventario, List<Empleado> listadoAspEmpleados) {
         this.listadoMesas = listadoMesas;
         this.listadoEmpleados = listadoEmpleados;
         this.listadoClientes = listadoClientes;
@@ -48,6 +52,7 @@ public class Restaurante implements Serializable {
         this.numMesas += contadorListado(listadoMesas);
         this.numEmpleados += contadorListado(listadoEmpleados);
         this.numClientes += contadorListado(listadoEmpleados);
+	this.listadoAspEmpleados = listadoAspEmpleados;
     }
 
     //Cuenta el tamaño de una lista
@@ -92,6 +97,9 @@ public class Restaurante implements Serializable {
         public List<Pedido> getPedidos(){
         	return pedidos;
         }
+	public List<Empleado> getAspEmpleados () {
+	    return this.listadoAspEmpleados;
+	}
 
     //Metodos setter
     public void setEmpleadoDelMes (Empleado empleadoDelMes) {
