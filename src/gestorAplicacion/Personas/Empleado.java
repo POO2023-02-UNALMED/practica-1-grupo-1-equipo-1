@@ -14,6 +14,8 @@ import gestorAplicacion.Cosas.Turno;
 
 import java.util.ArrayList;
 import java.io.Serializable;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 
 public class Empleado extends Persona implements Serializable{
 	private static final long serialVersionUID=1L;
@@ -96,37 +98,59 @@ public class Empleado extends Persona implements Serializable{
 	
     // Metodos de funcionalidades
     // Verificar Tiempo
-	
+	public  String clasificarDia(LocalDate fecha) {
+        DayOfWeek diaDeLaSemana = fecha.getDayOfWeek();
+        switch (diaDeLaSemana) {
+            case SATURDAY:
+                return "SÁBADO";
+            case SUNDAY:
+                return "DOMINGO";
+            default:
+                return "SEMANA";
+        }
+    }
+
 	// Para verificar tiempo de el cocinero
-    public boolean verificarTiempo(Empleado empleado,int tiempoPlato){
+    public boolean verificarTiempo(Empleado empleado,int tiempoPlatos){
+    	LocalDate fechaActual = LocalDate.now();
+    	String dia = clasificarDia(fechaActual);
     	for (Turno turno : empleado.getTurnos()) {
+    		if (turno.getTipo().toString().equals(dia)){
     		if(!turno.isCobrado()){
     			int tiempoDisponible = turno.getHoras()* 60;
-    	    	if(tiempoDisponible>tiempoPlato){
+    			if(tiempoDisponible>tiempoPlatos){
     	    		return true;
     	    		}
     	    	}
     			}
+    	}
 		return false;
     }
     // Metodo apra verificar tiempo de domiciliario y mesero
     public boolean verificarTiempo(Empleado empleado){
-    	if(empleado.getPuesto().equals("domicilio")){
+    	LocalDate fechaActual = LocalDate.now();
+    	String dia = clasificarDia(fechaActual);
+    	if(empleado.getPuesto().equals("domiciliario")){
     	for (Turno turno : empleado.getTurnos()) {
+    		if (turno.getTipo().toString().equals(dia)){
     		if(!turno.isCobrado()){
     			int tiempoDisponible = turno.getHoras()* 60; 
     			if( tiempoDisponible > Pedido.TIEMPO_DOMICILIO ){
-    				return true;}}}
-    	if(empleado.getPuesto().equals("domicilio")){
+    				return true;}
+    			}}
+    	}
+    	}
+    	if(empleado.getPuesto().equals("mesero")){
     		for (Turno turno : empleado.getTurnos()) {
+    			if (turno.getTipo().toString().equals(dia)){
         		if(!turno.isCobrado()){
         			int tiempoDisponible = turno.getHoras()* 60; 
         			if( tiempoDisponible > Pedido.TIEMPO_MESERO ){
         				return true;}}}
-    	}
+    		}
     	}
 		return false;
-    }
+    	}
 	
 	//metodo que permite reportar daños a un material no organico
 	public void reportarDano(Material.Tipo material,int cantidad) {
@@ -138,7 +162,9 @@ public class Empleado extends Persona implements Serializable{
     public void turnosCompletados(Empleado empleado){
 		for(Turno turno : empleado.getTurnos()){
 			if (turno.isCompletado()==true & turno.isCobrado()==false){
-					salario+=turno.getSalario();}}
+					empleado.salario+=turno.getSalario();
+					}
+			}
 		}
     //Retornar turno no cobrado
 	private Turno turnoActual() {
@@ -150,7 +176,7 @@ public class Empleado extends Persona implements Serializable{
 		}
 	// toString de la clase
 	public String toString(){
-		return "Nombre: " + this.getNombre()+ " Puesto: "+ this.getPuesto() ;
+		return "Nombre: " + this.getNombre()+ " Puesto: "+ this.getPuesto() + "turno " +this.getTurnos().toString() ;
 	}
 	public void puntuacion(Empleado e) {		
 	}
@@ -162,10 +188,10 @@ public class Empleado extends Persona implements Serializable{
 	public String puntuacion(){
 	  return "La puntacion del Empleado es: "+ this.getPuntuacion();
 	}
-	
+
 	//Metodo para mostrar la descripcion del trabajo del Empleado
 	public String trabajo(){
-	  return "Empleado del restaurante"
+	  return "Empleado del restaurante";
 	}
 	
 }

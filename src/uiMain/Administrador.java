@@ -179,11 +179,12 @@ public class Administrador implements Menu {
 			break;
 				case 2: do{
 	    			System.out.println("¿Que deseas hacer?");
-	    			System.out.println("1. Ver lista de pedidos");
-	    			System.out.println("2. Añadir pedidos");
-	    			System.out.println("3. Cancelar pedidos");
-	    			System.out.println("4. Verificar pedidos");
-	    			System.out.println("5. Volver al menú de funcionalidades");
+	    			System.out.println("1. Ver lista de pedidos consumo(restaurante)");
+	    			System.out.println("2. Ver lista de pedidos consumo(domicilio)");	
+	    			System.out.println("3. Añadir pedidos");
+	    			System.out.println("4. Cancelar pedidos");
+	    			System.out.println("5. Verificar pedidos");
+	    			System.out.println("6. Volver al menú de funcionalidades");
 	    			System.out.print("Escribe el número de la opción que necesitas: ");
 	    			
 	    			opcion=(int) readLong();
@@ -200,10 +201,17 @@ public class Administrador implements Menu {
 		    			if(restaurante.getPedidosVerificados().size()==0)
 		    			{System.out.println("\n-No hay pedidos verificados");}
 		    			System.out.println(restaurante.imprimirPedidosVerificados());
-		    			System.out.println("-------------------------------------------------------");
 		    			break;
 		    			
 		    			case 2:
+		    				System.out.println("-------------------------------------------------------");
+		    				System.out.println("\nListado de Pedidos Domicilios");
+		    				if(restaurante.getPedidosDomicilio().size()==0)
+			    			{System.out.println("\n-No hay pedidos de domicilio");}
+			    			System.out.println(restaurante.imprimirDomicilios());
+			    			System.out.println("-------------------------------------------------------");
+			    			break;
+		    			case 3:
 		    				ArrayList<Plato> platosTemp = new ArrayList<Plato>();
 		    				// Imprimir el menú
 		    				int i1 =0;
@@ -246,7 +254,8 @@ public class Administrador implements Menu {
 			    			        break;		    			    }
 			    			    else {
 			    			    // Se guarda en pedidos ya que en el constructor de pedidos hay im
-			    			    Pedido pedidoDomicilio = new Pedido(tipoPedido, cocinero, domiciliario, platosTemp, restaurante);		    			    System.out.println("Pedido creado exitosamente");
+			    			    Pedido pedidoDomicilio = new Pedido(tipoPedido, cocinero, domiciliario, platosTemp, restaurante);		    			    
+			    			    System.out.println("Pedido creado exitosamente");
 			    			    pedido.actualizarInventario(restaurante, pedidoDomicilio);
 			    			    }
 			    			    System.out.println("-------------------------------------------------------");
@@ -298,7 +307,7 @@ public class Administrador implements Menu {
 			    			//Para reinicializar la lista para mandar
 			    			platosTemp = new ArrayList<Plato>();
 						break;
-		    			case 3:
+		    			case 4:
 		    			    System.out.println("Estos son los pedidos que puedes cancelar");
 		    			    System.out.println(restaurante.imprimirPedidosSinVerificar());
 
@@ -315,7 +324,7 @@ public class Administrador implements Menu {
 		    			    break;
 		    			    
 	    			
-	    			case 4:
+	    			case 5:
 	    				System.out.println("\nListado de Pedidos sin Verificar");
 	        			if (restaurante.getPedidos().size()==0)
 	        			{System.out.println("\n-No hay pedidos sin verificar");}
@@ -340,9 +349,9 @@ public class Administrador implements Menu {
 	    			    	System.out.println("-------------------------------------------------------");
 	    			    	}
 	    			    }
-	    			case 5: break; // Volver al menú principal
+	    			case 6: break; // Volver al menú principal
 	    			}
-	    		}while(opcion!=5); break;
+	    		}while(opcion!=6); break;
     		case 3:
 		    /*int opcionEmp;
 		    int opcionEmp1;
@@ -842,27 +851,28 @@ public class Administrador implements Menu {
     	System.out.println("Vuelva pronto");
     	Serializador.serializar(gestor);
     	System.exit(0);
+    
     }
 	//Metodo para mostrar algunos datos de los empleados
-	public static void mostrarEmpleados(ArrayList<Empleados> Empleado) {
-	  short cont=1;
-	  for (Empleado e:Empleado) {
-	    System.out.println(cont+". Nombre:"+e.getNombre()+"- Puesto"+e.getPuesto()+"- Turno: "+e.getTurno().getTipo();
-	    cont++;
-	  }
-	}
+	//public static void mostrarEmpleados(ArrayList<Empleados> Empleado) {
+	  //short cont=1;
+	  //for (Empleado e:Empleado) {
+	  //  System.out.println(cont+". Nombre:"+e.getNombre()+"- Puesto"+e.getPuesto()+"- Turno: "+e.getTurno().getTipo();
+	 //   cont++;
+	//  }
+	//}
 	
 	//Metodo para mostrar detalles de los empleados
-	public static void detallesEmpleado(){
-	  return 
-	    "\n   Nombre: " + this.getNombre()+
-	    "\n   Cedula: " + this.getCedula()+
-	    "\n   Puesto: " + this.getPuesto()+
-	    "\n   Turno: " + this.getTurno().getTipo()+
-	    "\n   Salario: " + this.getTurno().getSalario();
-	    "\n"+" "+this.Puntuacion()
-	}
-
+	//public static void detallesEmpleado(){
+	  //return 
+	   // "\n   Nombre: " + this.getNombre()+
+	    //"\n   Cedula: " + this.getCedula()+
+	    //"\n   Puesto: " + this.getPuesto()+
+	    //"\n   Turno: " + this.getTurno().getTipo()+
+	    //"\n   Salario: " + this.getTurno().getSalario();
+	    //"\n"+" "+this.Puntuacion()
+	//}
 }
+
 
 

@@ -17,8 +17,8 @@ public class Pedido implements Serializable,Menu{
     private Reserva reserva;
     private ArrayList<Plato> platos;
     private Restaurante restaurante;
-    public static final int TIEMPO_DOMICILIO = 30;
-    public static final int TIEMPO_MESERO = 20;
+    public static final int TIEMPO_DOMICILIO = 45;
+    public static final int TIEMPO_MESERO = 30;
     private boolean verificado = false; // Segun este atributo se van a mostrar y se van a dividir en pedidos verificados y no verificados
 	private String tipoPedido;
 	
@@ -60,41 +60,11 @@ public class Pedido implements Serializable,Menu{
 
     
    // Metdos para Administrador
-   // Gestion de Pedidos
-    public void actualizarTiempoEmpleados(Pedido pedido){
-    	// Este metodo es  para actualizar el tiempo
-    	for(Turno turno : pedido.getCocinero().getTurnos()){
-   		 if(turno.isCobrado()) {
-   			 turno.restarTiempo(pedido.getTiempoTotal());
-   		 }
-   	 }
-    	// Llama metodo para cobrar turno
-   	 pedido.getCocinero().turnosCompletados(pedido.getCocinero());
-   	 // Si el pedido es de consumo en restaurante se actualiza tiempo a mesero
-   	 if(pedido.getMesero()!=null) {
-       	 for(Turno turno :pedido.getMesero().getTurnos()){
-       		 if(turno.isCobrado()) {
-       			 turno.restarTiempo(TIEMPO_MESERO);
-       		 }
-       	 }
-       	 // Llama metodo para cobrar turno
-       	 pedido.getMesero().turnosCompletados(pedido.getMesero()); 
-   	 }
-   	 // Si el pedido es de consumo en domicilio se actualiza tiempo a domiciliario
-   	 if(pedido.getDomiciliario()!=null) {
-   	 for(Turno turno : pedido.getDomiciliario().getTurnos()){
-   		 if(turno.isCobrado()) {
-   			 turno.restarTiempo(TIEMPO_DOMICILIO);
-   		 }
-   	 }
-   	 // Llama metodo para cobrar turno
-   	 pedido.getDomiciliario().turnosCompletados(pedido.getDomiciliario());
-   	 }
-    }
+
     
     // Metodo para realizar llamada multiple a metodos de actualizar inventario
     public void actualizarInventario(Restaurante restaurante,Pedido pedido) {
-		actualizarTiempoEmpleados(pedido);
+		restaurante.actualizarTiempoEmpleados(pedido);
 		restaurante.actualizarInsumos(pedido);}
     
     //Metodo para verificar pedido
@@ -190,13 +160,13 @@ public class Pedido implements Serializable,Menu{
 	@Override
     public String toString() {
    	 String mesaStr = (mesa != null) ? mesa.toString() : "N/A";
-        String meseroStr = (mesero != null) ? mesero.getNombre() : "N/A";
-        String domiciliarioStr = (domiciliario != null) ? domiciliario.getNombre() : "N/A";
+        String meseroStr = (mesero != null) ? mesero.toString() : "N/A";
+        String domiciliarioStr = (domiciliario != null) ? domiciliario.toString() : "N/A";
         String resumen = (reserva != null) ? reserva.resumenReservaPedido() : "no tiene reserva asociada";
         
 
         return "mesa: " + mesa +
-                "\n   cocinero: " + cocinero.getNombre() +
+                "\n   cocinero: " + cocinero.toString() +
                 "\n   mesero: " + meseroStr +
                 "\n   domiciliario: " + domiciliarioStr +
                 "\n   numero de platos: " + this.getPlatos().size()+ 

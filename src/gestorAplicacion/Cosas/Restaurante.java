@@ -217,7 +217,7 @@ public class Restaurante implements Serializable {
  	public List<Pedido> getPedidosVerificados() {
 		List<Pedido> pedidosVerificados = new ArrayList<>();
 		for(Pedido pedido : getPedidos()){
-			if(pedido.isVerificado()){
+			if(pedido.isVerificado()&& pedido.getDomiciliario()==null){
 				pedidosVerificados.add(pedido);
 			}
 		}
@@ -227,7 +227,7 @@ public class Restaurante implements Serializable {
 	public List<Pedido> getPedidosSinVerificar(){
 		List<Pedido> pedidosSinVerificar = new ArrayList<>();
 		for(Pedido pedido : getPedidos()){
-			if(pedido.isVerificado()==false){
+			if(pedido.isVerificado()==false && pedido.getDomiciliario()==null){
 				pedidosSinVerificar.add(pedido);
 			}
 		}
@@ -260,6 +260,44 @@ public class Restaurante implements Serializable {
 	        }
 	    }
 	}
+	   // Gestion de Pedidos
+    public void actualizarTiempoEmpleados(Pedido pedido){
+    	// Este metodo es  para actualizar el tiempo
+    	LocalDate fechaActual = LocalDate.now();
+    	String dia = pedido.getCocinero().clasificarDia(fechaActual);
+    	for(Pedido pedidoi: getPedidos()) {
+    		if(pedidoi.equals(pedido)) {
+    			for(Turno turno : pedido.getCocinero().getTurnos()){
+    				if(turno.getTipo().toString().equals(dia)) {
+    					if(!turno.isCompletado()) {
+    					turno.restarTiempo(turno,pedido.getTiempoTotal());
+    					}
+    					}
+    				}
+    		
+    	// Llama metodo para cobrar turno
+   	 pedido.getCocinero().turnosCompletados(pedido.getCocinero());
+   	 // Si el pedido es de consumo en restaurante se actualiza tiempo a mesero
+   	 if(pedido.getMesero()!=null) {
+       	 for(Turno turno :pedido.getMesero().getTurnos()){
+       		if(turno.getTipo().toString().equals(dia)) {
+       		 if(!turno.isCompletado()) {
+       			 turno.restarTiempo(turno,Pedido.TIEMPO_MESERO);
+       		 }}
+       	 // Llama metodo para cobrar turno
+       		}
+       	pedido.getMesero().turnosCompletados(pedido.getMesero()); 
+       	}
+   	 // Si el pedido es de consumo en domicilio se actualiza tiempo a domiciliario
+   	 if(pedido.getDomiciliario()!=null) {
+   	 for(Turno turno : pedido.getDomiciliario().getTurnos()){
+   		if(turno.getTipo().toString().equals(dia)) {
+   		 if(!turno.isCobrado()) {
+   			 turno.restarTiempo(turno,Pedido.TIEMPO_DOMICILIO);
+   		 }}}
+   	 // Llama metodo para cobrar turno
+   	 pedido.getDomiciliario().turnosCompletados(pedido.getDomiciliario());
+   	 }}}}
 	// Buscar un empleado por su nombre y puesto
     public Empleado buscarEmpleado(String nombre, String puesto){
     	for(Empleado empleado : listadoEmpleados){
@@ -497,5 +535,24 @@ public class Restaurante implements Serializable {
             return "No existe una mesa con ese número, por favor vuelva a intentarlo";
         }
     }
+    public List<Pedido> getPedidosDomicilio(){
+    	List<Pedido> pedidosDomicilio = new ArrayList<>();
+    	for(Pedido pedido : getPedidos()){
+		if(pedido.getDomiciliario()!=null){
+			pedidosDomicilio.add(pedido);
+		}
+	}
+	return pedidosDomicilio;
+    }
+    
+	public String imprimirDomicilios() {
+		List<Pedido> pedidosDomicilio = getPedidosDomicilio();
+		String domicilios="";
+		for(int i = 0; i < pedidosDomicilio.size(); i++){
+			domicilios+=(i + 1) + ". " + pedidosDomicilio.get(i);
+			domicilios+="\n-------------------------------------------------------\n";
+			}
+		return domicilios;
+	}
 
 }

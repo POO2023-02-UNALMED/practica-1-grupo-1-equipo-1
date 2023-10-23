@@ -62,9 +62,16 @@ public class Turno implements Serializable{
 		this.horas = horas;
 	}
 	
-    public void restarTiempo(int tiempo){
-		this.horas=(this.horas*60)-tiempo;
+    public void restarTiempo(Turno turno,int tiempo){
+    	if((this.horas*60)-tiempo>=-20) {
+    		turno.setHoras(((this.horas*60)-tiempo)/60);
+    		// Rango de 20 minutos para contratiempos
+    		if(turno.getHoras() > -20 && turno.getHoras() <= 0){
+    			turno.setCompletado(true);
+    		}
+    	}
 	}
+    
     // Metodo que calcula las horas extra
 	public int HorasExtras() {
         int horasRegulares = 8;  //suponer que es 8
@@ -76,6 +83,8 @@ public class Turno implements Serializable{
 	}
 	// toString de la clase
 	public String toString(){
-		return "Tipo: " + this.getTipo() +" Salario: " +this.getEstado() +" Estado completado: " + this.isCompletado() +" Estado cobrado";
+		return "Tipo: " + this.getTipo() +" Salario: " +this.getEstado() +" Estado completado: " + this.isCompletado() +" Estado cobrado" + this.isCobrado()+"time"+this.getHoras();
 	}
+
+	
 }
