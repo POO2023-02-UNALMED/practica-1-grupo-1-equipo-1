@@ -372,14 +372,14 @@ public class Administrador implements Menu {
 			  		else {
 						Administrador.mostrarEmpleados(restaurante.getEmpleados());
 		    		}
-		      		System.out.println("Escribe el nùmero del empleado para ver mas detalles");
+		      		System.out.println("Escribe el número del empleado para ver mas detalles");
 		      		int num= (int) readLong();
 		      		int indice=num-1;
 		      		System.out.println("-------------------------------------------------------");
 		      		if (indice>=0 && indice<restaurante.getEmpleados().size()) {
 						System.out.print(restaurante.getEmpleados().get(indice).detallesEmpleado());
 		      		} else {
-						System.out.println("El nùmero ingresado no es vàlido, por favor ingresa un nùmero que corresponda a un empleado");
+						System.out.println("El número ingresado no es válido, por favor ingresa un número que corresponda a un empleado");
 		      		}
 		      		System.out.println("-------------------------------------------------------");
 		      		break;
@@ -391,14 +391,14 @@ public class Administrador implements Menu {
 		      		} else {
 						mostrarEmpleados(restaurante.getAspEmpleados());
 		      		}
-		      		System.out.println("Escribe el nùmero del aspirante para ver mas detalles");
+		      		System.out.println("Escribe el número del aspirante para ver mas detalles");
 		      		num= (int) readLong();
 		      		indice=num-1;
 		      		System.out.println("-------------------------------------------------------");
 		      		if (indice>=0 && indice<restaurante.getAspEmpleados().size()) {
 						System.out.print(restaurante.getAspEmpleados().get(indice).detallesEmpleado());
 		    		} else {
-						System.out.println("El nùmero ingresado no es vàlido, por favor ingresa un nùmero que corresponda a un empleado");
+						System.out.println("El número ingresado no es válido, por favor ingresa un número que corresponda a un empleado");
 		    		}
 		      		System.out.println("-------------------------------------------------------");
 		      		break;
@@ -409,6 +409,7 @@ public class Administrador implements Menu {
 		       			System.out.println("1. Agregar ficha de Cocinero");
 		       			System.out.println("2. Agregar ficha de Mesero"); 
 		       			System.out.println("3. Agregar ficha de Domiciliario");
+						System.out.println("4. volver a gestión de Empleados");
 		       			System.out.print("Escribe el número de la opción que necesitas: ");
 		       			opcionEmp1= (int) readLong();
 		       			switch(opcionEmp1) {
@@ -417,7 +418,7 @@ public class Administrador implements Menu {
 			 					String nombre= readln();
 			 					System.out.println("Ingresa la cedula");
 			 					Long cedula= readLong();
-			 					System.out.println("Ingresa el turno");
+			 					System.out.print("Ingresa el turno: semana, sabado o domingo: ");
 			 					String tipoturno= readln().toUpperCase();
 								Turno turno = null;
 			   					if (tipoturno=="SEMANA"){
@@ -435,7 +436,7 @@ public class Administrador implements Menu {
 			  					String nombre1 = readln();
 			  					System.out.println("Ingresa la cedula");
 			  					Long cedula1 = readLong();
-			  					System.out.println("Ingresa el turno");
+			  					System.out.print("Ingresa el turno: semana, sabado o domingo: ");
 			  					String tipoturno1 = readln().toUpperCase();
 								Turno turnoj = null;
 			    				if (tipoturno1=="SEMANA"){
@@ -453,7 +454,7 @@ public class Administrador implements Menu {
 			    				String nombre2= readln();
 			    				System.out.println("Ingresa la cedula");
 			    				Long cedula2= readLong();
-			    				System.out.println("Ingresa el turno");
+			    				System.out.print("Ingresa el turno: semana, sabado o domingo: ");
 			    				String tipoturno2 = readln().toUpperCase();
 								Turno turnok = null;
 			      				if (tipoturno2=="SEMANA"){
@@ -477,7 +478,7 @@ public class Administrador implements Menu {
 		      		} else {
 						mostrarEmpleados(restaurante.getAspEmpleados());
 		      		}
-		      		System.out.println("Escribe el nùmero del aspirante que deseas contratar");
+		      		System.out.println("Escribe el número del aspirante que deseas contratar");
 		      		num= (int) readLong();
 		      		indice=num-1;
 		      		System.out.println("-------------------------------------------------------");
@@ -485,7 +486,7 @@ public class Administrador implements Menu {
 						restaurante.contratarEmpleado(restaurante.getAspEmpleados().get(indice));
 						restaurante.getAspEmpleados().remove(indice);
 		      		} else {
-						System.out.println("El nùmero ingresado no es vàlido, por favor ingresa un nùmero que corresponda a un empleado");
+						System.out.println("El número ingresado no es válido, por favor ingresa un número que corresponda a un empleado");
 		      		}
 		      		System.out.println("-------------------------------------------------------");
 		      		break;
@@ -497,14 +498,14 @@ public class Administrador implements Menu {
 					} else {
 			  			mostrarEmpleados(restaurante.getEmpleados());
 					}
-					System.out.println("Escribe el nùmero del empleado que desea despedir");
+					System.out.println("Escribe el número del empleado que desea despedir");
 					num= (int) readLong();
 					indice=num-1;
 					System.out.println("-------------------------------------------------------");
 					if (indice>=0 && indice<restaurante.getEmpleados().size()) {
 			  			restaurante.getEmpleados().remove(indice);
 					} else {
-			  			System.out.println("El nùmero ingresado no es válido, por favor ingresa un nùmero que corresponda a un empleado");
+			  			System.out.println("El número ingresado no es válido, por favor ingresa un número que corresponda a un empleado");
 					}
 					System.out.println("-------------------------------------------------------");
 					break;
