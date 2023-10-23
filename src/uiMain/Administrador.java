@@ -691,7 +691,7 @@ public class Administrador implements Menu {
         					System.out.println("2. Valor de abastecer un Material del Inventario");
         					System.out.println("3. Pago total de los Empleados");
         					System.out.println("4. Pago de un Empleado");
-        					System.out.println("5. Volver al menú de gestión de inventario");
+        					System.out.println("5. Volver al menú de gestión Financiera");
         					System.out.print("Escribe el número de la opción que necesitas: ");
         					
         		
@@ -755,7 +755,7 @@ public class Administrador implements Menu {
         					System.out.println("-------------------------------------------------------");
         					System.out.println("1. Ganancia Bruta");
         					System.out.println("2. Ganancia Neta");
-        					System.out.println("3. Volver al menú de gestión de inventario");
+        					System.out.println("3. Volver al menú de gestión Financiera");
         					System.out.print("Escribe el número de la opción que necesitas: ");
         					
         					opcionF2=(int)readLong();
