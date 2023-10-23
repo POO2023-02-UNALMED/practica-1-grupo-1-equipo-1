@@ -338,8 +338,19 @@ public class Restaurante implements Serializable {
     public void botarMaterial(Material.Tipo tipo,int cantidad) {
     	if (this.inventario.containsKey(tipo)) {
     		Material materialEliminado=this.inventario.get(tipo);
+    		if (materialEliminado.getCantidad()>=cantidad) {
     			materialEliminado.botarMaterial(cantidad);
+    		}else {
+    			operacionInvalida();
+    		}
     	}
+    	else {
+    		operacionInvalida();
+    	}
+    }
+  //metodo para decir si una accion no puede ser ejecutada
+    public String operacionInvalida() {
+    	return "Operacion Inválida";
     }
     public double calcularValorInventario() {
     	double valorTotal=0;
