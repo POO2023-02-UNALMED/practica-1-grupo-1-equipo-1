@@ -348,7 +348,7 @@ public class Administrador implements Menu {
 	    			    	break;
 	    			    }case 5: break; 
 	    			// Volver al menú principal
-	    			}}while(opcion!=5); break;
+	    			}}while(opcion3!=5); break;
     		case 3:
 		    /*int opcionEmp;
 		    int opcionEmp1;
