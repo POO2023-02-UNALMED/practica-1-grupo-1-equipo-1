@@ -383,8 +383,8 @@ public class Administrador implements Menu {
 		      		} else {
 						mostrarEmpleados(restaurante.getAspEmpleados());
 		      		System.out.println("Escribe el número del aspirante para ver mas detalles");
-		      		num= (int) readLong();
-		      		indice=num-1;
+		      		int num= (int) readLong();
+		      		int indice=num-1;
 		      		System.out.println("-------------------------------------------------------");
 		      		if (indice>=0 && indice<restaurante.getAspEmpleados().size()) {
 						System.out.print(restaurante.getAspEmpleados().get(indice).detallesEmpleado());
@@ -470,8 +470,8 @@ public class Administrador implements Menu {
 		      		} else {
 						mostrarEmpleados(restaurante.getAspEmpleados());
 		      		System.out.println("Escribe el número del aspirante que deseas contratar");
-		      		num= (int) readLong();
-		      		indice=num-1;
+		      		int num= (int) readLong();
+		      		int indice=num-1;
 		      		System.out.println("-------------------------------------------------------");
 		      		if (indice>=0 && indice<restaurante.getAspEmpleados().size()) {
 						restaurante.contratarEmpleado(restaurante.getAspEmpleados().get(indice));
@@ -490,8 +490,8 @@ public class Administrador implements Menu {
 					} else {
 			  			mostrarEmpleados(restaurante.getEmpleados());
 					System.out.println("Escribe el número del empleado que desea despedir");
-					num= (int) readLong();
-					indice=num-1;
+					int num= (int) readLong();
+					int indice=num-1;
 					System.out.println("-------------------------------------------------------");
 					if (indice>=0 && indice<restaurante.getEmpleados().size()) {
 			  			restaurante.getEmpleados().remove(indice);
