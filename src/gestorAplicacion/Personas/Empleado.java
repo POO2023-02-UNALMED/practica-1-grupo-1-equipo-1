@@ -102,7 +102,7 @@ public class Empleado extends Persona implements Serializable{
         DayOfWeek diaDeLaSemana = fecha.getDayOfWeek();
         switch (diaDeLaSemana) {
             case SATURDAY:
-                return "SÁBADO";
+                return "SABADO";
             case SUNDAY:
                 return "DOMINGO";
             default:
@@ -111,14 +111,14 @@ public class Empleado extends Persona implements Serializable{
     }
 
 	// Para verificar tiempo de el cocinero
-    public boolean verificarTiempo(Empleado empleado,int tiempoPlatos){
+    public boolean verificarTiempo(Empleado empleado,int tiempoPreparacion){
     	LocalDate fechaActual = LocalDate.now();
     	String dia = clasificarDia(fechaActual);
     	for (Turno turno : empleado.getTurnos()) {
     		if (turno.getTipo().toString().equals(dia)){
     		if(!turno.isCobrado()){
     			int tiempoDisponible = turno.getHoras()* 60;
-    			if(tiempoDisponible>tiempoPlatos){
+    			if(tiempoDisponible>tiempoPreparacion){
     	    		return true;
     	    		}
     	    	}
@@ -145,10 +145,16 @@ public class Empleado extends Persona implements Serializable{
     			if (turno.getTipo().toString().equals(dia)){
         		if(!turno.isCobrado()){
         			int tiempoDisponible = turno.getHoras()* 60; 
-        			if( tiempoDisponible > Pedido.TIEMPO_MESERO ){
-        				return true;}}}
+        			if( tiempoDisponible > Pedido.TIEMPO_MESERO )
+        			{
+        				System.out.println("verificar mesero");
+        				return true;
+        				}
+        			}
+        		}
     		}
     	}
+    	
 		return false;
     	}
 	
@@ -162,7 +168,8 @@ public class Empleado extends Persona implements Serializable{
     public void turnosCompletados(Empleado empleado){
 		for(Turno turno : empleado.getTurnos()){
 			if (turno.isCompletado()==true & turno.isCobrado()==false){
-					empleado.salario+=turno.getSalario();
+					turno.setCobrado(true);
+					empleado.setSalario(turno.getSalario());
 					}
 			}
 		}

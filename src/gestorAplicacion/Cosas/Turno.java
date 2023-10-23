@@ -66,7 +66,7 @@ public class Turno implements Serializable{
     	if((this.horas*60)-tiempo>=-20) {
     		turno.setHoras(((this.horas*60)-tiempo)/60);
     		// Rango de 20 minutos para contratiempos
-    		if(turno.getHoras() > -20 && turno.getHoras() <= 0){
+    		if(turno.getHoras()> -20 && turno.getHoras() <= 0){
     			turno.setCompletado(true);
     		}
     	}

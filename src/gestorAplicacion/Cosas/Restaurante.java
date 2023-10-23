@@ -213,6 +213,18 @@ public class Restaurante implements Serializable {
 	    }
 	    return domiciliariosVerificados;
 	}
+	
+	public List<Empleado> verificarMeseros(List<Empleado> empleados) {
+	    List<Empleado> meseros = clasificarEmpleados(empleados, "mesero");
+	    List<Empleado> meserosVerificados = new ArrayList<>();
+	    for(Empleado empleado : meseros){
+	        if(empleado.verificarTiempo(empleado)){
+	        	meserosVerificados.add(empleado);
+	        }
+	    }
+	    return meserosVerificados;
+	}
+	
 	// Filtrar los pedidos verificados
  	public List<Pedido> getPedidosVerificados() {
 		List<Pedido> pedidosVerificados = new ArrayList<>();
@@ -270,6 +282,7 @@ public class Restaurante implements Serializable {
     			for(Turno turno : pedido.getCocinero().getTurnos()){
     				if(turno.getTipo().toString().equals(dia)) {
     					if(!turno.isCompletado()) {
+    						System.out.println("cocinero");
     					turno.restarTiempo(turno,pedido.getTiempoTotal());
     					}
     					}
@@ -282,10 +295,12 @@ public class Restaurante implements Serializable {
        	 for(Turno turno :pedido.getMesero().getTurnos()){
        		if(turno.getTipo().toString().equals(dia)) {
        		 if(!turno.isCompletado()) {
+       			 System.out.println("mesero");
        			 turno.restarTiempo(turno,Pedido.TIEMPO_MESERO);
        		 }}
        	 // Llama metodo para cobrar turno
        		}
+       	 System.out.println("se cobra");
        	pedido.getMesero().turnosCompletados(pedido.getMesero()); 
        	}
    	 // Si el pedido es de consumo en domicilio se actualiza tiempo a domiciliario
@@ -293,6 +308,7 @@ public class Restaurante implements Serializable {
    	 for(Turno turno : pedido.getDomiciliario().getTurnos()){
    		if(turno.getTipo().toString().equals(dia)) {
    		 if(!turno.isCobrado()) {
+   			 System.out.println("domiciliario");
    			 turno.restarTiempo(turno,Pedido.TIEMPO_DOMICILIO);
    		 }}}
    	 // Llama metodo para cobrar turno

@@ -86,7 +86,7 @@ public class Administrador implements Menu {
     	Pedido pedido = new Pedido();
         Plato plato = new Plato();
     	//mostrarMenu(menu);
-    	int opcion, opcion2;
+    	int opcion, opcion2,opcion3;
 		for (Mesa mesa1 : restaurante.getMesas()) {
 			mesa1.anadirNumero(mesa1.getNumeroMesa());
 		}
@@ -177,19 +177,18 @@ public class Administrador implements Menu {
 					case 6: break;
 				} } while(opcion2 != 6);
 			break;
+			
 				case 2: do{
 	    			System.out.println("¿Que deseas hacer?");
-	    			System.out.println("1. Ver lista de pedidos consumo(restaurante)");
-	    			System.out.println("2. Ver lista de pedidos consumo(domicilio)");	
-	    			System.out.println("3. Añadir pedidos");
-	    			System.out.println("4. Cancelar pedidos");
-	    			System.out.println("5. Verificar pedidos");
-	    			System.out.println("6. Volver al menú de funcionalidades");
+	    			System.out.println("1. Ver lista de pedidos ");
+	    			System.out.println("2. Añadir pedidos");
+	    			System.out.println("3. Cancelar pedidos");
+	    			System.out.println("4. Verificar pedidos");
+	    			System.out.println("5. Volver al menú de funcionalidades");
 	    			System.out.print("Escribe el número de la opción que necesitas: ");
+	    			opcion3=(int) readLong();
 	    			
-	    			opcion=(int) readLong();
-	    			
-	    			switch(opcion) {
+	    			switch(opcion3) {
 	    			
 	    			case 1:
 	    				System.out.println("-------------------------------------------------------");
@@ -201,17 +200,15 @@ public class Administrador implements Menu {
 		    			if(restaurante.getPedidosVerificados().size()==0)
 		    			{System.out.println("\n-No hay pedidos verificados");}
 		    			System.out.println(restaurante.imprimirPedidosVerificados());
+		    			System.out.println("-------------------------------------------------------");
+	    				System.out.println("\nListado de Pedidos Domicilios");
+	    				if(restaurante.getPedidosDomicilio().size()==0)
+		    			{System.out.println("\n-No hay pedidos de domicilio");}
+		    			System.out.println(restaurante.imprimirDomicilios());
+		    			System.out.println("-------------------------------------------------------");
 		    			break;
-		    			
+		    		
 		    			case 2:
-		    				System.out.println("-------------------------------------------------------");
-		    				System.out.println("\nListado de Pedidos Domicilios");
-		    				if(restaurante.getPedidosDomicilio().size()==0)
-			    			{System.out.println("\n-No hay pedidos de domicilio");}
-			    			System.out.println(restaurante.imprimirDomicilios());
-			    			System.out.println("-------------------------------------------------------");
-			    			break;
-		    			case 3:
 		    				ArrayList<Plato> platosTemp = new ArrayList<Plato>();
 		    				// Imprimir el menú
 		    				int i1 =0;
@@ -263,7 +260,7 @@ public class Administrador implements Menu {
 			    			} else if(tipoPedido.equals("restaurante")){
 			    				System.out.println("-------------------------------------------------------");
 			    				System.out.println("Estos son los meseros disponibles ");
-			    				List<Empleado> meseros = restaurante.clasificarEmpleados(restaurante.getEmpleados(), "mesero");
+			    				List<Empleado> meseros = restaurante.verificarMeseros(restaurante.getEmpleados());
 			    				for(int i = 0; i < meseros.size(); i++){
 			    					System.out.println((i + 1) + ". " + meseros.get(i));
 			    				}
@@ -307,7 +304,7 @@ public class Administrador implements Menu {
 			    			//Para reinicializar la lista para mandar
 			    			platosTemp = new ArrayList<Plato>();
 						break;
-		    			case 4:
+		    			case 3:
 		    			    System.out.println("Estos son los pedidos que puedes cancelar");
 		    			    System.out.println(restaurante.imprimirPedidosSinVerificar());
 
@@ -324,7 +321,7 @@ public class Administrador implements Menu {
 		    			    break;
 		    			    
 	    			
-	    			case 5:
+	    			case 4:
 	    				System.out.println("\nListado de Pedidos sin Verificar");
 	        			if (restaurante.getPedidos().size()==0)
 	        			{System.out.println("\n-No hay pedidos sin verificar");}
@@ -348,10 +345,10 @@ public class Administrador implements Menu {
 	    			    	else{System.out.println("\nHay un problema en el pedido numero: " + num);
 	    			    	System.out.println("-------------------------------------------------------");
 	    			    	}
-	    			    }
-	    			case 6: break; // Volver al menú principal
-	    			}
-	    		}while(opcion!=6); break;
+	    			    	break;
+	    			    }case 5: break; 
+	    			// Volver al menú principal
+	    			}}while(opcion!=5); break;
     		case 3:
 		    /*int opcionEmp;
 		    int opcionEmp1;
