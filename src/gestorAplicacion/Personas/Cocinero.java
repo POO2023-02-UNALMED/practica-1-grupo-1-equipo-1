@@ -1,6 +1,10 @@
 package gestorAplicacion.Personas;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import gestorAplicacion.Cosas.Restaurante;
+import gestorAplicacion.Cosas.Turno;
 
 public class Cocinero extends Empleado implements Serializable{
   private static final long serialVersionUID = 1L;
@@ -22,6 +26,6 @@ public class Cocinero extends Empleado implements Serializable{
 
   //Metodo para mostrar la descripcion del trabajo del Empleado
   public String trabajo(){
-    return "Cocinero, es quien cocina y prepara alimentos en el restaurante."
+    return "Cocinero, es quien cocina y prepara alimentos en el restaurante.";
   }
 }

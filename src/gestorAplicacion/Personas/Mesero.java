@@ -1,6 +1,10 @@
 package gestorAplicacion.Personas;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import gestorAplicacion.Cosas.Restaurante;
+import gestorAplicacion.Cosas.Turno;
 
 public class Mesero extends Empleado implements Serializable{
   private static final long serialVersionUID = 1L;
@@ -22,6 +26,6 @@ public class Mesero extends Empleado implements Serializable{
 
   //Metodo para mostrar la descripcion del trabajo del Empleado
   public String trabajo(){
-    return "Mesero, es quien se encarga de atender y servir a la clientela."
+    return "Mesero, es quien se encarga de atender y servir a la clientela.";
   }
 }
