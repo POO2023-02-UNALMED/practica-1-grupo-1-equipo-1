@@ -843,6 +843,26 @@ public class Administrador implements Menu {
     	Serializador.serializar(gestor);
     	System.exit(0);
     }
+	//Metodo para mostrar algunos datos de los empleados
+	public static void mostrarEmpleados(ArrayList<Empleados> Empleado) {
+	  short cont=1;
+	  for (Empleado e:Empleado) {
+	    System.out.println(cont+". Nombre:"+e.getNombre()+"- Puesto"+e.getPuesto()+"- Turno: "+e.getTurno().getTipo();
+	    cont++;
+	  }
+	}
+	
+	//Metodo para mostrar detalles de los empleados
+	public static void detallesEmpleado(){
+	  return 
+	    "\n   Nombre: " + this.getNombre()+
+	    "\n   Cedula: " + this.getCedula()+
+	    "\n   Puesto: " + this.getPuesto()+
+	    "\n   Turno: " + this.getTurno().getTipo()+
+	    "\n   Salario: " + this.getTurno().getSalario();
+	    "\n"+" "+this.Puntuacion()
+	}
+
 }
 
 
