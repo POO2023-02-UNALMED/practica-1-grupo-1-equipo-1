@@ -296,10 +296,12 @@ public class Restaurante implements Serializable {
     	}
     }
     //Metodos gestion de inventario
-
-
+    
+    
+    //Añade la cantidad del material suministrado junto a su fecha de vencimiento, en caso de
+    //que lo ultimo no coincida se crea una instancia diferente y si no existe la instancia se crea
     public void comprarMaterial (Material.Tipo tipo, int cantidad, int precio, String fecha) {
-
+    	//revisa si ya existe el material
         if (this.inventario.containsKey(tipo)) {
         	Material materialComprado = this.inventario.get(tipo);
         	LocalDate vence = Reserva.deStringaFecha(fecha);
@@ -309,6 +311,7 @@ public class Restaurante implements Serializable {
             
             
         }
+        //no existe por lo que lo crea
         else {
         	LocalDate vence = Reserva.deStringaFecha(fecha);
         	Material nuevoMaterial=new Material(tipo,cantidad,precio,vence);
@@ -317,6 +320,8 @@ public class Restaurante implements Serializable {
             nuevoMaterial.cambiarFechaVencimiento(vence);
         }
     }
+    
+    //sobrecarga de metodo, hace lo mismo que el de arriba pero sin fecha de vencimiento
     public void comprarMaterial (Material.Tipo tipo, int cantidad, int precio) {
         if (this.inventario.containsKey(tipo)) {
         	Material materialComprado = this.inventario.get(tipo);
@@ -329,18 +334,11 @@ public class Restaurante implements Serializable {
             nuevoMaterial.cambiarPrecioUnitario(precio);
         }
     }
-
+    //Se encarga de eliminar un material especifico
     public void botarMaterial(Material.Tipo tipo,int cantidad) {
     	if (this.inventario.containsKey(tipo)) {
     		Material materialEliminado=this.inventario.get(tipo);
-    		if (materialEliminado.getCantidad()>=cantidad) {
     			materialEliminado.botarMaterial(cantidad);
-    		}else {
-    			operacionInvalida();
-    		}
-    	}
-    	else {
-    		operacionInvalida();
     	}
     }
     public double calcularValorInventario() {
@@ -351,10 +349,7 @@ public class Restaurante implements Serializable {
     	return valorTotal;
     }
     
-    //metodo para decir si una accion no puede ser ejecutada
-    public String operacionInvalida() {
-    	return "Operacion Inválida";
-    }
+    
 
     // Gestion de Reservas
     public void borrarReservasViejas() {

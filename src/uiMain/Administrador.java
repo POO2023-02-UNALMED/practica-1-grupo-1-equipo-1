@@ -38,7 +38,7 @@ public class Administrador implements Menu {
 	}
     public static void main(String[] args) {
     	Scanner scanner = new Scanner(System.in);
-    	
+    	//se crea el objeto de gestor que se encarga de asignarle los objetos deserializados al restaurante
     	Gestor gestor=new Gestor();
     	Restaurante restaurante=gestor.getRestaurante();
     	restaurante.setClientes(gestor.getClientes());
@@ -79,12 +79,7 @@ public class Administrador implements Menu {
     	Turno turno8 = new Turno(Turno.Tipo.SABADO, 2, 70000);
     	Turno turno9 = new Turno(Turno.Tipo.DOMINGO, 1, 80000);
     	Turno turno10 = new Turno(Turno.Tipo.SEMANA, 5, 65000);
-    	/*Empleado mesero1 = new Empleado("Juan", 123456789L, "mesero", restaurante, turno1);
-    	mesero1.agregarTurno(turno2);
-    	Empleado cocinero1 = new Empleado("Ana", 987654321L, "cocinero", restaurante, turno3);
-    	cocinero1.agregarTurno(turno4);
-    	Empleado domiciliario1 = new Empleado("Carlos", 456789123L, "domiciliario", restaurante, turno5);
-    	domiciliario1.agregarTurno(turno6);*/
+    	
         Pedido pedido = new Pedido();
         Plato plato = new Plato();
     	//mostrarMenu(menu);
@@ -348,7 +343,7 @@ public class Administrador implements Menu {
     		case 3:
     			System.out.println("Esperando a ser creada por Jhogert");
     			break;
-			//funcionalidad Sebas
+			//funcionalidad gestion inventario (sebastian hoyos)
     		case 4: 
     			int opcionInv = 0;
     			int opcionInv1;
@@ -363,11 +358,16 @@ public class Administrador implements Menu {
     			System.out.print("Escribe el número de la opción que necesitas: ");
     			opcionInv=(int) readLong();
     			switch(opcionInv) {
-    			case 1:System.out.println("-------------------------------------------------------"); 
+    			//muestra las mesas y materiales que tiene el restaurante
+    			case 1:
+    				
+    				System.out.println("-------------------------------------------------------"); 
     				mostrarIngredientes(restaurante);
     				System.out.println("-------------------------------------------------------");
 					mostrarMesas(restaurante);
     				break;
+    			//muestra los materiales que tiene el restaurante y permite comprarlos
+    			//en caso de comprar una mesa crea una instancia de mesa nueva
     			case 2:
     				
     				do {
@@ -379,11 +379,12 @@ public class Administrador implements Menu {
     					opcionInv1=(int)readLong();
     					switch(opcionInv1) {
     					case 1: 
+    						
     						System.out.println("-------------------------------------------------------");
     						mostrarIngredientes(restaurante);
     						System.out.print("Ingrese el ingrediente a comprar: ");
     						System.out.println("\n-------------------------------------------------------");
-    						String ingrediente=scan.next();
+    						String ingrediente=scan.next().toUpperCase();
     						Material.Tipo ingredienteEnum=Material.Tipo.valueOf(ingrediente);
     						System.out.print("Ingrese la cantidad a comprar: ");
     						System.out.println("\n-------------------------------------------------------");	
@@ -410,7 +411,7 @@ public class Administrador implements Menu {
     						System.out.println("-------------------------------------------------------");
     						System.out.print("Ingrese el material a comprar: ");
     						System.out.println("\n-------------------------------------------------------");
-    						String material=scan.next();
+    						String material=scan.next().toUpperCase();
     						Material.Tipo materialEnum=Material.Tipo.valueOf(material);
     						System.out.print("Ingrese la cantidad a comprar: ");
     						System.out.println("\n-------------------------------------------------------");
@@ -436,6 +437,8 @@ public class Administrador implements Menu {
     						break;
     					}
     				}while(opcionInv1!=4); break;
+    				//muestra los materiales que tiene el restaurante y permite eliminarlos
+        			//en caso de comprar una mesa, se elimina la instancia de esta mesa
     			case 3:
     				
 					do {
@@ -448,7 +451,7 @@ public class Administrador implements Menu {
     					switch(opcionInv2) {
     					case 1:  mostrarIngredientes(restaurante);
     						System.out.print("Ingrese el ingrediente a desechar: ");
-    						String ingrediente =scan.next();
+    						String ingrediente =scan.next().toUpperCase();
     						System.out.print("Ingrese la cantidad a desechar: ");
     						int cantidad=(int) readLong();
     						Material.Tipo ingredienteEnum=Material.Tipo.valueOf(ingrediente);
@@ -457,7 +460,7 @@ public class Administrador implements Menu {
     						break;
     					case 2: mostrarIngredientes(restaurante);
     						System.out.print("Ingrese el material a desechar: ");
-    						String material= scan.next();
+    						String material= scan.next().toUpperCase();
     						System.out.print("Ingrese la cantidad a desechar: ");
     						Material.Tipo materialEnum=Material.Tipo.valueOf(material);
     						int cantidad2=(int) readLong();
@@ -635,11 +638,14 @@ public class Administrador implements Menu {
         				
 				}	
     		} while (opcionF!=6); break;
-    		case 6: salirDelSistema(gestor);
+    		case 6: 
+    			//ejecuta el metodo para cerrar el programa y serializar los objetos
+    			salirDelSistema(gestor);
 			break;
     	} 
     
     		} while(opcion!=6);}
+    //metodo utilizado para mostrar todas las mesas del restaurante
     public static void mostrarMesas(Restaurante restaurante) {
     	System.out.println("Mesas del restaurante: ");
     	for (Mesa mesa:restaurante.getMesas()) {
@@ -647,7 +653,7 @@ public class Administrador implements Menu {
     		System.out.println("-------------------------------------------------------");
     	}
     }
-    
+    //metodo utilizado para mostrar todos los materiales del inventario
     public static void mostrarIngredientes(Restaurante restaurante) {   	
     	if (restaurante.getInventario().size()==0) {
     		System.out.println("No hay materiales en el inventario");
@@ -662,7 +668,7 @@ public class Administrador implements Menu {
     		}
     	}
     }
-    
+    //metodo utilizado para mostrar los platos del menu
     public static void mostrarMenu(ArrayList<Plato> menu) {
     	short cont=1;
     	for (Plato plato:menu) {
@@ -670,7 +676,7 @@ public class Administrador implements Menu {
     		cont++;
     	}
     }
-    
+    //metodo especializado para serializar los objetos del programa cuando se cierra el programa
     private static void salirDelSistema(Gestor gestor) {
     	System.out.println("Vuelva pronto");
     	Serializador.serializar(gestor);

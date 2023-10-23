@@ -17,6 +17,7 @@ import gestorAplicacion.Personas.Empleado;
 
 public class Gestor implements Serializable{
 	private static final long serialVersionUID=1L;
+	//Se crean listas vacias que se encargaran de soportar los objetos serializados/deserializados
 	private Restaurante restaurante=new Restaurante();
 	private List<Cliente> clientes=new ArrayList<>();
 	private List<Empleado> empleados=new ArrayList<>();
@@ -25,7 +26,7 @@ public class Gestor implements Serializable{
 	private Map<Tipo,Material> inventario=new HashMap<>();
 	private ArrayList<Pedido> pedidos=new ArrayList<>();
 	
-	
+	//getters y setters
 	public Empleado getEmpleadoDelMes() {
 		return this.empMes;
 	}
@@ -77,6 +78,8 @@ public class Gestor implements Serializable{
 	public void setPedidos(ArrayList<Pedido> pedidos) {
 		this.pedidos=pedidos;
 	}
+	
+	//metodos para simular constructores para los objetos
 	public Cliente nuevoCliente(String nombre,long cedula) {
 		Cliente nuevoCliente=new Cliente(nombre,cedula);
 		clientes.add(nuevoCliente);
