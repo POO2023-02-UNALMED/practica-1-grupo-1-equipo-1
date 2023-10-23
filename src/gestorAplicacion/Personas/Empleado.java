@@ -185,8 +185,7 @@ public class Empleado extends Persona implements Serializable{
 	public String toString(){
 		return "Nombre: " + this.getNombre()+ " Puesto: "+ this.getPuesto() + "turno " +this.getTurnos().toString() ;
 	}
-	public void puntuacion(Empleado e) {		
-	}
+	
 	// Alterar turno
     public void agregarTurno(Turno turno){
 		this.turnos.add(turno);

@@ -27,5 +27,5 @@ public abstract class Persona implements Serializable {
 	public void setCedula(Long cedula) {
 		this.cedula = cedula;
 	}
-	public abstract void puntuacion(Empleado e);
+	public abstract String puntuacion();
 }
