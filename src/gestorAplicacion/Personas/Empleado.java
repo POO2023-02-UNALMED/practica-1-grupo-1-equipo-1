@@ -19,7 +19,7 @@ import java.time.LocalDate;
 
 public class Empleado extends Persona implements Serializable{
 	private static final long serialVersionUID=1L;
-    private ArrayList<Turno> turnos;
+    protected ArrayList<Turno> turnos;
     private Turno turno;
     private String puesto;
     private double salario;
