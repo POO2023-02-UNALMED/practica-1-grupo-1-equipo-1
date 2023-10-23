@@ -854,7 +854,7 @@ public class Administrador implements Menu {
 	private static void mostrarEmpleados(List<Empleado> empleados) {
 	  short cont=1;
 	  for (Empleado e : empleados) {
-	    System.out.println(cont + ". Nombre: " + e.getNombre() + "- Puesto: " + e.getPuesto() + "- Turno: " + e.getTurno().getTipo());
+	    System.out.println(cont + ". Nombre: " + e.getNombre() + "- Puesto: " + e.getPuesto() + "- Turno: " + e.getTurnos().get(0).getTipo());
 	    cont++;
 	  }
 	}
