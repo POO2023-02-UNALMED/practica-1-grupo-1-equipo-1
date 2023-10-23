@@ -383,11 +383,11 @@ public class Administrador implements Menu {
 		      		} else {
 						mostrarEmpleados(restaurante.getAspEmpleados());
 		      		System.out.println("Escribe el número del aspirante para ver mas detalles");
-		      		num= (int) readLong();
-		      		indice=num-1;
+		      		int num1= (int) readLong();
+		      		int indice1=num1-1;
 		      		System.out.println("-------------------------------------------------------");
-		      		if (indice>=0 && indice<restaurante.getAspEmpleados().size()) {
-						System.out.print(restaurante.getAspEmpleados().get(indice).detallesEmpleado());
+		      		if (indice1>=0 && indice1<restaurante.getAspEmpleados().size()) {
+						System.out.print(restaurante.getAspEmpleados().get(indice1).detallesEmpleado());
 		    		} else {
 						System.out.println("El número ingresado no es válido, por favor ingresa un número que corresponda a un empleado");
 		    		}
@@ -470,12 +470,12 @@ public class Administrador implements Menu {
 		      		} else {
 						mostrarEmpleados(restaurante.getAspEmpleados());
 		      		System.out.println("Escribe el número del aspirante que deseas contratar");
-		      		num= (int) readLong();
-		      		indice=num-1;
+		      		int num2 = (int) readLong();
+		      		int indice2 = num2-1;
 		      		System.out.println("-------------------------------------------------------");
-		      		if (indice>=0 && indice<restaurante.getAspEmpleados().size()) {
-						restaurante.contratarEmpleado(restaurante.getAspEmpleados().get(indice));
-						restaurante.getAspEmpleados().remove(indice);
+		      		if (indice2>=0 && indice2<restaurante.getAspEmpleados().size()) {
+						restaurante.contratarEmpleado(restaurante.getAspEmpleados().get(indice2));
+						restaurante.getAspEmpleados().remove(indice2);
 		      		} else {
 						System.out.println("El número ingresado no es válido, por favor ingresa un número que corresponda a un empleado");
 		      		}
@@ -490,11 +490,11 @@ public class Administrador implements Menu {
 					} else {
 			  			mostrarEmpleados(restaurante.getEmpleados());
 					System.out.println("Escribe el número del empleado que desea despedir");
-					num= (int) readLong();
-					indice=num-1;
+					int num3= (int) readLong();
+					int indice3=num3-1;
 					System.out.println("-------------------------------------------------------");
-					if (indice>=0 && indice<restaurante.getEmpleados().size()) {
-			  			restaurante.getEmpleados().remove(indice);
+					if (indice3>=0 && indice3<restaurante.getEmpleados().size()) {
+			  			restaurante.getEmpleados().remove(indice3);
 					} else {
 			  			System.out.println("El número ingresado no es válido, por favor ingresa un número que corresponda a un empleado");
 					}
