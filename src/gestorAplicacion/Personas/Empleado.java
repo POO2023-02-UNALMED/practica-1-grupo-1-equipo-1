@@ -204,7 +204,7 @@ public class Empleado extends Persona implements Serializable{
 		  "\n   Nombre: " + this.getNombre()+
 		  "\n   Cedula: " + this.getCedula()+
 		  "\n   Puesto: " + this.getPuesto()+
-		  "\n   Turno: " + this.getTurno().getTipo()+
+		  "\n   Turno: " + this.getTurnos().get(0).getTipo()+
 		  "\n   Salario: " + this.getTurno().getSalario()+
 		  "\n"+" "+this.puntuacion();
 	  }
