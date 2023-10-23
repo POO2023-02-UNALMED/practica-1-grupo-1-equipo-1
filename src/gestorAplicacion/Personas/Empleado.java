@@ -202,11 +202,11 @@ public class Empleado extends Persona implements Serializable{
 	//Metodo para mostrar detalles de los empleados
 	public String detallesEmpleado(){
 		return 
-		  "\n   Nombre: " + this.getNombre()+
-		  "\n   Cedula: " + this.getCedula()+
-		  "\n   Puesto: " + this.getPuesto()+
-		  "\n   Turno: " + this.getTurnos().get(0).getTipo()+
-		  "\n   Salario: " + this.getTurnos().get(0).getSalario()+
+		  "Nombre: " + this.getNombre()+
+		  "\nCedula: " + this.getCedula()+
+		  "\nPuesto: " + this.getPuesto()+
+		  "\nTurno: " + this.getTurnos().get(0).getTipo()+
+		  "\nSalario: " + this.getTurnos().get(0).getSalario()+
 		  "\n"+" "+this.puntuacion();
 	  }
 	
