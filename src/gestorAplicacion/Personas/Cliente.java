@@ -27,8 +27,8 @@ public class Cliente extends Persona implements Serializable{
 	public void PedirComida(Pedido pedido) {
 		this.pedido = pedido;
 	}
-	public void puntuacion(Empleado e) {
-		
+	public String puntuacion() {
+		return "El cliente "+this.getNombre() +" no tiene puntuacion";
 	}
 	
 }
