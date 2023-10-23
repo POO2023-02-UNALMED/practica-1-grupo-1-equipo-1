@@ -397,7 +397,7 @@ public class Administrador implements Menu {
     						String vence = readln();
 							if (Reserva.revisarFecha(vence)) {
 								restaurante.comprarMaterial(ingredienteEnum,cantidad,precio,vence);
-								System.out.println("Se han comprado "+cantidad+" "+ingredienteEnum+" al precio de "+precio+" que vencen el "+vence);
+								System.out.println("Se han comprado "+cantidad+" "+ingredienteEnum+" al precio de "+precio+"$ que vencen el "+vence);
 							}
 							else {
 								System.out.println("La fecha ingresada no es válida, por favor intente con una fecha posterior a hoy");
@@ -430,7 +430,12 @@ public class Administrador implements Menu {
     						System.out.print("Escriba la capacidad de la nueva mesa: ");
     						System.out.println("\n-------------------------------------------------------");
     						int capacidad=(int) readLong();
-    						restaurante.comprarMesa(new Mesa(capacidad,numMesa));
+							if (capacidad > 0) {
+								restaurante.comprarMesa(new Mesa(capacidad,numMesa));
+							}
+    						else {
+								System.out.println("Capacidad de la mesa inválida, debe ser mayor a 0");
+							}
     						System.out.println("La mesa numero "+numMesa+" con capadidad de "+capacidad+" personas ha sido registrada con éxito");
     						break;
     					case 4:
@@ -443,22 +448,12 @@ public class Administrador implements Menu {
     				
 					do {
     					System.out.println("-------------------------------------------------------");
-    					System.out.println("1. ¿Que ingrediente vas a desechar?");
-    					System.out.println("2. ¿Que material vas a desechar?");
-    					System.out.println("3. ¿Que mesa vas a desechar?");
-    					System.out.println("4. Volver al menú de gestión de inventario");
+    					System.out.println("1. ¿Que material vas a desechar?");
+    					System.out.println("2. ¿Que mesa vas a desechar?");
+    					System.out.println("3. Volver al menú de gestión de inventario");
     					opcionInv2=(int)readLong();
     					switch(opcionInv2) {
     					case 1:  mostrarIngredientes(restaurante);
-    						System.out.print("Ingrese el ingrediente a desechar: ");
-    						String ingrediente =scan.next().toUpperCase();
-    						System.out.print("Ingrese la cantidad a desechar: ");
-    						int cantidad=(int) readLong();
-    						Material.Tipo ingredienteEnum=Material.Tipo.valueOf(ingrediente);
-    						restaurante.botarMaterial(ingredienteEnum,cantidad);
-    						System.out.println("Se han eliminado "+cantidad+" "+ingredienteEnum);
-    						break;
-    					case 2: mostrarIngredientes(restaurante);
     						System.out.print("Ingrese el material a desechar: ");
     						String material= scan.next().toUpperCase();
     						System.out.print("Ingrese la cantidad a desechar: ");
@@ -467,18 +462,17 @@ public class Administrador implements Menu {
     						restaurante.botarMaterial(materialEnum,cantidad2);
     						System.out.println("Se han eliminado "+cantidad2+" "+materialEnum);
     						break;
-    					case 3:
-    						mostrarMesas(restaurante);
+    					case 2: mostrarMesas(restaurante);
     						System.out.print("Escriba el numero de mesa a desechar: ");
     						System.out.println("\n-------------------------------------------------------");
     						int numMesa=(int) readLong();
     						restaurante.eliminarMesa(numMesa);
     						System.out.println("La mesa numero "+numMesa+" ha sido eliminada con éxito");
     						break;
-    					case 4:
+    					case 3:
     						break;
     					}
-    				} while(opcionInv2!=4); break;
+    				} while(opcionInv2!=3); break;
     			case 4:
     				break;
     			}
