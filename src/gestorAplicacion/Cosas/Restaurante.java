@@ -137,15 +137,18 @@ public class Restaurante implements Serializable {
     	this.pedidos=pedidos;
     }
 
-    //Metodos funcionalidades
-    //busca el objeto empleado por el nombre
+    // Metodos funcionalidad gestion de pedidos
+    
+    // Se agrega un pedido
     public void agregarPedido(Pedido pedido) {
 		pedidos.add(pedido);
 	}
 	
+    // Se verifica el menu si es apto para ofrecerlo
 	public  ArrayList<Plato>  veirificarMenu(ArrayList<Plato> menu) {
 		ArrayList<Plato> menuVerificado= new ArrayList<>();
 		for(Plato plato: menu){
+			// Se verifica si cada plato cumple
 			if(plato.verificarInsumos(plato)){
 				menuVerificado.add(plato);
 			}
@@ -154,7 +157,7 @@ public class Restaurante implements Serializable {
 	}
 	
 	
-	
+	// Encontrar reserva, aqui se mira si segun los datos en el pedido hay una reserva
 	public Reserva encontrarReserva(int numMesa, String nombre) {
 		Mesa mesa = encontrarMesa(numMesa);
 		for(Reserva reserva : mesa.getReservas()){
@@ -163,7 +166,9 @@ public class Restaurante implements Serializable {
 			}
 		}
 		return null;
-}
+		}
+	
+	// Clasificar empleados por su tipo
 	public List<Empleado> clasificarEmpleados( List<Empleado> empleados, String tipo){
 		List<Empleado> empleadosClasificados = new ArrayList<>();
 		for(Empleado empleado : empleados){
@@ -173,24 +178,19 @@ public class Restaurante implements Serializable {
 		}
 		return empleadosClasificados;
 	}
-	public List<Mesa> buscarMesaDisponible() {
+	// Encontrar una mesa disponible en la fecha de el dia actual
+	public Mesa buscarMesaDisponible() {
 		LocalDate fechaActual = LocalDate.now();
-		List<Mesa> listaDeMesasNo = new ArrayList<>();
-        List<Mesa> listadoTotal = getMesas();
-        for (Mesa mesa1 : getMesas()) {
-            for (Reserva reserva1 : mesa1.getReservas()) {
-                if (reserva1.getDiaReserva().equals(fechaActual)) {
-                    listaDeMesasNo.add(mesa1);
-                    break;
-                }
-            }
-        }
-        for (Mesa mesa2 : listaDeMesasNo) {
-            listadoTotal.remove(mesa2);
-        }
-        return listadoTotal;
-    }
-	
+		for(Mesa mesa : listadoMesas){
+			for(Reserva reserva : mesa.getReservas()){
+				if(!reserva.getDiaReserva().equals(fechaActual)){
+					return mesa;
+				}
+			}
+		}
+		return null;
+	} 
+	// Verificar los cocineros aptos para la cantidad de platos
 	public List<Empleado> verificarCocineros(List<Empleado> empleados, ArrayList<Plato> platos){
 	    List<Empleado> cocineros = clasificarEmpleados(empleados, "cocinero");
 	    List<Empleado> cocinerosVerificados = new ArrayList<>();
@@ -202,7 +202,7 @@ public class Restaurante implements Serializable {
 	    }
 	    return cocinerosVerificados;
 	}
-	
+	//Verificar los domiciliarios aptos para netregar el pedido
 	public List<Empleado> verificarDomiciliarios(List<Empleado> empleados) {
 	    List<Empleado> domiciliarios = clasificarEmpleados(empleados, "domiciliario");
 	    List<Empleado> domiciliariosVerificados = new ArrayList<>();
@@ -213,7 +213,7 @@ public class Restaurante implements Serializable {
 	    }
 	    return domiciliariosVerificados;
 	}
-	
+	// Filtrar los pedidos verificados
  	public List<Pedido> getPedidosVerificados() {
 		List<Pedido> pedidosVerificados = new ArrayList<>();
 		for(Pedido pedido : getPedidos()){
@@ -223,7 +223,7 @@ public class Restaurante implements Serializable {
 		}
 		return pedidosVerificados;
 	}
- 	
+ 	// Filtrar los pedidos sin verificar
 	public List<Pedido> getPedidosSinVerificar(){
 		List<Pedido> pedidosSinVerificar = new ArrayList<>();
 		for(Pedido pedido : getPedidos()){
@@ -233,7 +233,7 @@ public class Restaurante implements Serializable {
 		}
 		return pedidosSinVerificar;
 	}
-	
+	// Imprimir los pedidos
 	public String imprimirPedidosVerificados(){
 		String pedidosVerificados ="";
 		for(int i = 0; i < getPedidosVerificados().size(); i++){
@@ -250,7 +250,7 @@ public class Restaurante implements Serializable {
 	    }
 	    return pedidosSinVerificar;
 	}
-
+	// Actualizar insumos despues de ya estar verificado el pedido
 	public void actualizarInsumos(Pedido pedido) {
 	    for (Plato plato : pedido.getPlatos()) {
 	        for (Map.Entry<Material, Integer> entrada : plato.getIngredientes().entrySet()) {
@@ -260,6 +260,7 @@ public class Restaurante implements Serializable {
 	        }
 	    }
 	}
+	// Buscar un empleado por su nombre y puesto
     public Empleado buscarEmpleado(String nombre, String puesto){
     	for(Empleado empleado : listadoEmpleados){
     		if((empleado.getNombre()).equals(nombre) && (empleado.getPuesto()).equals(puesto)){
@@ -408,6 +409,15 @@ public class Restaurante implements Serializable {
         }
         return r;
     }
+    
+    public void cancelarPedido(Pedido pedido){
+    	
+    	for(int i = 0; i < pedidos.size(); i++){
+    		if(pedidos.get(i).equals(pedido)){
+    			pedidos.remove(i);
+    		}
+    	}
+    }
     //Imprime las reservas confirmadas (con mesa asignada)
     public String imprimirReservas2() {
         String r = "";
@@ -487,4 +497,5 @@ public class Restaurante implements Serializable {
             return "No existe una mesa con ese número, por favor vuelva a intentarlo";
         }
     }
+
 }

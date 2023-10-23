@@ -28,14 +28,12 @@ public class Material implements Serializable{
         this.precioUnitario = precioUnitario;
         this.fechaVencimiento = fechaVencimiento;
     }
+    // Metodos getters
     public Tipo getTipo () {
         return this.tipo;
     }
     public int getCantidad () {
         return this.cantidad;
-    }
-    public void restarCantidad(int cantidad){
-    	this.cantidad-=cantidad;
     }
     public double getPrecioUnitario () {
         return this.precioUnitario;
@@ -43,6 +41,20 @@ public class Material implements Serializable{
     public LocalDate getFechaVencimiento() {
         return this.fechaVencimiento;
     }
+    // Metodos setters
+    public Tipo setTipo (Tipo tipo) {
+        return this.tipo=tipo;
+    }
+    public int setCantidad (int cantidad) {
+        return this.cantidad=cantidad;
+    }
+    public double setPrecioUnitario (double precioUnitario) {
+        return this.precioUnitario=precioUnitario;
+    }
+    public LocalDate setFechaVencimiento(LocalDate fechaVencimiento) {
+        return this.fechaVencimiento=fechaVencimiento;
+    }
+    // Metodos para modificar cantidades
     public void comprarMaterial(int cantidad) {
         this.cantidad += cantidad;
     }
@@ -57,5 +69,8 @@ public class Material implements Serializable{
     }
     public String fechaMaterial() {
     	return "Este material no tiene fecha de vencimiento";
+    }
+    public void restarCantidad(int cantidad){
+    	this.cantidad-=cantidad;
     }
 }

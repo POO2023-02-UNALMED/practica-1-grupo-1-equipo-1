@@ -32,9 +32,11 @@ public class Empleado extends Persona implements Serializable{
         super(nombre, cedula);
         this.puesto = puesto;
         this.restaurante = restaurante;
-        this.turnos = new ArrayList<>(); // Inicializa la lista de turnos
-        this.turnos.add(turno); // Añade el turno a la lista
-        this.setFechaContratacion(new Date()); // Guarda la fecha actual
+     // Inicializa la lista de turnos
+        this.turnos = new ArrayList<>();
+     // Añade el turno a la lista
+        this.turnos.add(turno); 
+        this.setFechaContratacion(new Date()); 
         restaurante.contratarEmpleado(this);
     }
     
@@ -94,6 +96,8 @@ public class Empleado extends Persona implements Serializable{
 	
     // Metodos de funcionalidades
     // Verificar Tiempo
+	
+	// Para verificar tiempo de el cocinero
     public boolean verificarTiempo(Empleado empleado,int tiempoPlato){
     	for (Turno turno : empleado.getTurnos()) {
     		if(!turno.isCobrado()){
@@ -105,6 +109,7 @@ public class Empleado extends Persona implements Serializable{
     			}
 		return false;
     }
+    // Metodo apra verificar tiempo de domiciliario y mesero
     public boolean verificarTiempo(Empleado empleado){
     	if(empleado.getPuesto().equals("domicilio")){
     	for (Turno turno : empleado.getTurnos()) {
@@ -123,52 +128,35 @@ public class Empleado extends Persona implements Serializable{
 		return false;
     }
 	
-    public void agregarTurno(Turno turno){
-		this.turnos.add(turno);
+	//metodo que permite reportar daños a un material no organico
+	public void reportarDano(Material.Tipo material,int cantidad) {
+		this.restaurante.botarMaterial(material, cantidad);
 	}
 
 	// Este metodo verifica si un turno esta completado y no cobrado 
 	// Para que se le agregué al salario total
     public void turnosCompletados(Empleado empleado){
-
 		for(Turno turno : empleado.getTurnos()){
-
 			if (turno.isCompletado()==true & turno.isCobrado()==false){
-
-					salario+=turno.getSalario();
-
-				}
-
-			}
-
+					salario+=turno.getSalario();}}
 		}
-	
-	//metodo que permite reportar daños a un material no organico
-	public void reportarDano(Material.Tipo material,int cantidad) {
-		this.restaurante.botarMaterial(material, cantidad);
-	}
-	
-	public String mostrarPorTipo(String tipo){
-		for(Empleado empleado : restaurante.getEmpleados()){
-			return empleado.toString();
-		}
-		return null;
-	}
+    //Retornar turno no cobrado
 	private Turno turnoActual() {
 		for(Turno turno : this.turnos)
 		{
 			if(!turno.isCobrado()){
-				return turno;
-			}
-		}
+				return turno;}}
 		return null;
 		}
+	// toString de la clase
 	public String toString(){
 		return "Nombre: " + this.getNombre()+ " Puesto: "+ this.getPuesto() ;
 	}
-	
-	public void puntuacion(Empleado e) {
-		
+	public void puntuacion(Empleado e) {		
+	}
+	// Alterar turno
+    public void agregarTurno(Turno turno){
+		this.turnos.add(turno);
 	}
 	
 }

@@ -65,7 +65,7 @@ public class Turno implements Serializable{
     public void restarTiempo(int tiempo){
 		this.horas=(this.horas*60)-tiempo;
 	}
-
+    // Metodo que calcula las horas extra
 	public int HorasExtras() {
         int horasRegulares = 8;  //suponer que es 8
         if (this.horas > horasRegulares) {
@@ -74,7 +74,7 @@ public class Turno implements Serializable{
             return 0;
         }
 	}
-
+	// toString de la clase
 	public String toString(){
 		return "Tipo: " + this.getTipo() +" Salario: " +this.getEstado() +" Estado completado: " + this.isCompletado() +" Estado cobrado";
 	}

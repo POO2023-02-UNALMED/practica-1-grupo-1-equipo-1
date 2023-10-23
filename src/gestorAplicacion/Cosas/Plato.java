@@ -91,16 +91,6 @@ public class Plato implements Serializable{
 		return tipos;
     }
     
-    public String detallesPlato() {
-        return 
-        	"\n   Nombre: " + nombre  +
-            "\n   Precio: " + precio +
-            "\n   Descripcion: " + descripcion  +
-            "\n   Tiempo de preparacion: " + tiempoPreparacion +
-            "\n   Ingredientes: " + mostrarIngredientes().toString();
-    }
-    
-    
     // Método para obtener el número total de ingredientes
     public int getNumeroDeIngredientes() {
         return ingredientes.size();
@@ -119,6 +109,16 @@ public class Plato implements Serializable{
 	public void setVerificadoInsumos(boolean verificadoInsumos) {
 		this.verificadoInsumos = verificadoInsumos;
 	}
+	
+	// Detalles de plato
+    public String detallesPlato() {
+        return 
+        	"\n   Nombre: " + nombre  +
+            "\n   Precio: " + precio +
+            "\n   Descripcion: " + descripcion  +
+            "\n   Tiempo de preparacion: " + tiempoPreparacion +
+            "\n   Ingredientes: " + mostrarIngredientes().toString();
+    }
 
 }
 

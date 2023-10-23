@@ -302,12 +302,12 @@ public class Administrador implements Menu {
 		    			    System.out.print("¿Qué pedido deseas cancelar?: ");
 		    			    int numPedido = (int)readLong();
 
-		    			    if (numPedido > 0 && numPedido <= restaurante.getPedidos().size()){
-		    			        restaurante.getPedidos().remove(numPedido-1);
+		    			    if (numPedido > 0 && numPedido <= restaurante.getPedidosSinVerificar().size()){
+		    			    	restaurante.cancelarPedido(restaurante.getPedidosSinVerificar().get(numPedido-1));
 		    			        System.out.println("Estos son los pedidos actualizados");
 		    			        System.out.println("El pedido número: "  + numPedido);
 		    			        System.out.println(restaurante.imprimirPedidosSinVerificar());
-		    			    } else {System.out.println("Número de pedido inválido. Por favor, introduce un número entre 1 y " + restaurante.getPedidos().size());}
+		    			    } else {System.out.println("Número de pedido inválido. Por favor, introduce un número entre 1 y " + restaurante.getPedidosSinVerificar().size());}
 		    			    System.out.println("-------------------------------------------------------");
 		    			    break;
 		    			    
@@ -328,7 +328,7 @@ public class Administrador implements Menu {
 	    			    String[] nums = numsPedido.split(",");
 	    			    for(String numStr : nums){
 	    			    	int num = Integer.parseInt(numStr);
-	    			    	Pedido ped = pedido.getPedidos(restaurante).get(num-1);
+	    			    	Pedido ped = pedido.getPedidosSinVerificar(restaurante).get(num-1);
 	    			    	if(!pedido.verificarPedido(restaurante,ped).equals(null)) {
 	    			    		pedido.verificarPedido(restaurante,ped);
 	    			    	System.out.println("\nPedido: " + num +  " verificado exitosamente");
