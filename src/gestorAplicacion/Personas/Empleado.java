@@ -158,5 +158,14 @@ public class Empleado extends Persona implements Serializable{
     public void agregarTurno(Turno turno){
 		this.turnos.add(turno);
 	}
+	//Metodo para mostrar la puntuacion del Empleado
+	public String puntuacion(){
+	  return "La puntacion del Empleado es: "+ this.getPuntuacion();
+	}
+	
+	//Metodo para mostrar la descripcion del trabajo del Empleado
+	public String trabajo(){
+	  return "Empleado del restaurante"
+	}
 	
 }
