@@ -599,14 +599,14 @@ public class Administrador implements Menu {
         					
         					case 1:  
         						System.out.println("-------------------------------------------------------");
-        						double pago1 = financia.getGananciasBrutas();
+        						double pago1 = financia.gananciasBrutas();
         						System.out.println("La Ganancia Bruta del Restaurante : " + pago1);
         						
         						break;
         						
         					case 2: 
         						System.out.println("-------------------------------------------------------");
-        						double pago2 = financia.getGananciasNetas();
+        						double pago2 = financia.gananciasNetas();
         						System.out.println("La Ganancia Neta del Restaurante : " + pago2 );
         						
         						break;
