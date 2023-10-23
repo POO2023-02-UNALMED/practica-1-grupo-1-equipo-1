@@ -198,5 +198,15 @@ public class Empleado extends Persona implements Serializable{
 	public String trabajo(){
 	  return "Empleado del restaurante";
 	}
+	//Metodo para mostrar detalles de los empleados
+	public String detallesEmpleado(){
+		return 
+		  "\n   Nombre: " + this.getNombre()+
+		  "\n   Cedula: " + this.getCedula()+
+		  "\n   Puesto: " + this.getPuesto()+
+		  "\n   Turno: " + this.getTurno().getTipo()+
+		  "\n   Salario: " + this.getTurno().getSalario()+
+		  "\n"+" "+this.puntuacion();
+	  }
 	
 }
