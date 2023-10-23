@@ -359,7 +359,7 @@ public class Administrador implements Menu {
 		    case 1:	System.out.println("-------------------------------------------------------"); 
 		      		System.out.println("Lista de Empleados: ");
 		      		if (restaurante.getEmpleados().size()==0){
-						System.out.println("No hay empleados");
+						System.out.println("No hay empleados contratados");
 		    		} 
 			  		else {
 						Administrador.mostrarEmpleados(restaurante.getEmpleados());
@@ -373,7 +373,6 @@ public class Administrador implements Menu {
 						System.out.println("El número ingresado no es válido, por favor ingresa un número que corresponda a un empleado");
 		      		}
 					}
-		      		System.out.println("-------------------------------------------------------");
 		      		break;
 			
 		    case 2:	System.out.println("-------------------------------------------------------"); 
@@ -392,7 +391,6 @@ public class Administrador implements Menu {
 						System.out.println("El número ingresado no es válido, por favor ingresa un número que corresponda a un empleado");
 		    		}
 				}
-		      		System.out.println("-------------------------------------------------------");
 		      		break;
 		
 		    case 3: do {
@@ -420,7 +418,7 @@ public class Administrador implements Menu {
 			   					} else if (tipoturno=="DOMINGO") {
 			     					turno = turno3;
 			   					}
-			 					Empleado empleado = new Cocinero(nombre, cedula, "Cocinero", restaurante, turno);
+			 					Empleado empleado = new Cocinero(nombre, cedula, "cocinero", restaurante, turno);
 			 					restaurante.getAspEmpleados().add(empleado);
 			 					break;
 			 			case 2:	System.out.println("-------------------------------------------------------");  
@@ -438,7 +436,7 @@ public class Administrador implements Menu {
 			    				} else if (tipoturno1=="DOMINGO") {
 			      					turnoj = turno3;
 			    				}
-			  					Empleado empleado1 = new Mesero(nombre1, cedula1, "Mesero", restaurante, turnoj);
+			  					Empleado empleado1 = new Mesero(nombre1, cedula1, "mesero", restaurante, turnoj);
 			  					restaurante.getAspEmpleados().add(empleado1);
 			  					break;
 			 			case 3:	System.out.println("-------------------------------------------------------");  
@@ -456,7 +454,7 @@ public class Administrador implements Menu {
 			      				} else if (tipoturno2=="DOMINGO") {
 									turnok = turno3;
 			      				}
-			    				Empleado empleado2 = new Domiciliario(nombre2, cedula2, "Domiciliario", restaurante, turnok);
+			    				Empleado empleado2 = new Domiciliario(nombre2, cedula2, "domiciliario", restaurante, turnok);
 			    				restaurante.getAspEmpleados().add(empleado2);
 			    				break;
 			 			case 4:
@@ -480,7 +478,6 @@ public class Administrador implements Menu {
 						System.out.println("El número ingresado no es válido, por favor ingresa un número que corresponda a un empleado");
 		      		}
 				}
-		      		System.out.println("-------------------------------------------------------");
 		      		break;
 		
 		    case 5:	System.out.println("-------------------------------------------------------");
@@ -499,12 +496,11 @@ public class Administrador implements Menu {
 			  			System.out.println("El número ingresado no es válido, por favor ingresa un número que corresponda a un empleado");
 					}
 					}
-					System.out.println("-------------------------------------------------------");
 					break;
 		    case 6:
 		      		break;
 		    }
-		  	}while(opcionEmp!=6); break; //Mañana pruebo esto, Atte: Jhogert.
+		  	}while(opcionEmp!=6); break; 
 				
 			//funcionalidad gestion inventario (sebastian hoyos)
     		case 4: 
@@ -846,7 +842,7 @@ public class Administrador implements Menu {
 	private static void mostrarEmpleados(List<Empleado> empleados) {
 	  short cont=1;
 	  for (Empleado e : empleados) {
-	    System.out.println(cont + ". Nombre: " + e.getNombre() + "- Puesto: " + e.getPuesto() + "- Turno: " + e.getTurnos().get(0).getTipo());
+	    System.out.println(cont + ". Nombre: " + e.getNombre() + " - Puesto: " + e.getPuesto() + " - Turno: " + e.getTurnos().get(0).getTipo());
 	    cont++;
 	  }
 	}
