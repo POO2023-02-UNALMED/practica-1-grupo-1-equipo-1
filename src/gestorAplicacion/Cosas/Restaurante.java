@@ -152,6 +152,8 @@ public class Restaurante implements Serializable {
 		pedidos.add(pedido);
 	}
 	
+    // Metodos funcionaliad gestion de pedidos
+    
     // Se verifica el menu si es apto para ofrecerlo
 	public  ArrayList<Plato>  veirificarMenu(ArrayList<Plato> menu) {
 		ArrayList<Plato> menuVerificado= new ArrayList<>();
@@ -210,7 +212,7 @@ public class Restaurante implements Serializable {
 	    }
 	    return cocinerosVerificados;
 	}
-	//Verificar los domiciliarios aptos para netregar el pedido
+	//Verificar los domiciliarios aptos para entregar el pedido
 	public List<Empleado> verificarDomiciliarios(List<Empleado> empleados) {
 	    List<Empleado> domiciliarios = clasificarEmpleados(empleados, "domiciliario");
 	    List<Empleado> domiciliariosVerificados = new ArrayList<>();
@@ -221,7 +223,7 @@ public class Restaurante implements Serializable {
 	    }
 	    return domiciliariosVerificados;
 	}
-	
+	// Verificar los meseros aptos para entregar
 	public List<Empleado> verificarMeseros(List<Empleado> empleados) {
 	    List<Empleado> meseros = clasificarEmpleados(empleados, "mesero");
 	    List<Empleado> meserosVerificados = new ArrayList<>();
@@ -234,42 +236,26 @@ public class Restaurante implements Serializable {
 	}
 	
 	// Filtrar los pedidos verificados
- 	public List<Pedido> getPedidosVerificados() {
-		List<Pedido> pedidosVerificados = new ArrayList<>();
+ 	public List<Pedido> getPedidosRestaurante() {
+		List<Pedido> pedidosRestaurante = new ArrayList<>();
 		for(Pedido pedido : getPedidos()){
-			if(pedido.isVerificado()&& pedido.getDomiciliario()==null){
-				pedidosVerificados.add(pedido);
+			if(pedido.isVerificado()&& pedido.getDomiciliario()==null && pedido.getMesero()!=null){
+				pedidosRestaurante.add(pedido);
 			}
 		}
-		return pedidosVerificados;
+		return pedidosRestaurante;
 	}
- 	// Filtrar los pedidos sin verificar
-	public List<Pedido> getPedidosSinVerificar(){
-		List<Pedido> pedidosSinVerificar = new ArrayList<>();
-		for(Pedido pedido : getPedidos()){
-			if(pedido.isVerificado()==false && pedido.getDomiciliario()==null){
-				pedidosSinVerificar.add(pedido);
+	// Imprimir pedidos restaurante
+	public String imprimirPedidosRestaurante(){
+		String pedidosRestaurante ="";
+		for(int i = 0; i < getPedidosRestaurante().size(); i++){
+			pedidosRestaurante+=(i + 1) + ". " + getPedidosRestaurante().get(i);
+			pedidosRestaurante+="\n-------------------------------------------------------\n";
 			}
-		}
-		return pedidosSinVerificar;
+		return pedidosRestaurante;
 	}
-	// Imprimir los pedidos
-	public String imprimirPedidosVerificados(){
-		String pedidosVerificados ="";
-		for(int i = 0; i < getPedidosVerificados().size(); i++){
-			pedidosVerificados+=(i + 1) + ". " + getPedidosVerificados().get(i);
-			pedidosVerificados+="\n-------------------------------------------------------\n";
-			}
-		return pedidosVerificados;
-	}
-	public String imprimirPedidosSinVerificar(){
-	    String pedidosSinVerificar ="";
-	    for(int i = 0; i < getPedidosSinVerificar().size(); i++){
-	        pedidosSinVerificar+=(i + 1) + ". " + getPedidosSinVerificar().get(i);
-	        pedidosSinVerificar+="\n-------------------------------------------------------\n";
-	    }
-	    return pedidosSinVerificar;
-	}
+	
+	
 	// Actualizar insumos despues de ya estar verificado el pedido
 	public void actualizarInsumos(Pedido pedido) {
 	    for (Plato plato : pedido.getPlatos()) {
@@ -290,25 +276,27 @@ public class Restaurante implements Serializable {
     			for(Turno turno : pedido.getCocinero().getTurnos()){
     				if(turno.getTipo().toString().equals(dia)) {
     					if(!turno.isCompletado()) {
-    						System.out.println("cocinero");
+    						System.out.println(" se resta time cocinero");
     					turno.restarTiempo(turno,pedido.getTiempoTotal());
     					}
     					}
     				}
     		
     	// Llama metodo para cobrar turno
-   	 pedido.getCocinero().turnosCompletados(pedido.getCocinero());
+    	System.out.println("se cobra cocinero");
+    	pedido.getCocinero().turnosCompletados(pedido.getCocinero());
    	 // Si el pedido es de consumo en restaurante se actualiza tiempo a mesero
    	 if(pedido.getMesero()!=null) {
        	 for(Turno turno :pedido.getMesero().getTurnos()){
        		if(turno.getTipo().toString().equals(dia)) {
        		 if(!turno.isCompletado()) {
        			 System.out.println("mesero");
+       			 System.out.println("se resta time mesero");
        			 turno.restarTiempo(turno,Pedido.TIEMPO_MESERO);
        		 }}
        	 // Llama metodo para cobrar turno
        		}
-       	 System.out.println("se cobra");
+       	System.out.println("se cobra mesero");
        	pedido.getMesero().turnosCompletados(pedido.getMesero()); 
        	}
    	 // Si el pedido es de consumo en domicilio se actualiza tiempo a domiciliario
@@ -317,9 +305,11 @@ public class Restaurante implements Serializable {
    		if(turno.getTipo().toString().equals(dia)) {
    		 if(!turno.isCobrado()) {
    			 System.out.println("domiciliario");
+   			 System.out.println("se resta time domicilio");
    			 turno.restarTiempo(turno,Pedido.TIEMPO_DOMICILIO);
    		 }}}
    	 // Llama metodo para cobrar turno
+   	 System.out.println("se cobra domi");
    	 pedido.getDomiciliario().turnosCompletados(pedido.getDomiciliario());
    	 }}}}
 	// Buscar un empleado por su nombre y puesto
@@ -569,7 +559,7 @@ public class Restaurante implements Serializable {
 	return pedidosDomicilio;
     }
     
-	public String imprimirDomicilios() {
+	public String imprimirPedidosDomicilios() {
 		List<Pedido> pedidosDomicilio = getPedidosDomicilio();
 		String domicilios="";
 		for(int i = 0; i < pedidosDomicilio.size(); i++){
@@ -578,5 +568,6 @@ public class Restaurante implements Serializable {
 			}
 		return domicilios;
 	}
+	
 
 }

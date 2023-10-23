@@ -64,9 +64,11 @@ public class Turno implements Serializable{
 	
     public void restarTiempo(Turno turno,int tiempo){
     	if((this.horas*60)-tiempo>=-20) {
+    		System.out.println("tiempoa actual: " +turno.getHoras());
     		turno.setHoras(((this.horas*60)-tiempo)/60);
+    		System.out.println("tiempoa despues: " +turno.getHoras());    		
     		// Rango de 20 minutos para contratiempos
-    		if(turno.getHoras()> -20 && turno.getHoras() <= 0){
+    		if(turno.getHoras()*60> -20 && turno.getHoras()*60 <= 0){
     			turno.setCompletado(true);
     		}
     	}

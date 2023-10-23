@@ -167,6 +167,7 @@ public class Empleado extends Persona implements Serializable{
     public void turnosCompletados(Empleado empleado){
 		for(Turno turno : empleado.getTurnos()){
 			if (turno.isCompletado()==true & turno.isCobrado()==false){
+				System.out.println("entra a cobrado");
 					turno.setCobrado(true);
 					empleado.setSalario(turno.getSalario());
 					}

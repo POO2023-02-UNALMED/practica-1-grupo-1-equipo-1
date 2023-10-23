@@ -182,8 +182,8 @@ public class Administrador implements Menu {
 	    			System.out.println("¿Que deseas hacer?");
 	    			System.out.println("1. Ver lista de pedidos ");
 	    			System.out.println("2. Añadir pedidos");
-	    			System.out.println("3. Cancelar pedidos");
-	    			System.out.println("4. Verificar pedidos");
+	    			System.out.println("3. Cancelar pedidos consumo(domicilio)");
+	    			System.out.println("4. Verificar pedidos comsumo(restaurante)");
 	    			System.out.println("5. Volver al menú de funcionalidades");
 	    			System.out.print("Escribe el número de la opción que necesitas: ");
 	    			opcion3=(int) readLong();
@@ -193,18 +193,14 @@ public class Administrador implements Menu {
 	    			case 1:
 	    				System.out.println("-------------------------------------------------------");
 		    			System.out.println("\nListado de Pedidos sin Verificar");
-		    			if (restaurante.getPedidosSinVerificar().size()==0)
-		    			{System.out.println("\n-No hay pedidos sin verificar");}
-		    			System.out.println(restaurante.imprimirPedidosSinVerificar());
-		    			System.out.println("\nListado de Pedidos Verificados");
-		    			if(restaurante.getPedidosVerificados().size()==0)
-		    			{System.out.println("\n-No hay pedidos verificados");}
-		    			System.out.println(restaurante.imprimirPedidosVerificados());
+		    			if (restaurante.getPedidosRestaurante().size()==0)
+		    			{System.out.println("\n-No hay pedidos consumo (restaurante)");}
+		    			System.out.println(restaurante.imprimirPedidosRestaurante());
 		    			System.out.println("-------------------------------------------------------");
 	    				System.out.println("\nListado de Pedidos Domicilios");
 	    				if(restaurante.getPedidosDomicilio().size()==0)
 		    			{System.out.println("\n-No hay pedidos de domicilio");}
-		    			System.out.println(restaurante.imprimirDomicilios());
+		    			System.out.println(restaurante.imprimirPedidosDomicilios());
 		    			System.out.println("-------------------------------------------------------");
 		    			break;
 		    		
@@ -281,10 +277,17 @@ public class Administrador implements Menu {
 			    			    
 			    			    if (reserva==null) {
 			    			    	System.out.println("\nReserva no encontrada");
-			    			    	new Pedido(mesaTemporal, tipoPedido, cocinero, mesero, platosTemp, restaurante);
-				    			    System.out.println("pedido creado exitosamente");
-				    			    System.out.println("-------------------------------------------------------");
-			    			    	break;
+			    			    	Pedido ped2 = new Pedido(mesaTemporal, tipoPedido, cocinero, mesero, platosTemp, restaurante);
+			    			    	if(!pedido.verificarPedido(restaurante,ped2).equals(null)) {
+			    			    		pedido.verificarPedido(restaurante,ped2);
+			    			    		System.out.println("pedido creado exitosamente");
+					    			    System.out.println("-------------------------------------------------------");
+				    			    	
+			    			    	}
+			    			    	else{System.out.println("\nHay un problema al crear el pedido");
+			    			    	System.out.println("-------------------------------------------------------");
+			    			    	}
+				    			    break;
 			    			    	}
 			    			    
 			    			    else if(reserva!=null){
@@ -306,47 +309,36 @@ public class Administrador implements Menu {
 						break;
 		    			case 3:
 		    			    System.out.println("Estos son los pedidos que puedes cancelar");
-		    			    System.out.println(restaurante.imprimirPedidosSinVerificar());
+		    			    System.out.println(restaurante.getPedidosRestaurante());
 
 		    			    System.out.print("¿Qué pedido deseas cancelar?: ");
 		    			    int numPedido = (int)readLong();
 
-		    			    if (numPedido > 0 && numPedido <= restaurante.getPedidosSinVerificar().size()){
-		    			    	restaurante.cancelarPedido(restaurante.getPedidosSinVerificar().get(numPedido-1));
+		    			    if (numPedido > 0 && numPedido <= restaurante.getPedidosRestaurante().size()){
+		    			    	restaurante.cancelarPedido(restaurante.getPedidosRestaurante().get(numPedido-1));
 		    			        System.out.println("Estos son los pedidos actualizados");
 		    			        System.out.println("El pedido número: "  + numPedido);
-		    			        System.out.println(restaurante.imprimirPedidosSinVerificar());
-		    			    } else {System.out.println("Número de pedido inválido. Por favor, introduce un número entre 1 y " + restaurante.getPedidosSinVerificar().size());}
+		    			        System.out.println(restaurante.imprimirPedidosRestaurante());
+		    			    } else {System.out.println("Número de pedido inválido. Por favor, introduce un número entre 1 y " + restaurante.getPedidosRestaurante().size());}
 		    			    System.out.println("-------------------------------------------------------");
 		    			    break;
-		    			    
-	    			
-	    			case 4:
-	    				System.out.println("\nListado de Pedidos sin Verificar");
-	        			if (restaurante.getPedidos().size()==0)
-	        			{System.out.println("\n-No hay pedidos sin verificar");}
-	        			else{System.out.println(restaurante.imprimirPedidosSinVerificar());}
-	        			System.out.println("-------------------------------------------------------");
-	        			System.out.println("\nListado de Pedidos Verificados");
-	            		if (restaurante.getPedidosVerificados().size()==0)
-	            		{System.out.println("\n-No hay pedidos verificados");}
-	            		else{System.out.println(restaurante.imprimirPedidosVerificados());}
-	        			
-	            		System.out.print("\nIngrese los pedidos que desee verificar separado por comas: ");
-	    			    String numsPedido = scanner.nextLine();
-	    			    String[] nums = numsPedido.split(",");
-	    			    for(String numStr : nums){
-	    			    	int num = Integer.parseInt(numStr);
-	    			    	Pedido ped = pedido.getPedidosSinVerificar(restaurante).get(num-1);
-	    			    	if(!pedido.verificarPedido(restaurante,ped).equals(null)) {
-	    			    		pedido.verificarPedido(restaurante,ped);
-	    			    	System.out.println("\nPedido: " + num +  " verificado exitosamente");
-	    			    	}
-	    			    	else{System.out.println("\nHay un problema en el pedido numero: " + num);
-	    			    	System.out.println("-------------------------------------------------------");
-	    			    	}
-	    			    	break;
-	    			    }case 5: break; 
+		    		case 4:
+	    			    System.out.println("Estos son los pedidos que puedes cancelar");
+	    			    System.out.println(restaurante.getPedidosDomicilio());
+
+	    			    System.out.print("¿Qué pedido deseas cancelar?: ");
+	    			    int numPedido2 = (int)readLong();
+
+	    			    if (numPedido2 > 0 && numPedido2 <= restaurante.getPedidosDomicilio().size()){
+	    			    	restaurante.cancelarPedido(restaurante.getPedidosDomicilio().get(numPedido2-1));
+	    			        System.out.println("Estos son los pedidos actualizados");
+	    			        System.out.println("El pedido número: "  + numPedido2);
+	    			        System.out.println(restaurante.imprimirPedidosDomicilios());
+	    			    } else {System.out.println("Número de pedido inválido. Por favor, introduce un número entre 1 y " + restaurante.getPedidosDomicilio().size());}
+	    			    System.out.println("-------------------------------------------------------");
+	    			    
+		    			break;
+		    		case 5: break;
 	    			// Volver al menú principal
 	    			}}while(opcion3!=5); break;
     		case 3:
