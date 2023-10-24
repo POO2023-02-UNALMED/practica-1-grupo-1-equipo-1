@@ -430,7 +430,8 @@ public class Administrador implements Menu {
 			  					Empleado empleado1 = new Mesero(nombre1, cedula1, "mesero", restaurante, turnoj);
 			  					restaurante.getAspEmpleados().add(empleado1);
 			  					break;
-			 			case 3:	System.out.println("-------------------------------------------------------");  
+			 			case 3:	do{
+							System.out.println("-------------------------------------------------------");  
 			    				System.out.println("Ingresa el nombre");
 			    				nombre2= readln();
 			    				System.out.println("Ingresa la cedula");
