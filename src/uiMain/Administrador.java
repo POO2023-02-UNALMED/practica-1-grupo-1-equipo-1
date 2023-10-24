@@ -645,7 +645,7 @@ public class Administrador implements Menu {
         			System.out.println("2. Consultar los Gastos del restaurante");
         			System.out.println("3. Consultar las Ganancias del restaurante");
         			System.out.println("4. Consultar el valor de liquidación de un empleado");
-        			System.out.println("5. Consultar las Pérdidas del restaurante");
+        			System.out.println("5. Consultar cuanto cuesta en promedio preparar cada plato en el Menú");
         			System.out.println("6. Volver al menú de funcionalidades");
         			System.out.print("Escribe el número de la opción que necesitas: ");
         			
@@ -776,8 +776,8 @@ public class Administrador implements Menu {
 					    break;
         				
         			case 5:
-        				//double perdidas = financia.calcularPerdidas();
-        				//System.out.println("Las pérdidas del restaurante son: " + perdidas);
+        				double costoPlato = financia.costoPromedioPorPlato();
+        				System.out.println("Cuesta en promedio preparar cada plato en el Menú: " + costoPlato);
         				break; 
         			case 6: break;
         				
