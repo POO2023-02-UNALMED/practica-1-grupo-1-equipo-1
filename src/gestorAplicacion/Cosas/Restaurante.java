@@ -151,8 +151,6 @@ public class Restaurante implements Serializable {
     public void agregarPedido(Pedido pedido) {
 		pedidos.add(pedido);
 	}
-	
-    // Metodos funcionaliad gestion de pedidos
     
     // Se verifica el menu si es apto para ofrecerlo
 	public  ArrayList<Plato>  veirificarMenu(ArrayList<Plato> menu) {
