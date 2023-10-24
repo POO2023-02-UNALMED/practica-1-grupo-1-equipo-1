@@ -39,7 +39,6 @@ public class Empleado extends Persona implements Serializable{
      // Añade el turno a la lista
         this.turnos.add(turno); 
         this.setFechaContratacion(new Date()); 
-        restaurante.contratarEmpleado(this);
     }
     
     // Metodos getter
