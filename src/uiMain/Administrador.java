@@ -186,11 +186,10 @@ public class Administrador implements Menu {
 			
 				case 2: do{
 	    			System.out.println("¿Que deseas hacer?");
-	    			System.out.println("1. Ver lista de pedidos ");
-	    			System.out.println("2. Añadir pedidos");
-	    			System.out.println("3. Cancelar pedidos consumo(domicilio)");
-	    			System.out.println("4. Verificar pedidos comsumo(restaurante)");
-	    			System.out.println("5. Volver al menú de funcionalidades");
+	    			System.out.println("1. Ver lista de pedidos consumo(restaurante)");
+	    			System.out.println("2. Ver lista de pedidos consumo(domicilio)");
+	    			System.out.println("3. Añadir pedidos");
+	    			System.out.println("4. Volver al menú de funcionalidades");
 	    			System.out.print("Escribe el número de la opción que necesitas: ");
 	    			opcion3=(int) readLong();
 	    			
@@ -202,14 +201,16 @@ public class Administrador implements Menu {
 		    			if (restaurante.getPedidosRestaurante().size()==0)
 		    			{System.out.println("\n-No hay pedidos consumo (restaurante)");}
 		    			System.out.println(restaurante.imprimirPedidosRestaurante());
+		    			break;
+		    			
+	    			case 2:
 	    				System.out.println("\nListado de Pedidos consumo (domicilio)\n");
 	    				if(restaurante.getPedidosDomicilio().size()==0)
 		    			{System.out.println("\n-No hay pedidos de domicilio");}
 		    			System.out.println(restaurante.imprimirPedidosDomicilios());
 		    			System.out.println("-------------------------------------------------------");
 		    			break;
-		    		
-		    			case 2:
+		    			case 3:
 		    				ArrayList<Plato> platosTemp = new ArrayList<Plato>();
 		    				// Imprimir el menú
 		    				int i1 =0;
@@ -312,40 +313,9 @@ public class Administrador implements Menu {
 			    			//Para reinicializar la lista para mandar
 			    			platosTemp = new ArrayList<Plato>();
 						break;
-		    			case 3:
-		    			    System.out.println("Pedidos de consumo(restaurante)");
-		    			    System.out.println(restaurante.getPedidosRestaurante());
-
-		    			    System.out.print("¿Qué pedido deseas cancelar?: ");
-		    			    int numPedido = (int)readLong();
-
-		    			    if (numPedido > 0 && numPedido <= restaurante.getPedidosRestaurante().size()){
-		    			    	restaurante.cancelarPedido(restaurante.getPedidosRestaurante().get(numPedido-1));
-		    			        System.out.println("Estos son los pedidos actualizados");
-		    			        System.out.println("El pedido número: "  + numPedido);
-		    			        System.out.println(restaurante.imprimirPedidosRestaurante());
-		    			    } else {System.out.println("Número de pedido inválido. Por favor, introduce un número entre 1 y " + restaurante.getPedidosRestaurante().size());}
-		    			    System.out.println("-------------------------------------------------------");
-		    			    break;
-		    		case 4:
-	    			    System.out.println("Estos son los pedidos que puedes cancelar");
-	    			    System.out.println(restaurante.getPedidosDomicilio());
-
-	    			    System.out.print("¿Qué pedido deseas cancelar?: ");
-	    			    int numPedido2 = (int)readLong();
-
-	    			    if (numPedido2 > 0 && numPedido2 <= restaurante.getPedidosDomicilio().size()){
-	    			    	restaurante.cancelarPedido(restaurante.getPedidosDomicilio().get(numPedido2-1));
-	    			        System.out.println("Estos son los pedidos actualizados");
-	    			        System.out.println("El pedido número: "  + numPedido2);
-	    			        System.out.println(restaurante.imprimirPedidosDomicilios());
-	    			    } else {System.out.println("Número de pedido inválido. Por favor, introduce un número entre 1 y " + restaurante.getPedidosDomicilio().size());}
-	    			    System.out.println("-------------------------------------------------------");
-	    			    
-		    			break;
-		    		case 5: break;
+		    		case 4: break;
 	    			// Volver al menú principal
-	    			}}while(opcion3!=5); break;
+	    			}}while(opcion3!=4); break;
     		case 3:
 		    int opcionEmp, opcionEmp1;
 		    do {

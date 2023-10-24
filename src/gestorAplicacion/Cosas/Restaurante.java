@@ -234,8 +234,28 @@ public class Restaurante implements Serializable {
 	    }
 	    return meserosVerificados;
 	}
-	
-	// Filtrar los pedidos verificados
+
+    
+    // Filtrar los pedidos consumo domicilio
+	public String imprimirPedidosDomicilios() {
+		List<Pedido> pedidosDomicilio = getPedidosDomicilio();
+		String domicilios="";
+		for(int i = 0; i < pedidosDomicilio.size(); i++){
+			domicilios+=(i + 1) + ". " + pedidosDomicilio.get(i);
+			domicilios+="\n-------------------------------------------------------\n";
+			}
+		return domicilios;
+	}
+    public List<Pedido> getPedidosDomicilio(){
+    	List<Pedido> pedidosDomicilio = new ArrayList<>();
+    	for(Pedido pedido : getPedidos()){
+		if(pedido.getDomiciliario()!=null){
+			pedidosDomicilio.add(pedido);
+		}
+	}
+	return pedidosDomicilio;
+    }
+	// Filtrar los pedidos consumo(restaurante)
  	public List<Pedido> getPedidosRestaurante() {
 		List<Pedido> pedidosRestaurante = new ArrayList<>();
 		for(Pedido pedido : getPedidos()){
@@ -459,16 +479,8 @@ public class Restaurante implements Serializable {
         }
         return r;
     }
-    
-    public void cancelarPedido(Pedido pedido){
-    	
-    	for(int i = 0; i < pedidos.size(); i++){
-    		if(pedidos.get(i).equals(pedido)){
-    			pedidos.remove(i);
-    		}
-    	}
-    }
-    //Imprime las reservas confirmadas (con mesa asignada)
+   
+	//Imprime las reservas confirmadas (con mesa asignada)
     public String imprimirReservas2() {
         String r = "";
         List<Reserva> listado = new ArrayList<>();
@@ -547,25 +559,6 @@ public class Restaurante implements Serializable {
             return "No existe una mesa con ese número, por favor vuelva a intentarlo";
         }
     }
-    public List<Pedido> getPedidosDomicilio(){
-    	List<Pedido> pedidosDomicilio = new ArrayList<>();
-    	for(Pedido pedido : getPedidos()){
-		if(pedido.getDomiciliario()!=null){
-			pedidosDomicilio.add(pedido);
-		}
-	}
-	return pedidosDomicilio;
-    }
-    
-	public String imprimirPedidosDomicilios() {
-		List<Pedido> pedidosDomicilio = getPedidosDomicilio();
-		String domicilios="";
-		for(int i = 0; i < pedidosDomicilio.size(); i++){
-			domicilios+=(i + 1) + ". " + pedidosDomicilio.get(i);
-			domicilios+="\n-------------------------------------------------------\n";
-			}
-		return domicilios;
-	}
 	
 
 }
