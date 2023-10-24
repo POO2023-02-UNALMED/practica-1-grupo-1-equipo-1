@@ -88,22 +88,21 @@ public class Administrador implements Menu {
     	Turno turno17 = new Turno(Turno.Tipo.SABADO, 2.0, 55000);
     	Empleado empleado1 = new Mesero("Juan", 123456789L, "Mesero", restaurante, turno1);
     	empleado1.agregarTurno(turno2);
-	restaurante.contratarEmpleado(empleado1);
-    	Empleado empleado2 = new Empleado("Fernando", 234567891L, "Cocinero", restaurante, turno2);
+    	Empleado empleado2 = new Cocinero("Fernando", 234567891L, "Cocinero", restaurante, turno2);
     	empleado2.agregarTurno(turno3);
-    	Empleado empleado3 = new Empleado("Santiago", 345678912L, "Domiciliario", restaurante, turno4);
+    	Empleado empleado3 = new Domiciliario("Santiago", 345678912L, "Domiciliario", restaurante, turno4);
     	empleado1.agregarTurno(turno5);
-    	Empleado empleado4 = new Empleado("Jhon", 123456789L, "Mesero", restaurante, turno6);
+    	Empleado empleado4 = new Mesero("Jhon", 123456789L, "Mesero", restaurante, turno6);
     	empleado1.agregarTurno(turno7);
-    	Empleado empleado5 = new Empleado("Moises", 234567891L, "Cocinero", restaurante, turno8);
+    	Empleado empleado5 = new Cocinero("Moises", 234567891L, "Cocinero", restaurante, turno8);
     	empleado2.agregarTurno(turno9);
-    	Empleado empleado6 = new Empleado("Rigo", 345678912L, "Domiciliario", restaurante, turno10);
+    	Empleado empleado6 = new Domiciliario("Rigo", 345678912L, "Domiciliario", restaurante, turno10);
     	empleado1.agregarTurno(turno11);
-    	Empleado empleado7 = new Empleado("Brayan", 123456789L, "Mesero", restaurante, turno12);
+    	Empleado empleado7 = new Mesero("Brayan", 123456789L, "Mesero", restaurante, turno12);
     	empleado1.agregarTurno(turno13);
-    	Empleado empleado8 = new Empleado("Felipe", 234567891L, "Cocinero", restaurante, turno14);
+    	Empleado empleado8 = new Cocinero("Felipe", 234567891L, "Cocinero", restaurante, turno14);
     	empleado2.agregarTurno(turno15);
-    	Empleado empleado9 = new Empleado("Martin", 345678912L, "Domiciliario", restaurante, turno16);
+    	Empleado empleado9 = new Domiciliario("Martin", 345678912L, "Domiciliario", restaurante, turno16);
     	empleado1.agregarTurno(turno17);
     	// Crear empleados
 
