@@ -72,7 +72,7 @@ public class Administrador implements Menu {
     	Turno turno1 = new Turno(Turno.Tipo.SEMANA, 2.0, 50000);
     	Turno turno2 = new Turno(Turno.Tipo.SEMANA, 8.0, 60000);
     	Turno turno3 = new Turno(Turno.Tipo.SEMANA, 2.0, 70000);
-    	Turno turno4 = new Turno(Turno.Tipo.SEMANA, 8.0, 55000);
+    	Turno turno4 = new Turno(Turno.Tipo.DOMINGO, 8.0, 55000);
     	Turno turno5 = new Turno(Turno.Tipo.SEMANA, 2.0, 65000);
     	Turno turno6 = new Turno(Turno.Tipo.SEMANA, 8.0, 75000);
     	Turno turno7 = new Turno(Turno.Tipo.SEMANA, 2.0, 60000);
@@ -80,12 +80,30 @@ public class Administrador implements Menu {
     	Turno turno9 = new Turno(Turno.Tipo.SEMANA, 2.0, 80000);
     	Turno turno10 = new Turno(Turno.Tipo.SEMANA, 8.0, 65000);
     	Turno turno11 = new Turno(Turno.Tipo.SEMANA, 3.0, 80000);
-    	Turno turno12 = new Turno(Turno.Tipo.SABADO, 5.0, 50000);
+    	Turno turno12 = new Turno(Turno.Tipo.SABADO, 7.0, 50000);
     	Turno turno13 = new Turno(Turno.Tipo.SABADO, 3.0, 60000);
-    	Turno turno14 = new Turno(Turno.Tipo.DOMINGO, 2.0, 70000);
-    	Turno turno15 = new Turno(Turno.Tipo.DOMINGO, 8.0, 55000);
-    	
-
+    	Turno turno14 = new Turno(Turno.Tipo.SEMANA, 7.0, 70000);
+    	Turno turno15 = new Turno(Turno.Tipo.SEMANA, 2.0, 55000);
+    	Turno turno16 = new Turno(Turno.Tipo.DOMINGO, 3.0, 55000);
+    	Turno turno17 = new Turno(Turno.Tipo.SABADO, 2.0, 55000);
+    	Empleado empleado1 = new Empleado("Juan", 123456789L, "Mesero", restaurante, turno1);
+    	empleado1.agregarTurno(turno2);
+    	Empleado empleado2 = new Empleado("Fernando", 234567891L, "Cocinero", restaurante, turno2);
+    	empleado2.agregarTurno(turno3);
+    	Empleado empleado3 = new Empleado("Santiago", 345678912L, "Domiciliario", restaurante, turno4);
+    	empleado1.agregarTurno(turno5);
+    	Empleado empleado4 = new Empleado("Jhon", 123456789L, "Mesero", restaurante, turno6);
+    	empleado1.agregarTurno(turno7);
+    	Empleado empleado5 = new Empleado("Moises", 234567891L, "Cocinero", restaurante, turno8);
+    	empleado2.agregarTurno(turno9);
+    	Empleado empleado6 = new Empleado("Rigo", 345678912L, "Domiciliario", restaurante, turno10);
+    	empleado1.agregarTurno(turno11);
+    	Empleado empleado7 = new Empleado("Brayan", 123456789L, "Mesero", restaurante, turno12);
+    	empleado1.agregarTurno(turno13);
+    	Empleado empleado8 = new Empleado("Felipe", 234567891L, "Cocinero", restaurante, turno14);
+    	empleado2.agregarTurno(turno15);
+    	Empleado empleado9 = new Empleado("Martin", 345678912L, "Domiciliario", restaurante, turno16);
+    	empleado1.agregarTurno(turno17);
     	// Crear empleados
 
     	Pedido pedido = new Pedido();
@@ -758,8 +776,8 @@ public class Administrador implements Menu {
 					    break;
         				
         			case 5:
-        				double perdidas = financia.calcularPerdidas();
-        				System.out.println("Las pérdidas del restaurante son: " + perdidas);
+        				//double perdidas = financia.calcularPerdidas();
+        				//System.out.println("Las pérdidas del restaurante son: " + perdidas);
         				break; 
         			case 6: break;
         				
