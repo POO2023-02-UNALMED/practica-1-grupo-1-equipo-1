@@ -69,20 +69,26 @@ public class Administrador implements Menu {
     	Material papas = new Material(Material.Tipo.PAPAS ,200 ,100 );
     	Material huevos = new Material(Material.Tipo.PAPAS ,200 ,100 );
     	
-    	Turno turno1 = new Turno(Turno.Tipo.SEMANA, 5, 50000);
-    	Turno turno2 = new Turno(Turno.Tipo.SABADO, 3, 60000);
-    	Turno turno3 = new Turno(Turno.Tipo.DOMINGO, 2, 70000);
-    	Turno turno4 = new Turno(Turno.Tipo.SEMANA, 8, 55000);
-    	Turno turno5 = new Turno(Turno.Tipo.SABADO, 7, 65000);
-    	Turno turno6 = new Turno(Turno.Tipo.DOMINGO, 6, 75000);
-    	Turno turno7 = new Turno(Turno.Tipo.SEMANA, 5, 60000);
-    	Turno turno8 = new Turno(Turno.Tipo.SABADO, 2, 70000);
-    	Turno turno9 = new Turno(Turno.Tipo.DOMINGO, 1, 80000);
-    	Turno turno10 = new Turno(Turno.Tipo.SEMANA, 5, 65000);
-    	Turno turno11 = new Turno(Turno.Tipo.DOMINGO, 1, 80000);
-    	Turno turno12= new Turno(Turno.Tipo.SEMANA, 8, 50000);
-        Turno turno13= new Turno(Turno.Tipo.SEMANA, 2, 50000);
-        Turno turno14= new Turno(Turno.Tipo.SEMANA, 1, 50000);
+    	// Crear turnos
+    	Turno turno1 = new Turno(Turno.Tipo.SEMANA, 2.0, 50000);
+    	Turno turno2 = new Turno(Turno.Tipo.SEMANA, 8.0, 60000);
+    	Turno turno3 = new Turno(Turno.Tipo.SEMANA, 2.0, 70000);
+    	Turno turno4 = new Turno(Turno.Tipo.SEMANA, 8.0, 55000);
+    	Turno turno5 = new Turno(Turno.Tipo.SEMANA, 2.0, 65000);
+    	Turno turno6 = new Turno(Turno.Tipo.SEMANA, 8.0, 75000);
+    	Turno turno7 = new Turno(Turno.Tipo.SEMANA, 2.0, 60000);
+    	Turno turno8 = new Turno(Turno.Tipo.SEMANA, 8.0, 70000);
+    	Turno turno9 = new Turno(Turno.Tipo.SEMANA, 2.0, 80000);
+    	Turno turno10 = new Turno(Turno.Tipo.SEMANA, 8.0, 65000);
+    	Turno turno11 = new Turno(Turno.Tipo.SEMANA, 3.0, 80000);
+    	Turno turno12 = new Turno(Turno.Tipo.SABADO, 5.0, 50000);
+    	Turno turno13 = new Turno(Turno.Tipo.SABADO, 3.0, 60000);
+    	Turno turno14 = new Turno(Turno.Tipo.DOMINGO, 2.0, 70000);
+    	Turno turno15 = new Turno(Turno.Tipo.DOMINGO, 8.0, 55000);
+    	
+
+    	// Crear empleados
+
     	Pedido pedido = new Pedido();
         Plato plato = new Plato();
     	//mostrarMenu(menu);
@@ -192,12 +198,11 @@ public class Administrador implements Menu {
 	    			
 	    			case 1:
 	    				System.out.println("-------------------------------------------------------");
-		    			System.out.println("\nListado de Pedidos sin Verificar");
+		    			System.out.println("\nListado de Pedidos consumo(restaurante)\n");
 		    			if (restaurante.getPedidosRestaurante().size()==0)
 		    			{System.out.println("\n-No hay pedidos consumo (restaurante)");}
 		    			System.out.println(restaurante.imprimirPedidosRestaurante());
-		    			System.out.println("-------------------------------------------------------");
-	    				System.out.println("\nListado de Pedidos Domicilios");
+	    				System.out.println("\nListado de Pedidos consumo (domicilio)\n");
 	    				if(restaurante.getPedidosDomicilio().size()==0)
 		    			{System.out.println("\n-No hay pedidos de domicilio");}
 		    			System.out.println(restaurante.imprimirPedidosDomicilios());
@@ -225,7 +230,7 @@ public class Administrador implements Menu {
 		    				for(int i = 0; i < cocineros.size(); i++){
 		    					System.out.println((i + 1) + ". " + cocineros.get(i));
 		    				}
-		    				System.out.print("Ingrese el Nombre del Cocinero: ");
+		    				System.out.print("\nIngrese el Nombre del Cocinero: ");
 			    			String nombreCocinero = scanner.nextLine();
 			    			Empleado cocinero = restaurante.buscarEmpleado(nombreCocinero, "cocinero");
 			    			if (cocinero == null) {
@@ -239,7 +244,7 @@ public class Administrador implements Menu {
 			    				for(int i = 0; i < domiciliarios.size(); i++){
 			    					System.out.println((i + 1) + ". " + domiciliarios.get(i));
 			    				}
-			    			    System.out.print("Ingrese el Nombre del Domiciliario: ");
+			    			    System.out.print("\nIngrese el Nombre del Domiciliario: ");
 			    			    String nombreDomiciliario = scanner.nextLine();
 			    			    Empleado domiciliario = restaurante.buscarEmpleado(nombreDomiciliario, "domiciliario");
 			    			    if (domiciliario == null) {
@@ -296,8 +301,8 @@ public class Administrador implements Menu {
 			    			    	Pedido ped = new Pedido(reserva.getMesa(), tipoPedido, cocinero, mesero, platosTemp, restaurante, reserva);
 				    			    ped.setVerificado(true);
 				    			    pedido.actualizarInventario(restaurante,ped);
-				    			    System.out.println("pedido creado exitosamente/n");
-				    			    System.out.println("-------------------------------------------------------");
+				    			    System.out.println("pedido creado exitosamente");
+				    			    System.out.println("\n-------------------------------------------------------");
 				    			    break;
 			    			    }
 			    			    
@@ -308,7 +313,7 @@ public class Administrador implements Menu {
 			    			platosTemp = new ArrayList<Plato>();
 						break;
 		    			case 3:
-		    			    System.out.println("Estos son los pedidos que puedes cancelar");
+		    			    System.out.println("Pedidos de consumo(restaurante)");
 		    			    System.out.println(restaurante.getPedidosRestaurante());
 
 		    			    System.out.print("¿Qué pedido deseas cancelar?: ");

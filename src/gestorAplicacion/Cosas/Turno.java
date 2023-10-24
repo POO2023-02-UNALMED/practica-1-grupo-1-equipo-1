@@ -10,13 +10,13 @@ public class Turno implements Serializable{
     private double salario;
     private boolean completado;
     private boolean cobrado;
-    private int horas;
+    private double horas;
 	private Tipo tipo;
 
     // Constructor
-    public Turno(Tipo tipo, int horas, double salario){
+    public Turno(Tipo tipo, double d, double salario){
     	this.tipo = tipo;
-        this.setHoras(horas);
+        this.setHoras(d);
         this.salario = salario;
         this.completado = false;
         this.cobrado = false;
@@ -26,7 +26,7 @@ public class Turno implements Serializable{
     public Tipo getTipo () {
         return this.tipo;
     }
-	public int getHoras() {
+	public double getHoras() {
 		return horas;
 	}
  
@@ -58,25 +58,23 @@ public class Turno implements Serializable{
 		return this.completado;
 	}
 
-	public void setHoras(int horas) {
-		this.horas = horas;
+	public void setHoras(double d) {
+		this.horas = d;
 	}
 	
-    public void restarTiempo(Turno turno,int tiempo){
-    	if((this.horas*60)-tiempo>=-20) {
-    		System.out.println("tiempoa actual: " +turno.getHoras());
-    		turno.setHoras(((this.horas*60)-tiempo)/60);
-    		System.out.println("tiempoa despues: " +turno.getHoras());    		
-    		// Rango de 20 minutos para contratiempos
-    		if(turno.getHoras()*60> -20 && turno.getHoras()*60 <= 0){
+    public void restarTiempo(Turno turno,double tiempo_total){
+    	if((this.horas*60)-tiempo_total>=-20) {
+    		turno.setHoras(((this.horas*60)-tiempo_total)/60);  		
+    		// Rango de 10 minutos para contratiempos
+    		if(turno.getHoras()*60.0 <= 10.0){
     			turno.setCompletado(true);
     		}
     	}
 	}
     
     // Metodo que calcula las horas extra
-	public int HorasExtras() {
-        int horasRegulares = 8;  //suponer que es 8
+	public double HorasExtras() {
+        double horasRegulares = 8;  //suponer que es 8
         if (this.horas > horasRegulares) {
             return this.horas - horasRegulares;
         } else {
@@ -85,7 +83,7 @@ public class Turno implements Serializable{
 	}
 	// toString de la clase
 	public String toString(){
-		return "Tipo: " + this.getTipo() +" Salario: " +this.getEstado() +" Estado completado: " + this.isCompletado() +" Estado cobrado" + this.isCobrado()+"time"+this.getHoras();
+		return "Tipo: " + this.getTipo() +" Salario: " +this.getEstado() +" Estado completado: " + this.isCompletado() +" Estado cobrado" + this.isCobrado();
 	}
 
 	

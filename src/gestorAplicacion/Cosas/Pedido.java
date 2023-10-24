@@ -80,26 +80,7 @@ public class Pedido implements Serializable,Menu{
      }
      
 
-     // Metodos que devuelven pedidos sin verificar
-     public  ArrayList<Pedido> getPedidosSinVerificar(Restaurante restaurante){
-    	 ArrayList<Pedido> PedidosSinVerificar=new ArrayList<>();
-    	 for(Pedido pedido: restaurante.getPedidos()) {
-    		 if(!pedido.isVerificado()){
-    			 PedidosSinVerificar.add(pedido);
-    		 }
-    	 }
-    	 return PedidosSinVerificar;
-     }
-  // Metodos que devuelven pedidos verificados
-     public  ArrayList<Pedido> getPedidosVerificados(Restaurante restaurante){
-    	 ArrayList<Pedido> PedidosVerificados=new ArrayList<>();
-    	 for(Pedido pedido: restaurante.getPedidos()) {
-    		 if(pedido.isVerificado()){
-    			 PedidosVerificados.add(pedido);
-    		 }
-    	 }
-    	 return PedidosVerificados;
-     }
+
      
      // Metodos setters
      public void agregarPlato(Plato plato) {
@@ -131,15 +112,15 @@ public class Pedido implements Serializable,Menu{
     	 return this.domiciliario;
      }
      public double getPrecioTotal() {
-         double precioTotal = 0;
+         int precioTotal = 0;
          for (Plato plato : this.getPlatos()) {
              precioTotal += plato.getPrecio();
          }
          return precioTotal;
      }
      
-     public int getTiempoTotal() {
-         int tiempoTotal = 0;
+     public double getTiempoTotal() {
+         float tiempoTotal = 0;
          for (Plato plato : this.getPlatos()) {
         	 tiempoTotal += plato.getTiempoPreparacion();
          }
@@ -160,8 +141,8 @@ public class Pedido implements Serializable,Menu{
 	@Override
     public String toString() {
    	 String mesaStr = (mesa != null) ? mesa.toString() : "N/A";
-        String meseroStr = (mesero != null) ? mesero.toString() : "N/A";
-        String domiciliarioStr = (domiciliario != null) ? domiciliario.toString() : "N/A";
+        String meseroStr = (mesero != null) ? mesero.getNombre() : "N/A";
+        String domiciliarioStr = (domiciliario != null) ? domiciliario.getNombre() : "N/A";
         String resumen = (reserva != null) ? reserva.resumenReservaPedido() : "no tiene reserva asociada";
         
 
@@ -172,7 +153,6 @@ public class Pedido implements Serializable,Menu{
                 "\n   numero de platos: " + this.getPlatos().size()+ 
                 "\n   platos: " + imprimirPlatos() +
                 "\n   Este pedido tiene esta reserva: " + resumen+
-                "\n   verificado: " + verificado +
                 "\n   tipoPedido: " + tipoPedido ;
     }
 

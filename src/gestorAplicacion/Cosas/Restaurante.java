@@ -276,27 +276,26 @@ public class Restaurante implements Serializable {
     			for(Turno turno : pedido.getCocinero().getTurnos()){
     				if(turno.getTipo().toString().equals(dia)) {
     					if(!turno.isCompletado()) {
-    						System.out.println(" se resta time cocinero");
-    					turno.restarTiempo(turno,pedido.getTiempoTotal());
+    						
+    						turno.restarTiempo(turno,pedido.getTiempoTotal());
     					}
     					}
     				}
     		
     	// Llama metodo para cobrar turno
-    	System.out.println("se cobra cocinero");
+    	
     	pedido.getCocinero().turnosCompletados(pedido.getCocinero());
    	 // Si el pedido es de consumo en restaurante se actualiza tiempo a mesero
    	 if(pedido.getMesero()!=null) {
        	 for(Turno turno :pedido.getMesero().getTurnos()){
        		if(turno.getTipo().toString().equals(dia)) {
        		 if(!turno.isCompletado()) {
-       			 System.out.println("mesero");
-       			 System.out.println("se resta time mesero");
+
        			 turno.restarTiempo(turno,Pedido.TIEMPO_MESERO);
        		 }}
        	 // Llama metodo para cobrar turno
        		}
-       	System.out.println("se cobra mesero");
+
        	pedido.getMesero().turnosCompletados(pedido.getMesero()); 
        	}
    	 // Si el pedido es de consumo en domicilio se actualiza tiempo a domiciliario
@@ -304,12 +303,11 @@ public class Restaurante implements Serializable {
    	 for(Turno turno : pedido.getDomiciliario().getTurnos()){
    		if(turno.getTipo().toString().equals(dia)) {
    		 if(!turno.isCobrado()) {
-   			 System.out.println("domiciliario");
-   			 System.out.println("se resta time domicilio");
+   	
    			 turno.restarTiempo(turno,Pedido.TIEMPO_DOMICILIO);
    		 }}}
    	 // Llama metodo para cobrar turno
-   	 System.out.println("se cobra domi");
+   	
    	 pedido.getDomiciliario().turnosCompletados(pedido.getDomiciliario());
    	 }}}}
 	// Buscar un empleado por su nombre y puesto

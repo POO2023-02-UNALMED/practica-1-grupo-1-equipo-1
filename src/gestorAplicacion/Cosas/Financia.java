@@ -152,7 +152,7 @@ public class Financia implements Serializable{
 		    double totalPago = 0;
 		    for (Turno turno : empleado.getTurnos()) {
 		        double pago = turno.getSalario();
-		        int horasExtras = turno.HorasExtras();
+		        double horasExtras = turno.HorasExtras();
 		        if (horasExtras > 0) {
 		            double pagoHoraExtra = 1.5; // Supongamos que las horas extras se pagan a 1.5 veces el salario regular por hora
 		            pago += horasExtras * (empleado.getSalario() / turno.getHoras()) * pagoHoraExtra;
@@ -171,7 +171,7 @@ public class Financia implements Serializable{
 	            totalPago += liquidacionEmpleado(empleado.getNombre()); // Sumar la liquidación del empleado
 	            for (Turno turno : empleado.getTurnos()) {
 	                if (turno.isCompletado() && !turno.isCobrado()) {
-	                    int horasExtras = turno.HorasExtras();
+	                    double horasExtras = turno.HorasExtras();
 	                    if (horasExtras > 0) {
 	                        double pagoHoraExtra = 1.5; // Supongamos que las horas extras se pagan a 1.5 veces el salario regular por hora
 	                        totalPago += horasExtras * (empleado.getSalario() / turno.getHoras()) * pagoHoraExtra;
