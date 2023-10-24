@@ -9,6 +9,8 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.io.Serializable;
+import java.time.LocalDate;
+
 import gestorAplicacion.Cosas.*;
 import gestorAplicacion.Personas.Empleado;
 
@@ -21,7 +23,7 @@ public class Financia implements Serializable{
 	private double pagosEmpleados;
 	private double gananciasBrutas;
 	private double gananciasNetas;
-	private double perdidas;
+	private double costoPromedioPorPlato;
 	private Restaurante restaurante;
 	public Financia() {
 		this.presupuesto = 1000000;
@@ -30,12 +32,12 @@ public class Financia implements Serializable{
 		this.pagosEmpleados = 0;
 		this.gananciasBrutas = 0;
 		this.gananciasNetas = 0 ;
-		this.perdidas = 0;
+		this.costoPromedioPorPlato = 0;
 	}
 	public Financia(Restaurante restaurante) {
 		this.restaurante = restaurante;
 	}
-	public Financia(Restaurante restaurante, double presupuesto, double gastosMateriales,double gastoMaterialEspecifico, double pagosEmpleados, double gananciasBrutas, double gananciasNetas, double liquidacion, double perdidas) {
+	public Financia(Restaurante restaurante, double presupuesto, double gastosMateriales,double gastoMaterialEspecifico, double pagosEmpleados, double gananciasBrutas, double gananciasNetas, double liquidacion, double costoPromedioPorPlato) {
 	this.restaurante = restaurante;
 	this.presupuesto = presupuesto;
 	this.gastosMateriales = gastosMateriales;
@@ -43,7 +45,7 @@ public class Financia implements Serializable{
 	this.pagosEmpleados = pagosEmpleados;
 	this.gananciasBrutas = gananciasBrutas;
 	this.gananciasNetas = gananciasNetas;
-	this.perdidas = perdidas;
+	this.costoPromedioPorPlato =costoPromedioPorPlato ;
 	
 	}
 	
@@ -65,8 +67,8 @@ public class Financia implements Serializable{
 	public double getGananciasNetas() {
 		return gananciasNetas;
 	}
-	public double getPerdidas() {
-		return perdidas;
+	public double getCostoPromedioPorPlato() {
+		return costoPromedioPorPlato;
 	}
 	
 	 
@@ -183,21 +185,24 @@ public class Financia implements Serializable{
 	        return this.pagosEmpleados;
 	    }
 	
-	// Calcula las perdidas del inventario  del restaurante
+	// Calcula el costo promedio de los ingredientes por plato.
 	    
-	    public double calcularPerdidas() {
-	        this.perdidas = 0;
-	        
-	        Map<Material.Tipo, Material> inventario = this.restaurante.getInventario();
+	    public double costoPromedioPorPlato() {
+	        double totalCosto = 0;
+	        int totalPlatos = 0;
 
-	        for (Material.Tipo tipo : inventario.keySet()) {
-	            Material material = inventario.get(tipo);
-
-	            if (material.getCantidad() < 0) {
-	                this.perdidas += material.getPrecioUnitario() * Math.abs(material.getCantidad());
+	        for (Pedido pedido : this.restaurante.getPedidos()) {
+	            for (Plato plato : pedido.getPlatos()) {
+	                totalPlatos++;
+	                for (Map.Entry<Material, Integer> entrada : plato.getIngredientes().entrySet()) {
+	                    Material material = entrada.getKey();
+	                    int cantidadUtilizada = entrada.getValue();
+	                    totalCosto += material.getPrecioUnitario() * cantidadUtilizada;
+	                }
 	            }
 	        }
-	        return this.perdidas;
+
+	        return totalCosto / totalPlatos;
 	    }
 	    
 	// Calcula las ganancias Brutas del restaurante
