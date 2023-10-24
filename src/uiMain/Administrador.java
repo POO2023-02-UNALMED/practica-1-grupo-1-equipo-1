@@ -368,7 +368,7 @@ public class Administrador implements Menu {
 		    		} else {
 						System.out.println("El número ingresado no es válido, por favor ingresa un número que corresponda a un empleado");
 		    		}
-				}
+					}
 		      		break;
 		
 		    case 3: do {
@@ -382,7 +382,7 @@ public class Administrador implements Menu {
 		       			System.out.print("Escribe el número de la opción que necesitas: ");
 		       			opcionEmp1= (int) readLong();
 		       			switch(opcionEmp1) {
-			 			case 1:	do {
+			 			case 1:	
 							System.out.println("-------------------------------------------------------");  
 							System.out.println("Ingresa el nombre");
 							nombre= readln();
@@ -396,17 +396,20 @@ public class Administrador implements Menu {
 							switch(opcionEmp2) {
 							case 1: 
 								turno = turno1;
+								break;
 							case 2:
 								turno = turno2;
+								break;
 							case 3:
 								turno = turno3;
+								break;
 							case 4:
 									break;
-							}}while(opcionEmp2!=4);
+							}
 							Empleado empleado = new Cocinero(nombre, cedula, "cocinero", restaurante, turno);
 							restaurante.getAspEmpleados().add(empleado);
 							break;
-			 			case 2:	do {
+			 			case 2:	
 							System.out.println("-------------------------------------------------------");  
 							System.out.println("Ingresa el nombre");
 							nombre1 = readln();
@@ -416,22 +419,25 @@ public class Administrador implements Menu {
 							System.out.println("1. Semana");
 				       		System.out.println("2. Sabado"); 
 				       		System.out.println("3. Domingo");
-			    				opcionEmp3 = (int) readLong();
+			    			opcionEmp3 = (int) readLong();
 							switch(opcionEmp3) {
 							case 1: 
 								turnoj = turno1;
+								break;
 							case 2:
 								turnoj = turno2;
+								break;
 							case 3:
 								turnoj = turno3;
+								break;
 							case 4:
 									break;
-							}}while(opcionEmp3!=4);
-			  					Empleado empleado1 = new Mesero(nombre1, cedula1, "mesero", restaurante, turnoj);
-			  					restaurante.getAspEmpleados().add(empleado1);
-			  					break;
-			 			case 3:	do{
-							System.out.println("-------------------------------------------------------");  
+							}
+			  				Empleado empleado1 = new Mesero(nombre1, cedula1, "mesero", restaurante, turnoj);
+			  				restaurante.getAspEmpleados().add(empleado1);
+			  				break;
+			 			case 3:	
+								System.out.println("-------------------------------------------------------");  
 			    				System.out.println("Ingresa el nombre");
 			    				nombre2= readln();
 			    				System.out.println("Ingresa la cedula");
@@ -445,16 +451,19 @@ public class Administrador implements Menu {
 							switch(opcionEmp4) {
 							case 1: 
 								turnok = turno1;
+								break;
 							case 2:
 								turnok = turno2;
+								break;
 							case 3:
 								turnok = turno3;
+								break;
 							case 4:
 									break;
-							}}while(opcionEmp4!=4);
-			    				Empleado empleado2 = new Domiciliario(nombre2, cedula2, "domiciliario", restaurante, turnok);
-			    				restaurante.getAspEmpleados().add(empleado2);
-			    				break;
+							}
+			    			Empleado empleado2 = new Domiciliario(nombre2, cedula2, "domiciliario", restaurante, turnok);
+			    			restaurante.getAspEmpleados().add(empleado2);
+			    			break;
 			 			case 4:
 			   					break;
 		    		}}while(opcionEmp1!=4);
