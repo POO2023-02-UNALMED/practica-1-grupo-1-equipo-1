@@ -428,8 +428,8 @@ public class Administrador implements Menu {
 			    				} else if (tipoturno1=="DOMINGO") {
 			      					turnoj = turno3;
 			    				}
-			  					Empleado empleado1 = new Mesero(nombre1, cedula1, "mesero", restaurante, turnoj);
-			  					restaurante.getAspEmpleados().add(empleado1);
+			  					Empleado empleado10 = new Mesero(nombre1, cedula1, "mesero", restaurante, turnoj);
+			  					restaurante.getAspEmpleados().add(empleado10);
 			  					break;
 			 			case 3:	System.out.println("-------------------------------------------------------");  
 			    				System.out.println("Ingresa el nombre");
@@ -446,8 +446,8 @@ public class Administrador implements Menu {
 			      				} else if (tipoturno2=="DOMINGO") {
 									turnok = turno3;
 			      				}
-			    				Empleado empleado2 = new Domiciliario(nombre2, cedula2, "domiciliario", restaurante, turnok);
-			    				restaurante.getAspEmpleados().add(empleado2);
+			    				Empleado empleado11 = new Domiciliario(nombre2, cedula2, "domiciliario", restaurante, turnok);
+			    				restaurante.getAspEmpleados().add(empleado11);
 			    				break;
 			 			case 4:
 			   					break;
