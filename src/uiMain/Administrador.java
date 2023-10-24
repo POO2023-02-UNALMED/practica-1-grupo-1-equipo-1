@@ -406,7 +406,7 @@ public class Administrador implements Menu {
 							nombre= readln();
 							System.out.println("Ingresa la cedula");
 							cedula= readLong();
-							System.out.print("Selecciona el turno: ");
+							System.out.println("Selecciona el turno: ");
 							System.out.println("1. Semana");
 				       		System.out.println("2. Sabado"); 
 				       		System.out.println("3. Domingo");
@@ -416,10 +416,10 @@ public class Administrador implements Menu {
 								turno = turno1;
 								break;
 							case 2:
-								turno = turno2;
+								turno = turno12;
 								break;
 							case 3:
-								turno = turno3;
+								turno = turno16;
 								break;
 							case 4:
 									break;
@@ -433,7 +433,7 @@ public class Administrador implements Menu {
 							nombre1 = readln();
 							System.out.println("Ingresa la cedula");
 							cedula1 = readLong();
-							System.out.print("Selecciona el turno: ");
+							System.out.println("Selecciona el turno: ");
 							System.out.println("1. Semana");
 				       		System.out.println("2. Sabado"); 
 				       		System.out.println("3. Domingo");
@@ -443,10 +443,10 @@ public class Administrador implements Menu {
 								turnoj = turno1;
 								break;
 							case 2:
-								turnoj = turno2;
+								turnoj = turno12;
 								break;
 							case 3:
-								turnoj = turno3;
+								turnoj = turno16;
 								break;
 							case 4:
 									break;
@@ -460,7 +460,7 @@ public class Administrador implements Menu {
 			    				nombre2= readln();
 			    				System.out.println("Ingresa la cedula");
 			    				cedula2= readLong();
-								System.out.print("Selecciona el turno: ");
+								System.out.println("Selecciona el turno: ");
 								System.out.println("1. Semana");
 				       			System.out.println("2. Sabado"); 
 				       			System.out.println("3. Domingo");
@@ -471,10 +471,10 @@ public class Administrador implements Menu {
 								turnok = turno1;
 								break;
 							case 2:
-								turnok = turno2;
+								turnok = turno12;
 								break;
 							case 3:
-								turnok = turno3;
+								turnok = turno16;
 								break;
 							case 4:
 									break;
