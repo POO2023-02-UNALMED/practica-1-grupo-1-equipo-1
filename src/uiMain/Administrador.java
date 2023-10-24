@@ -398,10 +398,10 @@ public class Administrador implements Menu {
 								turno = turno1;
 								break;
 							case 2:
-								turno = turno2;
+								turno = turno12;
 								break;
 							case 3:
-								turno = turno3;
+								turno = turno14;
 								break;
 							case 4:
 									break;
@@ -425,10 +425,10 @@ public class Administrador implements Menu {
 								turnoj = turno1;
 								break;
 							case 2:
-								turnoj = turno2;
+								turnoj = turno12;
 								break;
 							case 3:
-								turnoj = turno3;
+								turnoj = turno14;
 								break;
 							case 4:
 									break;
@@ -453,10 +453,10 @@ public class Administrador implements Menu {
 								turnok = turno1;
 								break;
 							case 2:
-								turnok = turno2;
+								turnok = turno12;
 								break;
 							case 3:
-								turnok = turno3;
+								turnok = turno14;
 								break;
 							case 4:
 									break;
@@ -471,7 +471,7 @@ public class Administrador implements Menu {
 		    case 4: System.out.println("-------------------------------------------------------");
 			    	System.out.println("Lista de Aspirantes a Empleados: ");
 			    	if (restaurante.getAspEmpleados().size()==0){
-			        	System.out.println("No hay empleados");
+			        	System.out.println("No hay aspirantes a empleados");
 			    	} else {
 			        	mostrarEmpleados(restaurante.getAspEmpleados());
 			    		System.out.println("Escribe el número de la ficha que desea eliminar");
